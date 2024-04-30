@@ -32,5 +32,6 @@ public class Plant extends Char {
 
       /* METHOD */
       public void shoot(){}
+      public void status(){}
 
 }
