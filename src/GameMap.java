@@ -35,4 +35,12 @@ public class GameMap {
     public Area getArea(int row, int col) {
         return map[row][col];
     }
+
+    public int getRow(){
+        return height;
+    }
+
+    public int getColumn(){
+        return width;
+    }
 }
