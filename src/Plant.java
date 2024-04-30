@@ -1,10 +1,6 @@
 public class Plant extends Char {
       /*ATRIBUT*/
-      // private String name;
-      private int cost;
-      // private int health;
-      // private int attack_damage;
-      // private int attack_speed;   
+      private int cost; 
       private int range;  
       private Stopwatch cooldown;
 
@@ -14,12 +10,9 @@ public class Plant extends Char {
       // cooldown = satuannya pake
 
       /*KONSTRUKTOR*/
-      public Plant(String name, int cost, int health, int attack_damage, int attack_speed, int range, Stopwatch  cooldown) {
-            this.name = name;
+      public Plant(String name, int health, int attack_damage, int attack_speed,int cost, int range, Stopwatch cooldown) {
+            super(name, health, attack_damage, attack_speed);
             this.cost = cost;
-            this.health = health;
-            this.attack_damage = attack_damage;
-            this.attack_speed = attack_speed;
             this.range = range;
             this.cooldown = cooldown;
       }
