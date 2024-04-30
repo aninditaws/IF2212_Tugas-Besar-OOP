@@ -22,13 +22,19 @@ public class Plant {
       public void setName(String nama){this.name=nama;}
       public String getName(){return this.name;}
 
-      public void setCost(int harga)  {this.cost=harga;}
+      // public void setCost(int harga)  {this.cost=harga;} 
       public int getCost() {return this.cost;}
 
       public void reduceHealth(int damage) {this.health-=damage;}
       public int getHealth() {return this.health;}
 
       public boolean isDead() {if (this.getHealth()<=0) return true; else return false;}
+
       public int getAttackDamage()  {return this.attack_damage;}
+
       public int getCooldownTime() {return this.cooldown;}
+
+      public int getAttackSpeed() {return this.attack_speed;}
+
+      public int getRange(){return this.range;}
 }
