@@ -1,10 +1,10 @@
-public class Plant {
-      // ATRIBUTE
-      private String name;
+public class Plant extends Char {
+      /*ATRIBUT*/
+      // private String name;
       private int cost;
-      private int health;
-      private int attack_damage;
-      private int attack_speed;   
+      // private int health;
+      // private int attack_damage;
+      // private int attack_speed;   
       private int range;  
       private Stopwatch cooldown;
 
@@ -13,7 +13,7 @@ public class Plant {
       // range = satuannya dalam tile. 0 artinya ga nyerang. -1 artinya bisa menyerang sepanjang jalur
       // cooldown = satuannya pake
 
-/*KONSTRUKTOR*/
+      /*KONSTRUKTOR*/
       public Plant(String name, int cost, int health, int attack_damage, int attack_speed, int range, Stopwatch  cooldown) {
             this.name = name;
             this.cost = cost;
@@ -23,6 +23,7 @@ public class Plant {
             this.range = range;
             this.cooldown = cooldown;
       }
+
       /*GETTER & SETTER*/      
       public void setName(String nama){this.name=nama;}
       public String getName(){return this.name;}
@@ -42,4 +43,9 @@ public class Plant {
       public int getAttackSpeed() {return this.attack_speed;}
 
       public int getRange(){return this.range;}
+
+
+      /* METHOD */
+      public void shoot(){}
+
 }

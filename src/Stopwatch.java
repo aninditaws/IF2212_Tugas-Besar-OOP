@@ -1,10 +1,10 @@
 public class Stopwatch {
-  
+      // ATRIBUT
       private long startTime = 0;
       private long stopTime = 0;
       private boolean running = false;
       
-      
+      /*METHOD*/
       public void start_watch() {
         this.startTime = System.currentTimeMillis();
         this.running = true;
@@ -17,7 +17,7 @@ public class Stopwatch {
       }
       
       
-      //elaspsed time in milliseconds
+      /*GETTER */ 
       public long getElapsedTime() {
         long elapsed;
         if (running) {
@@ -29,7 +29,7 @@ public class Stopwatch {
       }
       
       
-      //elaspsed time in seconds
+
       public long getElapsedTimeSecs() {
         long elapsed;
         if (running) {
@@ -41,3 +41,9 @@ public class Stopwatch {
       }
     }
     
+
+
+    /* NOTES */
+    //Elapsed itu selisih waktu, jadi kalo:
+    //1.lagi running = elapsed nya itu selisih antara waktu sekarang sama waktu mulai
+    //2.lagi stop = elapsed nya itu selisih antara waktu stop sama waktu mulai
