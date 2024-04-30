@@ -1,19 +1,20 @@
 public class Plant {
-      // Atribut
+      // ATRIBUTE
       private String name;
       private int cost;
       private int health;
       private int attack_damage;
       private int attack_speed;   
       private int range;  
-      private int cooldown;
+      private Stopwatch cooldown;
 
-/*Notes ajaa */
-// attack_speed = tanaman meyerang dalam x detik
-// satuannya dalam tile. 0 artinya ga nyerang. -1 artinya bisa menyerang sepanjang jalur
+      /* NOTES */
+      // attack_speed = tanaman meyerang dalam x detik
+      // range = satuannya dalam tile. 0 artinya ga nyerang. -1 artinya bisa menyerang sepanjang jalur
+      // cooldown = satuannya pake
 
 /*KONSTRUKTOR*/
-      public Plant(String name, int cost, int health, int attack_damage, int attack_speed, int range, int  cooldown) {
+      public Plant(String name, int cost, int health, int attack_damage, int attack_speed, int range, Stopwatch  cooldown) {
             this.name = name;
             this.cost = cost;
             this.health = health;
@@ -36,7 +37,7 @@ public class Plant {
 
       public int getAttackDamage()  {return this.attack_damage;}
 
-      public int getCooldownTime() {return this.cooldown;}
+      public Stopwatch getCooldownTime() {return this.cooldown;}
 
       public int getAttackSpeed() {return this.attack_speed;}
 
