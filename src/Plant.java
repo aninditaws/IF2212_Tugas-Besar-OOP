@@ -4,9 +4,13 @@ public class Plant {
       private int cost;
       private int health;
       private int attack_damage;
-      private int attack_speed;   //tanaman meyerang dalam x detik
-      private int range;  //satuannya dalam tile. 0 artinya ga nyerang. -1 artinya bisa menyerang sepanjang jalur
+      private int attack_speed;   
+      private int range;  
       private int cooldown;
+
+/*Notes ajaa */
+// attack_speed = tanaman meyerang dalam x detik
+// satuannya dalam tile. 0 artinya ga nyerang. -1 artinya bisa menyerang sepanjang jalur
 
 /*KONSTRUKTOR*/
       public Plant(String name, int cost, int health, int attack_damage, int attack_speed, int range, int  cooldown) {
