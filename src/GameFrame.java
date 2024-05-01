@@ -1,8 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class GameFrame extends JFrame {
-    private GameMap gameMap;
+    private GameMap<Area> gameMap; // Gunakan GameMap dengan tipe Area
     private JPanel mapPanel;
 
     public GameFrame() {
@@ -11,21 +12,25 @@ public class GameFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        gameMap = new GameMap();
+        gameMap = new GameMap<>(9, 6); // Initialize dengan lebar dan tinggi
         mapPanel = new JPanel(new GridLayout(6, 9, 2, 2));
         initializeMap();
-        
+
         add(mapPanel, BorderLayout.CENTER);
     }
 
     private void initializeMap() {
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 9; j++) {
-                Area area = gameMap.getArea(i, j);
-                JPanel AreaPanel = new JPanel();
-                AreaPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-                AreaPanel.setBackground(getColorForAreaType(area.getType()));
-                mapPanel.add(AreaPanel);
+        for (int i = 0; i < gameMap.getHeight(); i++) {
+            for (int j = 0; j < gameMap.getWidth(); j++) {
+                List<Area> areas = gameMap.getEntities(i, j);
+                JPanel areaPanel = new JPanel();
+                areaPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+                if (!areas.isEmpty()) {
+                    areaPanel.setBackground(getColorForAreaType(areas.get(0).getType()));
+                } else {
+                    areaPanel.setBackground(Color.WHITE);
+                }
+                mapPanel.add(areaPanel);
             }
         }
     }
