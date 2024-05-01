@@ -35,11 +35,11 @@ public class GameMap<T> {
         return map[row][col];
     }
 
-    public int getWidth() {
-        return width;
+    public int getRow() {
+        return height;
     }
 
-    public int getHeight() {
-        return height;
+    public int getColumn() {
+        return width;
     }
 }
