@@ -1,12 +1,12 @@
-
-
-public class Char {
+public class Character {
       public String name;
       public int health;
       public int attack_damage;
       public int attack_speed;
+      public boolean dead;
 
-public Char(String name, int health, int attack_damage, int attack_speed){
+public Character(String name, int health, int attack_damage, int attack_speed)
+{
       this.name = name;
       this.health = health;
       this.attack_damage = attack_damage;
@@ -16,10 +16,12 @@ public Char(String name, int health, int attack_damage, int attack_speed){
       public void setName(String nama){this.name=nama;}
       public String getName(){return this.name;}
 
+      public boolean isDead() {if (this.getHealth()<=0) return true; else return false;}
+
       public void reduceHealth(int damage) {this.health-=damage;}
       public int getHealth() {return this.health;}
 
-      public boolean isDead() {if (this.getHealth()<=0) return true; else return false;}
+      
       public int getAttackDamage()  {return this.attack_damage;}
       public int getAttackSpeed() {return this.attack_speed;}
 

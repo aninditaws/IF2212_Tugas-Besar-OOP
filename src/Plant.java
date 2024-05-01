@@ -1,4 +1,4 @@
-public class Plant extends Char {
+public class Plant extends Character {
       /*ATRIBUT*/
       private int cost; 
       private int range;  
@@ -31,7 +31,10 @@ public class Plant extends Char {
 
 
       /* METHOD */
-      public void shoot(){}
+      public void quirk()
+      {
+
+      }
       public void status(){}
 
 }

@@ -29,7 +29,7 @@ public class Stopwatch {
       }
       
       
-
+      //pake yang ini aja
       public long getElapsedTimeSecs() {
         long elapsed;
         if (running) {
