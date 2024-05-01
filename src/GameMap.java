@@ -17,7 +17,7 @@ public class GameMap {
         }
     }
 
-    private AreaType determineAreaType(int row, int col) {
+    public AreaType determineAreaType(int row, int col) {
         if (col == 0) {
             return AreaType.PROTECTED_AREA;
         } else if (col >= 1 && col <= 7) {
@@ -36,11 +36,11 @@ public class GameMap {
         return map[row][col];
     }
 
-    public int getRow(){
+    public int getRow() {
         return height;
     }
 
-    public int getColumn(){
+    public int getColumn() {
         return width;
     }
 }
