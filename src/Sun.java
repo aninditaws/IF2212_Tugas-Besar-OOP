@@ -1,19 +1,23 @@
-public class Sun {
-    private static int totalSun = 0;
+public class Sun{
+    private int totalSun;
 
-    public static int gettotalSun(){
+    public Sun(){
+        totalSun = 0;
+    }
+
+    public int gettotalSun(){
         return totalSun;
     }
 
-    public static void generateSun(){
+    public void generateSun(){
         totalSun += 25;
     }
 
-    public static void spendSun(int cost){
+    public void spendSun(int cost) throws Exception{
         if (totalSun >= cost) {
             totalSun -= cost;
         } else {
-            System.out.println("Not enough sun to spend. Total sun available: " + totalSun);
+            throw new Exception("Not enough sun to spend");
         }
     }
 }
