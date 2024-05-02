@@ -3,12 +3,15 @@ import java.util.ArrayList;
 
 public class GameMap<T> {
     private List<T>[][] map;
+    private Area area;
     private final int width;
     private final int height;
 
+    @SuppressWarnings("unchecked")
     public GameMap(int width, int height) {
         this.width = width;
         this.height = height;
+        this.area = new Area(null);
         map = new ArrayList[height][width];
         initializeMap();
     }
@@ -21,11 +24,10 @@ public class GameMap<T> {
             }
         }
     }
-    
+
     private T createArea(AreaType type) {
         return (T) new Area(type); // Pastikan konstruktor Area menerima AreaType dan mengaturnya dengan benar
     }
-    
 
     public void addEntity(T entity, int row, int col) {
         if (row < 0 || row >= height || col < 0 || col >= width) {
@@ -56,11 +58,11 @@ public class GameMap<T> {
         return AreaType.PLANTABLE_AREA;
     }
 
-    public T getArea(int row, int col) {
+    public Area getArea(int row, int col) {
         if (row < 0 || row >= height || col < 0 || col >= width) {
-            throw new IllegalArgumentException("\"Error! Tidak dapat meletakkan di luar map");
+            throw new IllegalArgumentException("\"Error! Area tidak diketahui!");
         }
-        return map[row][col].isEmpty() ? null : map[row][col].get(0);
+        return this.area;
     }
 
     public int getRow() {
