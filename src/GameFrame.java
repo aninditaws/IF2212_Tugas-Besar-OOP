@@ -42,7 +42,7 @@ public class GameFrame extends JFrame {
             case PLANTABLE_AREA:
                 return Color.GREEN;
             case WATER_AREA:
-                return Color.BLUE;
+                return Color.CYAN;
             case ZOMBIE_SPAWN:
                 return Color.GRAY;
             default:
