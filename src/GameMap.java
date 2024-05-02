@@ -35,6 +35,21 @@ public class GameMap<T> {
         return map[row][col];
     }
 
+    public AreaType determineAreaType(int row, int col) {
+        if (col == 0) {
+            return AreaType.PROTECTED_AREA;
+        } else if (col >= 1 && col <= 7) {
+            if (row >= 2 && row <= 3) {
+                return AreaType.WATER_AREA;
+            } else {
+                return AreaType.PLANTABLE_AREA;
+            }
+        } else if (col == 8) {
+            return AreaType.ZOMBIE_SPAWN;
+        }
+        return AreaType.PLANTABLE_AREA;
+    }
+
     public int getRow() {
         return height;
     }

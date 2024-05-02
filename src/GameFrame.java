@@ -20,8 +20,8 @@ public class GameFrame extends JFrame {
     }
 
     private void initializeMap() {
-        for (int i = 0; i < gameMap.getColumn(); i++) {
-            for (int j = 0; j < gameMap.getRow(); j++) {
+        for (int i = 0; i < gameMap.getRow(); i++) {
+            for (int j = 0; j < gameMap.getColumn(); j++) {
                 List<Area> areas = gameMap.getEntities(i, j);
                 JPanel areaPanel = new JPanel();
                 areaPanel.setBorder(BorderFactory.createLineBorder(Color.black));
