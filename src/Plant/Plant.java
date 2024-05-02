@@ -1,6 +1,6 @@
-import Character;
-
 package Plant;
+import Character.Character;
+
 public class Plant extends Character {
       /*ATRIBUT*/
       private int cost; 
