@@ -1,4 +1,5 @@
 package Plant;
-public class Bomber {
+
+public class Squash {
       
 }

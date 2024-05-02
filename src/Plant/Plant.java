@@ -11,7 +11,6 @@ public class Plant extends Character {
       // attack_speed = tanaman meyerang dalam x detik
       // range = satuannya dalam tile. 0 artinya ga nyerang. -1 artinya bisa menyerang sepanjang jalur
       // cooldown = satuannya pake
-
       /*KONSTRUKTOR*/
       public Plant(String name, int health, int attack_damage, int attack_speed,int cost, int range, int cooldown) {
             super(name, health, attack_damage, attack_speed);

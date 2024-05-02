@@ -1,4 +1,4 @@
 package Plant;
-public class Peashooter {
+public class Peashooter extends Plant {
       
 }
