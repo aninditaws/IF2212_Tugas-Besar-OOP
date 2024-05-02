@@ -1,7 +1,5 @@
 package Zombie;
-public class Zombie {
-    
-}
+
 public abstract class Zombie {
     protected String name;
     protected int health;
@@ -12,8 +10,8 @@ public abstract class Zombie {
     public Zombie(String name, int health, int attack_Damage, int attack_Speed, boolean isAquatic) {
         this.name = name;
         this.health = health;
-        this.attackDamage = attack_Damage;
-        this.attackSpeed = attack_Speed;
+        this.attack_Damage = attack_Damage;
+        this.attack_Speed = attack_Speed;
         this.isAquatic = isAquatic;
     }
 
@@ -27,14 +25,28 @@ public abstract class Zombie {
         }
     }
 
-    protected void isDied() {
+    protected void isDead() {
         // Remove this zombie from the game
     }
 
     // Getter methods
-    public String getName() { return name; }
-    public int getHealth() { return health; }
-    public int getAttackDamage() { return attack_Damage; }
-    public int getAttackSpeed() { return attack_Speed; }
-    public boolean isAquatic() { return isAquatic; }
+    public String getName() { 
+        return name; 
+    }
+
+    public int getHealth() { 
+        return health; 
+    }
+
+    public int getAttackDamage() { 
+        return attack_Damage; 
+    }
+
+    public int getAttackSpeed() { 
+        return attack_Speed; 
+    }
+
+    public boolean isAquatic() { 
+        return isAquatic; 
+    }
 }
