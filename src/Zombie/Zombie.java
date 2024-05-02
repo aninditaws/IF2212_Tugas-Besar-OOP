@@ -1,6 +1,7 @@
 package Zombie;
+import Character.Character;
 
-public abstract class Zombie {
+public abstract class Zombie extends Character {
     protected String name;
     protected int health;
     protected int attack_Damage;
@@ -8,10 +9,7 @@ public abstract class Zombie {
     protected boolean isAquatic;
 
     public Zombie(String name, int health, int attack_Damage, int attack_Speed, boolean isAquatic) {
-        this.name = name;
-        this.health = health;
-        this.attack_Damage = attack_Damage;
-        this.attack_Speed = attack_Speed;
+        super(name, health, attack_Damage,attack_Speed);
         this.isAquatic = isAquatic;
     }
 
@@ -19,14 +17,11 @@ public abstract class Zombie {
 
     public void takeDamage(int damage) {
         health -= damage;
-        if (health <= 0) {
-            isDead();
-        } else {
-        }
+        isDead();
     }
 
-    protected void isDead() {
-        // Remove this zombie from the game
+    public boolean isDead() {
+        return (this.getHealth() <= 0);
     }
 
     // Getter methods
