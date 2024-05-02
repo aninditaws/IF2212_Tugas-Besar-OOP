@@ -58,7 +58,7 @@ public class GameMap<T> {
 
     public T getArea(int row, int col) {
         if (row < 0 || row >= height || col < 0 || col >= width) {
-            throw new IllegalArgumentException("Position out of map bounds");
+            throw new IllegalArgumentException("\"Error! Tidak dapat meletakkan di luar map");
         }
         return map[row][col].isEmpty() ? null : map[row][col].get(0);
     }
