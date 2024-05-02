@@ -2,7 +2,7 @@ public class Plant extends Character {
       /*ATRIBUT*/
       private int cost; 
       private int range;  
-      private Stopwatch cooldown;
+      private int cooldown;
 
       /* NOTES */
       // attack_speed = tanaman meyerang dalam x detik
@@ -31,10 +31,7 @@ public class Plant extends Character {
 
 
       /* METHOD */
-      public void quirk()
-      {
-
-      }
+      public void quirk(){}
       public void status(){}
 
 }
