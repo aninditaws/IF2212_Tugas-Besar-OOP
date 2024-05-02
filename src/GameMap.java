@@ -56,6 +56,13 @@ public class GameMap<T> {
         return AreaType.PLANTABLE_AREA;
     }
 
+    public T getArea(int row, int col) {
+        if (row < 0 || row >= height || col < 0 || col >= width) {
+            throw new IllegalArgumentException("Position out of map bounds");
+        }
+        return map[row][col].isEmpty() ? null : map[row][col].get(0);
+    }
+
     public int getRow() {
         return height;
     }
