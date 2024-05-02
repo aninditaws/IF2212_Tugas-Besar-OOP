@@ -1,3 +1,4 @@
+package Plant;
 public class Shooter extends Plant{
       // atribut
       private int damage;

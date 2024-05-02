@@ -1,5 +1,7 @@
 import java.util.*;
 
+import Plant.Plant;
+
 public class Inventory {
 
     private ArrayList<Plant> plantInventory;

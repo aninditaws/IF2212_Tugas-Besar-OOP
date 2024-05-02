@@ -1,5 +1,9 @@
 import java.util.*;
 
+import GameMap.AreaType;
+import GameMap.GameMap;
+import Plant.Plant;
+
 public class DeckTanaman {
     private List<Plant> arrayDeck;
     public static final int MAX_DECK_SIZE = 6;

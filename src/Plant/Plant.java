@@ -1,3 +1,6 @@
+import Character;
+
+package Plant;
 public class Plant extends Character {
       /*ATRIBUT*/
       private int cost; 
