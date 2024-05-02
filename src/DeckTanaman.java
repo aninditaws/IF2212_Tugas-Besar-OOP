@@ -5,7 +5,7 @@ public class DeckTanaman {
     public static final int MAX_DECK_SIZE = 6;
 
     // Inizialisation DeckTanaman
-    public DeckTanaman() {
+    private DeckTanaman() {
         this.arrayDeck = new ArrayList<Plant>();
 
     }
@@ -24,7 +24,7 @@ public class DeckTanaman {
     }
 
     // fungsi menambahkan tanaman ke dalam area
-    public void plantTanaman(Plant plant, GameMap area) {
+    public void plantTanaman(Plant plant, GameMap<T> area) {
         int areaRow = area.getRow();
         int areaColumn = area.getColumn();
 
@@ -39,14 +39,14 @@ public class DeckTanaman {
     }
 
     // fungsi menggali/remove tanaman dari dalam area
-    public void digTanaman(GameMap area) {
+    public void digTanaman(GameMap<T> area) {
         int areaRow = area.getRow();
         int areaColumn = area.getColumn();
 
         if (area.getArea(areaRow, areaColumn).getPlant() != null) {
             area.getArea(areaRow, areaColumn).removePlant();
         } else {
-            System.out.println(String.format("Tidak bisa menggali tanaman di area %s",
+            System.out.println(String.format("Tidak bisa menggali tanaman dari area %s",
                     area.getArea(areaRow, areaColumn).getType()));
         }
     }

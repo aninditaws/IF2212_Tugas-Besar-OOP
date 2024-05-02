@@ -26,6 +26,7 @@ public class Inventory {
     }
 
     // Method addPlant
+    // Memastikan tanaman belum ada di Inventory
     public void addPlant(Plant plant) {
         if (!plantInventory.contains(plant)) {
             plantInventory.add(plant);
