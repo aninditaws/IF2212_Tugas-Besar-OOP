@@ -1,6 +1,6 @@
+package GameMap;
 import Plant.Plant;
 
-package GameMap;
 public class Area {
     private AreaType type;
     private Plant plant; // Plant yang ditanam di Area ini, jika ada
