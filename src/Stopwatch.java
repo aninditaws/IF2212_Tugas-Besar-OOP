@@ -40,6 +40,8 @@ public class Stopwatch {
         return elapsed;
       }
     }
+
+    
     
 
 
@@ -47,3 +49,4 @@ public class Stopwatch {
     //Elapsed itu selisih waktu, jadi kalo:
     //1.lagi running = elapsed nya itu selisih antara waktu sekarang sama waktu mulai
     //2.lagi stop = elapsed nya itu selisih antara waktu stop sama waktu mulai
+    // ada kemungkinan currenttime millis bisa error, karena gabisa diubah ke second 
