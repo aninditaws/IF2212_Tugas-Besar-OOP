@@ -10,7 +10,7 @@ public class Plant extends Character {
       // cooldown = satuannya pake
 
       /*KONSTRUKTOR*/
-      public Plant(String name, int health, int attack_damage, int attack_speed,int cost, int range, Stopwatch cooldown) {
+      public Plant(String name, int health, int attack_damage, int attack_speed,int cost, int range, int cooldown) {
             super(name, health, attack_damage, attack_speed);
             this.cost = cost;
             this.range = range;
@@ -19,19 +19,16 @@ public class Plant extends Character {
 
       /*GETTER & SETTER*/      
 
+      public int getCost(){
+            return this.cost;
+      }
 
-      // public void setCost(int harga)  {this.cost=harga;} 
-      public int getCost() {return this.cost;}
+      public int getCooldownTime(){
+            return this.cooldown;
+      }
 
-
-      public Stopwatch getCooldownTime() {return this.cooldown;}
-
-
-      public int getRange(){return this.range;}
-
-
-      /* METHOD */
-      public void quirk(){}
-      public void status(){}
+      public int getRange(){
+            return this.range;
+      }
 
 }

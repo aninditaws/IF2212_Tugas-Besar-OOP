@@ -17,7 +17,7 @@ public class GameMap<T> {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 map[i][j] = new ArrayList<>();
-                map[i][j].add(createArea(determineAreaType(i, j))); // Pastikan ini benar
+                map[i][j].add(createArea(determineAreaType(i, j)));
             }
         }
     }
