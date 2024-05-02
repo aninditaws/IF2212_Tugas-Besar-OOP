@@ -1,19 +1,27 @@
-public class Sun{
+public class Sun {
     private int totalSun;
+    private static Sun instance;
 
-    public Sun(){
+    private Sun() {
         totalSun = 0;
     }
 
-    public int gettotalSun(){
+    public static Sun getInstance() {
+        if (instance == null) {
+            instance = new Sun();
+        }
+        return instance;
+    }
+
+    public int getTotalSun() {
         return totalSun;
     }
 
-    public void generateSun(){
+    public void generateSun() {
         totalSun += 25;
     }
 
-    public void spendSun(int cost) throws Exception{
+    public void spendSun(int cost) throws Exception {
         if (totalSun >= cost) {
             totalSun -= cost;
         } else {
