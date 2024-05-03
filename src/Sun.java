@@ -1,4 +1,4 @@
-public class Sun {
+public final class Sun {
     private int totalSun;
     private static Sun instance;
 
@@ -17,11 +17,11 @@ public class Sun {
         return totalSun;
     }
 
-    public void generateSun() {
+    public synchronized void generateSun() {
         totalSun += 25;
     }
 
-    public void spendSun(int cost) throws Exception {
+    public synchronized void spendSun(int cost) throws Exception {
         if (totalSun >= cost) {
             totalSun -= cost;
         } else {
