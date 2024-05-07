@@ -1,28 +1,27 @@
 package GameMap;
-import Plant.Plant;
 
-public class Area {
+public class Area<T> {
     private AreaType type;
-    private Plant plant; // Plant yang ditanam di Area ini, jika ada
+    private T entity; // Generic entity placed in this area
 
     public Area(AreaType type) {
         this.type = type;
-        this.plant = null; // Awalnya tidak ada tanaman
+        this.entity = null; // Initially empty
     }
 
     public AreaType getType() {
         return type;
     }
 
-    public Plant getPlant() {
-        return plant;
+    public T getEntity() {
+        return entity;
     }
 
-    public void setPlant(Plant plant) {
-        this.plant = plant;
+    public void setEntity(T entity) {
+        this.entity = entity;
     }
 
-    public void removePlant() {
-        this.plant = null;
+    public void removeEntity() {
+        this.entity = null;
     }
 }
