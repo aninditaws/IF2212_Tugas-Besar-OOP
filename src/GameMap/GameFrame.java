@@ -2,9 +2,10 @@ package GameMap;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class GameFrame extends JFrame {
-    private GameMap gameMap; // Non-generic GameMap
+    private GameMap<Object> gameMap; 
     private JPanel mapPanel;
 
     public GameFrame() {
@@ -13,7 +14,7 @@ public class GameFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        gameMap = new GameMap(9, 6); // Initialize with the appropriate dimensions
+        gameMap = new GameMap<>(9, 6); 
         mapPanel = new JPanel(new GridLayout(6, 9, 2, 2));
         initializeMap();
 
@@ -23,14 +24,22 @@ public class GameFrame extends JFrame {
     private void initializeMap() {
         for (int i = 0; i < gameMap.getRow(); i++) {
             for (int j = 0; j < gameMap.getColumn(); j++) {
-                Area<?> area = gameMap.getArea(i, j);
+                Area<Object> area = gameMap.getArea(i, j);
                 JPanel areaPanel = new JPanel();
                 areaPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+
                 if (area != null) {
                     areaPanel.setBackground(getColorForAreaType(area.getType()));
+
+                    List<Object> entities = area.getEntities();
+                    if (!entities.isEmpty()) {
+                        JLabel entityLabel = new JLabel(String.valueOf(entities.size()));
+                        areaPanel.add(entityLabel);
+                    }
                 } else {
                     areaPanel.setBackground(Color.WHITE);
                 }
+
                 mapPanel.add(areaPanel);
             }
         }

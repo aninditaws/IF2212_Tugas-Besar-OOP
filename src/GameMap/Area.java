@@ -1,27 +1,38 @@
 package GameMap;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Area<T> {
     private AreaType type;
-    private T entity; // Generic entity placed in this area
+    private List<T> entities;
 
     public Area(AreaType type) {
         this.type = type;
-        this.entity = null; // Initially empty
+        this.entities = new ArrayList<>();
     }
 
     public AreaType getType() {
         return type;
     }
 
-    public T getEntity() {
-        return entity;
+    public List<T> getEntities() {
+        return entities;
     }
 
-    public void setEntity(T entity) {
-        this.entity = entity;
+    public void addEntity(T entity) {
+        this.entities.add(entity);
     }
 
-    public void removeEntity() {
-        this.entity = null;
+    public void removeEntity(T entity) {
+        this.entities.remove(entity);
+    }
+
+    public void clearEntities() {
+        this.entities.clear();
+    }
+
+    public boolean containsEntity(Class<? extends T> entityType) {
+        return entities.stream().anyMatch(entityType::isInstance);
     }
 }

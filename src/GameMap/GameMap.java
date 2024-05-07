@@ -1,7 +1,9 @@
 package GameMap;
 
-public class GameMap {
-    private Area<?>[][] map;
+import java.util.List;
+
+public class GameMap<T> {
+    private Area<T>[][] map;
     private final int width;
     private final int height;
 
@@ -20,20 +22,18 @@ public class GameMap {
         }
     }
 
-    public void addEntity(Object entity, int row, int col) {
+    public void addEntity(T entity, int row, int col) {
         if (row < 0 || row >= height || col < 0 || col >= width) {
             throw new IllegalArgumentException("Error! Tidak dapat meletakkan di luar map");
         }
-
-        Area<Object> area = (Area<Object>) map[row][col];
-        area.setEntity(entity);
+        map[row][col].addEntity(entity);
     }
 
-    public Area<?> getArea(int row, int col) {
+    public List<T> getEntities(int row, int col) {
         if (row < 0 || row >= height || col < 0 || col >= width) {
-            throw new IllegalArgumentException("\"Error! Area tidak diketahui!");
+            throw new IllegalArgumentException("Error! Tidak dapat melihat yang di luar map");
         }
-        return map[row][col];
+        return map[row][col].getEntities();
     }
 
     public AreaType determineAreaType(int row, int col) {
@@ -49,6 +49,13 @@ public class GameMap {
             return AreaType.ZOMBIE_SPAWN;
         }
         return AreaType.PLANTABLE_AREA;
+    }
+
+    public Area<T> getArea(int row, int col) {
+        if (row < 0 || row >= height || col < 0 || col >= width) {
+            throw new IllegalArgumentException("Error! Area tidak diketahui!");
+        }
+        return map[row][col];
     }
 
     public int getRow() {
