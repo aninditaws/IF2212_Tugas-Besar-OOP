@@ -1,47 +1,39 @@
 package GameMap;
+
 import java.util.List;
-import java.util.ArrayList;
 
 public class GameMap<T> {
-    private List<T>[][] map;
-    private Area area;
+    private Area<T>[][] map;
     private final int width;
     private final int height;
 
-    @SuppressWarnings("unchecked")
     public GameMap(int width, int height) {
         this.width = width;
         this.height = height;
-        this.area = new Area(null);
-        map = new ArrayList[height][width];
+        map = new Area[height][width];
         initializeMap();
     }
 
     private void initializeMap() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                map[i][j] = new ArrayList<>();
-                map[i][j].add(createArea(determineAreaType(i, j)));
+                map[i][j] = new Area<>(determineAreaType(i, j));
             }
         }
-    }
-
-    private T createArea(AreaType type) {
-        return (T) new Area(type); // Pastikan konstruktor Area menerima AreaType dan mengaturnya dengan benar
     }
 
     public void addEntity(T entity, int row, int col) {
         if (row < 0 || row >= height || col < 0 || col >= width) {
             throw new IllegalArgumentException("Error! Tidak dapat meletakkan di luar map");
         }
-        map[row][col].add(entity);
+        map[row][col].addEntity(entity);
     }
 
     public List<T> getEntities(int row, int col) {
         if (row < 0 || row >= height || col < 0 || col >= width) {
             throw new IllegalArgumentException("Error! Tidak dapat melihat yang di luar map");
         }
-        return map[row][col];
+        return map[row][col].getEntities();
     }
 
     public AreaType determineAreaType(int row, int col) {
@@ -59,11 +51,11 @@ public class GameMap<T> {
         return AreaType.PLANTABLE_AREA;
     }
 
-    public Area getArea(int row, int col) {
+    public Area<T> getArea(int row, int col) {
         if (row < 0 || row >= height || col < 0 || col >= width) {
-            throw new IllegalArgumentException("\"Error! Area tidak diketahui!");
+            throw new IllegalArgumentException("Error! Area tidak diketahui!");
         }
-        return this.area;
+        return map[row][col];
     }
 
     public int getRow() {

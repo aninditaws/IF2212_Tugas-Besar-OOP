@@ -1,28 +1,38 @@
 package GameMap;
-import Plant.Plant;
 
-public class Area {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Area<T> {
     private AreaType type;
-    private Plant plant; // Plant yang ditanam di Area ini, jika ada
+    private List<T> entities;
 
     public Area(AreaType type) {
         this.type = type;
-        this.plant = null; // Awalnya tidak ada tanaman
+        this.entities = new ArrayList<>();
     }
 
     public AreaType getType() {
         return type;
     }
 
-    public Plant getPlant() {
-        return plant;
+    public List<T> getEntities() {
+        return entities;
     }
 
-    public void setPlant(Plant plant) {
-        this.plant = plant;
+    public void addEntity(T entity) {
+        this.entities.add(entity);
     }
 
-    public void removePlant() {
-        this.plant = null;
+    public void removeEntity(T entity) {
+        this.entities.remove(entity);
+    }
+
+    public void clearEntities() {
+        this.entities.clear();
+    }
+
+    public boolean containsEntity(Class<? extends T> entityType) {
+        return entities.stream().anyMatch(entityType::isInstance);
     }
 }
