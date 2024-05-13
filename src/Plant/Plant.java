@@ -40,6 +40,9 @@ public class Plant extends Character {
 
       public void takeDamage(){
             reduceHealth(attack_damage);
+            if (isDead()) {
+                  die(); // Hapus plant dari permainan
+              }
       };
 
       public void rangeZombie();

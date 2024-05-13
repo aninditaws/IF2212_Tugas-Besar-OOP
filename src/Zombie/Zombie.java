@@ -2,23 +2,31 @@ package Zombie;
 import Character.Character;
 import GameMap.Area;
 import Plant.Plant;
+import Update.*;
+
+import java.util.ArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public abstract class Zombie extends Character {
+public abstract class Zombie extends Character implements CustomListener {
     protected String name;
     protected int health;
     protected int attack_Damage;
     protected int attack_Speed;
     protected boolean isAquatic;
-    protected Area currentArea;
+    protected boolean moving;
+    protected boolean plant_in_range;
+    protected int time = 0 ;
+    protected boolean is_slow=false;
     private ScheduledExecutorService scheduler;
+
+    public static ArrayList<Zombie> zombies = new ArrayList<Zombie>();
+
 
     public Zombie(String name, int health, int attack_Damage, int attack_Speed, boolean isAquatic) {
         super(name, health, attack_Damage,attack_Speed);
         this.isAquatic = isAquatic;
-        this.scheduler = Executors.newSingleThreadScheduledExecutor();
     }
 
     // Getter methods
@@ -41,11 +49,59 @@ public abstract class Zombie extends Character {
     public boolean isAquatic() { 
         return isAquatic; 
     }
+
+    protected boolean is_slow=false;
+
+    public void set_slow(){
+        is_slow = true;
+    }
+
+    public void moving (){
+
+    }
+
+    public abstract void move();
+    void actionPerformed(){
+        if (timer >= 60*10 && is_slow ){
+            move();
+            time = 0;
+        }
+        if (timer >= 60*5 && !is_slow ){
+            move();
+            timer = 0;
+        } else {time++}
+        if(moving){
+            if(is_slowed){
+                if (timer > 10){
+                    X-=1;
+                    Plant_In_Range();
+                    timer = 0;
+                }
+            }
+            else{
+            if(timer>5){
+                X-=1;
+                Plant_In_Range();
+                timer=0;
+            }
+            }
+        }else{
+            if(timer>60){
+                Attack(target);
+                Plant_In_Range();
+                timer=0;
+            }
+        }
+        timer++;
+        if(X== 30){
+            System.out.println("lose");
+        }
+    }
+    
+    
+    }
+
 }
-
-    // Metode abstrak yang perlu diimplementasikan oleh subclass
-    public abstract void move(Area currentArea);
-
     // Metode untuk memulai pergerakan zombie
     public void startMoving(Area startingArea) {
         this.currentArea = startingArea;
@@ -54,12 +110,16 @@ public abstract class Zombie extends Character {
 
     // Menghentikan pergerakan zombie
     public void stopMoving() {
-        scheduler.shutdownNow(); // Menghentikan semua tugas yang dijadwalkan
+
     }
 
     // Menyerang tanaman di area
     public void attack(Plant.Plant plant) {
         plant.takeDamage(this.attack_Damage); // Pastikan Plant memiliki metode takeDamage
+    }
+
+    public void range (Plant.Plant plant) {
+        
     }
 
     public void takeDamage(int damage) {
@@ -77,7 +137,115 @@ public abstract class Zombie extends Character {
     // Menangani kematian zombie
     protected void die() {
         if (this.currentArea != null) {
-            this.currentArea.removeZombie(); // Pastikan metode removeZombie ada di kelas Area
+            this.currentArea.removeEntity(zombies); // Pastikan metode removeZombie ada di kelas Area
         }
         System.out.println(this.name + " has died.");
     }
+
+
+    import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+public class Zombie extends Square implements CustomListener {
+    String name = "Zombie";
+    int Health =125;
+    int attack_damage=100;
+    int attack_speed=1;
+    boolean is_aquatic=false;
+    boolean moving=true;
+    BufferedImage Png=null;
+    boolean plant_in_range=false;
+    int timer=0;
+    boolean dead=false;
+    boolean attack=false;
+    Plant target=null;
+;
+    Boolean is_slowed=false;
+    public void Attack(Plant plant){
+        plant.damage(attack_damage);
+    }
+    public void Start_moving(){
+        moving=true;
+    }
+    public void Stop_moving(){
+        moving=false;
+    }
+
+    public void Plant_In_Range(){
+        Start_moving();
+        for (Plant plant : Screen.plants) {
+            if(plant!=null){
+                if(check_Range(plant)){
+                    Stop_moving();
+                target=plant;
+                }
+            }
+        }
+    }
+
+    public boolean check_Range(Shapes shape){
+        if(shape!=null){
+            if(Y==shape.Y){
+                if(X-1*Screen.tilesize<shape.getX()&&X>shape.getX()){
+                    return true;
+                }else
+                {
+                    return false;
+                }
+            }else{
+                return false;
+            }
+        }
+        return false;
+    }
+
+    protected Zombie(int X, int Y) {
+        super(X, Y);
+        //TODO Auto-generated constructor stub
+    }
+
+    public void Draw(Graphics2D g2) {
+        try {
+            Png = ImageIO.read(new File(picture));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        g2.drawImage(Png,X,Y,1*Screen.tilesize,1*Screen.tilesize,null);
+    }
+
+    @Override
+    public void actionPerformed() {
+        if(moving){
+            if(is_slowed){
+                if (timer > 10){
+                    X-=1;
+                    Plant_In_Range();
+                    timer = 0;
+                }
+            }
+            else{
+            if(timer>5){
+                X-=1;
+                Plant_In_Range();
+                timer=0;
+            }
+            }
+        }else{
+            if(timer>60){
+                Attack(target);
+                Plant_In_Range();
+                timer=0;
+            }
+        }
+        timer++;
+        if(X== 30){
+            System.out.println("lose");
+        }
+    }
+    
+     
+}
