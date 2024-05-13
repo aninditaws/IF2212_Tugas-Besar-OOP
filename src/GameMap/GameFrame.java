@@ -1,12 +1,19 @@
 package GameMap;
 
 import javax.swing.*;
+
+import Plant.Bullet;
+import Plant.Plant;
+
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameFrame extends JFrame {
     private GameMap<Object> gameMap; 
     private JPanel mapPanel;
+    private static ArrayList<Bullet> bullets = new ArrayList<Bullet>(); //buat array bullet sama tanaman
+    private static ArrayList<Plant> plants = new ArrayList<Plant>();
 
     public GameFrame() {
         setTitle("Michael vs. Lalapan");
@@ -65,5 +72,9 @@ public class GameFrame extends JFrame {
             GameFrame frame = new GameFrame();
             frame.setVisible(true);
         });
+    }
+
+    public void draw(){
+        
     }
 }

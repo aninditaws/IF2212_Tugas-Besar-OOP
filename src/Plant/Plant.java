@@ -1,6 +1,6 @@
 package Plant;
 import Character.Character;
-
+import javax.swing.*;
 public class Plant extends Character {
       /*ATRIBUT*/
       private int cost; 
