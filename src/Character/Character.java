@@ -48,11 +48,7 @@ public Character(String name, int health, int attack_damage, int attack_speed)
             this.health-=damage;
       }
       public boolean isDead(){
-            if (this.getHealth()<=0){
-                  return true; 
-            } else {
-                  return false;
-            }
+          return this.getHealth() <= 0;
       }
 
 }

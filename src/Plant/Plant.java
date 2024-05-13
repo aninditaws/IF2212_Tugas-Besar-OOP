@@ -45,18 +45,22 @@ public class Plant extends Character {
               }
       };
 
-      public void rangeZombie();
+      public void rangeZombie() {};
       
       
       public void shoot(){
             System.out.println("Has been shot");
       }
 
-      public void draw(); //buat ngedraw 
+      public void draw() {}; //buat ngedraw
 
       public void die(){
             if (isDead()){
                   System.out.println("Plant has been dead");
             }
       }
+       public void update() {
+            // DO NOTHING IN PLANT
+            return;
+       }
 }

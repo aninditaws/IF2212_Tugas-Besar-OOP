@@ -1,3 +1,5 @@
+package Sun;
+
 public final class Sun {
     private int totalSun;
     private static Sun instance;

@@ -1,8 +1,29 @@
 package Plant;
-public class Sunflower extends Plant {
-      // private static Sun sun = 25 blom ada class sun nya
 
-      public Sunflower(String name, int health, int attack_damage, int attack_speed, int cost, int range, int cooldown) {
-            super(name, health, attack_damage, attack_speed, cost, range, cooldown);
+import Sun.Sun;
+
+public class Sunflower extends Plant {
+      private int doUpdate;
+
+      public Sunflower() {
+            super("Sunflower", 100, 0, 0, 50, 0, 10);
+            doUpdate = 0;
         }
+
+    @Override
+    public void update() {
+//        System.out.println("mencoba update sunflower");
+//        System.out.println(doUpdate);
+        doUpdate += 1;
+        if (doUpdate == 3) {
+//            System.out.println("berhasil update");
+            generateSun();
+            doUpdate = 0;
+        }
+    }
+
+    public void generateSun() {
+          Sun.getInstance().generateSun();
+
+      }
 }
