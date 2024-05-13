@@ -1,3 +1,4 @@
+package Update;
 public class Update implements Runnable {
     Thread gamThread;
     int fps=60;

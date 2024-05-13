@@ -7,3 +7,4 @@ public class SnowPea extends Plant{
             super(name, health, attack_damage, attack_speed, cost, range, cooldown);
         }
 }
+
