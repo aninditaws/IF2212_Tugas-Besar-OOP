@@ -10,8 +10,9 @@ public class Main {
     private static final EventChannel channel = new EventChannel();
 
     public static void main(String[] args) {
+        // Contoh penggunaan, subscribe ke channel untuk semua entitas yang butuh update
         sunflower = new Sunflower();
-
+        channel.subscribe(sunflower);
         startTimer();
     }
 
@@ -41,7 +42,6 @@ public class Main {
         // Masukkan seluruh fungsi yang membutuhkan update sesuai waktu kesini
         System.out.println(new Date());
 
-        sunflower.update();
         channel.publishUpdate();
     }
 
