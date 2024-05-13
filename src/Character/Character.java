@@ -1,6 +1,6 @@
 package Character;
 
-public class Character {
+abstract public class Character {
       public String name;
       public int health;
       public int attack_damage;
@@ -51,4 +51,7 @@ public Character(String name, int health, int attack_damage, int attack_speed)
           return this.getHealth() <= 0;
       }
 
+      public void update() {
+      // DO NOTHING
+      }
 }

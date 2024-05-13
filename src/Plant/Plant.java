@@ -59,8 +59,4 @@ public class Plant extends Character {
                   System.out.println("Plant has been dead");
             }
       }
-       public void update() {
-            // DO NOTHING IN PLANT
-            return;
-       }
 }

@@ -8,10 +8,9 @@ public class DeckTanaman {
     private List<Plant> arrayDeck;
     public static final int MAX_DECK_SIZE = 6;
 
-    // Inizialisation DeckTanaman
+    // Initialization DeckTanaman
     private DeckTanaman() {
         this.arrayDeck = new ArrayList<Plant>();
-
     }
 
     // getter arrayDeck
@@ -28,14 +27,14 @@ public class DeckTanaman {
     }
 
     // fungsi menambahkan tanaman ke dalam area
-    public void plantTanaman(Plant plant, GameMap<T> area) {
+    public void plantTanaman(Plant plant, GameMap<Plant> area) {
         int areaRow = area.getRow();
         int areaColumn = area.getColumn();
 
         if (area.determineAreaType(areaRow, areaColumn) == AreaType.PLANTABLE_AREA) {
             // if (plant.getCooldownTime()) if untuk cek cooldown tanaman
 
-            area.getArea(areaRow, areaColumn).setPlant(plant);
+            area.getArea(areaRow, areaColumn).addEntity(plant);
         } else {
             System.out.println(String.format("Tidak bisa menanam tanaman di area %s",
                     area.getArea(areaRow, areaColumn).getType()));
@@ -43,12 +42,12 @@ public class DeckTanaman {
     }
 
     // fungsi menggali/remove tanaman dari dalam area
-    public void digTanaman(GameMap<T> area) {
+    public void digTanaman(GameMap<Plant> area) {
         int areaRow = area.getRow();
         int areaColumn = area.getColumn();
 
-        if (area.getArea(areaRow, areaColumn).getPlant() != null) {
-            area.getArea(areaRow, areaColumn).removePlant();
+        if (area.getArea(areaRow, areaColumn).getEntities() != null) {
+            area.getArea(areaRow, areaColumn).clearEntities();
         } else {
             System.out.println(String.format("Tidak bisa menggali tanaman dari area %s",
                     area.getArea(areaRow, areaColumn).getType()));
