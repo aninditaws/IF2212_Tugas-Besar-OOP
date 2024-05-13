@@ -1,13 +1,14 @@
 import Plant.Sunflower;
-import Sun.Sun;
+import Subscriber.EventChannel;
 
 import java.util.Date;
-import java.util.Scanner;
 
 public class Main {
 
     public static Thread timerThread;
     public static Sunflower sunflower;
+    private static final EventChannel channel = new EventChannel();
+
     public static void main(String[] args) {
         sunflower = new Sunflower();
 
@@ -41,6 +42,8 @@ public class Main {
         System.out.println(new Date());
 
         sunflower.update();
+        channel.publishUpdate();
     }
+
 
 }

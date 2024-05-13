@@ -1,6 +1,8 @@
 package Character;
 
-abstract public class Character {
+import Subscriber.Subscriber;
+
+abstract public class Character implements Subscriber {
       public String name;
       public int health;
       public int attack_damage;
@@ -51,7 +53,8 @@ public Character(String name, int health, int attack_damage, int attack_speed)
           return this.getHealth() <= 0;
       }
 
+      @Override
       public void update() {
-      // DO NOTHING
+            // DO NOTHING
       }
 }
