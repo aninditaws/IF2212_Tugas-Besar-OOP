@@ -74,7 +74,5 @@ public class GameFrame extends JFrame {
         });
     }
 
-    public void draw(){
-        
-    }
+    // public void draw(){}
 }
