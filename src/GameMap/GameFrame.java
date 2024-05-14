@@ -53,13 +53,21 @@ public class GameFrame extends JFrame {
     }
 
     private Color getColorForAreaType(AreaType type) {
-        return switch (type) {
-            case PROTECTED_AREA -> Color.RED;
-            case PLANTABLE_AREA -> Color.GREEN;
-            case WATER_AREA -> Color.CYAN;
-            case ZOMBIE_SPAWN_GROUND, ZOMBIE_SPAWN_WATER -> Color.GRAY;
-            default -> Color.WHITE;
-        };
+        switch (type) {
+            case PROTECTED_AREA:
+                return Color.RED;
+
+            case PLANTABLE_AREA:
+                return Color.GREEN;
+            case WATER_AREA:
+                return Color.CYAN;
+            case ZOMBIE_SPAWN_GROUND:
+                return Color.GRAY;
+            case ZOMBIE_SPAWN_WATER:
+                return Color.GRAY;
+            default:
+                return Color.WHITE;
+        }
     }
 
     public void updateRender() {
