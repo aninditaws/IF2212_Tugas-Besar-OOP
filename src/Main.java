@@ -6,13 +6,13 @@ import java.util.Date;
 public class Main {
 
     public static Thread timerThread;
-    public static Sunflower sunflower;
-    private static final EventChannel channel = new EventChannel();
+    private static final EventChannel channel = EventChannel.instance;
 
     public static void main(String[] args) {
         // Contoh penggunaan, subscribe ke channel untuk semua entitas yang butuh update
-        sunflower = new Sunflower();
-        channel.subscribe(sunflower);
+        // Subscribe dilakukan di setiap kelas yang butuh update (cek kelas Sunflower untuk contoh)
+        // Subscrive dilakukan dengan memanggil subscrive ke singleton instance dari eventchannel
+        Sunflower sunflower = new Sunflower();
         startTimer();
     }
 
@@ -39,9 +39,7 @@ public class Main {
     }
 
     public static void updateGameTick() {
-        // Masukkan seluruh fungsi yang membutuhkan update sesuai waktu kesini
         System.out.println(new Date());
-
         channel.publishUpdate();
     }
 

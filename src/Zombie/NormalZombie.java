@@ -1,12 +1,13 @@
 package Zombie;
-
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import Plant.Plant;
+import Update.CustomListener;
+import javax.imageio.ImageIO;
 public class NormalZombie {
-    import java.awt.*;
-    import java.awt.image.BufferedImage;
-    import java.io.File;
-    import java.io.IOException;
-    
-    import javax.imageio.ImageIO;
+
     
     public class Zombie extends Square implements CustomListener {
         String name = "Zombie";
@@ -118,5 +119,3 @@ public class NormalZombie {
 }
 
 
-import Plant.Plant;
-import Update.CustomListener;

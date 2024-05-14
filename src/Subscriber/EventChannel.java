@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventChannel {
+
+    public static EventChannel instance = new EventChannel();
     private List<Subscriber> subscribers = new ArrayList<>();
 
     public void subscribe(Subscriber subscriber) {
