@@ -2,8 +2,6 @@ package Character;
 
 import Subscriber.Subscriber;
 
-import java.awt.*;
-
 abstract public class Character implements Subscriber {
       public String name;
       public int health;
@@ -11,7 +9,6 @@ abstract public class Character implements Subscriber {
       public int attack_speed;
       public boolean dead;
 
-      public Point position;
 
       public Character(String name, int health, int attack_damage, int attack_speed)
       {
@@ -56,6 +53,7 @@ abstract public class Character implements Subscriber {
       public boolean isDead(){
           return this.getHealth() <= 0;
       }
+
 
       @Override
       public void update(int gameTick) {
