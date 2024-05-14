@@ -17,7 +17,7 @@ public class GameMap<T> {
     private void initializeMap() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                map[i][j] = new Area<>(determineAreaType(i, j));
+                map[i][j] = new Area<T>(determineAreaType(i, j));
             }
         }
     }
@@ -46,7 +46,11 @@ public class GameMap<T> {
                 return AreaType.PLANTABLE_AREA;
             }
         } else if (col == 8) {
-            return AreaType.ZOMBIE_SPAWN;
+            if (row >= 2 && row <= 3) {
+                return AreaType.ZOMBIE_SPAWN_WATER;
+            } else {
+                return AreaType.ZOMBIE_SPAWN_GROUND;
+            }
         }
         return AreaType.PLANTABLE_AREA;
     }
