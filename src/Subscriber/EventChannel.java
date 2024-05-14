@@ -1,14 +1,12 @@
 package Subscriber;
 
-import Subscriber.Subscriber;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class EventChannel {
 
-    private static EventChannel instance;
-    private List<Subscriber> subscribers = new ArrayList<>();
+    private static EventChannel instance = null;
+    private final List<Subscriber> subscribers = new ArrayList<>();
 
     public static EventChannel getInstance() {
         if (instance == null) {
@@ -25,9 +23,9 @@ public class EventChannel {
         subscribers.remove(subscriber);
     }
 
-    public void publishUpdate(int gameTick) {
-        for (Subscriber subscriber : subscribers) {
+    public synchronized void publishUpdate(int gameTick) {
+        subscribers.forEach(subscriber -> {
             subscriber.update(gameTick);
-        }
+        });
     }
 }

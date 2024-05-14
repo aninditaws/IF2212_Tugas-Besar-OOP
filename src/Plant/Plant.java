@@ -52,7 +52,7 @@ public class Plant extends Character {
             System.out.println("Has been shot");
       }
 
-      public void draw() {}; //buat ngedraw
+      public void draw() {} //buat ngedraw
 
       public void die(){
             if (isDead()){

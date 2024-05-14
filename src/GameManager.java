@@ -6,13 +6,15 @@ public class GameManager {
     public static Thread timerThread;
     private static final EventChannel channel = EventChannel.getInstance();
 
-    private static int gameTick = 0;
     public static void startTimer() {
         // Membuat sebuah thread yang akan menjalankan updateGameTick setiap 1 detik (1000 milliseconds)
         timerThread = new Thread(() -> {
             try {
+                int gameTick = 0;
                 while (true) {
-                    updateGameTick();
+                    gameTick += 1;
+                    gameTick = gameTick % 200;
+                    updateGameTick(gameTick);
                     Thread.sleep(1000);
                 }
             } catch (InterruptedException e) {
@@ -29,10 +31,8 @@ public class GameManager {
         timerThread.interrupt();
     }
 
-    public static void updateGameTick() {
+    public static synchronized void updateGameTick(int gameTick) {
         System.out.println(new Date());
-        gameTick += 1;
-        gameTick = gameTick % 200;
         channel.publishUpdate(gameTick);
     }
 }

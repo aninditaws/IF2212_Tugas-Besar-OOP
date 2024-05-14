@@ -13,6 +13,7 @@ public final class Sun implements Subscriber {
     private Sun() {
         totalSun = 25;
         EventChannel.getInstance().subscribe(this);
+        generateRandomInterval();
     }
 
     public static Sun getInstance() {
@@ -53,6 +54,7 @@ public final class Sun implements Subscriber {
             generateRandomInterval();
             if (gameTick < 100) {
                 generateSun();
+                System.out.println("Generated sun");
             }
         }
     }
