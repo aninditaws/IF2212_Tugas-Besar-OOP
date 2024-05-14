@@ -13,7 +13,7 @@ public class Sunflower extends Plant {
         }
 
     @Override
-    public void update() {
+    public void update(int gameTick) {
 //        System.out.println("mencoba update sunflower");
 //        System.out.println(doUpdate);
         doUpdate += 1;

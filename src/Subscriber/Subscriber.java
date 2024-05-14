@@ -1,5 +1,5 @@
 package Subscriber;
 
 public interface Subscriber {
-    void update();
+    void update(int gameTick);
 }

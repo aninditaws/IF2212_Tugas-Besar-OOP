@@ -25,9 +25,9 @@ public class EventChannel {
         subscribers.remove(subscriber);
     }
 
-    public void publishUpdate() {
+    public void publishUpdate(int gameTick) {
         for (Subscriber subscriber : subscribers) {
-            subscriber.update();
+            subscriber.update(gameTick);
         }
     }
 }

@@ -11,7 +11,7 @@ public final class Sun implements Subscriber {
     private int doUpdate = 0;
 
     private Sun() {
-        totalSun = 0;
+        totalSun = 25;
         EventChannel.getInstance().subscribe(this);
     }
 
@@ -45,13 +45,15 @@ public final class Sun implements Subscriber {
     }
 
     @Override
-    public void update() {
-        // Memberikan sun dalam jangka waktu yang random
+    public void update(int gameTick) {
+        // Memberikan sun dalam jangka waktu yang random pada PAGI HARI (0 - 100)
         doUpdate += 1;
         if (doUpdate == randomGeneratedInterval) {
             doUpdate = 0;
             generateRandomInterval();
-            generateSun();
+            if (gameTick < 100) {
+                generateSun();
+            }
         }
     }
 }
