@@ -4,11 +4,9 @@ import Subscriber.EventChannel;
 import Sun.Sun;
 
 public class Sunflower extends Plant {
-      private int doUpdate;
 
       public Sunflower() {
             super("Sunflower", 100, 0, 0, 50, 0, 10);
-            doUpdate = 0;
           EventChannel.getInstance().subscribe(this);
         }
 
@@ -16,11 +14,9 @@ public class Sunflower extends Plant {
     public void update(int gameTick) {
 //        System.out.println("mencoba update sunflower");
 //        System.out.println(doUpdate);
-        doUpdate += 1;
-        if (doUpdate == 3) {
+        if (gameTick % 3 == 0) {
             System.out.println("berhasil update");
             generateSun();
-            doUpdate = 0;
         }
     }
 
