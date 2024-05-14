@@ -9,7 +9,7 @@ public class Sunflower extends Plant {
       public Sunflower() {
             super("Sunflower", 100, 0, 0, 50, 0, 10);
             doUpdate = 0;
-          EventChannel.instance.subscribe(this);
+          EventChannel.getInstance().subscribe(this);
         }
 
     @Override

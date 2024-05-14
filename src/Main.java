@@ -6,7 +6,7 @@ import java.util.Date;
 public class Main {
 
     public static Thread timerThread;
-    private static final EventChannel channel = EventChannel.instance;
+    private static final EventChannel channel = EventChannel.getInstance();
 
     public static void main(String[] args) {
         // Contoh penggunaan, subscribe ke channel untuk semua entitas yang butuh update

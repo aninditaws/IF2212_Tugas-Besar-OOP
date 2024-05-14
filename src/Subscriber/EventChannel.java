@@ -7,8 +7,15 @@ import java.util.List;
 
 public class EventChannel {
 
-    public static EventChannel instance = new EventChannel();
+    private static EventChannel instance;
     private List<Subscriber> subscribers = new ArrayList<>();
+
+    public static EventChannel getInstance() {
+        if (instance == null) {
+            instance = new EventChannel();
+        }
+        return instance;
+    }
 
     public void subscribe(Subscriber subscriber) {
         subscribers.add(subscriber);
