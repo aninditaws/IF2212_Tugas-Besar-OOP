@@ -12,8 +12,8 @@ import java.util.List;
 public class GameFrame extends JFrame {
     private GameMap<Object> gameMap; 
     private JPanel mapPanel;
-    private static ArrayList<Bullet> bullets = new ArrayList<Bullet>(); //buat array bullet sama tanaman
-    private static ArrayList<Plant> plants = new ArrayList<Plant>();
+    // private static ArrayList<Bullet> bullets = new ArrayList<Bullet>(); //buat array bullet sama tanaman
+    // private static ArrayList<Plant> plants = new ArrayList<Plant>();
 
     public GameFrame() {
         setTitle("Michael vs. Lalapan");
@@ -74,5 +74,7 @@ public class GameFrame extends JFrame {
         });
     }
 
-    // public void draw(){}
+    // public void draw(){
+    //     for (int )
+    // }
 }
