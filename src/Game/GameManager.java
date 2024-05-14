@@ -1,8 +1,12 @@
 package Game;
 
 import Subscriber.EventChannel;
+import Zombie.Zombie;
+import ZombieFactory.ZombieFactory;
+import ZombieFactory.ZombieType;
 
 import java.util.Date;
+import java.util.Random;
 
 public class GameManager {
 
@@ -50,7 +54,23 @@ public class GameManager {
     }
 
     private void spawnZombie(int gameTick) {
+        // Mekanisme buat cek zombie di setiap area map
+
+        int max = 6; // Sejumlah tipe zombie
+        int min = 1;
+        int randomIndex = (int) ((Math.random() * (max - min)) + min);
+        ZombieType[] zombieTypes = ZombieType.values();
+        ZombieFactory zombieFactory = new ZombieFactory();
+
+        boolean val = new Random().nextInt(3)==0;
+        if (val) {
+            zombieFactory.CreateZombie(zombieTypes[randomIndex]);
+        }
 
     }
 
+    private int countZombies() {
+        // TODO
+        return 0;
+    }
 }
