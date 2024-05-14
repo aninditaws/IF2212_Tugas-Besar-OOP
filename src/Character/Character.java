@@ -9,14 +9,14 @@ abstract public class Character implements Subscriber {
       public int attack_speed;
       public boolean dead;
 
-public Character(String name, int health, int attack_damage, int attack_speed)
-{
-      this.name = name;
-      this.health = Math.max (0, health); //memastikan health is not negative
-      this.attack_damage = Math.max(0, attack_damage); //memastikan attack_speed is not negative
-      this.attack_speed = Math.max(0, attack_speed); //memastikan attack_speed is not negative
+      public Character(String name, int health, int attack_damage, int attack_speed)
+      {
+            this.name = name;
+            this.health = Math.max (0, health); //memastikan health is not negative
+            this.attack_damage = Math.max(0, attack_damage); //memastikan attack_speed is not negative
+            this.attack_speed = Math.max(0, attack_speed); //memastikan attack_speed is not negative
 
-}
+      }
 
       public void setName(String nama){
             this.name=nama;
