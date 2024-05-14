@@ -1,4 +1,4 @@
-package GameMap;
+package Game;
 
 import java.util.List;
 
@@ -68,5 +68,10 @@ public class GameMap<T> {
 
     public int getColumn() {
         return width;
+    }
+
+    public void updateGameMap() {
+        // Iterasi setiap area entity, kalau dia zombie dan sudah berubah positionnya, pindahin
+
     }
 }

@@ -1,27 +1,24 @@
-package GameMap;
+package Game;
 
 import javax.swing.*;
 
-import Plant.Bullet;
-import Plant.Plant;
-
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class GameFrame extends JFrame {
-    private GameMap<Object> gameMap; 
+    private GameManager gameManager;
     private JPanel mapPanel;
     // private static ArrayList<Bullet> bullets = new ArrayList<Bullet>(); //buat array bullet sama tanaman
     // private static ArrayList<Plant> plants = new ArrayList<Plant>();
 
-    public GameFrame() {
+    public GameFrame(GameManager gameManager) {
         setTitle("Michael vs. Lalapan");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        gameMap = new GameMap<>(9, 6); 
+        this.gameManager = gameManager;
+
         mapPanel = new JPanel(new GridLayout(6, 9, 2, 2));
         initializeMap();
 
@@ -29,9 +26,9 @@ public class GameFrame extends JFrame {
     }
 
     private void initializeMap() {
-        for (int i = 0; i < gameMap.getRow(); i++) {
-            for (int j = 0; j < gameMap.getColumn(); j++) {
-                Area<Object> area = gameMap.getArea(i, j);
+        for (int i = 0; i < gameManager.getGameMap().getRow(); i++) {
+            for (int j = 0; j < gameManager.getGameMap().getColumn(); j++) {
+                Area<Object> area = gameManager.getGameMap().getArea(i, j);
                 JPanel areaPanel = new JPanel();
                 areaPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 
@@ -72,13 +69,7 @@ public class GameFrame extends JFrame {
 
     public void updateRender() {
         // Fungsi untuk update game map setiap detik saat game dijalankan
-    }
-
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            GameFrame frame = new GameFrame();
-            frame.setVisible(true);
-        });
+        gameManager.getGameMap().updateGameMap();
     }
 
     // public void draw(){

@@ -1,10 +1,10 @@
-import GameMap.GameFrame;
+import Game.GameFrame;
+import Game.GameManager;
 import Plant.Sunflower;
 import Subscriber.EventChannel;
 import Sun.Sun;
 
 import java.awt.*;
-import java.util.Date;
 
 
 public class Main {
@@ -19,9 +19,10 @@ public class Main {
         // Subscrive dilakukan dengan memanggil subscrive ke singleton instance dari eventchannel
         Sunflower sunflower = new Sunflower();
         Sun sun = Sun.getInstance();
-        GameManager.startTimer();
+        GameManager gameManager = new GameManager();
+        gameManager.startTimer();
         EventQueue.invokeLater(() -> {
-            GameFrame frame = new GameFrame();
+            GameFrame frame = new GameFrame(gameManager);
             frame.setVisible(true);
         });
     }

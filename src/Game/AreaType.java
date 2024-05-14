@@ -1,4 +1,4 @@
-package GameMap;
+package Game;
 public enum AreaType {
     PROTECTED_AREA, // Area yang harus dilindungi pemain
     PLANTABLE_AREA, // Area yang dapat ditanami

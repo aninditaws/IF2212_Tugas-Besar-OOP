@@ -1,7 +1,7 @@
 import java.util.*;
 
-import GameMap.AreaType;
-import GameMap.GameMap;
+import Game.AreaType;
+import Game.GameMap;
 import Plant.Plant;
 
 public class DeckTanaman {

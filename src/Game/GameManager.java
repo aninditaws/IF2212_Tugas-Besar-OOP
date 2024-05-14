@@ -1,12 +1,16 @@
+package Game;
+
 import Subscriber.EventChannel;
 
 import java.util.Date;
 
 public class GameManager {
-    public static Thread timerThread;
-    private static final EventChannel channel = EventChannel.getInstance();
 
-    public static void startTimer() {
+    // Time Manager
+    public Thread timerThread;
+    private final EventChannel channel = EventChannel.getInstance();
+
+    public void startTimer() {
         // Membuat sebuah thread yang akan menjalankan updateGameTick setiap 1 detik (1000 milliseconds)
         timerThread = new Thread(() -> {
             try {
@@ -26,13 +30,27 @@ public class GameManager {
         timerThread.start();
     }
 
-    public static void stopTimer() {
+    public void stopTimer() {
         // Membuat thread berhenti
         timerThread.interrupt();
     }
 
-    public static synchronized void updateGameTick(int gameTick) {
+    public synchronized void updateGameTick(int gameTick) {
         System.out.println(new Date());
         channel.publishUpdate(gameTick);
     }
+
+    // Map Manager
+
+    private final GameMap<Object> gameMap = new GameMap<>(9, 6);
+
+
+    public GameMap<Object> getGameMap() {
+        return gameMap;
+    }
+
+    private void spawnZombie(int gameTick) {
+
+    }
+
 }
