@@ -42,6 +42,7 @@ public class GameManager {
     public synchronized void updateGameTick(int gameTick) {
         System.out.println(new Date());
         channel.publishUpdate(gameTick);
+        System.out.println(gameTick);
     }
 
     // Map Manager
