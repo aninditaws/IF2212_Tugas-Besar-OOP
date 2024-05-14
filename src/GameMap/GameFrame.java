@@ -53,18 +53,17 @@ public class GameFrame extends JFrame {
     }
 
     private Color getColorForAreaType(AreaType type) {
-        switch (type) {
-            case PROTECTED_AREA:
-                return Color.RED;
-            case PLANTABLE_AREA:
-                return Color.GREEN;
-            case WATER_AREA:
-                return Color.CYAN;
-            case ZOMBIE_SPAWN:
-                return Color.GRAY;
-            default:
-                return Color.WHITE;
-        }
+        return switch (type) {
+            case PROTECTED_AREA -> Color.RED;
+            case PLANTABLE_AREA -> Color.GREEN;
+            case WATER_AREA -> Color.CYAN;
+            case ZOMBIE_SPAWN_GROUND, ZOMBIE_SPAWN_WATER -> Color.GRAY;
+            default -> Color.WHITE;
+        };
+    }
+
+    public void updateRender() {
+        // Fungsi untuk update game map setiap detik saat game dijalankan
     }
 
     public static void main(String[] args) {
