@@ -4,7 +4,7 @@ public class SnowPea extends Plant{
       
       
       public SnowPea() {
-            super("Snowpea", 100, 25, 4, 175, -1, 10);
+            super("Snow pea", 100, 25, 4, 175, -1, 10);
         }
 }
 
