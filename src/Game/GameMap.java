@@ -3,7 +3,7 @@ package Game;
 import java.util.List;
 
 public class GameMap<T> {
-    private Area<T>[][] map;
+    public Area<T>[][] map;
     private final int width;
     private final int height;
 

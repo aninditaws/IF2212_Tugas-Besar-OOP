@@ -6,5 +6,9 @@ public enum ZombieType {
     POLEVAULTING,
     BUCKETHEAD,
     DUCKYTUBE,
-    DOLPHINRIDER
+    DOLPHINRIDER,
+    FOOTBALL,
+    GARGANTUAR,
+    IMP,
+    SCREENDOOR
 }

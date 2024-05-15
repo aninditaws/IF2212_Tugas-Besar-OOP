@@ -7,8 +7,12 @@ import ZombieFactory.ZombieType;
 
 import java.util.Date;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class GameManager {
+
+    public int flag = 0;
+    private final int zombieIncrease = 2;
 
     // Time Manager
     public Thread timerThread;
@@ -43,6 +47,10 @@ public class GameManager {
         System.out.println(new Date());
         channel.publishUpdate(gameTick);
         System.out.println(gameTick);
+        if (gameTick == 50) {
+            flag += 1;
+            System.out.println("flag increased");
+        }
     }
 
     // Map Manager
@@ -57,21 +65,33 @@ public class GameManager {
     private void spawnZombie(int gameTick) {
         // Mekanisme buat cek zombie di setiap area map
 
-        int max = 6; // Sejumlah tipe zombie
+        int max = 10; // Sejumlah tipe zombie
         int min = 1;
         int randomIndex = (int) ((Math.random() * (max - min)) + min);
         ZombieType[] zombieTypes = ZombieType.values();
         ZombieFactory zombieFactory = new ZombieFactory();
 
-        boolean val = new Random().nextInt(3)==0;
-        if (val) {
-            zombieFactory.CreateZombie(zombieTypes[randomIndex]);
+        for (int i = 0; i <= flag; i += 1) {
+            boolean val = new Random().nextInt(3)==0;
+            int zombieCount = countZombies();
+            if (val && zombieCount < 10 + (zombieIncrease * flag)) {
+                zombieFactory.CreateZombie(zombieTypes[randomIndex]);
+            }
         }
-
     }
 
     private int countZombies() {
-        // TODO
-        return 0;
+        AtomicInteger count = new AtomicInteger();
+        for (int i = 0; i < gameMap.getRow(); i += 1) {
+            for (int j = 0; j < gameMap.getColumn(); j += 1) {
+                gameMap.map[i][j].getEntities().forEach(character -> {
+                    if (character instanceof Zombie) {
+                        count.addAndGet(1);
+                    }
+                });
+            }
+        }
+
+        return count.get();
     }
 }

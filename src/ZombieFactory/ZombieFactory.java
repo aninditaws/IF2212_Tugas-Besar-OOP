@@ -18,6 +18,14 @@ public class ZombieFactory {
                 return new DuckytubeZombie();
             case DOLPHINRIDER:
                 return new DolphinRiderZombie();
+            case FOOTBALL:
+                return new FootballZombie();
+            case GARGANTUAR:
+                return new GargantuarZombie();
+            case IMP:
+                return new ImpZombie();
+            case SCREENDOOR:
+                return new ScreenDoorZombie();
             default:
                 return new NormalZombie();
         }
