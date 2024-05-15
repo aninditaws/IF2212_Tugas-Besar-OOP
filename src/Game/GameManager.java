@@ -10,6 +10,8 @@ import java.util.Random;
 
 public class GameManager {
 
+    public int flag = 0;
+
     // Time Manager
     public Thread timerThread;
     private final EventChannel channel = EventChannel.getInstance();
@@ -43,6 +45,10 @@ public class GameManager {
         System.out.println(new Date());
         channel.publishUpdate(gameTick);
         System.out.println(gameTick);
+        if (gameTick == 50) {
+            flag += 1;
+            System.out.println("flag increased");
+        }
     }
 
     // Map Manager
@@ -63,15 +69,18 @@ public class GameManager {
         ZombieType[] zombieTypes = ZombieType.values();
         ZombieFactory zombieFactory = new ZombieFactory();
 
-        boolean val = new Random().nextInt(3)==0;
-        if (val) {
-            zombieFactory.CreateZombie(zombieTypes[randomIndex]);
-        }
+        for (int i = 0; i <= flag; i += 1) {
+            boolean val = new Random().nextInt(3)==0;
 
+            if (val) {
+                zombieFactory.CreateZombie(zombieTypes[randomIndex]);
+            }
+        }
     }
 
     private int countZombies() {
         // TODO
+
         return 0;
     }
 }
