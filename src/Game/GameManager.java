@@ -12,6 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class GameManager {
 
     public int flag = 0;
+    private final int zombieIncrease = 2;
 
     // Time Manager
     public Thread timerThread;
@@ -64,7 +65,7 @@ public class GameManager {
     private void spawnZombie(int gameTick) {
         // Mekanisme buat cek zombie di setiap area map
 
-        int max = 6; // Sejumlah tipe zombie
+        int max = 10; // Sejumlah tipe zombie
         int min = 1;
         int randomIndex = (int) ((Math.random() * (max - min)) + min);
         ZombieType[] zombieTypes = ZombieType.values();
@@ -72,8 +73,8 @@ public class GameManager {
 
         for (int i = 0; i <= flag; i += 1) {
             boolean val = new Random().nextInt(3)==0;
-
-            if (val) {
+            int zombieCount = countZombies();
+            if (val && zombieCount < 10 + (zombieIncrease * flag)) {
                 zombieFactory.CreateZombie(zombieTypes[randomIndex]);
             }
         }
