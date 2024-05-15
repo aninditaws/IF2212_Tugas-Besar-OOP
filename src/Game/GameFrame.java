@@ -8,13 +8,15 @@ import java.util.List;
 public class GameFrame extends JFrame {
     private GameManager gameManager;
     private JPanel mapPanel;
-    // private static ArrayList<Bullet> bullets = new ArrayList<Bullet>(); //buat array bullet sama tanaman
+    // private static ArrayList<Bullet> bullets = new ArrayList<Bullet>(); //buat
+    // array bullet sama tanaman
     // private static ArrayList<Plant> plants = new ArrayList<Plant>();
 
     public GameFrame(GameManager gameManager) {
         setTitle("Michael vs. Lalapan");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLayout(new BorderLayout());
 
         this.gameManager = gameManager;
@@ -73,6 +75,6 @@ public class GameFrame extends JFrame {
     }
 
     // public void draw(){
-    //     for (int )
+    // for (int )
     // }
 }

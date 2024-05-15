@@ -1,6 +1,8 @@
+package Inventory;
+
 import java.util.*;
 
-import Plant.Plant;
+import Plant.*;
 
 public class Inventory {
 
@@ -8,6 +10,16 @@ public class Inventory {
 
     public Inventory() {
         this.plantInventory = new ArrayList<Plant>();
+        this.addPlant(new Sunflower());
+        this.addPlant(new Peashooter());
+        this.addPlant(new Wallnut());
+        this.addPlant(new SnowPea());
+        this.addPlant(new Squash());
+        this.addPlant(new Lilypad());
+        this.addPlant(new CherryBomb());
+        this.addPlant(new Jalapeno());
+        this.addPlant(new Onehitter());
+        this.addPlant(new Tallnut());
     }
 
     /* METHOD */
@@ -17,40 +29,37 @@ public class Inventory {
         return this.plantInventory;
     }
 
-    //
+    // getter Plant
+    public Plant getPlant(int index) {
+        return this.plantInventory.get(index);
+    }
+
+    // method addPlant
+    public void addPlant(Plant plant) {
+        plantInventory.add(plant);
+    }
 
     // Method print tanaman yang ada di inventory
     public void printInventory() {
-        System.out.println("Inventory:\n");
         for (Plant plant : plantInventory) {
             System.out.println(String.format("%s", plant.name));
         }
     }
 
-    // Method addPlant
-    // Memastikan tanaman belum ada di Inventory
-    public void addPlant(Plant plant) {
-        if (!plantInventory.contains(plant)) {
-            plantInventory.add(plant);
-        } else {
-            System.out.println(String.format("Tanaman %s sudah ada di inventory", plant.name));
-        }
-    }
-
     // Fungsi chooseTanaman digunakan untuk memilih tanaman yang akan digunakan
     // dan ditaruh di deck tanaman
-    public void chooseTanaman(Plant plant, DeckTanaman plantDeck) {
+    public void chooseTanaman(Plant plant, DeckTanaman plantDeck, Inventory inventory) {
         if (plantDeck.getArrayDeck().size() < DeckTanaman.MAX_DECK_SIZE) {
-            if (plantInventory.contains(plant)) {
-                if (!plantDeck.getArrayDeck().contains(plant)) {
-                    plantDeck.getArrayDeck().add(plant);
-                    // System.out.println(String.format("Berhasil menambahkan %s pada deck",
-                    // plant.name));
+            if (!this.plantInventory.contains(plant)) {
+                if (plantDeck.getArrayDeck().contains(plant)) {
+                    inventory.plantInventory.add(plant);
+                    System.out.println(String.format("Berhasil menambahkan %s pada deck",
+                            plant.name));
                 } else {
-                    System.out.println("Tanaman sudah ada di deck");
+                    System.out.println(String.format("Tidak ada tanaman %s di Deck.\n", plant.name));
                 }
             } else {
-                System.out.println(String.format("Tidak ada tanaman %s di Inventory.\n", plant.name));
+                System.out.println("Tanaman sudah ada di deck");
             }
         } else {
             System.out.println(String.format("Tidak bisa menambah %s", plant.name));

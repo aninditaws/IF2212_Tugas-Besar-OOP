@@ -1,3 +1,5 @@
+package Inventory;
+
 import java.util.*;
 
 import Game.AreaType;
@@ -6,16 +8,22 @@ import Plant.Plant;
 
 public class DeckTanaman {
     private List<Plant> arrayDeck;
+    private int maxDeckSize;
     public static final int MAX_DECK_SIZE = 6;
 
     // Initialization DeckTanaman
-    private DeckTanaman() {
+    public DeckTanaman(int maxDeckSize) {
         this.arrayDeck = new ArrayList<Plant>();
+        this.maxDeckSize = maxDeckSize;
     }
 
     // getter arrayDeck
     public List<Plant> getArrayDeck() {
         return this.arrayDeck;
+    }
+
+    public int getMaxDeckSize() {
+        return this.maxDeckSize;
     }
 
     // Method print tanaman yang ada di deck
