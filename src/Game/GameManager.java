@@ -7,6 +7,7 @@ import ZombieFactory.ZombieType;
 
 import java.util.Date;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class GameManager {
 
@@ -79,8 +80,17 @@ public class GameManager {
     }
 
     private int countZombies() {
-        // TODO
+        AtomicInteger count = new AtomicInteger();
+        for (int i = 0; i < gameMap.getRow(); i += 1) {
+            for (int j = 0; j < gameMap.getColumn(); j += 1) {
+                gameMap.map[i][j].getEntities().forEach(character -> {
+                    if (character instanceof Zombie) {
+                        count.addAndGet(1);
+                    }
+                });
+            }
+        }
 
-        return 0;
+        return count.get();
     }
 }
