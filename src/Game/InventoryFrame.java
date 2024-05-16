@@ -37,7 +37,7 @@ public class InventoryFrame extends JFrame {
         layeredPane.setPreferredSize(screenSize);
 
         // Add Picture for Background
-        imageIcon = new ImageIcon("ImagePvZ/Inventory/Inventory.png");
+        imageIcon = new ImageIcon("ImagePvZ/Inventory/inventoryNoDeck.png");
 
         image = imageIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(image);
@@ -48,7 +48,6 @@ public class InventoryFrame extends JFrame {
         // Part Buat Plant Buttons di Inventory
         JPanel plantButtons = new JPanel();
         plantButtons.setOpaque(false);
-        plantButtons.setSize(680, 538);
         plantButtons.setLayout(new GridLayout(3, 4, 10, 10));
 
         int index = 0;
@@ -66,9 +65,10 @@ public class InventoryFrame extends JFrame {
             button.setOpaque(false);
             button.setContentAreaFilled(false);
             button.setBorder(null);
-            button.setMargin(new Insets(margin, margin, margin, margin));
             button.setSize(new Dimension(imageWidth, imageHeight));
+
             button.addActionListener(new ActionListener() {
+
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     Plant clickedPlant = inventory.getPlant(currentIndex);
@@ -91,6 +91,7 @@ public class InventoryFrame extends JFrame {
             });
 
             plantButtons.add(button);
+            planButtons.add(button);
             index++;
         }
         // Center the buttons panel within the layeredPane
@@ -109,7 +110,6 @@ public class InventoryFrame extends JFrame {
         button.setContentAreaFilled(false);
         button.setBorder(null);
         button.setMargin(new Insets(0, 0, 0, 0));
-        // button.setPreferredSize(new Dimension(255, 100));
 
         button.addActionListener(new ActionListener() {
 
@@ -122,8 +122,57 @@ public class InventoryFrame extends JFrame {
             }
         });
         button.setBounds(screenWidth - 500, screenHeight - 200, 457, 121);
+
         layeredPane.add(button, Integer.valueOf(1));
 
+        // 3 button: Clear, Swap, Delete
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setOpaque(false);
+        buttonPanel.setLayout(new GridLayout(1, 3, 10, 10));
+        buttonPanel.setBounds((screenWidth - 880) / 2, screenHeight - 157, 692, 66);
+
+        button = new JButton();
+        button.setIcon(new ImageIcon("ImagePvZ/Inventory/Button/clearButton.png"));
+        button.setOpaque(false);
+        button.setContentAreaFilled(false);
+        button.setBorder(null);
+        button.setSize(300, 100);
+        button.setMargin(new Insets(0, 0, 0, 0));
+
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deckTanaman.clearDeck();
+                reenableAllButtons();
+                for (JButton button : planButtons) {
+                    button.setBorder(null);
+                }
+            }
+        });
+
+        buttonPanel.add(button, BorderLayout.CENTER);
+
+        button = new JButton();
+        button.setIcon(new ImageIcon("ImagePvZ/Inventory/Button/swapButton.png"));
+        button.setOpaque(false);
+        button.setContentAreaFilled(false);
+        button.setBorder(null);
+        button.setSize(300, 100);
+        button.setMargin(new Insets(0, 0, 0, 0));
+
+        buttonPanel.add(button, BorderLayout.CENTER);
+
+        button = new JButton();
+        button.setIcon(new ImageIcon("ImagePvZ/Inventory/Button/deleteButton.png"));
+        button.setOpaque(false);
+        button.setContentAreaFilled(false);
+        button.setBorder(null);
+        button.setSize(300, 100);
+        button.setMargin(new Insets(0, 0, 0, 0));
+
+        buttonPanel.add(button, BorderLayout.CENTER);
+
+        layeredPane.add(buttonPanel, Integer.valueOf(1));
         add(layeredPane, BorderLayout.CENTER);
         setVisible(true);
     }

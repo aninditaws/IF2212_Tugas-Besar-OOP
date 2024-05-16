@@ -34,6 +34,11 @@ public class DeckTanaman {
         }
     }
 
+    // ClearDeck
+    public void clearDeck() {
+        this.arrayDeck.clear();
+    }
+
     // fungsi menambahkan tanaman ke dalam area
     public void plantTanaman(Plant plant, GameMap<Plant> area) {
         int areaRow = area.getRow();
