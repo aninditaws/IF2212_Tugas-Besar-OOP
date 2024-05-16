@@ -1,142 +1,143 @@
 package Game;
 
 import javax.swing.*;
-import javax.tools.Tool;
-
-import Inventory.Inventory;
-import Plant.*;
-
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
 
-import java.util.ArrayList;
+import Inventory.*;
+import Picture.*;
+import Plant.*;
+import Update.Update;
 
 public class InventoryFrame extends JFrame {
+    Inventory inventory = new Inventory();
+    DeckTanaman deckTanaman = new DeckTanaman(6);
+    JLayeredPane layeredPane;
+    JLabel label;
+    JButton button;
+    ImageIcon imageIcon;
+    Image image;
+    PlantImage PlantImage;
+    Dimension screenSize;
+
+    java.util.List<JButton> planButtons = new java.util.ArrayList<>(); // ini buat nyimpen button
+
     public InventoryFrame() {
-
-        // Attributes
-        Inventory inventory = new Inventory();
-
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        // Inventory Background
-        ImageIcon inventoryIcon = createImageIcon("ImagePvZ/Inventory/Inventory.png");
 
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int width = (int) screenSize.getWidth();
-        int height = (int) screenSize.getHeight();
+        // Declare size of screen
+        screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int screenWidth = (int) screenSize.getWidth();
+        int screenHeight = (int) screenSize.getHeight();
 
-        Image image = inventoryIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        inventoryIcon = new ImageIcon(image);
-        JLabel label = new JLabel(inventoryIcon);
+        // LayeredPane
+        layeredPane = new JLayeredPane();
+        layeredPane.setPreferredSize(screenSize);
 
-        int labelWidth = label.getPreferredSize().width;
-        int labelHeight = label.getPreferredSize().height;
-        int labelX = (width - labelWidth) / 2;
-        int labelY = (width - labelHeight) / 2;
+        // Add Picture for Background
+        imageIcon = new ImageIcon("ImagePvZ/Inventory/Inventory.png");
 
-        // first Plant Row Button
-        JButton[] plantButtons1 = new JButton[5];
-        String[] plantImages1 = {
-                "ImagePvZ/Plants/PlantsCard/sunflowerCard.png",
-                "ImagePvZ/Plants/PlantsCard/PeashooterCard.PNG",
-                "ImagePvZ/Plants/PlantsCard/wallnutCard.png",
-                "ImagePvZ/Plants/PlantsCard/SnowPea.png",
-                "ImagePvZ/Plants/PlantsCard/squash.png",
-        };
-        JButton[] plantButtons2 = new JButton[5];
-        String[] plantImages2 = {
-                "ImagePvZ/Plants/PlantsCard/LilyPadSeedCard.png",
-                "ImagePvZ/Plants/PlantsCard/cherrybombCard.png",
-                "ImagePvZ/Plants/PlantsCard/jalapenoCard.png",
-                "ImagePvZ/Plants/PlantsCard/jalapenoCard.png",
-                "ImagePvZ/Plants/PlantsCard/jalapenoCard.png"
-        };
-        int buttonWidth = 220;
-        int buttonHeight = 155;
+        image = imageIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
+        imageIcon = new ImageIcon(image);
+        label = new JLabel(imageIcon);
+        label.setBounds(0, 0, screenWidth, screenHeight);
+        layeredPane.add(label, Integer.valueOf(0));
 
-        JPanel buttonPanel1 = new JPanel();
-        buttonPanel1.setLayout(new GridLayout(1, plantButtons1.length, 10, 0));
+        // Part Buat Plant Buttons di Inventory
+        JPanel plantButtons = new JPanel();
+        plantButtons.setOpaque(false);
+        plantButtons.setLayout(new GridLayout(2, 5, 20, 20));
 
-        for (int i = 0; i < plantButtons1.length; i++) {
-            ImageIcon plantIcon = createImageIcon(plantImages1[i]);
-            Image plantImage = plantIcon.getImage().getScaledInstance(buttonWidth, buttonHeight, Image.SCALE_SMOOTH);
-            plantIcon = new ImageIcon(plantImage);
-            plantButtons1[i] = new JButton(plantIcon);
-            buttonPanel1.add(plantButtons1[i]);
+        int index = 0;
+        int margin = 20;
+        for (PlantImage plant : PlantImage.values()) {
+            final int currentIndex = index;
+            ImageIcon imageIcon = new ImageIcon(plant.getImagePath());
+            int imageWidth = 220;
+            int imageHeight = 120;
+            Image image = imageIcon.getImage().getScaledInstance(imageWidth, imageHeight, Image.SCALE_SMOOTH);
+            imageIcon = new ImageIcon(image);
+            JButton button = new JButton();
+            button.setIcon(imageIcon);
+            button.setOpaque(false);
+            button.setContentAreaFilled(false);
+            button.setBorder(null);
+            button.setMargin(new Insets(margin, margin, margin, margin));
+            button.setPreferredSize(new Dimension(imageWidth, imageHeight));
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    Plant clickedPlant = inventory.getPlant(currentIndex);
+                    if (button.isEnabled()) {
+                        if (deckTanaman.getArrayDeck().contains(inventory.getPlant(currentIndex))) {
+                            deckTanaman.getArrayDeck().remove(clickedPlant);
+                            button.setBorder(null);
+                            reenableAllButtons();
+                        } else {
+                            if (deckTanaman.getArrayDeck().size() < deckTanaman.getMaxDeckSize()) {
+                                inventory.chooseTanaman(clickedPlant, deckTanaman, inventory);
+                                button.setBorder(BorderFactory.createLineBorder(Color.RED, 5));
+
+                            }
+                        }
+                        deckTanaman.printDeck();
+                        disableButtonsIfMaxReached();
+                    }
+                }
+            });
+
+            plantButtons.add(button);
+            index++;
         }
-        // Second Plant Row Button
-        JPanel buttonPanel2 = new JPanel();
-        buttonPanel2.setLayout(new GridLayout(1, plantButtons2.length, 10, 0));
-        for (int i = 0; i < plantButtons2.length; i++) {
+        // Center the buttons panel within the layeredPane
+        int panelWidth = plantButtons.getPreferredSize().width;
+        int panelHeight = plantButtons.getPreferredSize().height;
+        plantButtons.setBounds((screenWidth - panelWidth) / 2, (screenHeight - panelHeight) / 2 - 100, panelWidth,
+                panelHeight);
 
-            ImageIcon plantIcon = createImageIcon(plantImages2[i]);
-            Image plantImage = plantIcon.getImage().getScaledInstance(buttonWidth, buttonHeight, Image.SCALE_SMOOTH);
+        layeredPane.add(plantButtons, Integer.valueOf(1));
 
-            plantIcon = new ImageIcon(plantImage);
-            plantButtons2[i] = new JButton(plantIcon);
-            buttonPanel2.add(plantButtons2[i]);
-        }
+        // Button to GameFrame
+        button = new JButton();
+        button.setIcon(new ImageIcon("ImagePvZ/Button/Play_Button.png"));
+        button.setOpaque(false);
+        button.setContentAreaFilled(false);
+        button.setBorder(null);
+        button.setMargin(new Insets(0, 0, 0, 0));
+        button.setPreferredSize(new Dimension(200, 100));
+        button.addActionListener(new ActionListener() {
 
-        // Merge buttonPanel1 and buttonPanel2
-        JPanel buttonPlants = new JPanel();
-        buttonPlants.setLayout(new GridLayout(2, 1));
-        buttonPlants.add(buttonPanel1);
-        buttonPlants.add(buttonPanel2);
-        buttonPlants.setOpaque(false);
-        buttonPlants.setBackground(new Color(0, 0, 0, 0));
-
-        // Play Button
-        ImageIcon playIcon = createImageIcon("ImagePvZ/Button/Play_Button.png");
-
-        Dimension playSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int playWidth = (int) playSize.getWidth();
-        int playHeight = (int) playSize.getHeight();
-        Image playImage = playIcon.getImage().getScaledInstance(playWidth, playHeight, Image.SCALE_SMOOTH);
-        playIcon = new ImageIcon(playImage);
-        JButton playButton = new JButton(playIcon);
-        int playX = (int) (playWidth * 0.85);
-        int playY = (int) (playHeight * 0.85);
-
-        playButton.setBorderPainted(false);
-        playButton.setContentAreaFilled(false);
-        playButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                startGame();
+                GameManager gameManager = new GameManager();
+                GameFrame frame = new GameFrame(gameManager);
+                frame.setVisible(true);
+                dispose();
             }
         });
+        button.setBounds(screenWidth - 500, screenHeight - 200, 458, 117);
+        layeredPane.add(button, Integer.valueOf(1));
 
-        setLayout(null);
-
-        label.setBounds(0, 0, labelWidth, labelHeight);
-
-        int buttonPlantsX = (width - buttonWidth * 5) / 2;
-        int buttonPlantsY = (height - buttonHeight * 2) / 2;
-        buttonPlants.setBounds(buttonPlantsX, buttonPlantsY, buttonWidth * 5, (buttonHeight * 2));
-
-        playButton.setBounds(playX, playY, playWidth, playHeight);
-
-        add(label);
-        add(buttonPlants);
-        add(playButton);
-
-        setSize(width, height);
+        add(layeredPane, BorderLayout.CENTER);
         setVisible(true);
     }
 
-    // Method buat pindah ke GameFrame
-    public void startGame() {
-        GameManager gameManager = new GameManager();
-        gameManager.startTimer();
-        GameFrame gameFrame = new GameFrame(gameManager);
-        gameFrame.setVisible(true);
-        dispose();
+    private void reenableAllButtons() {
+        for (JButton button : planButtons) {
+            button.setEnabled(true);
+        }
     }
 
-    public ImageIcon createImageIcon(String path) {
-        return new ImageIcon(path);
-
+    private void disableButtonsIfMaxReached() {
+        if (deckTanaman.getArrayDeck().size() >= deckTanaman.getMaxDeckSize()) {
+            for (JButton button : planButtons) {
+                if (!deckTanaman.getArrayDeck().contains(inventory.getPlant(planButtons.indexOf(button)))) {
+                    button.setEnabled(false);
+                }
+            }
+        }
     }
 
     public static void main(String[] args) {

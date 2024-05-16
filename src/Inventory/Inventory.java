@@ -10,6 +10,19 @@ public class Inventory {
 
     public Inventory() {
         this.plantInventory = new ArrayList<Plant>();
+        initializeInventory();
+    }
+
+    /* METHOD */
+
+    // getter plantInventory
+    public ArrayList<Plant> getPlantInventory() {
+        return this.plantInventory;
+    }
+
+    // method initializeInventory
+
+    public void initializeInventory() {
         this.addPlant(new Sunflower());
         this.addPlant(new Peashooter());
         this.addPlant(new Wallnut());
@@ -20,13 +33,6 @@ public class Inventory {
         this.addPlant(new Jalapeno());
         this.addPlant(new Onehitter());
         this.addPlant(new Tallnut());
-    }
-
-    /* METHOD */
-
-    // getter plantInventory
-    public ArrayList<Plant> getPlantInventory() {
-        return this.plantInventory;
     }
 
     // getter Plant
