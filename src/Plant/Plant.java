@@ -6,6 +6,8 @@ public class Plant extends Character {
       private int cost; 
       private int range;  
       private int cooldown;
+      protected int x;
+      protected int y;
 
       /* NOTES */
       // attack_speed = tanaman meyerang dalam x detik
@@ -13,11 +15,14 @@ public class Plant extends Character {
       // cooldown = satuannya pake
       /*KONSTRUKTOR*/
 
-      public Plant(String name, int health, int attack_damage, int attack_speed,int cost, int range, int cooldown) {
+      public Plant(String name, int health, int attack_damage, int attack_speed,int cost, int range, int cooldown, int x, int y) {
             super(name, health, attack_damage, attack_speed);
             this.cost = cost;
             this.range = range;
             this.cooldown = cooldown;
+            this.x = x;
+            this.y = y;
+
       }
 
       /*GETTER & SETTER*/      
@@ -45,10 +50,11 @@ public class Plant extends Character {
               }
       };
 
-      public void rangeZombie() {};
+      // public void rangeZombie() {};
       
       
-      public void shoot(){
+      public void shoot(int power){
+            Bullet bullet = new Bullet(power, null);
             System.out.println("Has been shot");
       }
 
