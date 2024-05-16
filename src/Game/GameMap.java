@@ -1,6 +1,7 @@
 package Game;
 
 import java.util.List;
+import Zombie.*;
 
 public class GameMap<T> {
     public Area<T>[][] map;
@@ -27,6 +28,27 @@ public class GameMap<T> {
             throw new IllegalArgumentException("Error! Tidak dapat meletakkan di luar map");
         }
         map[row][col].addEntity(entity);
+    }
+
+    public void removeEntity(int row, int col, int index) {
+        if (row < 0 || row >= height || col < 0 || col >= width) {
+            throw new IllegalArgumentException("Error! Tidak dapat meletakkan di luar map");
+        }
+        T removedEntity = map[row][col].getEntities().get(index);
+        map[row][col].removeEntity(removedEntity);
+    }
+
+
+
+    public void moveEntity(int oldRow, int oldCol, int index, int newRow, int newCol) {
+        if (oldRow < 0 || oldRow >= height || oldCol < 0 || oldCol >= width) {
+            throw new IllegalArgumentException("Error! Tidak dapat meletakkan di luar map");
+        }
+        if (newRow < 0 || newRow >= height || newCol < 0 || newCol >= width) {
+            throw new IllegalArgumentException("Error! Tidak dapat meletakkan di luar map");
+        }
+        map[newRow][newCol].addEntity(map[oldRow][oldCol].getEntities().get(index));
+        removeEntity(oldRow, oldCol, index);
     }
 
     public List<T> getEntities(int row, int col) {
@@ -70,8 +92,5 @@ public class GameMap<T> {
         return width;
     }
 
-    public void updateGameMap() {
-        // Iterasi setiap area entity, kalau dia zombie dan sudah berubah positionnya, pindahin
 
-    }
 }

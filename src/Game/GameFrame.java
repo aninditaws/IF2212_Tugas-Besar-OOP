@@ -71,7 +71,7 @@ public class GameFrame extends JFrame {
 
     public void updateRender() {
         // Fungsi untuk update game map setiap detik saat game dijalankan
-        gameManager.getGameMap().updateGameMap();
+        gameManager.updateGameMap();
     }
 
     // public void draw(){

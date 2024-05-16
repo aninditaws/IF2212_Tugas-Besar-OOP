@@ -15,8 +15,9 @@ public class Sunflower extends Plant {
     public void update(int gameTick) {
 //        System.out.println("mencoba update sunflower");
 //        System.out.println(doUpdate);
-        if (doUpdate % 3 == 0) {
-            doUpdate += 1;
+        doUpdate += 1;
+        if (doUpdate == 2) {
+            doUpdate = 0;
             System.out.println("berhasil update");
             generateSun();
         }
