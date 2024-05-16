@@ -66,4 +66,6 @@ abstract public class Character implements Subscriber {
       public void update(int gameTick) {
             // DO NOTHING
       }
+
+
 }
