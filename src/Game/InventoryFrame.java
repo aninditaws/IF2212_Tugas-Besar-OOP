@@ -8,7 +8,6 @@ import java.util.*;
 import Inventory.*;
 import Picture.*;
 import Plant.*;
-import Update.Update;
 
 public class InventoryFrame extends JFrame {
     Inventory inventory = new Inventory();

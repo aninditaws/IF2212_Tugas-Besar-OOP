@@ -31,7 +31,7 @@ public class Inventory {
         this.addPlant(new Lilypad());
         this.addPlant(new CherryBomb());
         this.addPlant(new Jalapeno());
-        this.addPlant(new Onehitter());
+//        this.addPlant(new Onehitter());
         this.addPlant(new Tallnut());
     }
 

@@ -7,6 +7,7 @@ import ZombieFactory.ZombieType;
 
 import java.awt.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -45,14 +46,18 @@ public class GameManager {
     }
 
     public synchronized void updateGameTick(int gameTick) {
-        System.out.println(new Date());
+//        System.out.println(new Date());
+        // Publish update
         channel.publishUpdate(gameTick);
         System.out.println(gameTick);
+        // Mekanisme flag
         if (gameTick == 50) {
             flag += 1;
             System.out.println("flag increased");
         }
+        // Mekanisme spawning zombie
         spawnZombie(gameTick);
+        updateGameMap();
     }
 
     // Map Manager
@@ -79,12 +84,12 @@ public class GameManager {
             System.out.print("Zombie Count: ");
             System.out.println(zombieCount);
             if (val && zombieCount < 10 + (zombieIncrease * flag)) {
+                Point randomPosition = generateRandomZombiePosition(zombieTypes[randomIndex]);
+                gameMap.map[randomPosition.y][randomPosition.x].addEntity(zombieFactory.CreateZombie(zombieTypes[randomIndex], randomPosition));
                 System.out.print("Created Zombie ");
                 System.out.print(zombieTypes[randomIndex].toString());
                 System.out.print(" at ");
-                Point randomPosition = generateRandomZombiePosition(zombieTypes[randomIndex]);
                 System.out.println(randomPosition);
-                gameMap.map[randomPosition.y][randomPosition.x].addEntity(zombieFactory.CreateZombie(zombieTypes[randomIndex], randomPosition));
             }
         }
     }
@@ -122,5 +127,25 @@ public class GameManager {
         }
 
         return count.get();
+    }
+
+    public void updateGameMap() {
+        // Iterasi setiap area entity, kalau dia zombie dan sudah berubah positionnya, pindahin
+        for (int i = 0; i < gameMap.map.length; i += 1) {
+            for (int j = 0; j < gameMap.map[i].length; j += 1) {
+                List<Object> entities = gameMap.getEntities(i, j);
+                for (int k = 0; k < entities.size(); k += 1) {
+                    Object entity = entities.get(k);
+                    if (entity instanceof Zombie){
+//                        System.out.println(String.format("%d = %d? %d = %d?", ((Zombie) entity).position.x, j, ((Zombie) entity).position.y, i));
+                        if (((Zombie) entity).position.x != j || ((Zombie) entity).position.y != i) {
+                            gameMap.moveEntity(i, j, k, ((Zombie) entity).position.y, ((Zombie) entity).position.x);
+                            System.out.println(String.format("Moved zombie %s from %d, %d to %d, %d", ((Zombie) entity).name, j, i, ((Zombie) entity).position.x, ((Zombie) entity).position.y));
+
+                        }
+                    }
+                }
+            }
+        }
     }
 }
