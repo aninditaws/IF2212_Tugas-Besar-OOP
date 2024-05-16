@@ -48,10 +48,12 @@ public class InventoryFrame extends JFrame {
         // Part Buat Plant Buttons di Inventory
         JPanel plantButtons = new JPanel();
         plantButtons.setOpaque(false);
-        plantButtons.setLayout(new GridLayout(3, 4, 17, 21));
+        plantButtons.setSize(680, 538);
+        plantButtons.setLayout(new GridLayout(3, 4, 10, 10));
 
         int index = 0;
         int margin = 25;
+
         for (PlantImage plant : PlantImage.values()) {
             final int currentIndex = index;
             ImageIcon imageIcon = new ImageIcon(plant.getImagePath());
@@ -108,6 +110,7 @@ public class InventoryFrame extends JFrame {
         button.setBorder(null);
         button.setMargin(new Insets(0, 0, 0, 0));
         // button.setPreferredSize(new Dimension(255, 100));
+
         button.addActionListener(new ActionListener() {
 
             @Override
@@ -118,7 +121,7 @@ public class InventoryFrame extends JFrame {
                 dispose();
             }
         });
-        button.setBounds(screenWidth - 500, screenHeight - 200, 271, 78);
+        button.setBounds(screenWidth - 500, screenHeight - 200, 457, 121);
         layeredPane.add(button, Integer.valueOf(1));
 
         add(layeredPane, BorderLayout.CENTER);
