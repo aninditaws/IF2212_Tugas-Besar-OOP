@@ -6,8 +6,8 @@ import Sun.Sun;
 public class Sunflower extends Plant {
 
     private int doUpdate = 0;
-      public Sunflower() {
-            super("Sunflower", 100, 0, 0, 50, 0, 10);
+      public Sunflower(int x, int y) {
+            super("Sunflower", 100, 0, 0, 50, 0, 10, x, y);
           EventChannel.getInstance().subscribe(this);
         }
 
