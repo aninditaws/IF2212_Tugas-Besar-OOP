@@ -7,8 +7,8 @@ import javax.imageio.ImageIO;
 
 public class ConeheadZombie extends Zombie {
 
-    public ConeheadZombie() {
-        super("Conehead Zombie", 250, 100, 1, false);
+    public ConeheadZombie(Point position) {
+        super("Conehead Zombie", 250, 100, 1, false, position);
     }
     // Hanya dapat berjalan di area umum
 

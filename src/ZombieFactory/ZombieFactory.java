@@ -2,32 +2,32 @@ package ZombieFactory;
 
 import Zombie.*;
 
+import java.awt.*;
+
 public class ZombieFactory {
 
-    public Zombie CreateZombie(ZombieType zombieType) {
+    public Zombie CreateZombie(ZombieType zombieType, Point position) {
         switch (zombieType) {
-            case NORMAL:
-                return new NormalZombie();
             case CONEHEAD:
-                return new ConeheadZombie();
+                return new ConeheadZombie(position);
             case POLEVAULTING:
-                return new PolevaultingZombie();
+                return new PolevaultingZombie(position);
             case BUCKETHEAD:
-                return new BucketheadZombie();
+                return new BucketheadZombie(position);
             case DUCKYTUBE:
-                return new DuckytubeZombie();
+                return new DuckytubeZombie(position);
             case DOLPHINRIDER:
-                return new DolphinRiderZombie();
+                return new DolphinRiderZombie(position);
             case FOOTBALL:
-                return new FootballZombie();
+                return new FootballZombie(position);
             case GARGANTUAR:
-                return new GargantuarZombie();
+                return new GargantuarZombie(position);
             case IMP:
-                return new ImpZombie();
+                return new ImpZombie(position);
             case SCREENDOOR:
-                return new ScreenDoorZombie();
+                return new ScreenDoorZombie(position);
             default:
-                return new NormalZombie();
+                return new NormalZombie(position);
         }
     }
 }

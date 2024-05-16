@@ -9,9 +9,10 @@ public class Zombie extends Character {
 
     public Point position;
     public boolean is_aquatic;
-    public Zombie(String name, int health, int attack_damage, int attack_speed, boolean is_aquatic) {
+    public Zombie(String name, int health, int attack_damage, int attack_speed, boolean is_aquatic, Point position) {
         super(name, health, attack_damage, attack_speed);
         this.is_aquatic = is_aquatic;
+        this.position = new Point(position);
     }
 
     public void move(int x, int y) throws IllegalMoveException {
