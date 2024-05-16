@@ -5,6 +5,7 @@ import Zombie.Zombie;
 import ZombieFactory.ZombieFactory;
 import ZombieFactory.ZombieType;
 
+import java.awt.*;
 import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -75,9 +76,29 @@ public class GameManager {
             boolean val = new Random().nextInt(3)==0;
             int zombieCount = countZombies();
             if (val && zombieCount < 10 + (zombieIncrease * flag)) {
-                zombieFactory.CreateZombie(zombieTypes[randomIndex]);
+                zombieFactory.CreateZombie(zombieTypes[randomIndex], generateRandomZombiePosition(zombieTypes[randomIndex]));
             }
         }
+    }
+
+    private Point generateRandomZombiePosition(ZombieType zombieType) {
+        int x = 8;
+        int y, max, min;
+        if (zombieType == ZombieType.DOLPHINRIDER || zombieType == ZombieType.DUCKYTUBE) {
+            max = 3;
+            min = 2;
+        } else {
+            boolean spawnTop = new Random().nextInt(2)==0;
+            if (spawnTop) {
+                max = 1;
+                min = 0;
+            } else {
+                max = 5;
+                min = 4;
+            }
+        }
+        y = (int) ((Math.random() * (max - min)) + min);
+        return new Point(x, y);
     }
 
     private int countZombies() {

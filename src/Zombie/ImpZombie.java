@@ -2,8 +2,10 @@ package Zombie;
 
 import Zombie.Zombie;
 
+import java.awt.*;
+
 public class ImpZombie extends Zombie {
-    public ImpZombie() {
-        super("Imp Zombie", 75, 50, 2, false);
+    public ImpZombie(Point position) {
+        super("Imp Zombie", 75, 50, 2, false, position);
     }
 }
