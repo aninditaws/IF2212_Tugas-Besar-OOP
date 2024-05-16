@@ -3,8 +3,8 @@ package Plant;
 public class Lilypad extends Plant {
       private boolean planted;      
 
-      public Lilypad(int x, int y) {
-            super("Lilypad", 100, 0, 0, 25, 0, 10, x, y);
+      public Lilypad() {
+            super("Lilypad", 100, 0, 0, 25, 0, 10);
         }
 
       public boolean getPlanted(){
