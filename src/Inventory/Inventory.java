@@ -7,10 +7,15 @@ import Plant.*;
 public class Inventory {
 
     private ArrayList<Plant> plantInventory;
+    private Map<Integer, Boolean> clickedPlants;
 
     public Inventory() {
         this.plantInventory = new ArrayList<Plant>();
         initializeInventory();
+        clickedPlants = new HashMap<>();
+        for (int i = 0; i < plantInventory.size(); i++) {
+            clickedPlants.put(i, false);
+        }
     }
 
     /* METHOD */
@@ -31,7 +36,7 @@ public class Inventory {
         this.addPlant(new Lilypad());
         this.addPlant(new CherryBomb());
         this.addPlant(new Jalapeno());
-//        this.addPlant(new Onehitter());
+        this.addPlant(new Nightpeater());
         this.addPlant(new Tallnut());
     }
 
@@ -55,17 +60,18 @@ public class Inventory {
     // Fungsi chooseTanaman digunakan untuk memilih tanaman yang akan digunakan
     // dan ditaruh di deck tanaman
     public void chooseTanaman(Plant plant, DeckTanaman plantDeck, Inventory inventory) {
-        if (plantDeck.getArrayDeck().size() < DeckTanaman.MAX_DECK_SIZE) {
-            if (!this.plantInventory.contains(plant)) {
-                if (plantDeck.getArrayDeck().contains(plant)) {
-                    inventory.plantInventory.add(plant);
+
+        if (plantDeck.getArrayDeck().size() < plantDeck.getMaxDeckSize()) {
+            if (this.plantInventory.contains(plant)) {
+                if (!plantDeck.getArrayDeck().contains(plant)) {
+                    plantDeck.getArrayDeck().add(plant);
                     System.out.println(String.format("Berhasil menambahkan %s pada deck",
                             plant.name));
                 } else {
-                    System.out.println(String.format("Tidak ada tanaman %s di Deck.\n", plant.name));
+                    System.out.println("Tanaman sudah ada di deck");
                 }
             } else {
-                System.out.println("Tanaman sudah ada di deck");
+                System.out.println(String.format("Tidak ada tanaman %s di Deck.\n", plant.name));
             }
         } else {
             System.out.println(String.format("Tidak bisa menambah %s", plant.name));
@@ -106,5 +112,16 @@ public class Inventory {
                 System.out.println("Tanaman yang dipilih sama");
             }
         }
+    }
+
+    // Method buat GUI
+    // plant boolean
+    public boolean isClicked(int index) {
+        return clickedPlants.getOrDefault(index, false);
+    }
+
+    // plant lagi dipencet
+    public void setClicked(int index, boolean clicked) {
+        clickedPlants.put(index, clicked);
     }
 }

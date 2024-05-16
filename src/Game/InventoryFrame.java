@@ -8,6 +8,7 @@ import java.util.*;
 import Inventory.*;
 import Picture.*;
 import Plant.*;
+// import Update.Update;
 
 public class InventoryFrame extends JFrame {
     Inventory inventory = new Inventory();
@@ -47,15 +48,15 @@ public class InventoryFrame extends JFrame {
         // Part Buat Plant Buttons di Inventory
         JPanel plantButtons = new JPanel();
         plantButtons.setOpaque(false);
-        plantButtons.setLayout(new GridLayout(2, 5, 20, 20));
+        plantButtons.setLayout(new GridLayout(3, 4, 17, 21));
 
         int index = 0;
-        int margin = 20;
+        int margin = 25;
         for (PlantImage plant : PlantImage.values()) {
             final int currentIndex = index;
             ImageIcon imageIcon = new ImageIcon(plant.getImagePath());
-            int imageWidth = 220;
-            int imageHeight = 120;
+            int imageWidth = 155;
+            int imageHeight = 93;
             Image image = imageIcon.getImage().getScaledInstance(imageWidth, imageHeight, Image.SCALE_SMOOTH);
             imageIcon = new ImageIcon(image);
             JButton button = new JButton();
@@ -64,7 +65,7 @@ public class InventoryFrame extends JFrame {
             button.setContentAreaFilled(false);
             button.setBorder(null);
             button.setMargin(new Insets(margin, margin, margin, margin));
-            button.setPreferredSize(new Dimension(imageWidth, imageHeight));
+            button.setSize(new Dimension(imageWidth, imageHeight));
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -93,19 +94,20 @@ public class InventoryFrame extends JFrame {
         // Center the buttons panel within the layeredPane
         int panelWidth = plantButtons.getPreferredSize().width;
         int panelHeight = plantButtons.getPreferredSize().height;
-        plantButtons.setBounds((screenWidth - panelWidth) / 2, (screenHeight - panelHeight) / 2 - 100, panelWidth,
+        plantButtons.setBounds((screenWidth - panelWidth) / 2 - 100, (screenHeight - panelHeight) / 2 - 100,
+                panelWidth,
                 panelHeight);
 
         layeredPane.add(plantButtons, Integer.valueOf(1));
 
         // Button to GameFrame
         button = new JButton();
-        button.setIcon(new ImageIcon("ImagePvZ/Button/Play_Button.png"));
+        button.setIcon(new ImageIcon("ImagePvZ/Inventory/Button/playButton.png"));
         button.setOpaque(false);
         button.setContentAreaFilled(false);
         button.setBorder(null);
         button.setMargin(new Insets(0, 0, 0, 0));
-        button.setPreferredSize(new Dimension(200, 100));
+        // button.setPreferredSize(new Dimension(255, 100));
         button.addActionListener(new ActionListener() {
 
             @Override
@@ -116,7 +118,7 @@ public class InventoryFrame extends JFrame {
                 dispose();
             }
         });
-        button.setBounds(screenWidth - 500, screenHeight - 200, 458, 117);
+        button.setBounds(screenWidth - 500, screenHeight - 200, 271, 78);
         layeredPane.add(button, Integer.valueOf(1));
 
         add(layeredPane, BorderLayout.CENTER);
