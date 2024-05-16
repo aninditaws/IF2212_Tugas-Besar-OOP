@@ -14,6 +14,8 @@ public class Zombie extends Character {
     public Point position;
     public boolean is_aquatic;
     private int doUpdate = 0;
+
+    private boolean walk = true;
     public Zombie(String name, int health, int attack_damage, int attack_speed, boolean is_aquatic, Point position) {
         super(name, health, attack_damage, attack_speed);
         this.is_aquatic = is_aquatic;
@@ -38,6 +40,12 @@ public class Zombie extends Character {
         System.out.println(String.format("Zombie %d moved from %d, %d to %d, %d", zombieId, position.x, position.y, finalX, finalY));
         position.x = finalX;
         position.y = finalY;
+        if (finalX == 0) walk = false;
+    }
+
+    @Override
+    public void attack(Character character) {
+        character.reduceHealth(attack_damage);
     }
 
     @Override
@@ -46,10 +54,12 @@ public class Zombie extends Character {
         doUpdate += 1;
         if (doUpdate == 5) {
             doUpdate = 0;
-            try {
-                move(-1, 0);
-            } catch (IllegalMoveException e) {
-                System.out.println(e.getMessage());
+            if (walk) {
+                try {
+                    move(-1, 0);
+                } catch (IllegalMoveException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         }
     }

@@ -49,9 +49,16 @@ abstract public class Character implements Subscriber {
 
       public void reduceHealth(int damage){
             this.health-=damage;
+            if (this.health < 0) {
+                  dead = true;
+            }
       }
       public boolean isDead(){
           return this.getHealth() <= 0;
+      }
+
+      public void attack(Character character) {
+
       }
 
 
