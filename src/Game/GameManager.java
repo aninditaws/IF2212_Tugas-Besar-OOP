@@ -52,6 +52,7 @@ public class GameManager {
             flag += 1;
             System.out.println("flag increased");
         }
+        spawnZombie(gameTick);
     }
 
     // Map Manager
@@ -75,8 +76,15 @@ public class GameManager {
         for (int i = 0; i <= flag; i += 1) {
             boolean val = new Random().nextInt(3)==0;
             int zombieCount = countZombies();
+            System.out.print("Zombie Count: ");
+            System.out.println(zombieCount);
             if (val && zombieCount < 10 + (zombieIncrease * flag)) {
-                zombieFactory.CreateZombie(zombieTypes[randomIndex], generateRandomZombiePosition(zombieTypes[randomIndex]));
+                System.out.print("Created Zombie ");
+                System.out.print(zombieTypes[randomIndex].toString());
+                System.out.print(" at ");
+                Point randomPosition = generateRandomZombiePosition(zombieTypes[randomIndex]);
+                System.out.println(randomPosition);
+                gameMap.map[randomPosition.y][randomPosition.x].addEntity(zombieFactory.CreateZombie(zombieTypes[randomIndex], randomPosition));
             }
         }
     }
@@ -97,7 +105,7 @@ public class GameManager {
                 min = 4;
             }
         }
-        y = (int) ((Math.random() * (max - min)) + min);
+        y = (new Random().nextInt(2) + min);
         return new Point(x, y);
     }
 
