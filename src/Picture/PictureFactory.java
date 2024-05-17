@@ -80,6 +80,9 @@ public class PictureFactory {
             case GAMEDAY:
                 imageIcon = new ImageIcon("ImagePvZ/GameFrame/gameFrame.png");
                 break;
+            case GAMENIGHT:
+                imageIcon = new ImageIcon("ImagePvZ/GameFrame/gameFrameNight.png");
+                break;
 
             // Button
             case STARTBUTTON:

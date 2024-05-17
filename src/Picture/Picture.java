@@ -17,6 +17,7 @@ public enum Picture {
     WELCOME,
     INVENTORY,
     GAMEDAY,
+    GAMENIGHT,
 
     // Plant
     SUNFLOWER,
