@@ -110,7 +110,9 @@ public class WelcomingFrame extends JFrame {
 
         helpButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // masukin page help
+                Help frame = new Help();
+                frame.setVisible(true);
+                dispose();
             }
         });
         layeredPane.add(helpButton, Integer.valueOf(1));

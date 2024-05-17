@@ -87,7 +87,7 @@ public class PictureFactory {
                 imageIcon = new ImageIcon("ImagePvZ/GameFrame/gameFrameNight.png");
                 break;
 
-            // Button
+            // Welcome
             case STARTBUTTON:
                 imageIcon = new ImageIcon("ImagePvZ/Welcome/Button/startButton.png");
                 break;
@@ -103,10 +103,13 @@ public class PictureFactory {
             case EXITBUTTON:
                 imageIcon = new ImageIcon("ImagePvZ/Welcome/Button/exitButton.png");
                 break;
+            
+            // Help
             case MENUBUTTON:
                 imageIcon = new ImageIcon("ImagePvZ/GameFrame/MenuButton.png");
                 break;
 
+            // Inventory
             case SWAPBUTTON:
                 imageIcon = new ImageIcon("ImagePvZ/Inventory/Button/swapButton.png");
                 break;
