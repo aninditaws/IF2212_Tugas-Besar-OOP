@@ -1,6 +1,7 @@
 package Game;
 
 import Subscriber.EventChannel;
+import Sun.Sun;
 import Zombie.Zombie;
 import ZombieFactory.ZombieFactory;
 import ZombieFactory.ZombieType;
@@ -15,6 +16,8 @@ public class GameManager {
 
     public int flag = 0;
     private final int zombieIncrease = 2;
+
+    public Sun sun = Sun.getInstance();
 
     // Time Manager
     public Thread timerThread;
