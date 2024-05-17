@@ -2,12 +2,16 @@ package Inventory;
 
 import java.util.*;
 
+import javax.swing.JButton;
+
 import Plant.*;
 
 public class Inventory {
 
     private ArrayList<Plant> plantInventory;
     private Map<Integer, Boolean> clickedPlants;
+
+    private List<JButton> plantButtons;
 
     public Inventory() {
         this.plantInventory = new ArrayList<Plant>();
@@ -16,6 +20,7 @@ public class Inventory {
         for (int i = 0; i < plantInventory.size(); i++) {
             clickedPlants.put(i, false);
         }
+        plantButtons = new ArrayList<>();
     }
 
     /* METHOD */
@@ -48,6 +53,17 @@ public class Inventory {
     // method addPlant
     public void addPlant(Plant plant) {
         plantInventory.add(plant);
+    }
+
+    // method addPlantButton
+    public void addPlantButton(JButton button) {
+        plantButtons.add(button);
+    }
+
+    // Apus border InventoryButotn
+    public void removePlantBorder(int index) {
+        JButton button = plantButtons.get(index);
+        button.setBorder(null);
     }
 
     // Method print tanaman yang ada di inventory
