@@ -13,8 +13,9 @@ public enum Picture {
     NIGHTPEATERCARD,
     TALLNUTCARD,
 
-    // Inventory
+    // Background
     INVENTORY,
+    GAMEDAY,
 
     // Plant
     SUNFLOWER,

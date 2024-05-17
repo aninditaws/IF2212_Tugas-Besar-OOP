@@ -2,6 +2,9 @@ package Game;
 
 import javax.swing.*;
 
+import Picture.Picture;
+import Picture.PictureFactory;
+
 import java.awt.*;
 import java.util.List;
 
@@ -21,10 +24,20 @@ public class GameFrame extends JFrame {
 
         this.gameManager = gameManager;
 
-        mapPanel = new JPanel(new GridLayout(6, 9, 2, 2));
-        initializeMap();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int screenWidth = (int) screenSize.getWidth();
+        int screenHeight = (int) screenSize.getHeight();
 
-        add(mapPanel, BorderLayout.CENTER);
+        mapPanel = new JPanel(new GridLayout(6, 9, 2, 2));
+        ImageIcon imageIcon = PictureFactory.getImageIcon(Picture.GAMEDAY);
+        Image image = imageIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
+        imageIcon = new ImageIcon(image);
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(0, 0, 800, 600);
+        add(label);
+        // initializeMap();
+
+        // add(mapPanel, BorderLayout.CENTER);
     }
 
     private void initializeMap() {

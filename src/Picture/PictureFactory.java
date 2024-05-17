@@ -69,6 +69,9 @@ public class PictureFactory {
             case INVENTORY:
                 imageIcon = new ImageIcon("ImagePvZ/Inventory/inventoryNoDeck.png");
                 break;
+            case GAMEDAY:
+                imageIcon = new ImageIcon("ImagePvZ/GameFrame/gameFrame.png");
+                break;
             case SWAPBUTTON:
                 imageIcon = new ImageIcon("ImagePvZ/Inventory/SwapButton.png");
                 break;
