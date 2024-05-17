@@ -228,11 +228,11 @@ public class InventoryFrame extends JFrame {
     private void addPlayButton() {
         JButton playButton = new JButton();
         playButton.setIcon(PictureFactory.getImageIcon(Picture.NEXTBUTTON));
-        // playButton.setOpaque(false);
+        playButton.setOpaque(false);
         // playButton.setContentAreaFilled(false);
         // playButton.setBorder(null);
         playButton.setMargin(new Insets(0, 0, 0, 0));
-        playButton.setBounds(screenSize.width - 350, screenSize.height - 100, 242, 61);
+        playButton.setBounds(screenSize.width - 350, screenSize.height - 145, 242, 61);
         playButton.addActionListener(e -> startGame());
 
         layeredPane.add(playButton, Integer.valueOf(3));
