@@ -17,6 +17,7 @@ public class InventoryFrame extends JFrame {
     private java.util.List<JButton> plantButtons;
 
     public InventoryFrame() {
+        setTitle("Michael vs. Lalapan");
         inventory = new Inventory();
         deckTanaman = new DeckTanaman(6);
         plantButtons = new ArrayList<>();
@@ -157,6 +158,8 @@ public class InventoryFrame extends JFrame {
 
         layeredPane.add(buttonPanel, Integer.valueOf(3));
         addPlayButton();
+        layeredPane.revalidate();
+        layeredPane.repaint();
     }
 
     private void addButton(JPanel panel, Picture picture, ActionListener actionListener) {
@@ -233,6 +236,8 @@ public class InventoryFrame extends JFrame {
         playButton.addActionListener(e -> startGame());
 
         layeredPane.add(playButton, Integer.valueOf(3));
+        layeredPane.revalidate();
+        layeredPane.repaint();
     }
 
     private void startGame() {
