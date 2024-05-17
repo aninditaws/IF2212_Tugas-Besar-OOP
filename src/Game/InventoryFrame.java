@@ -159,6 +159,7 @@ public class InventoryFrame extends JFrame {
         buttonPanel.setOpaque(false);
         buttonPanel.setLayout(new GridLayout(1, 3, 10, 10));
         buttonPanel.setBounds((screenWidth - 880) / 2, screenHeight - 157, 692, 66);
+        layeredPane.add(buttonPanel, Integer.valueOf(1));
 
         // clearButton
         button = new JButton();
@@ -211,23 +212,8 @@ public class InventoryFrame extends JFrame {
 
         buttonPanel.add(button, BorderLayout.CENTER);
 
-        layeredPane.add(buttonPanel, Integer.valueOf(1));
-
         add(layeredPane, BorderLayout.CENTER);
         setVisible(true);
-    }
-
-    private void updateDeckPanel() {
-        deckTanaman.clearDeck();
-        for (Plant plant : deckTanaman.getArrayDeck()) {
-            ImageIcon imageIcon = new ImageIcon(plant.getImagePath());
-            Image image = imageIcon.getImage().getScaledInstance(153, 93, Image.SCALE_SMOOTH);
-            imageIcon = new ImageIcon(image);
-            JLabel label = new JLabel(imageIcon);
-        }
-        panel.revalidate();
-        panel.repaint();
-
     }
 
     private void reenableAllButtons() {
