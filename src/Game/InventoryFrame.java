@@ -243,6 +243,7 @@ public class InventoryFrame extends JFrame {
     private void startGame() {
         if (deckTanaman.getArrayDeck().size() == deckTanaman.getMaxDeckSize()) {
             GameManager gameManager = new GameManager();
+            gameManager.startTimer();
             GameFrame frame = new GameFrame(gameManager);
             frame.setVisible(true);
             dispose();
