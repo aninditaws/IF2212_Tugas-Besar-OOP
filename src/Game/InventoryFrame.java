@@ -131,29 +131,6 @@ public class InventoryFrame extends JFrame {
                 panelHeight);
 
         layeredPane.add(plantButtons, Integer.valueOf(1));
-
-        // Button to GameFrame
-        button = new JButton();
-        button.setIcon(PictureFactory.getImageIcon(Picture.NEXTBUTTON));
-        button.setOpaque(false);
-        button.setContentAreaFilled(false);
-        button.setBorder(null);
-        button.setMargin(new Insets(0, 0, 0, 0));
-
-        button.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                GameManager gameManager = new GameManager();
-                GameFrame frame = new GameFrame(gameManager);
-                frame.setVisible(true);
-                dispose();
-            }
-        });
-        button.setBounds(screenWidth - 445, screenHeight - 163, 457, 121);
-
-        layeredPane.add(button, Integer.valueOf(1));
-
         // 3 button: Clear, Swap, Delete
         JPanel buttonPanel = new JPanel();
         buttonPanel.setOpaque(false);
@@ -189,7 +166,7 @@ public class InventoryFrame extends JFrame {
             }
         });
 
-        buttonPanel.add(button, BorderLayout.CENTER);
+        buttonPanel.add(button);
         // swapButton
         button = new JButton();
         button.setIcon(PictureFactory.getImageIcon(Picture.SWAPBUTTON));
@@ -199,7 +176,7 @@ public class InventoryFrame extends JFrame {
         button.setSize(300, 100);
         button.setMargin(new Insets(0, 0, 0, 0));
 
-        buttonPanel.add(button, BorderLayout.CENTER);
+        buttonPanel.add(button);
 
         // deleteButton
         button = new JButton();
@@ -210,7 +187,35 @@ public class InventoryFrame extends JFrame {
         button.setSize(300, 100);
         button.setMargin(new Insets(0, 0, 0, 0));
 
-        buttonPanel.add(button, BorderLayout.CENTER);
+        buttonPanel.add(button);
+
+        // Button to GameFrame
+        button = new JButton();
+        button.setIcon(PictureFactory.getImageIcon(Picture.NEXTBUTTON));
+        button.setOpaque(false);
+        button.setContentAreaFilled(false);
+        button.setBorder(null);
+        button.setMargin(new Insets(0, 0, 0, 0));
+
+        button.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (deckTanaman.getArrayDeck().size() < deckTanaman.getMaxDeckSize()) {
+                    JOptionPane.showMessageDialog(null, "Deck belum penuh");
+                    return;
+                } else {
+                    GameManager gameManager = new GameManager();
+                    GameFrame frame = new GameFrame(gameManager);
+                    frame.setVisible(true);
+                    dispose();
+
+                }
+            }
+        });
+        button.setBounds(screenWidth - 445, screenHeight - 163, 457, 121);
+
+        layeredPane.add(button, Integer.valueOf(1));
 
         add(layeredPane, BorderLayout.CENTER);
         setVisible(true);
