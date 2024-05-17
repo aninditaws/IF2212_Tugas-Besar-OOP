@@ -43,7 +43,7 @@ public class WelcomingFrame extends JFrame {
         buttonPanel = new JPanel();
         buttonPanel.setOpaque(false);
         buttonPanel.setLayout(new GridLayout(3, 1, 10, 10));
-        buttonPanel.setBounds((screenWidth - 300) / 2, (screenHeight - 300) / 2, 300, 300);
+        buttonPanel.setBounds((screenWidth - 400) / 2, (screenHeight - 100) / 2, 450, 300);
         layeredPane.add(buttonPanel, Integer.valueOf(1));
 
         // Start Button -- To Inventory
@@ -52,7 +52,7 @@ public class WelcomingFrame extends JFrame {
         startButton.setOpaque(false);
         startButton.setContentAreaFilled(false);
         startButton.setBorder(null);
-        startButton.setSize(350, 100);
+        startButton.setSize(450, 100);
         startButton.setMargin(new Insets(0, 0, 0, 0));
 
         startButton.addActionListener(new ActionListener() {
@@ -70,7 +70,7 @@ public class WelcomingFrame extends JFrame {
         plantsButton.setOpaque(false);
         plantsButton.setContentAreaFilled(false);
         plantsButton.setBorder(null);
-        plantsButton.setSize(300, 100);
+        plantsButton.setSize(450, 100);
         plantsButton.setMargin(new Insets(0, 0, 0, 0));
 
         plantsButton.addActionListener(new ActionListener() {
@@ -87,7 +87,7 @@ public class WelcomingFrame extends JFrame {
         zombiesButton.setOpaque(false);
         zombiesButton.setContentAreaFilled(false);
         zombiesButton.setBorder(null);
-        zombiesButton.setSize(300, 100);
+        zombiesButton.setSize(450, 100);
         zombiesButton.setMargin(new Insets(0, 0, 0, 0));
 
         zombiesButton.addActionListener(new ActionListener() {
