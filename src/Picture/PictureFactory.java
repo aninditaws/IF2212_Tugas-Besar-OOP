@@ -72,7 +72,7 @@ public class PictureFactory {
 
             // Background
             case WELCOME:
-                imageIcon = new ImageIcon("ImagePvZ/Welcome/welcomePage.png");
+                imageIcon = new ImageIcon("ImagePvZ/Welcome/welcomePageNoButton.png");
                 break;
             case INVENTORY:
                 imageIcon = new ImageIcon("ImagePvZ/Inventory/inventoryNoDeck.png");
