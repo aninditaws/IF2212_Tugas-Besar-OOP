@@ -17,16 +17,20 @@ public class GameFrame extends JFrame {
     private JPanel mapPanel;
     private JLabel totalSunLabel;
     private JLayeredPane layeredPane;
+
     private JLabel backgroundLabel;
     private ImageIcon imageIcon;
     private int screenWidth;
     private int screenHeight;
 
+    private DeckPanel deckPanel;
+    private DeckTanaman deckTanaman;
+
     // private static ArrayList<Bullet> bullets = new ArrayList<Bullet>(); //buat
     // array bullet sama tanaman
     // private static ArrayList<Plant> plants = new ArrayList<Plant>();
 
-    public GameFrame(GameManager gameManager) {
+    public GameFrame(GameManager gameManager, DeckPanel deckPanel) {
         // Game Title & State
         setTitle("Michael vs. Lalapan");
         setSize(800, 600);
@@ -57,6 +61,9 @@ public class GameFrame extends JFrame {
         layeredPane.add(backgroundLabel, Integer.valueOf(0));
 
         // Deck Panel
+        this.deckPanel = deckPanel;
+
+        layeredPane.add(deckPanel, Integer.valueOf(1));
 
         // Map Panel
         mapPanel = new JPanel(new GridLayout(6, 9, 2, 2));
