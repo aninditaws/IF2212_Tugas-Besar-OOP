@@ -1,7 +1,38 @@
 package Picture;
 
-public interface Picture {
+public enum Picture {
+    // Plant Card
+    SUNFLOWERCARD,
+    PEASHOOTERCARD,
+    WALLNUTCARD,
+    SNOWPEACARD,
+    SQUASHCARD,
+    LILY_PAD_SEEDCARD,
+    CHERRYBOMBCARD,
+    JALAPENOCARD,
+    NIGHTPEATERCARD,
+    TALLNUTCARD,
 
-    public String getImagePath();
+    // Inventory
+    INVENTORY,
+
+    // Plant
+    SUNFLOWER,
+    PEASHOOTER,
+    WALLNUT,
+    SNOWPEA,
+    SQUASH,
+    LILY_PAD,
+    CHERRYBOMB,
+    JALAPENO,
+    NIGHTPEATER,
+    TALLNUT,
+
+    // Button
+
+    SWAPBUTTON,
+    DELETEBUTTON,
+    CLEARBUTTON,
+    NEXTBUTTON,
 
 }

@@ -15,6 +15,7 @@ public class InventoryFrame extends JFrame {
     DeckTanaman deckTanaman = new DeckTanaman(6);
     JLayeredPane layeredPane;
     JLabel label;
+    JPanel panel;
     JButton button;
     ImageIcon imageIcon;
     Image image;
@@ -37,7 +38,7 @@ public class InventoryFrame extends JFrame {
         layeredPane.setPreferredSize(screenSize);
 
         // Add Picture for Background
-        imageIcon = new ImageIcon("ImagePvZ/Inventory/inventoryNoDeck.png");
+        imageIcon = PictureFactory.getImageIcon(Picture.INVENTORY);
 
         image = imageIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(image);
@@ -45,13 +46,23 @@ public class InventoryFrame extends JFrame {
         label.setBounds(0, 0, screenWidth, screenHeight);
         layeredPane.add(label, Integer.valueOf(0));
 
-        // Part Buat Plant Buttons di Inventory
+        // deckPanel
+
+        JPanel deckPanel = new JPanel();
+
+        deckPanel.setPreferredSize(new Dimension(150, 150));
+        deckPanel.setBounds(34, 150, 150, 600);
+        deckPanel.setLayout(new GridLayout(6, 1));
+        deckPanel.setBackground(new Color(255, 255, 255, 150));
+        deckPanel.setOpaque(false);
+        layeredPane.add(deckPanel, BorderLayout.WEST, Integer.valueOf(0));
+
+        // Inventory
         JPanel plantButtons = new JPanel();
         plantButtons.setOpaque(false);
         plantButtons.setLayout(new GridLayout(3, 4, 10, 10));
 
         int index = 0;
-        int margin = 25;
 
         for (PlantImage plant : PlantImage.values()) {
             final int currentIndex = index;
@@ -68,20 +79,34 @@ public class InventoryFrame extends JFrame {
             button.setSize(new Dimension(imageWidth, imageHeight));
 
             button.addActionListener(new ActionListener() {
-
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     Plant clickedPlant = inventory.getPlant(currentIndex);
+                    JButton clonnedButton = new JButton(button.getIcon());
                     if (button.isEnabled()) {
                         if (deckTanaman.getArrayDeck().contains(inventory.getPlant(currentIndex))) {
                             deckTanaman.getArrayDeck().remove(clickedPlant);
                             button.setBorder(null);
                             reenableAllButtons();
+
+                            for (Component component : deckPanel.getComponents()) {
+                                if (component instanceof JButton) {
+                                    JButton button = (JButton) component;
+                                    if (button.getIcon().equals(clonnedButton.getIcon())) {
+                                        deckPanel.remove(button);
+                                        deckPanel.revalidate();
+                                        deckPanel.repaint();
+                                    }
+                                }
+                            }
                         } else {
                             if (deckTanaman.getArrayDeck().size() < deckTanaman.getMaxDeckSize()) {
                                 inventory.chooseTanaman(clickedPlant, deckTanaman, inventory);
                                 button.setBorder(BorderFactory.createLineBorder(Color.RED, 5));
 
+                                deckPanel.add(clonnedButton);
+                                deckPanel.revalidate();
+                                deckPanel.repaint();
                             }
                         }
                         deckTanaman.printDeck();
@@ -90,14 +115,18 @@ public class InventoryFrame extends JFrame {
                 }
             });
 
-            plantButtons.add(button);
-            planButtons.add(button);
+            plantButtons.add(button); // Add button to plantButtons panel
+            planButtons.add(button); // Add button to list panel
             index++;
         }
-        // Center the buttons panel within the layeredPane
+        // Center the plantButtons within the layeredPane
         int panelWidth = plantButtons.getPreferredSize().width;
         int panelHeight = plantButtons.getPreferredSize().height;
-        plantButtons.setBounds((screenWidth - panelWidth) / 2 - 100, (screenHeight - panelHeight) / 2 - 100,
+
+        int panelX = (screenWidth - panelWidth) / 2 - 100;
+        int panelY = (screenHeight - panelHeight) / 2 - 100;
+
+        plantButtons.setBounds(panelX, panelY,
                 panelWidth,
                 panelHeight);
 
@@ -105,7 +134,7 @@ public class InventoryFrame extends JFrame {
 
         // Button to GameFrame
         button = new JButton();
-        button.setIcon(new ImageIcon("ImagePvZ/Inventory/Button/playButton.png"));
+        button.setIcon(PictureFactory.getImageIcon(Picture.NEXTBUTTON));
         button.setOpaque(false);
         button.setContentAreaFilled(false);
         button.setBorder(null);
@@ -121,7 +150,7 @@ public class InventoryFrame extends JFrame {
                 dispose();
             }
         });
-        button.setBounds(screenWidth - 500, screenHeight - 200, 457, 121);
+        button.setBounds(screenWidth - 445, screenHeight - 163, 457, 121);
 
         layeredPane.add(button, Integer.valueOf(1));
 
@@ -131,8 +160,9 @@ public class InventoryFrame extends JFrame {
         buttonPanel.setLayout(new GridLayout(1, 3, 10, 10));
         buttonPanel.setBounds((screenWidth - 880) / 2, screenHeight - 157, 692, 66);
 
+        // clearButton
         button = new JButton();
-        button.setIcon(new ImageIcon("ImagePvZ/Inventory/Button/clearButton.png"));
+        button.setIcon(PictureFactory.getImageIcon(Picture.CLEARBUTTON));
         button.setOpaque(false);
         button.setContentAreaFilled(false);
         button.setBorder(null);
@@ -144,16 +174,24 @@ public class InventoryFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 deckTanaman.clearDeck();
                 reenableAllButtons();
+
+                // Reset borders for all plan buttons
                 for (JButton button : planButtons) {
                     button.setBorder(null);
                 }
+
+                // Revalidate and repaint the deckPanel
+                deckPanel.removeAll();
+                deckPanel.revalidate();
+                deckPanel.repaint();
+
             }
         });
 
         buttonPanel.add(button, BorderLayout.CENTER);
-
+        // swapButton
         button = new JButton();
-        button.setIcon(new ImageIcon("ImagePvZ/Inventory/Button/swapButton.png"));
+        button.setIcon(PictureFactory.getImageIcon(Picture.SWAPBUTTON));
         button.setOpaque(false);
         button.setContentAreaFilled(false);
         button.setBorder(null);
@@ -162,8 +200,9 @@ public class InventoryFrame extends JFrame {
 
         buttonPanel.add(button, BorderLayout.CENTER);
 
+        // deleteButton
         button = new JButton();
-        button.setIcon(new ImageIcon("ImagePvZ/Inventory/Button/deleteButton.png"));
+        button.setIcon(PictureFactory.getImageIcon(Picture.DELETEBUTTON));
         button.setOpaque(false);
         button.setContentAreaFilled(false);
         button.setBorder(null);
@@ -173,8 +212,22 @@ public class InventoryFrame extends JFrame {
         buttonPanel.add(button, BorderLayout.CENTER);
 
         layeredPane.add(buttonPanel, Integer.valueOf(1));
+
         add(layeredPane, BorderLayout.CENTER);
         setVisible(true);
+    }
+
+    private void updateDeckPanel() {
+        deckTanaman.clearDeck();
+        for (Plant plant : deckTanaman.getArrayDeck()) {
+            ImageIcon imageIcon = new ImageIcon(plant.getImagePath());
+            Image image = imageIcon.getImage().getScaledInstance(153, 93, Image.SCALE_SMOOTH);
+            imageIcon = new ImageIcon(image);
+            JLabel label = new JLabel(imageIcon);
+        }
+        panel.revalidate();
+        panel.repaint();
+
     }
 
     private void reenableAllButtons() {
