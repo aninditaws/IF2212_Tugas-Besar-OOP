@@ -113,6 +113,9 @@ public class PictureFactory {
             case NEXTBUTTON:
                 imageIcon = new ImageIcon("ImagePvZ/Inventory/Button/playButton.png");
                 break;
+            case MENUBUTTON:
+                imageIcon = new ImageIcon("ImagePvZ/Inventory/Button/menuButton.png");
+                break;
             default:
                 break;
         }

@@ -41,6 +41,7 @@ public class InventoryFrame extends JFrame {
         addDeckPanel();
         addPlantButtonsPanel();
         addControlButtons();
+        addMenuButton();
 
         add(layeredPane, BorderLayout.CENTER);
     }
@@ -172,6 +173,26 @@ public class InventoryFrame extends JFrame {
         button.setMargin(new Insets(0, 0, 0, 0));
         button.addActionListener(actionListener);
         panel.add(button);
+    }
+
+    private void addMenuButton() {
+        JButton menuButton = new JButton();
+        menuButton.setIcon(PictureFactory.getImageIcon(Picture.MENUBUTTON));
+        menuButton.setOpaque(false);
+        menuButton.setContentAreaFilled(false);
+        menuButton.setBorder(null);
+        menuButton.setMargin(new Insets(0, 0, 0, 0));
+        menuButton.setBounds(screenSize.width - 300, screenSize.height - 850, 242, 95);
+        menuButton.addActionListener(e -> {
+            WelcomingFrame mainMenuFrame = new WelcomingFrame();
+            mainMenuFrame.setVisible(true);
+            dispose();
+        });
+
+        layeredPane.add(menuButton, Integer.valueOf(3));
+        layeredPane.revalidate();
+        layeredPane.repaint();
+
     }
 
     private void clearDeck() {

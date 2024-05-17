@@ -31,14 +31,13 @@ public enum Picture {
     NIGHTPEATER,
     TALLNUT,
 
-    // Welcoming Button
+    // Button
     STARTBUTTON,
     PLANTSBUTTON,
     ZOMBIESBUTTON,
     HELPBUTTON,
     EXITBUTTON,
-
-    // Inventory Button
+    MENUBUTTON,
     SWAPBUTTON,
     DELETEBUTTON,
     CLEARBUTTON,

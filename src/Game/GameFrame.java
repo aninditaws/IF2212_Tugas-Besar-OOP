@@ -45,6 +45,8 @@ public class GameFrame extends JFrame {
 
         // Background Map
         imageIcon = PictureFactory.getImageIcon(Picture.GAMEDAY);
+        Image image = imageIcon.getImage().getScaledInstance(this.screenWidth, this.screenHeight, Image.SCALE_SMOOTH);
+        imageIcon = new ImageIcon(image);
         backgroundLabel = new JLabel(imageIcon);
         backgroundLabel.setBounds(0, 0, screenWidth, screenHeight);
         layeredPane.add(backgroundLabel, Integer.valueOf(0));
