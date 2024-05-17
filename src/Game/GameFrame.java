@@ -1,6 +1,10 @@
 package Game;
 
 import javax.swing.*;
+
+import Inventory.DeckTanaman;
+import Game.InventoryFrame;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +21,7 @@ public class GameFrame extends JFrame {
     private ImageIcon imageIcon;
     private int screenWidth;
     private int screenHeight;
+
     // private static ArrayList<Bullet> bullets = new ArrayList<Bullet>(); //buat
     // array bullet sama tanaman
     // private static ArrayList<Plant> plants = new ArrayList<Plant>();
@@ -50,6 +55,8 @@ public class GameFrame extends JFrame {
         backgroundLabel = new JLabel(imageIcon);
         backgroundLabel.setBounds(0, 0, screenWidth, screenHeight);
         layeredPane.add(backgroundLabel, Integer.valueOf(0));
+
+        // Deck Panel
 
         // Map Panel
         mapPanel = new JPanel(new GridLayout(6, 9, 2, 2));
