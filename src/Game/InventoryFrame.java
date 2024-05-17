@@ -149,8 +149,8 @@ public class InventoryFrame extends JFrame {
     private void addControlButtons() {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setOpaque(false);
-        buttonPanel.setLayout(new GridLayout(1, 3, 10, 10));
-        buttonPanel.setBounds((screenSize.width - 880) / 2, screenSize.height - 157, 850, 100);
+        buttonPanel.setLayout(new GridLayout(1, 3, 0, 0));
+        buttonPanel.setBounds((screenSize.width - 810) / 2, screenSize.height - 195, 600, 100);
 
         addButton(buttonPanel, Picture.CLEARBUTTON, e -> clearDeck());
         addButton(buttonPanel, Picture.SWAPBUTTON, e -> swapPlants());
@@ -232,7 +232,7 @@ public class InventoryFrame extends JFrame {
         // playButton.setContentAreaFilled(false);
         // playButton.setBorder(null);
         playButton.setMargin(new Insets(0, 0, 0, 0));
-        playButton.setBounds(screenSize.width - 445, screenSize.height - 163, 362, 91);
+        playButton.setBounds(screenSize.width - 350, screenSize.height - 100, 242, 61);
         playButton.addActionListener(e -> startGame());
 
         layeredPane.add(playButton, Integer.valueOf(3));
