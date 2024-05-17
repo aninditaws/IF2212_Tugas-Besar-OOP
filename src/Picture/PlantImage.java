@@ -1,6 +1,6 @@
 package Picture;
 
-public enum PlantImage implements Picture {
+public enum PlantImage {
     SUNFLOWERCARD("ImagePvZ/Plants/PlantsCard/sunflowerCard.png"),
     PEASHOOTERCARD("ImagePvZ/Plants/PlantsCard/PeashooterCard.PNG"),
     WALLNUTCARD("ImagePvZ/Plants/PlantsCard/wallnutCard.png"),
@@ -9,7 +9,7 @@ public enum PlantImage implements Picture {
     LILY_PAD_SEEDCARD("ImagePvZ/Plants/PlantsCard/lilipadCard.png"),
     CHERRYBOMBCARD("ImagePvZ/Plants/PlantsCard/CherryBombCard.png"),
     JALAPENOCARD("ImagePvZ/Plants/PlantsCard/jalapenoCard.png"),
-    NIGHTPEATERCARD("ImagePvZ/Plants/PlantsCard/nightpeaterCard.png"),
+    REPEATERCARD("ImagePvZ/Plants/PlantsCard/repeaterCard.png"),
     TALLNUTCARD("ImagePvZ/Plants/PlantsCard/TallNutCard.png");
 
     private String imagePath;

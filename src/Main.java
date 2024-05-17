@@ -17,8 +17,6 @@ public class Main {
         // untuk contoh)
         // Subscrive dilakukan dengan memanggil subscrive ke singleton instance dari
         // eventchannel
-        Sunflower sunflower = new Sunflower();
-        Sun sun = Sun.getInstance();
         GameManager gameManager = new GameManager();
         gameManager.startTimer();
         EventQueue.invokeLater(() -> {

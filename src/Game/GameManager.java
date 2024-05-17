@@ -1,6 +1,7 @@
 package Game;
 
 import Subscriber.EventChannel;
+import Sun.Sun;
 import Zombie.Zombie;
 import ZombieFactory.ZombieFactory;
 import ZombieFactory.ZombieType;
@@ -14,7 +15,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class GameManager {
 
     public int flag = 0;
+    public int gameTick = 0;
     private final int zombieIncrease = 2;
+
+    public Sun sun = Sun.getInstance();
 
     // Time Manager
     public Thread timerThread;
@@ -24,7 +28,6 @@ public class GameManager {
         // Membuat sebuah thread yang akan menjalankan updateGameTick setiap 1 detik (1000 milliseconds)
         timerThread = new Thread(() -> {
             try {
-                int gameTick = 0;
                 while (true) {
                     gameTick += 1;
                     gameTick = gameTick % 200;
