@@ -1,12 +1,13 @@
 package Game;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 import Picture.Picture;
 import Picture.PictureFactory;
-
-import java.awt.*;
-import java.util.List;
 
 public class GameFrame extends JFrame {
     private GameManager gameManager;
@@ -51,64 +52,33 @@ public class GameFrame extends JFrame {
         label.setBounds(0, 0, screenWidth, screenHeight);
         layeredPane .add(label, Integer.valueOf(0));
 
-        // Menampilkan Sun
+        // Sun Label
         totalSunLabel = new JLabel(String.valueOf(gameManager.sun.getTotalSun()));
-        totalSunLabel.setFont(new Font("Yanone Kaffeesatz", Font.BOLD, 24));
+        totalSunLabel.setFont(new Font("Yanone Kaffeesatz", Font.BOLD, 30));
         totalSunLabel.setForeground(Color.WHITE);
-        totalSunLabel.setBounds(50, 50, 100, 50);
+        totalSunLabel.setBounds(135, 52, 100, 50);
         layeredPane.add(totalSunLabel, Integer.valueOf(2));
 
+        // Show Sun Label & Map
         add(layeredPane, BorderLayout.CENTER); 
-    }
 
-    private void initializeMap() {
-        for (int i = 0; i < gameManager.getGameMap().getRow(); i++) {
-            for (int j = 0; j < gameManager.getGameMap().getColumn(); j++) {
-                Area<Object> area = gameManager.getGameMap().getArea(i, j);
-                JPanel areaPanel = new JPanel();
-                areaPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-
-                if (area != null) {
-                    areaPanel.setBackground(getColorForAreaType(area.getType()));
-
-                    List<Object> entities = area.getEntities();
-                    if (!entities.isEmpty()) {
-                        JLabel entityLabel = new JLabel(String.valueOf(entities.size()));
-                        areaPanel.add(entityLabel);
-                    }
-                } else {
-                    areaPanel.setBackground(Color.WHITE);
-                }
-
-                mapPanel.add(areaPanel);
+        // Update periodically
+        Timer timer = new Timer(1000, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                updateRender();
             }
-        }
+        }); timer.start();
     }
 
-    private Color getColorForAreaType(AreaType type) {
-        switch (type) {
-            case PROTECTED_AREA:
-                return Color.RED;
-
-            case PLANTABLE_AREA:
-                return Color.GREEN;
-            case WATER_AREA:
-                return Color.CYAN;
-            case ZOMBIE_SPAWN_GROUND:
-                return Color.GRAY;
-            case ZOMBIE_SPAWN_WATER:
-                return Color.GRAY;
-            default:
-                return Color.WHITE;
+        // Setter for totalSunLabel
+        public void setTotalSun(int totalSun) {
+            SwingUtilities.invokeLater(() -> totalSunLabel.setText(String.valueOf(totalSun)));
         }
-    }
 
-    public void updateRender() {
+        public void updateRender() {
         // Fungsi untuk update game map setiap detik saat game dijalankan
         gameManager.updateGameMap();
+        System.out.println(gameManager.sun.getTotalSun());
+        setTotalSun(gameManager.sun.getTotalSun());
     }
-
-    // public void draw(){
-    // for (int )
-    // }
 }
