@@ -1,6 +1,10 @@
 package Picture;
 
+import java.util.InputMismatchException;
+
+import javax.imageio.ImageTypeSpecifier;
 import javax.swing.ImageIcon;
+import javax.swing.plaf.basic.BasicComboBoxUI.ItemHandler;
 
 public class PictureFactory {
     public static ImageIcon getImageIcon(Picture picture) {
@@ -36,6 +40,38 @@ public class PictureFactory {
                 break;
             case TALLNUTCARD:
                 imageIcon = new ImageIcon("ImagePvZ/Plant/TallnutCard.png");
+                break;
+            
+            // ZOmbies Cards
+            case NORMALZOMBIECARD:
+                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/NormalZombieCard.png")
+                break;
+            case CONEHEADZOMBIECARD:
+                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/ConeHeadZombieCard.png")
+                break;
+            case BUCKETHEADZOMBIECARD:
+                ImageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/BucketheadZombieCard.png")
+                break;
+            case SCREENDOORZOMBIECARD:
+                ImageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/ScreenDoorZombieCard.png")
+                break;
+            case FOOTBALLZOMBIECARD:
+                ImageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/FootballZombieCard.png")
+                break;
+            case POLEVAULTINGZOMBIECARD:
+                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/PoleVaultingZombieCard.png")
+                break;
+            case DUCKYTUBEZOMBIECARD:
+                ImageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/DuckyTubeZombieCard.png")
+                break;
+            case DOLPHINERIDERZOMBIECARD:
+                ImageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/DolphineRiderZombieCard.png")
+                break;
+            case NEWSPAPERZOMBIECARD:
+                ImageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/NewspaperZombieCard.png")
+                break;
+            case IMPZOMBIECARD:
+                ImageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/ImpZombieCard.png")
                 break;
 
             // Plants
