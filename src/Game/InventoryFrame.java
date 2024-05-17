@@ -12,6 +12,7 @@ import Plant.*;
 public class InventoryFrame extends JFrame {
     private Inventory inventory;
     private DeckTanaman deckTanaman;
+    private DeckPanel deckPanel;
     private JLayeredPane layeredPane;
     private Dimension screenSize;
     private java.util.List<JButton> plantButtons;
@@ -39,6 +40,7 @@ public class InventoryFrame extends JFrame {
 
         addBackgroundImage();
         addDeckPanel();
+
         addPlantButtonsPanel();
         addControlButtons();
         addMenuButton();
@@ -55,8 +57,8 @@ public class InventoryFrame extends JFrame {
         layeredPane.add(label, Integer.valueOf(0));
     }
 
-    private void addDeckPanel() {
-        JPanel deckPanel = new JPanel();
+    public void addDeckPanel() {
+        deckPanel = new DeckPanel(deckTanaman);
         deckPanel.setPreferredSize(new Dimension(150, 150));
         deckPanel.setBounds(34, 148, 150, 600);
         deckPanel.setLayout(new GridLayout(6, 1));
@@ -265,7 +267,7 @@ public class InventoryFrame extends JFrame {
         if (deckTanaman.getArrayDeck().size() == deckTanaman.getMaxDeckSize()) {
             GameManager gameManager = new GameManager();
             gameManager.startTimer();
-            GameFrame frame = new GameFrame(gameManager);
+            GameFrame frame = new GameFrame(gameManager, deckPanel.getDeckTanaman());
             frame.setVisible(true);
             dispose();
         } else {
