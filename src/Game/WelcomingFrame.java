@@ -6,62 +6,135 @@ import java.awt.event.*;
 
 import Picture.*;
 
-public class WelcomingFrame extends JFrame{
-    public WelcomingFrame(){
+public class WelcomingFrame extends JFrame {
+    private JLayeredPane layeredPane;
+    private JPanel buttonPanel;
+    private JButton helpButton;
+    private JButton exitButton;
+    private JLabel label;
+    private Dimension screenSize;
+
+    public WelcomingFrame() {
         // Game Title & State
         setTitle("Michael vs. Lalapan");
-        setSize(800,600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLayout(new BorderLayout());
 
         // Screen Size
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = (int) screenSize.getWidth();
         int screenHeight = (int) screenSize.getHeight();
-        
-        // // Layered Pane
-        // JLayeredPane layeredPane = new JLayeredPane();
-        // layeredPane.setPreferredSize(screenSize);
+
+        // Layered Pane
+        layeredPane = new JLayeredPane();
+        layeredPane.setPreferredSize(screenSize);
 
         // Picture of Background
         ImageIcon imageIcon = PictureFactory.getImageIcon(Picture.WELCOME);
         Image image = imageIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(image);
-        JLabel label = new JLabel(imageIcon);
-        label.setBounds(0,0,screenWidth,screenHeight);
+        label = new JLabel(imageIcon);
+        label.setBounds(0, 0, screenWidth, screenHeight);
         add(label);
-        // layeredPane.add(label, Integer.valueOf(0));
+        layeredPane.add(label, Integer.valueOf(0));
 
         // 3 buttons: START, PLANTS LIST, ZOMBIES LIST
-        JPanel buttonPanel = new JPanel();
-        // buttonPanel.setOpaque(false);
-        // buttonPanel.setLayout(new GridLayout(1,3,10,10));
-        // buttonPanel.setBounds((screenWidth - 880)/2, screenHeight - 157, 692, 66);
-        // layeredPane.add(buttonPanel, Integer.valueOf(1));
+        buttonPanel = new JPanel();
+        buttonPanel.setOpaque(false);
+        buttonPanel.setLayout(new GridLayout(3, 1, 10, 10));
+        buttonPanel.setBounds((screenWidth - 300) / 2, (screenHeight - 300) / 2, 300, 300);
+        layeredPane.add(buttonPanel, Integer.valueOf(1));
 
         // Start Button -- To Inventory
-        JButton button = new JButton();
-        button.setIcon(PictureFactory.getImageIcon(Picture.STARTBUTTON));
-        button.setOpaque(false);
-        button.setContentAreaFilled(false);
-        button.setBorder(null);
-        button.setSize(440, 75);
-        button.setMargin(new Insets(0,0,0,0));
-        
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e){
+        JButton startButton = new JButton();
+        startButton.setIcon(PictureFactory.getImageIcon(Picture.STARTBUTTON));
+        startButton.setOpaque(false);
+        startButton.setContentAreaFilled(false);
+        startButton.setBorder(null);
+        startButton.setSize(350, 100);
+        startButton.setMargin(new Insets(0, 0, 0, 0));
+
+        startButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 InventoryFrame frame = new InventoryFrame();
                 frame.setVisible(true);
                 dispose();
             }
         });
+        buttonPanel.add(startButton);
 
         // PlantsList Button -- To Plants List
+        JButton plantsButton = new JButton();
+        plantsButton.setIcon(PictureFactory.getImageIcon(Picture.PLANTSBUTTON));
+        plantsButton.setOpaque(false);
+        plantsButton.setContentAreaFilled(false);
+        plantsButton.setBorder(null);
+        plantsButton.setSize(300, 100);
+        plantsButton.setMargin(new Insets(0, 0, 0, 0));
+
+        plantsButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // masukin page plants
+            }
+        });
+
+        buttonPanel.add(plantsButton);
+
         // ZombiesList Button -- To Zombies List
+        JButton zombiesButton = new JButton();
+        zombiesButton.setIcon(PictureFactory.getImageIcon(Picture.ZOMBIESBUTTON));
+        zombiesButton.setOpaque(false);
+        zombiesButton.setContentAreaFilled(false);
+        zombiesButton.setBorder(null);
+        zombiesButton.setSize(300, 100);
+        zombiesButton.setMargin(new Insets(0, 0, 0, 0));
+
+        zombiesButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // masukin page zombies
+            }
+        });
+
+        buttonPanel.add(zombiesButton);
+
         // Help Button -- To Help
+        helpButton = new JButton();
+        helpButton.setIcon(PictureFactory.getImageIcon(Picture.HELPBUTTON));
+        helpButton.setOpaque(false);
+        helpButton.setContentAreaFilled(false);
+        helpButton.setBorder(null);
+        helpButton.setSize(250, 80);
+        helpButton.setMargin(new Insets(0, 0, 0, 0));
+        helpButton.setBounds(10, 10, 250, 80);
+
+        helpButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // masukin page help
+            }
+        });
+        layeredPane.add(helpButton, Integer.valueOf(1));
+
         // Exit Button -- To Exit
-        
+        exitButton = new JButton();
+        exitButton.setIcon(PictureFactory.getImageIcon(Picture.EXITBUTTON));
+        exitButton.setOpaque(false);
+        exitButton.setContentAreaFilled(false);
+        exitButton.setBorder(null);
+        exitButton.setSize(250, 80);
+        exitButton.setMargin(new Insets(0, 0, 0, 0));
+        exitButton.setBounds(screenWidth - 300, screenHeight - 200, 250, 80);
+        exitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        layeredPane.add(exitButton, Integer.valueOf(1));
+
+        // LayeredPane
+        add(layeredPane, BorderLayout.CENTER);
+        pack();
+        setVisible(true);
     }
 
     public static void main(String[] args) {
