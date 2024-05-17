@@ -166,7 +166,8 @@ public class InventoryFrame extends JFrame {
 
     private void addControlButtons() {
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setOpaque(false);
+        // buttonPanel.setOpaque(false);
+        // buttonPanel.setBackground(Color.red);
         buttonPanel.setLayout(new GridLayout(1, 3, 0, 0));
         buttonPanel.setBounds((screenSize.width - 810) / 2, screenSize.height - 195, 600, 100);
 
