@@ -14,6 +14,7 @@ public enum Picture {
     TALLNUTCARD,
 
     // Background
+    WELCOME,
     INVENTORY,
     GAMEDAY,
 
@@ -29,8 +30,14 @@ public enum Picture {
     NIGHTPEATER,
     TALLNUT,
 
-    // Button
+    // Welcoming Button
+    STARTBUTTON,
+    PLANTSBUTTON,
+    ZOMBIESBUTTON,
+    HELPBUTTON,
+    EXITBUTTON,
 
+    // Inventory Button
     SWAPBUTTON,
     DELETEBUTTON,
     CLEARBUTTON,

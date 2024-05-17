@@ -6,6 +6,7 @@ public class PictureFactory {
     public static ImageIcon getImageIcon(Picture picture) {
         ImageIcon imageIcon = null;
         switch (picture) {
+            // Plants Cards
             case SUNFLOWERCARD:
                 imageIcon = new ImageIcon("ImagePvZ/Plant/SunflowerCard.png");
                 break;
@@ -36,6 +37,8 @@ public class PictureFactory {
             case TALLNUTCARD:
                 imageIcon = new ImageIcon("ImagePvZ/Plant/TallnutCard.png");
                 break;
+
+            // Plants
             case SUNFLOWER:
                 imageIcon = new ImageIcon("ImagePvZ/Plant/Sunflower.png");
                 break;
@@ -66,12 +69,36 @@ public class PictureFactory {
             case TALLNUT:
                 imageIcon = new ImageIcon("ImagePvZ/Plant/Tallnut.png");
                 break;
+
+            // Background
+            case WELCOME:
+                imageIcon = new ImageIcon("ImagePvZ/Welcome/welcomePage.png");
+                break;
             case INVENTORY:
                 imageIcon = new ImageIcon("ImagePvZ/Inventory/inventoryNoDeck.png");
                 break;
             case GAMEDAY:
                 imageIcon = new ImageIcon("ImagePvZ/GameFrame/gameFrame.png");
                 break;
+
+            // Welcoming Button
+            case STARTBUTTON:
+                imageIcon = new ImageIcon("ImagePvZ/Welcome/Button/startButton.png");
+                break;
+            case PLANTSBUTTON:
+                imageIcon = new ImageIcon("ImagePvZ/Welcome/Button/plantListButton.png");
+                break;
+            case ZOMBIESBUTTON:
+                imageIcon = new ImageIcon("ImagePvZ/Welcome/Button/zombieListButton.png");
+                break;
+            case HELPBUTTON:
+                imageIcon = new ImageIcon("ImagePvZ/Welcome/Button/helpButton.png");
+                break;    
+            case EXITBUTTON:
+                imageIcon = new ImageIcon("ImagePvZ/Welcome/Button/exitButton.png");
+                break;           
+
+            // Inventory Button
             case SWAPBUTTON:
                 imageIcon = new ImageIcon("ImagePvZ/Inventory/SwapButton.png");
                 break;
