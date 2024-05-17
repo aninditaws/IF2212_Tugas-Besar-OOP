@@ -38,9 +38,10 @@ public enum Picture {
     ZOMBIESBUTTON,
     HELPBUTTON,
     EXITBUTTON,
+    MENUBUTTON,
 
     // Help Button
-    MENUBUTTON,
+    MENUBACKBUTTON,
 
     // Inventory Button
     SWAPBUTTON,

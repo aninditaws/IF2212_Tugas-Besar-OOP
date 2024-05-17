@@ -41,7 +41,7 @@ public class Help extends JFrame {
 
         // Menu Button -- To Welcome
         menuButton = new JButton();
-        menuButton.setIcon(PictureFactory.getImageIcon(Picture.MENUBUTTON));
+        menuButton.setIcon(PictureFactory.getImageIcon(Picture.MENUBACKBUTTON));
         menuButton.setOpaque(false);
         menuButton.setContentAreaFilled(false);
         menuButton.setBorder(null);
