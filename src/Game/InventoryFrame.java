@@ -135,8 +135,12 @@ public class InventoryFrame extends JFrame {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setOpaque(false);
         buttonPanel.setLayout(new GridLayout(1, 3, 10, 10));
+<<<<<<< Updated upstream
         buttonPanel.setBounds((screenWidth - 880) / 2, screenHeight - 157, 692, 66);
         layeredPane.add(buttonPanel, Integer.valueOf(1));
+=======
+        buttonPanel.setBounds((screenSize.width - 880) / 2, screenSize.height - 157, 850, 100);
+>>>>>>> Stashed changes
 
         // clearButton
         button = new JButton();
@@ -144,7 +148,7 @@ public class InventoryFrame extends JFrame {
         button.setOpaque(false);
         button.setContentAreaFilled(false);
         button.setBorder(null);
-        button.setSize(300, 100);
+        button.setSize(400, 100);
         button.setMargin(new Insets(0, 0, 0, 0));
 
         button.addActionListener(new ActionListener() {
@@ -166,6 +170,7 @@ public class InventoryFrame extends JFrame {
             }
         });
 
+<<<<<<< Updated upstream
         buttonPanel.add(button);
         // swapButton
         button = new JButton();
@@ -175,6 +180,17 @@ public class InventoryFrame extends JFrame {
         button.setBorder(null);
         button.setSize(300, 100);
         button.setMargin(new Insets(0, 0, 0, 0));
+=======
+    private void addPlayButton() {
+        JButton playButton = new JButton();
+        playButton.setIcon(PictureFactory.getImageIcon(Picture.NEXTBUTTON));
+        // playButton.setOpaque(false);
+        // playButton.setContentAreaFilled(false);
+        // playButton.setBorder(null);
+        playButton.setMargin(new Insets(0, 0, 0, 0));
+        playButton.setBounds(screenSize.width - 445, screenSize.height - 163, 362, 91);
+        playButton.addActionListener(e -> startGame());
+>>>>>>> Stashed changes
 
         buttonPanel.add(button);
 

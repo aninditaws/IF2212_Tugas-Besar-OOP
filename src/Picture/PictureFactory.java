@@ -81,7 +81,7 @@ public class PictureFactory {
                 imageIcon = new ImageIcon("ImagePvZ/GameFrame/gameFrame.png");
                 break;
 
-            // Welcoming Button
+            // Button
             case STARTBUTTON:
                 imageIcon = new ImageIcon("ImagePvZ/Welcome/Button/startButton.png");
                 break;
@@ -98,18 +98,17 @@ public class PictureFactory {
                 imageIcon = new ImageIcon("ImagePvZ/Welcome/Button/exitButton.png");
                 break;
 
-            // Inventory Button
             case SWAPBUTTON:
-                imageIcon = new ImageIcon("ImagePvZ/Inventory/SwapButton.png");
+                imageIcon = new ImageIcon("ImagePvZ/Inventory/Button/swapButton.png");
                 break;
             case DELETEBUTTON:
-                imageIcon = new ImageIcon("ImagePvZ/Inventory/DeleteButton.png");
+                imageIcon = new ImageIcon("ImagePvZ/Inventory/Button/deleteButton.png");
                 break;
             case CLEARBUTTON:
-                imageIcon = new ImageIcon("ImagePvZ/Inventory/ClearButton.png");
+                imageIcon = new ImageIcon("ImagePvZ/Inventory/Button/clearButton.png");
                 break;
             case NEXTBUTTON:
-                imageIcon = new ImageIcon("ImagePvZ/Inventory/NextButton.png");
+                imageIcon = new ImageIcon("ImagePvZ/Inventory/Button/playButton.png");
                 break;
             default:
                 break;
