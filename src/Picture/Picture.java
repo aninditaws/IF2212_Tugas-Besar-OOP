@@ -18,6 +18,7 @@ public enum Picture {
     INVENTORY,
     GAMEDAY,
     GAMENIGHT,
+    HELP,
 
     // Plant
     SUNFLOWER,
@@ -31,16 +32,19 @@ public enum Picture {
     NIGHTPEATER,
     TALLNUT,
 
-    // Button
+    // Welcoming Button
     STARTBUTTON,
     PLANTSBUTTON,
     ZOMBIESBUTTON,
     HELPBUTTON,
     EXITBUTTON,
+
+    // Help Button
     MENUBUTTON,
+
+    // Inventory Button
     SWAPBUTTON,
     DELETEBUTTON,
     CLEARBUTTON,
     NEXTBUTTON,
-
 }

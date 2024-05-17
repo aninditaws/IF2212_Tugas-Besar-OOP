@@ -40,7 +40,7 @@ public class Help extends JFrame {
         layeredPane.add(label, Integer.valueOf(0));
 
         // Menu Button -- To Welcome
-        JButton menuButton = new JButton();
+        menuButton = new JButton();
         menuButton.setIcon(PictureFactory.getImageIcon(Picture.MENUBUTTON));
         menuButton.setOpaque(false);
         menuButton.setContentAreaFilled(false);
