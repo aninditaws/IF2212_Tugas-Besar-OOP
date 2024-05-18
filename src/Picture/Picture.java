@@ -1,5 +1,7 @@
 package Picture;
 
+import Zombie.NormalZombie;
+
 public enum Picture {
     // Plant Card
     SUNFLOWERCARD,
@@ -25,13 +27,6 @@ public enum Picture {
     NEWSPAPERZOMBIECARD,
     IMPZOMBIECARD,
 
-    // Background
-    WELCOME,
-    INVENTORY,
-    GAMEDAY,
-    GAMENIGHT,
-    HELP,
-
     // Plant
     SUNFLOWER,
     PEASHOOTER,
@@ -43,6 +38,25 @@ public enum Picture {
     JALAPENO,
     NIGHTPEATER,
     TALLNUT,
+
+    // Zombies
+    NORMALZOMBIE,
+    CONEHEADZOMBIE,
+    BUCKETHEADZOMBIE,
+    SCREENDOORZOMBIE,
+    FOOTBALLZOMBIE,
+    POLEVAULTINGZOMBIE,
+    DUCKYTUBEZOMBIE,
+    DOLPHINERIDERZOMBIE,
+    NEWSPAPERZOMBIE,
+    IMPZOMBIE,
+
+    // Background
+    WELCOME,
+    INVENTORY,
+    GAMEDAY,
+    GAMENIGHT,
+    HELP,
 
     // Welcoming Button
     STARTBUTTON,
