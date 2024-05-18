@@ -22,7 +22,6 @@ public class DeckPanel extends JPanel {
         setLayout(new GridLayout(6, 1));
         setOpaque(false);
         setBounds(34, 148, 150, 600);
-        setLayout(new GridLayout(6, 1));
 
     }
 
