@@ -35,43 +35,43 @@ public class PictureFactory {
             case JALAPENOCARD:
                 imageIcon = new ImageIcon("ImagePvZ/Plant/JalapenoCard.png");
                 break;
-            case NIGHTPEATERCARD:
+            case REPEATERCARD:
                 imageIcon = new ImageIcon("ImagePvZ/Plant/NightpeaterCard.png");
                 break;
             case TALLNUTCARD:
                 imageIcon = new ImageIcon("ImagePvZ/Plant/TallnutCard.png");
                 break;
-            
+
             // ZOmbies Cards
             case NORMALZOMBIECARD:
-                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/NormalZombieCard.png")
+                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/NormalZombie.png");
                 break;
             case CONEHEADZOMBIECARD:
-                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/ConeHeadZombieCard.png")
+                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/ConeheadZombie.png");
                 break;
             case BUCKETHEADZOMBIECARD:
-                ImageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/BucketheadZombieCard.png")
+                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/buckethead.png");
                 break;
             case SCREENDOORZOMBIECARD:
-                ImageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/ScreenDoorZombieCard.png")
+                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/doorzoombie.png");
                 break;
             case FOOTBALLZOMBIECARD:
-                ImageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/FootballZombieCard.png")
+                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/FootballZombie.png");
                 break;
             case POLEVAULTINGZOMBIECARD:
-                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/PoleVaultingZombieCard.png")
+                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/PolevaultZombie.png");
                 break;
             case DUCKYTUBEZOMBIECARD:
-                ImageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/DuckyTubeZombieCard.png")
+                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/DuckZombie.png");
                 break;
             case DOLPHINERIDERZOMBIECARD:
-                ImageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/DolphineRiderZombieCard.png")
+                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/DolphineZombie.png");
                 break;
             case NEWSPAPERZOMBIECARD:
-                ImageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/NewspaperZombieCard.png")
+                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/newspaper.png");
                 break;
             case IMPZOMBIECARD:
-                ImageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/ImpZombieCard.png")
+                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/ImpZombie.png");
                 break;
 
             // Plants
@@ -99,7 +99,7 @@ public class PictureFactory {
             case JALAPENO:
                 imageIcon = new ImageIcon("ImagePvZ/Plant/Jalapeno.png");
                 break;
-            case NIGHTPEATER:
+            case REPEATER:
                 imageIcon = new ImageIcon("ImagePvZ/Plant/Nightpeater.png");
                 break;
             case TALLNUT:

@@ -39,7 +39,9 @@ public class InventoryFrame extends JFrame {
         layeredPane.setPreferredSize(screenSize);
 
         addBackgroundImage();
-        addDeckPanel();
+        // addDeckPanel();
+        deckPanel = new DeckPanel(deckTanaman);
+        setDeckPanel(deckPanel);
 
         addPlantButtonsPanel();
         addControlButtons();
@@ -64,6 +66,19 @@ public class InventoryFrame extends JFrame {
         deckPanel.setLayout(new GridLayout(6, 1));
         deckPanel.setOpaque(false);
         layeredPane.add(deckPanel, BorderLayout.WEST, Integer.valueOf(0));
+    }
+
+    public void setDeckPanel(DeckPanel deckPanel) {
+        this.deckPanel = deckPanel;
+        deckPanel.setPreferredSize(new Dimension(150, 150));
+        deckPanel.setBounds(34, 148, 150, 600);
+        deckPanel.setLayout(new GridLayout(6, 1));
+        deckPanel.setOpaque(false);
+        layeredPane.add(deckPanel, BorderLayout.WEST, Integer.valueOf(0));
+    }
+
+    public DeckPanel getDeckPanel() {
+        return deckPanel;
     }
 
     private void addPlantButtonsPanel() {
@@ -151,7 +166,8 @@ public class InventoryFrame extends JFrame {
 
     private void addControlButtons() {
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setOpaque(false);
+        // buttonPanel.setOpaque(false);
+        // buttonPanel.setBackground(Color.red);
         buttonPanel.setLayout(new GridLayout(1, 3, 0, 0));
         buttonPanel.setBounds((screenSize.width - 810) / 2, screenSize.height - 195, 600, 100);
 
@@ -267,7 +283,7 @@ public class InventoryFrame extends JFrame {
         if (deckTanaman.getArrayDeck().size() == deckTanaman.getMaxDeckSize()) {
             GameManager gameManager = new GameManager();
             gameManager.startTimer();
-            GameFrame frame = new GameFrame(gameManager);
+            GameFrame frame = new GameFrame(gameManager, deckPanel);
             frame.setVisible(true);
             dispose();
         } else {
@@ -293,8 +309,9 @@ public class InventoryFrame extends JFrame {
 
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
-            InventoryFrame frame = new InventoryFrame();
-            frame.setVisible(true);
+            InventoryFrame inventoryFrame = new InventoryFrame();
+
+            inventoryFrame.setVisible(true);
         });
     }
 }

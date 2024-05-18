@@ -12,7 +12,7 @@ public enum Picture {
     LILY_PAD_SEEDCARD,
     CHERRYBOMBCARD,
     JALAPENOCARD,
-    NIGHTPEATERCARD,
+    REPEATERCARD,
     TALLNUTCARD,
 
     // Zombie Card
@@ -36,7 +36,7 @@ public enum Picture {
     LILY_PAD,
     CHERRYBOMB,
     JALAPENO,
-    NIGHTPEATER,
+    REPEATER,
     TALLNUT,
 
     // Zombies
