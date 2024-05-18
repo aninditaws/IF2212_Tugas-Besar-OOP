@@ -12,16 +12,21 @@ import Plant.*;
 public class InventoryFrame extends JFrame {
     private Inventory inventory;
     private DeckTanaman deckTanaman;
+
     private DeckPanel deckPanel;
     private JLayeredPane layeredPane;
+
     private Dimension screenSize;
+
     private java.util.List<JButton> plantButtons;
+    private java.util.List<JButton> selectedButtons;
 
     public InventoryFrame() {
         setTitle("Michael vs. Lalapan");
         inventory = new Inventory();
         deckTanaman = new DeckTanaman(6);
         plantButtons = new ArrayList<>();
+        selectedButtons = new ArrayList<>();
 
         initializeFrame();
         initializeComponents();
@@ -43,7 +48,7 @@ public class InventoryFrame extends JFrame {
         deckPanel = new DeckPanel(deckTanaman);
         setDeckPanel(deckPanel);
 
-        addPlantButtonsPanel();
+        addinventoryPanel();
         addControlButtons();
         addMenuButton();
 
@@ -57,15 +62,7 @@ public class InventoryFrame extends JFrame {
         JLabel label = new JLabel(imageIcon);
         label.setBounds(0, 0, screenSize.width, screenSize.height);
         layeredPane.add(label, Integer.valueOf(0));
-    }
 
-    public void addDeckPanel() {
-        deckPanel = new DeckPanel(deckTanaman);
-        deckPanel.setPreferredSize(new Dimension(150, 150));
-        deckPanel.setBounds(34, 148, 150, 600);
-        deckPanel.setLayout(new GridLayout(6, 1));
-        deckPanel.setOpaque(false);
-        layeredPane.add(deckPanel, BorderLayout.WEST, Integer.valueOf(0));
     }
 
     public void setDeckPanel(DeckPanel deckPanel) {
@@ -75,16 +72,17 @@ public class InventoryFrame extends JFrame {
         deckPanel.setLayout(new GridLayout(6, 1));
         deckPanel.setOpaque(false);
         layeredPane.add(deckPanel, BorderLayout.WEST, Integer.valueOf(0));
+        // add(deckPanel);
     }
 
     public DeckPanel getDeckPanel() {
         return deckPanel;
     }
 
-    private void addPlantButtonsPanel() {
-        JPanel plantButtonsPanel = new JPanel();
-        plantButtonsPanel.setOpaque(false);
-        plantButtonsPanel.setLayout(new GridLayout(3, 4, 10, 10));
+    private void addinventoryPanel() {
+        JPanel inventoryPanel = new JPanel();
+        inventoryPanel.setOpaque(false);
+        inventoryPanel.setLayout(new GridLayout(3, 4, 10, 10));
 
         int index = 0;
         for (PlantImage plantImage : PlantImage.values()) {
@@ -96,7 +94,7 @@ public class InventoryFrame extends JFrame {
             imageIcon = new ImageIcon(image);
             JButton button = createPlantButton(imageIcon, currentIndex);
 
-            plantButtonsPanel.add(button);
+            inventoryPanel.add(button);
             plantButtons.add(button);
 
             inventory.addPlantButton(button);
@@ -104,23 +102,23 @@ public class InventoryFrame extends JFrame {
             index++;
         }
 
-        int panelWidth = plantButtonsPanel.getPreferredSize().width;
-        int panelHeight = plantButtonsPanel.getPreferredSize().height;
+        int panelWidth = inventoryPanel.getPreferredSize().width;
+        int panelHeight = inventoryPanel.getPreferredSize().height;
         int panelX = (screenSize.width - panelWidth) / 2 - 100;
         int panelY = (screenSize.height - panelHeight) / 2 - 100;
-        plantButtonsPanel.setBounds(panelX, panelY, panelWidth, panelHeight);
+        inventoryPanel.setBounds(panelX, panelY, panelWidth, panelHeight);
 
-        layeredPane.add(plantButtonsPanel, Integer.valueOf(2));
+        layeredPane.add(inventoryPanel, Integer.valueOf(2));
     }
 
     private JButton createPlantButton(ImageIcon imageIcon, int index) {
-        JButton button = new JButton();
-        button.setIcon(imageIcon);
+        JButton button = new JButton(imageIcon);
         button.setOpaque(false);
         button.setContentAreaFilled(false);
         button.setBorder(null);
         button.setSize(new Dimension(155, 93));
         button.addActionListener(e -> handlePlantButtonClick(index, button));
+
         return button;
     }
 
@@ -190,7 +188,9 @@ public class InventoryFrame extends JFrame {
         button.setSize(400, 100);
         button.setMargin(new Insets(0, 0, 0, 0));
         button.addActionListener(actionListener);
+
         panel.add(button);
+
     }
 
     private void addMenuButton() {
@@ -226,8 +226,57 @@ public class InventoryFrame extends JFrame {
     }
 
     private void swapPlants() {
-        // Implement swap functionality
 
+        JPanel deckPanel = (JPanel) layeredPane.getComponentAt(34, 148);
+
+        for (Component component : deckPanel.getComponents()) {
+            if (component instanceof JButton) {
+                JButton button = (JButton) component;
+                button.addActionListener(e -> {
+                    if (selectedButtons.contains(button)) {
+                        selectedButtons.remove(button);
+                        button.setBorder(null);
+                    } else {
+                        if (selectedButtons.size() < 2) {
+                            selectedButtons.add(button);
+                            button.setBorder(BorderFactory.createLineBorder(Color.BLUE, 5));
+                            if (selectedButtons.size() == 2) {
+                                swapButtonDeckPanel(selectedButtons.get(0), selectedButtons.get(1), deckPanel);
+                            }
+
+                        }
+                    }
+                });
+            }
+        }
+
+    }
+
+    private void swapButtonDeckPanel(JButton btn1, JButton btn2, JPanel panel) {
+        if (selectedButtons.size() == 2) {
+
+            int idx1 = panel.getComponentZOrder(btn1);
+            int idx2 = panel.getComponentZOrder(btn2);
+
+            // panel.remove(btn1);
+            // panel.remove(btn2);
+
+            panel.add(btn2, idx1);
+            panel.add(btn1, idx2);
+
+            Plant plant1 = deckTanaman.getArrayDeck().get(idx1);
+            Plant plant2 = deckTanaman.getArrayDeck().get(idx2);
+            inventory.Switch(deckTanaman, plant1, plant2);
+
+            // System.out.println("idx1 = " + idx1 + " idx2 = " + idx2);
+
+            panel.revalidate();
+            panel.repaint();
+
+            selectedButtons.clear();
+            btn1.setBorder(null);
+            btn2.setBorder(null);
+        }
     }
 
     private void deleteSelectedPlants() {

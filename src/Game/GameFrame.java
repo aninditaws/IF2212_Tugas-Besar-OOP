@@ -162,9 +162,6 @@ public class GameFrame extends JFrame {
     }
 
     // Method buat samain plant Card sama plantnya
-    // public ImageIcon setPlantCard(PlantImage plantCardImage) {
-
-    // }
 
     // Update game map every second
     public void updateRender() {
