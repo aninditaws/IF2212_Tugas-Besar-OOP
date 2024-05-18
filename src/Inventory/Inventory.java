@@ -116,14 +116,14 @@ public class Inventory {
     }
 
     // Method menukar tanaman di inventory
-    public void Switch(Inventory inventory, Plant plant1, Plant plant2) {
-        if (inventory.plantInventory.contains(plant1) && inventory.plantInventory.contains(plant2)) {
-            int idx1 = inventory.plantInventory.indexOf(plant1);
-            int idx2 = inventory.plantInventory.indexOf(plant2);
+    public void Switch(Plant plant1, Plant plant2) {
+        if (this.plantInventory.contains(plant1) && this.plantInventory.contains(plant2)) {
+            int idx1 = this.plantInventory.indexOf(plant1);
+            int idx2 = this.plantInventory.indexOf(plant2);
 
             if (idx1 != idx2) {
-                inventory.plantInventory.set(idx1, plant2);
-                inventory.plantInventory.set(idx2, plant1);
+                this.plantInventory.set(idx1, plant2);
+                this.plantInventory.set(idx2, plant1);
             } else {
                 System.out.println("Tanaman yang dipilih sama");
             }

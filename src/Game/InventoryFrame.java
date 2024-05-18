@@ -82,7 +82,7 @@ public class InventoryFrame extends JFrame {
     private void addinventoryPanel() {
         JPanel inventoryPanel = new JPanel();
         inventoryPanel.setOpaque(false);
-        inventoryPanel.setLayout(new GridLayout(3, 4, 10, 10));
+        inventoryPanel.setLayout(new GridLayout(3, 4, 15, 15));
 
         int index = 0;
         for (PlantImage plantImage : PlantImage.values()) {
@@ -102,11 +102,11 @@ public class InventoryFrame extends JFrame {
             index++;
         }
 
-        int panelWidth = inventoryPanel.getPreferredSize().width;
-        int panelHeight = inventoryPanel.getPreferredSize().height;
-        int panelX = (screenSize.width - panelWidth) / 2 - 100;
-        int panelY = (screenSize.height - panelHeight) / 2 - 100;
-        inventoryPanel.setBounds(panelX, panelY, panelWidth, panelHeight);
+        int inventoryWidth = inventoryPanel.getPreferredSize().width;
+        int inventoryHeight = inventoryPanel.getPreferredSize().height;
+        int inventoryX = (screenSize.width - inventoryWidth) / 2 - 100;
+        int inventoryY = (screenSize.height - inventoryHeight) / 2 - 100;
+        inventoryPanel.setBounds(inventoryX, inventoryY, inventoryWidth, inventoryHeight);
 
         layeredPane.add(inventoryPanel, Integer.valueOf(2));
     }
