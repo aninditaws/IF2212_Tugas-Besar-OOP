@@ -8,8 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import Picture.Picture;
-import Picture.PictureFactory;
+import Picture.*;
 
 public class GameFrame extends JFrame {
     private GameManager gameManager;
@@ -66,11 +65,40 @@ public class GameFrame extends JFrame {
         layeredPane.add(deckPanel, Integer.valueOf(1));
 
         // TEST PANEL
-        // JPanel tesPanel = new JPanel();
-        // tesPanel.setBounds(340, 120, 500, 130);
-        // // tesPanel.setOpaque(false);
-        // tesPanel.setBackground(Color.RED);
-        // add(tesPanel);
+        JPanel tesPanel = new JPanel();
+        tesPanel.setBounds(233, 110, 1085, 130);
+        tesPanel.setOpaque(false);
+        tesPanel.setLayout(new GridLayout(1, 10, 4, 2));
+        tesPanel.setBackground(Color.RED);
+        add(tesPanel);
+        // Button
+        for (int i = 0; i < 10; i++) {
+            JButton button = new JButton();
+            button.setOpaque(false);
+            button.setBorderPainted(false);
+            button.setContentAreaFilled(false);
+            button.setPreferredSize(new Dimension(110, 130));
+            button.setBounds(233, 110, 108, 130);
+            tesPanel.add(button);
+        }
+
+        // Menu Button
+        JButton menuButton = new JButton();
+        menuButton.setIcon(PictureFactory.getImageIcon(Picture.MENUBUTTON));
+        menuButton.setOpaque(false);
+        menuButton.setContentAreaFilled(false);
+        menuButton.setBorder(null);
+        menuButton.setMargin(new Insets(0, 0, 0, 0));
+        menuButton.setBounds(screenSize.width - 240, screenSize.height - 850, 242, 95);
+        menuButton.addActionListener(e -> {
+            WelcomingFrame mainMenuFrame = new WelcomingFrame();
+            mainMenuFrame.setVisible(true);
+            dispose();
+        });
+
+        layeredPane.add(menuButton, Integer.valueOf(3));
+        layeredPane.revalidate();
+        layeredPane.repaint();
 
         // Map Panel
         mapPanel = new JPanel(new GridLayout(6, 9, 2, 2));
@@ -97,6 +125,12 @@ public class GameFrame extends JFrame {
         timer.start();
     }
 
+    // Put Plant to Map
+    public void digButtonPLant(JButton plantBtn, JButton digBtn) {
+        Point location = digBtn.getLocation();
+        plantBtn.setLocation(location);
+    }
+
     // Setter for totalSunLabel
     public void setTotalSun(int totalSun) {
         SwingUtilities.invokeLater(() -> totalSunLabel.setText(String.valueOf(totalSun)));
@@ -120,6 +154,17 @@ public class GameFrame extends JFrame {
     public void setMap() {
         SwingUtilities.invokeLater(() -> updateBackgroundImage());
     }
+
+    // Method naro plant card di area
+    public void setPlant(JButton plantCard, JButton plant) {
+        Point location = plant.getLocation();
+        plantCard.setLocation(location);
+    }
+
+    // Method buat samain plant Card sama plantnya
+    // public ImageIcon setPlantCard(PlantImage plantCardImage) {
+
+    // }
 
     // Update game map every second
     public void updateRender() {

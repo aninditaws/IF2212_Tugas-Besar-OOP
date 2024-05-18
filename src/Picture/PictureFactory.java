@@ -1,10 +1,6 @@
 package Picture;
 
-import java.util.InputMismatchException;
-
-import javax.imageio.ImageTypeSpecifier;
 import javax.swing.ImageIcon;
-import javax.swing.plaf.basic.BasicComboBoxUI.ItemHandler;
 
 public class PictureFactory {
     public static ImageIcon getImageIcon(Picture picture) {
