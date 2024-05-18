@@ -259,7 +259,7 @@ public class InventoryFrame extends JFrame {
                             selectedButtons.add(button);
                             button.setBorder(BorderFactory.createLineBorder(Color.BLUE, 5));
                             if (selectedButtons.size() == 2
-                                    && allButtonsBelongToSamePanel(selectedButtons, deckPanel)) {
+                                    && isButtonSamePanel(selectedButtons, deckPanel)) {
                                 swapButton(selectedButtons.get(0), selectedButtons.get(1), deckPanel);
                             }
 
@@ -281,7 +281,7 @@ public class InventoryFrame extends JFrame {
                             selectedButtons.add(button);
                             button.setBorder(BorderFactory.createLineBorder(Color.BLUE, 5));
                             if (selectedButtons.size() == 2
-                                    && allButtonsBelongToSamePanel(selectedButtons, inventoryPanel)) {
+                                    && isButtonSamePanel(selectedButtons, inventoryPanel)) {
                                 swapButton(selectedButtons.get(0), selectedButtons.get(1), inventoryPanel);
                             }
 
@@ -293,7 +293,7 @@ public class InventoryFrame extends JFrame {
 
     }
 
-    private boolean allButtonsBelongToSamePanel(List<JButton> buttons, JPanel panel) {
+    private boolean isButtonSamePanel(List<JButton> buttons, JPanel panel) {
         for (JButton button : buttons) {
             if (button.getParent() != panel) {
                 return false;
