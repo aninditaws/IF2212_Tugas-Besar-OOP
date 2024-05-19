@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import Picture.*;
+import Zombie.Zombie;
 
 public class WelcomingFrame extends JFrame {
     private JLayeredPane layeredPane;
@@ -95,6 +96,9 @@ public class WelcomingFrame extends JFrame {
         zombiesButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // masukin page zombies
+                ZombieListFrame frame = new ZombieListFrame();
+                frame.setVisible(true);
+                dispose();
             }
         });
 
