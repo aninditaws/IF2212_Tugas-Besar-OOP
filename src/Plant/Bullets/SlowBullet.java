@@ -6,9 +6,9 @@ import Character.CharCoordinat;
 
 public class SlowBullet extends Bullet {
 
-      public SlowBullet(int power) {
-            super(power, origin);
-            img = "";
+      public SlowBullet(int power, CharCoordinat i) {
+            super(power, i);
+            img = "ImagePvZ/Plants/Bullet/SlowPea.png";
             //TODO Auto-generated constructor stub
       }
       
