@@ -254,7 +254,9 @@ public class PlantsListFrame extends JFrame{
         
         zombiesListButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // masukin page zombie
+                ZombieListFrame frame = new ZombieListFrame();
+                frame.setVisible(true);
+                dispose();
             }
         }); menuPanel.add(zombiesListButton);   
 
