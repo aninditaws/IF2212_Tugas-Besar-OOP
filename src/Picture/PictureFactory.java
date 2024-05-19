@@ -106,6 +106,9 @@ public class PictureFactory {
             case WELCOME:
                 imageIcon = new ImageIcon("ImagePvZ/Welcome/welcomePageNoButton.png");
                 break;
+            case PLANTSLISTBG:
+                imageIcon = new ImageIcon("ImagePvZ/Plants/Plants_page/plantsListBg.png");
+                break;
             case INVENTORY:
                 imageIcon = new ImageIcon("ImagePvZ/Inventory/inventoryNoButton.png");
                 break;

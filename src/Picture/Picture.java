@@ -53,6 +53,7 @@ public enum Picture {
 
     // Background
     WELCOME,
+    PLANTSLISTBG,
     INVENTORY,
     GAMEDAY,
     GAMENIGHT,
