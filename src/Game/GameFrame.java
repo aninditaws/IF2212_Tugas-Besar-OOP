@@ -87,6 +87,7 @@ public class GameFrame extends JFrame {
         tesPanelDarat2.setLayout(new GridLayout(2, 9, 0, 0));
         add(tesPanelDarat2);
 
+
         JPanel tesPanelnonButton = new JPanel();
         tesPanelnonButton.setBounds(240, 120, 116, 1150);
         tesPanelnonButton.setOpaque(false);
@@ -97,18 +98,25 @@ public class GameFrame extends JFrame {
     
 
    //cek satu plant di spawn trus dipindahin satu kotak ke kotak yang lain
+
         try {
-            BufferedImage originalImage1 = ImageIO.read(new File("ImagePvZ/Plants/Bullet/Pea.png"));
-            Image scaledImage1 = originalImage1.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+            // BufferedImage originalImage1 = ImageIO.read(new
+            // File("ImagePvZ/Plants/Bullet/Pea.png"));
+
+            // Cara gunain Picture Factory
+            ImageIcon originalImage1 = PictureFactory.getImageIcon(Picture.BULLET);
+
+            Image scaledImage1 = originalImage1.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
             ImageIcon plantIcon1 = new ImageIcon(scaledImage1);
+
         //    buat di darat atas
             for(int z = 0;z < 2; z++){
                 for(int i = 0;i < 9;i++){
                     JButton button = new JButton();
                     button.setBackground(Color.green);
-                    button.setPreferredSize(new Dimension(103,140));
+                    button.setPreferredSize(new Dimension(103, 140));
                     button.setIcon(plantIcon1); // Menambahkan ikon gambar pada tombol
-                    tesPanelDarat1.add(button,BorderLayout.WEST);
+                    tesPanelDarat1.add(button, BorderLayout.WEST);
                 }
             }
         } catch (Exception e) {
@@ -119,46 +127,47 @@ public class GameFrame extends JFrame {
 
         // buat di air
         // for(int z = 0;z < 2; z++){
-        //     for(int i = 0;i < 10;i++){
-        //         JButton button = new JButton();
-        //         button.setBackground(Color.blue);
-        //         button.setPreferredSize(new Dimension(103,140));
-                
-        //         tesPanelAir.add(button,BorderLayout.WEST);
-        //     }
+        // for(int i = 0;i < 10;i++){
+        // JButton button = new JButton();
+        // button.setBackground(Color.blue);
+        // button.setPreferredSize(new Dimension(103,140));
+
+        // tesPanelAir.add(button,BorderLayout.WEST);
+        // }
         // }
 
         try {
             BufferedImage originalImage2 = ImageIO.read(new File("ImagePvZ/Plants/Bullet/SlowPea.png"));
             Image scaledImage2 = originalImage2.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
             ImageIcon plantIcon2 = new ImageIcon(scaledImage2);
+// <<<<<<< HEAD
         //    buat di darat atas
             for(int z = 0;z < 2; z++){
                 for(int i = 0;i < 9;i++){
                     JButton button = new JButton();
                     button.setBackground(Color.blue);
-                    button.setPreferredSize(new Dimension(103,140));
-                    button.setIcon(plantIcon2); // Menambahkan ikon gambar pada tombol           
-                    tesPanelAir.add(button,BorderLayout.WEST);
+                    button.setPreferredSize(new Dimension(103, 140));
+                    button.setIcon(plantIcon2); // Menambahkan ikon gambar pada tombol
+                    tesPanelAir.add(button, BorderLayout.WEST);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-
         try {
             BufferedImage originalImage3 = ImageIO.read(new File("ImagePvZ/Plants/PlantsImg/Snowpea.png"));
             Image scaledImage3 = originalImage3.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
             ImageIcon plantIcon3 = new ImageIcon(scaledImage3);
+// <<<<<<< HEAD
         //    buat di darat atas
             for(int z = 0;z < 2; z++){
                 for(int i = 0;i < 9;i++){
                     JButton button = new JButton();
                     button.setBackground(Color.green);
-                    button.setPreferredSize(new Dimension(103,140));
-                    button.setIcon(plantIcon3); // Menambahkan ikon gambar pada tombol     
-                    tesPanelDarat2.add(button,BorderLayout.WEST);
+                    button.setPreferredSize(new Dimension(103, 140));
+                    button.setIcon(plantIcon3); // Menambahkan ikon gambar pada tombol
+                    tesPanelDarat2.add(button, BorderLayout.WEST);
                 }
             }
         } catch (Exception e) {
