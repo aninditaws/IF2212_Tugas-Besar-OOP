@@ -1,5 +1,7 @@
 package Plant;
 
+import javax.swing.ImageIcon;
+
 import Character.CharCoordinat;
 
 public abstract class Element {

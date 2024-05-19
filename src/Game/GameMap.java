@@ -7,6 +7,7 @@ public class GameMap<T> {
     public Area<T>[][] map;
     private final int width;
     private final int height;
+    //row dan col itu disini trus dibuat public 
 
     public GameMap(int width, int height) {
         this.width = width;

@@ -71,6 +71,10 @@ public enum Picture {
     JALAPENOLIST,
     SQUASHLIST,
 
+    //Bullet List
+    BULLET,
+    SLOWBULLET,
+
     // Welcoming Button
     STARTBUTTON,
     PLANTSBUTTON,

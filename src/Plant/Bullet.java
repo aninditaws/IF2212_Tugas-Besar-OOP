@@ -1,33 +1,53 @@
 package Plant;
 
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import java.awt.image.*;
+import java.io.File;
+import Zombie.*;
+import Plant.Plant;
 
 import Character.CharCoordinat;
 
 public class Bullet extends Element {
-      private int power;
+      public static int power;
+      int x, y;
+      public String img;
+      BufferedImage png;
 
       public Bullet(int power, CharCoordinat i){
             super(i);
             this.power = power;
+            initialize();
 
             
 
       }
 
-      public Bullet(int power, int x, int y){
-            super(x, y);
-            this.power = power;
-            initialize();
+      // public Bullet(int power ){
+            
+      //       this.power = power;
+      //       initialize();
+
+      // }
+
+      public void initialize() {
+		try {
+                  png = ImageIO.read(new File(img));
+            } catch (Exception e) {
+                  // TODO: handle exception
+            }
+            //tambahan buat letakkin image sesuai grid buttonnya
+
+
+	}
+
+      public void attack(){
 
       }
 
-      // public void initialize() {
-	// 	ImageIcon imageIcon =  ImageFactory.createImage(Image.PEASHOOTER_BULLET);
-	// 	setImageIcon(imageIcon);
 
-	// }
 
 
 
@@ -44,7 +64,7 @@ public class Bullet extends Element {
       // public void move();
 
 
-
+//actionperformed() dibuat 
 
 
       

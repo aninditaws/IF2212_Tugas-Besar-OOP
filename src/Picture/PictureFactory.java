@@ -72,34 +72,34 @@ public class PictureFactory {
 
             // Plants
             case SUNFLOWER:
-                imageIcon = new ImageIcon("ImagePvZ/Plant/Sunflower.png");
+                imageIcon = new ImageIcon("ImagePvZ/Plant/PlantsImg2/Sunflower.png");
                 break;
             case PEASHOOTER:
-                imageIcon = new ImageIcon("ImagePvZ/Plant/Peashooter.png");
+                imageIcon = new ImageIcon("ImagePvZ/Plant/PlantsImg2/Peashooter.png");
                 break;
             case WALLNUT:
-                imageIcon = new ImageIcon("ImagePvZ/Plant/Wallnut.png");
+                imageIcon = new ImageIcon("ImagePvZ/Plant/PlantsImg2/Wall-nut.png");
                 break;
             case SNOWPEA:
-                imageIcon = new ImageIcon("ImagePvZ/Plant/Snowpea.png");
+                imageIcon = new ImageIcon("ImagePvZ/Plant/PlantsImg2/Snowpea.png");
                 break;
             case SQUASH:
-                imageIcon = new ImageIcon("ImagePvZ/Plant/Squash.png");
+                imageIcon = new ImageIcon("ImagePvZ/Plant/PlantsImg2/Squash.png");
                 break;
             case LILY_PAD:
-                imageIcon = new ImageIcon("ImagePvZ/Plant/Lilypad.png");
+                imageIcon = new ImageIcon("ImagePvZ/Plant/PlantsImg2/Lilypad.png");
                 break;
             case CHERRYBOMB:
-                imageIcon = new ImageIcon("ImagePvZ/Plant/Cherrybomb.png");
+                imageIcon = new ImageIcon("ImagePvZ/Plant/PlantsImg2/Cherrybomb.png");
                 break;
             case JALAPENO:
-                imageIcon = new ImageIcon("ImagePvZ/Plant/Jalapeno.png");
+                imageIcon = new ImageIcon("ImagePvZ/Plant/PlantsImg2/Jalapeno.png");
                 break;
             case REPEATER:
-                imageIcon = new ImageIcon("ImagePvZ/Plant/Nightpeater.png");
+                imageIcon = new ImageIcon("ImagePvZ/Plant/PlantsImg2/Nightpeater.png");
                 break;
             case TALLNUT:
-                imageIcon = new ImageIcon("ImagePvZ/Plant/Tallnut.png");
+                imageIcon = new ImageIcon("ImagePvZ/Plant/PlantsImg2/Tall-nut.png");
                 break;
 
             // Background
@@ -152,6 +152,15 @@ public class PictureFactory {
                 break;
             case SQUASHLIST:
                 imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsList/Squash.png");
+                break;
+
+            // Bullet List
+            case BULLET:
+                imageIcon = new ImageIcon("ImagePvZ/Plants/Bullet/Pea.png");
+                break;
+            
+            case SLOWBULLET:
+                imageIcon = new ImageIcon("ImagePvZ/Plants/Bullet/SlowPea.png");
                 break;
 
             // Welcoming Button

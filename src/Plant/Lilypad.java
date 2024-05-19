@@ -4,7 +4,7 @@ public class Lilypad extends Plant {
       private boolean planted;      
 
       public Lilypad() {
-            super("Lilypad", 100, 0, 0, 25, 0, 10);
+            super("Lilypad", 100, 0, 0, 25, 0, 10, "ImagePvZ/Plant/Lilypad.png");
         }
 
       public boolean getPlanted(){
