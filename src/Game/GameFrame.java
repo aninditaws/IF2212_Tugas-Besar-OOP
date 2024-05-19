@@ -67,25 +67,32 @@ public class GameFrame extends JFrame {
         layeredPane.add(deckPanel, Integer.valueOf(1));
 
         JPanel tesPanelDarat1 = new JPanel();
-        tesPanelDarat1.setBounds(240, 120, 1160, 230);
+        tesPanelDarat1.setBounds(356, 120, 1044, 230);
         tesPanelDarat1.setOpaque(false);
         tesPanelDarat1.setBackground(Color.RED);
-        tesPanelDarat1.setLayout(new GridLayout(2, 10, 0, 0));
+        tesPanelDarat1.setLayout(new GridLayout(2, 9, 0, 0));
         add(tesPanelDarat1);
 
         JPanel tesPanelAir = new JPanel();
-        tesPanelAir.setBounds(240, 350, 1160, 230);
+        tesPanelAir.setBounds(356, 350, 1044, 230);
         tesPanelAir.setOpaque(false);
         tesPanelAir.setBackground(Color.BLUE);
-        tesPanelAir.setLayout(new GridLayout(2, 10, 0, 0));
+        tesPanelAir.setLayout(new GridLayout(2, 9, 0, 0));
         add(tesPanelAir);
 
         JPanel tesPanelDarat2 = new JPanel();
-        tesPanelDarat2.setBounds(240, 580, 1160, 230);
+        tesPanelDarat2.setBounds(356, 580, 1044, 230);
         tesPanelDarat2.setOpaque(false);
         tesPanelDarat2.setBackground(Color.RED);
-        tesPanelDarat2.setLayout(new GridLayout(2, 10, 0, 0));
+        tesPanelDarat2.setLayout(new GridLayout(2, 9, 0, 0));
         add(tesPanelDarat2);
+
+        JPanel tesPanelnonButton = new JPanel();
+        tesPanelnonButton.setBounds(240, 120, 116, 1150);
+        tesPanelnonButton.setOpaque(false);
+        tesPanelnonButton.setBackground(Color.BLACK);
+        tesPanelnonButton.setLayout(new GridLayout(9, 1, 0, 0));
+        add(tesPanelnonButton);
 
     
 
@@ -96,7 +103,7 @@ public class GameFrame extends JFrame {
             ImageIcon plantIcon1 = new ImageIcon(scaledImage1);
         //    buat di darat atas
             for(int z = 0;z < 2; z++){
-                for(int i = 0;i < 10;i++){
+                for(int i = 0;i < 9;i++){
                     JButton button = new JButton();
                     button.setBackground(Color.green);
                     button.setPreferredSize(new Dimension(103,140));
@@ -127,7 +134,7 @@ public class GameFrame extends JFrame {
             ImageIcon plantIcon2 = new ImageIcon(scaledImage2);
         //    buat di darat atas
             for(int z = 0;z < 2; z++){
-                for(int i = 0;i < 10;i++){
+                for(int i = 0;i < 9;i++){
                     JButton button = new JButton();
                     button.setBackground(Color.blue);
                     button.setPreferredSize(new Dimension(103,140));
@@ -146,7 +153,7 @@ public class GameFrame extends JFrame {
             ImageIcon plantIcon3 = new ImageIcon(scaledImage3);
         //    buat di darat atas
             for(int z = 0;z < 2; z++){
-                for(int i = 0;i < 10;i++){
+                for(int i = 0;i < 9;i++){
                     JButton button = new JButton();
                     button.setBackground(Color.green);
                     button.setPreferredSize(new Dimension(103,140));
@@ -157,6 +164,17 @@ public class GameFrame extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        for(int i = 0;i < 6;i++){
+            JButton button = new JButton();
+            button.setBackground(Color.BLACK);
+            button.setPreferredSize(new Dimension(103,140));
+            // button.setIcon(plantIcon4); // Menambahkan ikon gambar pada tombol   
+            button.setOpaque(false);
+            button.setContentAreaFilled(false);
+            button.setBorder(null);  
+            tesPanelnonButton.add(button,BorderLayout.WEST);
+            }
 
         // TEST PANEL
         JPanel tesPanel = new JPanel();
