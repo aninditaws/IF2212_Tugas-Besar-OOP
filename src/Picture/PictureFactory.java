@@ -133,7 +133,7 @@ public class PictureFactory {
                 imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsList/Repeater.png");
                 break;
             case LILIPADLIST:
-                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsList/Lilipad.png");
+                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsList/Lilypad.png");
                 break;
             case TALLNUTLIST:
                 imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsList/Tall-nut.png");
@@ -181,8 +181,8 @@ public class PictureFactory {
             case REPEATERBUTTON:
                 imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsIcon/Repeater_icon.png");
                 break;
-            case LILIPADBUTTON:
-                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsIcon/Lilipad_icon.png");
+            case LILYPADBUTTON:
+                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsIcon/Lilypad_icon.png");
                 break;
             case TALLNUTBUTTON:
                 imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsIcon/Tallnut_icon.png");
