@@ -75,7 +75,9 @@ public class WelcomingFrame extends JFrame {
 
         plantsButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // masukin page plants
+                PlantsListFrame frame = new PlantsListFrame();
+                frame.setVisible(true);
+                dispose();
             }
         });
 

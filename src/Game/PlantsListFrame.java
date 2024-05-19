@@ -19,10 +19,22 @@ public class PlantsListFrame extends JFrame{
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLayout(new BorderLayout());
 
-        // Screen Size
-        screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int screenWidth = (int) screenSize.width;
-        int screenHeight = (int) screenSize.height;
+        // Screen Size and scaling factor
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        double width = screenSize.getWidth();
+        double height = screenSize.getHeight();
+        double widthFactor = width / 1280;
+        double heightFactor = height / 720;
+        double scaleFactor = Math.min(widthFactor, heightFactor);
+        
+        // Set fixed size based on scale
+        int screenWidth = (int) (1280 * scaleFactor);
+        int screenHeight = (int) (720 * scaleFactor);
+        
+        // Set layout and size
+        setLayout(new BorderLayout());
+        setSize(screenWidth, screenHeight);
+        setLocationRelativeTo(null);  // Center the window
 
         // Layered Pane
         layeredPane = new JLayeredPane();
@@ -40,8 +52,8 @@ public class PlantsListFrame extends JFrame{
         // 10 buttons: PLANTS LIST
         buttonPanel = new JPanel();
         buttonPanel.setOpaque(false);
-        buttonPanel.setLayout(new GridLayout(3, 4, 30, 0));
-        buttonPanel.setBounds(95, 200, 825, 600);
+        buttonPanel.setLayout(new GridLayout(3, 4, 31, 0));
+        buttonPanel.setBounds(95, 210, 825, 600);
         layeredPane.add(buttonPanel, Integer.valueOf(1));
 
         // Sunflower Button -- Show Sunflower Page
