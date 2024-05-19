@@ -1,6 +1,7 @@
 package Plant;
 
 import Character.Character;
+import Character.CharCoordinat;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -15,6 +16,7 @@ public class Plant extends Character {
       public int cooldown;
       protected String file;
       protected BufferedImage image;
+      public int x, y;
       /* NOTES */
       // attack_speed = tanaman meyerang dalam x detik
       // range = satuannya dalam tile. 0 artinya ga nyerang. -1 artinya bisa menyerang
@@ -68,8 +70,7 @@ public class Plant extends Character {
             } catch (Exception e) {
 
             }
-
-            // g2.drawImage(image, x, y);
+            g2.drawImage(image, CharCoordinat.getAbsis(), CharCoordinat.getOrdinat(), null);
       } // buat ngedraw
 
       public void die() {
@@ -78,14 +79,13 @@ public class Plant extends Character {
             }
       }
 
-      // setImagePath
-      public void setImagePath(String file) {
-            this.file = file;
-      }
 
       // getImagePath
       public String getImagePath() {
             return file;
       }
 
+      public void attack() {
+
+      }
 }

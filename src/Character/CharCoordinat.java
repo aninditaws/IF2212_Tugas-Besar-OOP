@@ -1,7 +1,8 @@
 package Character;
 
 public class CharCoordinat {
-      private int x, y;
+      public int x;
+      public int y;
 
       public CharCoordinat(){
         this.x = 0;

@@ -7,7 +7,7 @@ public class Sunflower extends Plant {
 
     private int doUpdate = 0;
       public Sunflower() {
-            super("Sunflower", 100, 0, 0, 50, 0, 10);
+            super("Sunflower", 100, 0, 0, 50, 0, 10, "ImagePvZ/Plant/PlantzImg/Sunflower.png");
           EventChannel.getInstance().subscribe(this);
         }
 

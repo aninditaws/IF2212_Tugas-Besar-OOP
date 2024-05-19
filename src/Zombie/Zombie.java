@@ -5,24 +5,28 @@ import Exception.IllegalMoveException;
 import Subscriber.EventChannel;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Zombie extends Character {
 
     private static int id = 0;
     public int zombieId = 0;
-
+    public static int x, y;
     public Point position;
     public boolean is_aquatic;
     private int doUpdate = 0;
-
     private boolean walk = true;
-    public Zombie(String name, int health, int attack_damage, int attack_speed, boolean is_aquatic, Point position) {
+    public static ArrayList<Zombie> zombies = new ArrayList<Zombie>();
+    public Zombie(String name, int health, int attack_damage, int attack_speed, boolean is_aquatic, Point position, int x , int y) {
         super(name, health, attack_damage, attack_speed);
         this.is_aquatic = is_aquatic;
         this.position = new Point(position);
         EventChannel.getInstance().subscribe(this);
         this.zombieId = id;
         id += 1;
+        this.x = x;
+        this.y = y;
+
     }
 
     public void move(int x, int y) throws IllegalMoveException {
@@ -48,6 +52,10 @@ public class Zombie extends Character {
         character.reduceHealth(attack_damage);
     }
 
+    public void getAttacked(int attack_damage){
+        reduceHealth(attack_damage);
+    }
+
     @Override
     public void update(int gameTick) {
         super.update(gameTick);
@@ -63,4 +71,12 @@ public class Zombie extends Character {
             }
         }
     }
+
+public static int getX() {
+    return x;
+}
+
+public static int getY(){
+    return y;
+}
 }
