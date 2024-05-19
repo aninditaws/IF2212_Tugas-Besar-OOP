@@ -144,7 +144,7 @@ public class GameFrame extends JFrame {
 
         try {
             BufferedImage originalImage3 = ImageIO.read(new File("ImagePvZ/Plants/PlantsImg/Snowpea.png"));
-            Image scaledImage3 = originalImage3.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+            Image scaledImage3 = originalImage3.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
             ImageIcon plantIcon3 = new ImageIcon(scaledImage3);
             // buat di darat atas
             for (int z = 0; z < 2; z++) {
