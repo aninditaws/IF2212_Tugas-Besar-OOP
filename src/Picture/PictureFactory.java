@@ -116,7 +116,39 @@ public class PictureFactory {
                 imageIcon = new ImageIcon("ImagePvZ/GameFrame/gameFrameNight.png");
                 break;
             case HELP:
-                imageIcon = new ImageIcon("ImagePVZ/GameFrame/HelpNobutton.png");
+                imageIcon = new ImageIcon("ImagePvZ/GameFrame/HelpNobutton.png");
+                break;
+
+            // Plants List
+            case SUNFLOWERLIST:
+                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsList/Sunflower.png");
+                break;
+            case PEASHOOTERLIST:
+                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsList/Peashooter.png");
+                break;
+            case REPEATERLIST:
+                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsList/Repeater.png");
+                break;
+            case LILIPADLIST:
+                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsList/Lilipad.png");
+                break;
+            case TALLNUTLIST:
+                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsList/Tall-nut.png");
+                break;
+            case SNOWPEALIST:
+                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsList/SnowPea.png");
+                break;
+            case WALLNUTLIST:
+                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsList/Wall-nut.png");
+                break;
+            case CHERRYBOMBLIST:
+                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsList/Cherry Bomb.png");
+                break;
+            case JALAPENOLIST:
+                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsList/Jalapeno.png");
+                break;
+            case SQUASHLIST:
+                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsList/Squash.png");
                 break;
 
             // Welcoming Button
@@ -134,6 +166,38 @@ public class PictureFactory {
                 break;
             case EXITBUTTON:
                 imageIcon = new ImageIcon("ImagePvZ/Welcome/Button/exitButton.png");
+                break;
+
+            // Plants List Button
+            case SUNFLOWERBUTTON:
+                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsIcon/Sunflower_icon.png");
+                break;
+            case PEASHOOTERBUTTON:
+                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsIcon/Peashooter_icon.png");
+                break;
+            case REPEATERBUTTON:
+                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsIcon/Repeater_icon.png");
+                break;
+            case LILIPADBUTTON:
+                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsIcon/Lilipad_icon.png");
+                break;
+            case TALLNUTBUTTON:
+                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsIcon/Tallnut_icon.png");
+                break;
+            case SNOWPEABUTTON:
+                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsIcon/Snowpea_icon.png");
+                break;
+            case WALLNUTBUTTON:
+                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsIcon/Wallnut_icon.png");
+                break;
+            case CHERRYBOMBBUTTON:
+                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsIcon/CherryBomb_icon.png");
+                break;
+            case JALAPENOBUTTON:
+                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsIcon/Jalapeno_icon.png");
+                break;
+            case SQUASHBUTTON:
+                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsIcon/Squash_icon.png");
                 break;
 
             // Help Button
