@@ -51,11 +51,13 @@ public class Bullet extends Element {
       };
 
       public void check_hit(){
-            //ngesek klo x dan y nya si zombie dan bullet itu sama maka ngasih damage
+            //ngecek klo x dan y nya si zombie dan bullet itu sama maka ngasih damage 
             if (x <= Zombie.getX() && x + 115 >= Zombie.getX() && y == Zombie.getY()){
                   getAttacked(power);
             }
       }
+
+
 
       public int getPower(){
             return power;

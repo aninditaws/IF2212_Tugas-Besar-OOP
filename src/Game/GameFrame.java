@@ -1,5 +1,6 @@
 package Game;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import Inventory.DeckTanaman;
@@ -7,7 +8,8 @@ import Inventory.DeckTanaman;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.io.File;
+import java.awt.image.BufferedImage;
 import Picture.*;
 
 public class GameFrame extends JFrame {
@@ -63,6 +65,98 @@ public class GameFrame extends JFrame {
         System.out.println(deckPanel.getDeckTanaman().getArrayDeck());
 
         layeredPane.add(deckPanel, Integer.valueOf(1));
+
+        JPanel tesPanelDarat1 = new JPanel();
+        tesPanelDarat1.setBounds(240, 120, 1160, 230);
+        tesPanelDarat1.setOpaque(false);
+        tesPanelDarat1.setBackground(Color.RED);
+        tesPanelDarat1.setLayout(new GridLayout(2, 10, 0, 0));
+        add(tesPanelDarat1);
+
+        JPanel tesPanelAir = new JPanel();
+        tesPanelAir.setBounds(240, 350, 1160, 230);
+        tesPanelAir.setOpaque(false);
+        tesPanelAir.setBackground(Color.BLUE);
+        tesPanelAir.setLayout(new GridLayout(2, 10, 0, 0));
+        add(tesPanelAir);
+
+        JPanel tesPanelDarat2 = new JPanel();
+        tesPanelDarat2.setBounds(240, 580, 1160, 230);
+        tesPanelDarat2.setOpaque(false);
+        tesPanelDarat2.setBackground(Color.RED);
+        tesPanelDarat2.setLayout(new GridLayout(2, 10, 0, 0));
+        add(tesPanelDarat2);
+
+    
+
+   //cek satu plant di spawn trus dipindahin satu kotak ke kotak yang lain
+        try {
+            BufferedImage originalImage1 = ImageIO.read(new File("ImagePvZ/Plants/Bullet/Pea.png"));
+            Image scaledImage1 = originalImage1.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+            ImageIcon plantIcon1 = new ImageIcon(scaledImage1);
+        //    buat di darat atas
+            for(int z = 0;z < 2; z++){
+                for(int i = 0;i < 10;i++){
+                    JButton button = new JButton();
+                    button.setBackground(Color.green);
+                    button.setPreferredSize(new Dimension(103,140));
+                    button.setIcon(plantIcon1); // Menambahkan ikon gambar pada tombol
+                    tesPanelDarat1.add(button,BorderLayout.WEST);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        tesPanelDarat1.getComponent(5).setBackground(Color.RED);
+
+        // buat di air
+        // for(int z = 0;z < 2; z++){
+        //     for(int i = 0;i < 10;i++){
+        //         JButton button = new JButton();
+        //         button.setBackground(Color.blue);
+        //         button.setPreferredSize(new Dimension(103,140));
+                
+        //         tesPanelAir.add(button,BorderLayout.WEST);
+        //     }
+        // }
+
+        try {
+            BufferedImage originalImage2 = ImageIO.read(new File("ImagePvZ/Plants/Bullet/SlowPea.png"));
+            Image scaledImage2 = originalImage2.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+            ImageIcon plantIcon2 = new ImageIcon(scaledImage2);
+        //    buat di darat atas
+            for(int z = 0;z < 2; z++){
+                for(int i = 0;i < 10;i++){
+                    JButton button = new JButton();
+                    button.setBackground(Color.blue);
+                    button.setPreferredSize(new Dimension(103,140));
+                    button.setIcon(plantIcon2); // Menambahkan ikon gambar pada tombol           
+                    tesPanelAir.add(button,BorderLayout.WEST);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            BufferedImage originalImage3 = ImageIO.read(new File("ImagePvZ/Plants/PlantsImg/Snowpea.png"));
+            Image scaledImage3 = originalImage3.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+            ImageIcon plantIcon3 = new ImageIcon(scaledImage3);
+        //    buat di darat atas
+            for(int z = 0;z < 2; z++){
+                for(int i = 0;i < 10;i++){
+                    JButton button = new JButton();
+                    button.setBackground(Color.green);
+                    button.setPreferredSize(new Dimension(103,140));
+                    button.setIcon(plantIcon3); // Menambahkan ikon gambar pada tombol     
+                    tesPanelDarat2.add(button,BorderLayout.WEST);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         // TEST PANEL
         JPanel tesPanel = new JPanel();
