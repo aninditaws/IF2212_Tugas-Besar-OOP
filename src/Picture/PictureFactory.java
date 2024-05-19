@@ -172,6 +172,9 @@ public class PictureFactory {
                 break;
 
             // Plants List Button
+            case ZOMBIELISTSBUTTON:
+                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsIcon/zombieListsButton.png");
+                break;
             case SUNFLOWERBUTTON:
                 imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsIcon/Sunflower_icon.png");
                 break;

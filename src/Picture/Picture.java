@@ -80,6 +80,7 @@ public enum Picture {
     MENUBUTTON,
 
     // Plants List Button
+    ZOMBIELISTSBUTTON,
     SUNFLOWERBUTTON,
     PEASHOOTERBUTTON,
     REPEATERBUTTON,

@@ -11,6 +11,10 @@ public class PlantsListFrame extends JFrame{
     private JPanel buttonPanel;
     private JLabel label;
     private Dimension screenSize;
+    private JPanel menuPanel;
+    private JButton menuButton;
+    private JButton zombiesListButton;
+    private JButton currentVisibleCard;
     
     public PlantsListFrame(){
         // Game Title & State
@@ -20,40 +24,31 @@ public class PlantsListFrame extends JFrame{
         setLayout(new BorderLayout());
 
         // Screen Size and scaling factor
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        double width = screenSize.getWidth();
-        double height = screenSize.getHeight();
-        double widthFactor = width / 1280;
-        double heightFactor = height / 720;
-        double scaleFactor = Math.min(widthFactor, heightFactor);
-        
-        // Set fixed size based on scale
+        screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        double scaleFactor = Math.min(screenSize.getWidth() / 1280, screenSize.getHeight() / 720);
         int screenWidth = (int) (1280 * scaleFactor);
         int screenHeight = (int) (720 * scaleFactor);
         
-        // Set layout and size
+        // Set fixed size based on scale
         setLayout(new BorderLayout());
         setSize(screenWidth, screenHeight);
-        setLocationRelativeTo(null);  // Center the window
+        setLocationRelativeTo(null);
 
         // Layered Pane
         layeredPane = new JLayeredPane();
-        layeredPane.setPreferredSize(screenSize);
+        layeredPane.setPreferredSize(new Dimension(screenWidth, screenHeight));
 
         // Picture of Background
         ImageIcon imageIcon = PictureFactory.getImageIcon(Picture.PLANTSLISTBG);
         Image image = imageIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
-        imageIcon = new ImageIcon(image);
-        label = new JLabel(imageIcon);
+        label = new JLabel(new ImageIcon(image));
         label.setBounds(0, 0, screenWidth, screenHeight);
-        add(label);
         layeredPane.add(label, Integer.valueOf(0));
 
         // 10 buttons: PLANTS LIST
-        buttonPanel = new JPanel();
+        buttonPanel = new JPanel(new GridLayout(3, 4, 31, 0));
         buttonPanel.setOpaque(false);
-        buttonPanel.setLayout(new GridLayout(3, 4, 31, 0));
-        buttonPanel.setBounds(95, 210, 825, 600);
+        buttonPanel.setBounds(70, 150, 825, 600);
         layeredPane.add(buttonPanel, Integer.valueOf(1));
 
         // Sunflower Button -- Show Sunflower Page
@@ -63,8 +58,15 @@ public class PlantsListFrame extends JFrame{
         sunflowerButton.setContentAreaFilled(false);
         sunflowerButton.setBorder(null);
         sunflowerButton.setSize(750, 750);
-        sunflowerButton.setMargin(new Insets(0, 0, 0, 0));     
-        buttonPanel.add(sunflowerButton);
+        sunflowerButton.setMargin(new Insets(0, 0, 0, 0));    
+        
+        sunflowerButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JButton sunflowerCard = new JButton();
+                sunflowerCard.setIcon(PictureFactory.getImageIcon(Picture.SUNFLOWERLIST));
+                showCard(sunflowerCard, 950, 75, 500, 700);
+            }
+        }); buttonPanel.add(sunflowerButton);
 
         // Peashooter Button -- Show Peashooter Page
         JButton peashooterButton = new JButton();
@@ -74,7 +76,14 @@ public class PlantsListFrame extends JFrame{
         peashooterButton.setBorder(null);
         peashooterButton.setSize(750, 750);
         peashooterButton.setMargin(new Insets(0, 0, 0, 0));     
-        buttonPanel.add(peashooterButton);       
+        
+        peashooterButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JButton peashooterCard = new JButton();
+                peashooterCard.setIcon(PictureFactory.getImageIcon(Picture.PEASHOOTERLIST));
+                showCard(peashooterCard, 950, 75, 500, 700);
+            }
+        }); buttonPanel.add(peashooterButton);       
 
         // Repeater Button -- Show Repeater Page
         JButton repeaterButton = new JButton();
@@ -83,8 +92,15 @@ public class PlantsListFrame extends JFrame{
         repeaterButton.setContentAreaFilled(false);
         repeaterButton.setBorder(null);
         repeaterButton.setSize(750, 750);
-        repeaterButton.setMargin(new Insets(0, 0, 0, 0));     
-        buttonPanel.add(repeaterButton);   
+        repeaterButton.setMargin(new Insets(0, 0, 0, 0));  
+        
+        repeaterButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JButton repeaterCard = new JButton();
+                repeaterCard.setIcon(PictureFactory.getImageIcon(Picture.REPEATERLIST));
+                showCard(repeaterCard, 950, 75, 500, 700);
+            }
+        }); buttonPanel.add(repeaterButton);   
 
         // Lilipad Button -- Show Lilipad Page
         JButton lilypadButton = new JButton();
@@ -94,7 +110,14 @@ public class PlantsListFrame extends JFrame{
         lilypadButton.setBorder(null);
         lilypadButton.setSize(750, 750);
         lilypadButton.setMargin(new Insets(0, 0, 0, 0));     
-        buttonPanel.add(lilypadButton);   
+        
+        lilypadButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JButton lilypadCard = new JButton();
+                lilypadCard.setIcon(PictureFactory.getImageIcon(Picture.LILIPADLIST));
+                showCard(lilypadCard, 950, 75, 500, 700);
+            }
+        }); buttonPanel.add(lilypadButton);   
 
         // Tallnut Button -- Show Tallnut Page
         JButton tallnutButton = new JButton();
@@ -103,8 +126,15 @@ public class PlantsListFrame extends JFrame{
         tallnutButton.setContentAreaFilled(false);
         tallnutButton.setBorder(null);
         tallnutButton.setSize(750, 750);
-        tallnutButton.setMargin(new Insets(0, 0, 0, 0));     
-        buttonPanel.add(tallnutButton);         
+        tallnutButton.setMargin(new Insets(0, 0, 0, 0));   
+
+        tallnutButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JButton tallnutCard = new JButton();
+                tallnutCard.setIcon(PictureFactory.getImageIcon(Picture.TALLNUTLIST));
+                showCard(tallnutCard, 950, 75, 500, 700);
+            }
+        }); buttonPanel.add(tallnutButton);         
         
         // Snow Pea Button -- Show Snow Pea Page
         JButton snowpeaButton = new JButton();
@@ -114,7 +144,14 @@ public class PlantsListFrame extends JFrame{
         snowpeaButton.setBorder(null);
         snowpeaButton.setSize(750, 750);
         snowpeaButton.setMargin(new Insets(0, 0, 0, 0));     
-        buttonPanel.add(snowpeaButton);   
+        
+        snowpeaButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JButton snowpeaCard = new JButton();
+                snowpeaCard.setIcon(PictureFactory.getImageIcon(Picture.SNOWPEALIST));
+                showCard(snowpeaCard, 950, 75, 500, 700);
+            }
+        }); buttonPanel.add(snowpeaButton);   
 
         // Wallnut Button -- Show Wallnut Page
         JButton wallnutButton = new JButton();
@@ -124,7 +161,14 @@ public class PlantsListFrame extends JFrame{
         wallnutButton.setBorder(null);
         wallnutButton.setSize(750, 750);
         wallnutButton.setMargin(new Insets(0, 0, 0, 0));     
-        buttonPanel.add(wallnutButton);   
+        
+        wallnutButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JButton wallnutCard = new JButton();
+                wallnutCard.setIcon(PictureFactory.getImageIcon(Picture.WALLNUTLIST));
+                showCard(wallnutCard, 950, 75, 500, 700);
+            }
+        }); buttonPanel.add(wallnutButton);   
 
         // Cherry Bomb Button -- Show Cherry Bomb Page
         JButton cherrybombButton = new JButton();
@@ -134,7 +178,14 @@ public class PlantsListFrame extends JFrame{
         cherrybombButton.setBorder(null);
         cherrybombButton.setSize(750, 750);
         cherrybombButton.setMargin(new Insets(0, 0, 0, 0));     
-        buttonPanel.add(cherrybombButton);   
+        
+        cherrybombButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JButton cherrybombCard = new JButton();
+                cherrybombCard.setIcon(PictureFactory.getImageIcon(Picture.CHERRYBOMBLIST));
+                showCard(cherrybombCard, 950, 75, 500, 700);
+            }
+        }); buttonPanel.add(cherrybombButton);   
 
         // Jalapeno Button -- Show Jalapeno Page
         JButton jalapenoButton = new JButton();
@@ -144,7 +195,14 @@ public class PlantsListFrame extends JFrame{
         jalapenoButton.setBorder(null);
         jalapenoButton.setSize(750, 750);
         jalapenoButton.setMargin(new Insets(0, 0, 0, 0));     
-        buttonPanel.add(jalapenoButton);   
+        
+        jalapenoButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JButton jalapenoCard = new JButton();
+                jalapenoCard.setIcon(PictureFactory.getImageIcon(Picture.JALAPENOLIST));
+                showCard(jalapenoCard, 950, 75, 500, 700);
+            }
+        }); buttonPanel.add(jalapenoButton);   
 
         // Squash Button -- Show Squash Page
         JButton squashButton = new JButton();
@@ -154,7 +212,51 @@ public class PlantsListFrame extends JFrame{
         squashButton.setBorder(null);
         squashButton.setSize(750, 750);
         squashButton.setMargin(new Insets(0, 0, 0, 0));     
-        buttonPanel.add(squashButton);   
+        
+        squashButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JButton squashCard = new JButton();
+                squashCard.setIcon(PictureFactory.getImageIcon(Picture.SQUASHLIST));
+                showCard(squashCard, 950, 75, 500, 700);
+            }
+        }); buttonPanel.add(squashButton);   
+
+        // 2 buttons: Menu, Zombies List
+        menuPanel = new JPanel();
+        menuPanel.setOpaque(false);
+        menuPanel.setLayout(new GridLayout(1, 2, 0, 0));
+        menuPanel.setBounds((screenWidth - 650) / 2, 750, 650, 70);
+        layeredPane.add(menuPanel, Integer.valueOf(1));
+
+        // Menu Button -- To Welcome
+        menuButton = new JButton();
+        menuButton.setIcon(PictureFactory.getImageIcon(Picture.MENUBACKBUTTON));
+        menuButton.setOpaque(false);
+        menuButton.setContentAreaFilled(false);
+        menuButton.setBorder(null);
+        menuButton.setMargin(new Insets(0, 0, 0, 0));
+
+        menuButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                WelcomingFrame frame = new WelcomingFrame();
+                frame.setVisible(true);
+                dispose();
+            }
+        }); menuPanel.add(menuButton);        
+       
+        // Zombies List Button -- To Zombies List
+        zombiesListButton = new JButton();
+        zombiesListButton.setIcon(PictureFactory.getImageIcon(Picture.ZOMBIELISTSBUTTON));
+        zombiesListButton.setOpaque(false);
+        zombiesListButton.setContentAreaFilled(false);
+        zombiesListButton.setBorder(null);
+        zombiesListButton.setMargin(new Insets(0, 0, 0, 0));
+        
+        zombiesListButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // masukin page zombie
+            }
+        }); menuPanel.add(zombiesListButton);   
 
         // LayeredPane
         add(layeredPane, BorderLayout.CENTER);
@@ -162,6 +264,20 @@ public class PlantsListFrame extends JFrame{
         setVisible(true);
     }
 
+    private void showCard(JButton newCard, int x, int y, int width, int height) {
+        if (currentVisibleCard != null) {
+            layeredPane.remove(currentVisibleCard);
+        }
+        newCard.setOpaque(false);
+        newCard.setContentAreaFilled(false);
+        newCard.setBorderPainted(false);
+        newCard.setBounds(x, y, width, height);
+        layeredPane.add(newCard, Integer.valueOf(2));
+        currentVisibleCard = newCard;
+        layeredPane.repaint();
+        layeredPane.revalidate();
+    }
+    
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             PlantsListFrame frame = new PlantsListFrame();
