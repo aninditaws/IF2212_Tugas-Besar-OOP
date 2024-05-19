@@ -25,7 +25,7 @@ public class GameFrame extends JFrame {
 
     private DeckPanel deckPanel;
     private DeckTanaman deckTanaman;
-
+//ppp
     // private static ArrayList<Bullet> bullets = new ArrayList<Bullet>(); //buat
     // array bullet sama tanaman
     // private static ArrayList<Plant> plants = new ArrayList<Plant>();
