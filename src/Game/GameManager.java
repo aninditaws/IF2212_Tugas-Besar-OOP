@@ -7,7 +7,7 @@ import ZombieFactory.ZombieFactory;
 import ZombieFactory.ZombieType;
 
 import java.awt.*;
-import java.util.Date;
+import Plant.*;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -152,5 +152,34 @@ public class GameManager {
                 }
             }
         }
+    }
+
+    // Plant Manager
+
+    public long countPlantsInCell(int row, int col) {
+        List<Object> entities = gameMap.getEntities(row, col);
+        return entities.stream()
+                .filter(entity -> entity instanceof Plant)
+                .count();
+    }
+    public boolean addPlant(Plant plant, int row, int col) {
+        // DO CHECKING
+        boolean success = false;
+        if (gameMap.determineAreaType(row, col) == AreaType.PLANTABLE_AREA) {
+            if (!(plant instanceof Lilypad) && countPlantsInCell(row, col) == 0) {
+                success = true;
+                gameMap.addEntity(plant, row, col);
+            }
+        } else if (gameMap.determineAreaType(row, col) == AreaType.WATER_AREA) {
+            if ((plant instanceof Lilypad) && countPlantsInCell(row, col) == 0) {
+                success = true;
+                gameMap.addEntity(plant, row, col);
+            } else if (!(plant instanceof Lilypad) && countPlantsInCell(row, col) == 1) {
+                success = true;
+                gameMap.addEntity(plant, row, col);
+            }
+        }
+        System.out.println(String.format("planting %s", success));
+        return success;
     }
 }

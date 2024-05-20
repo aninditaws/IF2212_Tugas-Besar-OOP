@@ -244,8 +244,12 @@ public class GameFrame extends JFrame {
                 button.addActionListener(e -> {
                     if (selectedPlant != null) {
                         System.out.println(String.format("Planting at row %d col %d", row, col));
-                        gameManager.getGameMap().addEntity(plantFactory.CreatePlant(selectedPlant, new Point(col, row)), row, col);
-                        selectedPlant = null;
+                        boolean success = gameManager.addPlant(plantFactory.CreatePlant(selectedPlant, new Point(col, row)), row, col);
+                        if (success) {
+                            // Berhasil menanam, set selected plant nya null dan mulai cooldown, logic mengurangi sun ada di gameManager
+                            // TODO: cooldown refresh
+                            selectedPlant = null;
+                        }
                         Container parent = (Container) e.getSource();
                         System.out.println(parent.getComponents());
 //                        JButton newButton = new JButton(selectedDeckButton.getIcon());
