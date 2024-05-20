@@ -245,8 +245,8 @@ public class GameFrame extends JFrame {
                         Component[] components = mapPanel.getComponents();
                         for (int k = 0; k < components.length; k++) {
                             if (components[k] == button) {
-                                row = k / 9; // Assuming 9 columns in the grid
-                                column = k % 9;
+                                row = k / 11; // Assuming 11 columns in the grid
+                                column = k % 11;
                                 break;
                             }
                         }
@@ -262,7 +262,6 @@ public class GameFrame extends JFrame {
                         parent.repaint();
                     }
                 });
-
                 mapPanel.add(button);
                 mapButtons[i][z] = button;
             }
@@ -303,6 +302,7 @@ public class GameFrame extends JFrame {
                 imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(SCREENDOORZOMBIECARD).getImage());
                 break;
             default:
+                System.out.println(String.format("Default case! %s", zombie.name));
                 imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(NORMALZOMBIECARD).getImage());
                 break;
 
@@ -338,7 +338,7 @@ public class GameFrame extends JFrame {
 
     // public JButton getAreaButton(int row, int column) {
     // // Calculate the index of the button based on the row and column
-    // int index = row * 9 + column;
+    // int index = row * 11 + column;
 
     // // Get the component at the calculated index
     // Component component = mapPanel.getComponent(index);
