@@ -18,7 +18,6 @@ import Character.Character;
 import Plant.*;
 import static Picture.Picture.*;
 
-import UI.CustomButtonUI;
 import Zombie.*;
 
 public class GameFrame extends JFrame {
@@ -201,7 +200,6 @@ public class GameFrame extends JFrame {
         for (int i = 0; i < 6; i++) {
             for (int z = 0; z < 11; z++) {
                 JButton button = new JButton();
-                button.setUI(new CustomButtonUI());
                 button.setOpaque(false);
                 button.setContentAreaFilled(false);
                 button.setFocusPainted(false);
@@ -303,14 +301,15 @@ public class GameFrame extends JFrame {
                     Object entity = entities.get(0);
                     if (entity instanceof Zombie zombie) {
                         ImageIcon imageIcon = getZombieImage(zombie);
-                        Image image = imageIcon.getImage().getScaledInstance(button.getWidth(), button.getHeight(), Image.SCALE_SMOOTH);
+                        Image image = imageIcon.getImage().getScaledInstance(button.getWidth(), button.getHeight(),
+                                Image.SCALE_SMOOTH);
                         imageIcon = new ImageIcon(image);
                         button.setIcon(imageIcon);
                     } else if (entity instanceof Plant plant) {
                         button.setBackground(Color.green);
                     } // Bisa menambahkan yang lain
                 } else {
-//                    button.setBackground(Color.green);
+                    // button.setBackground(Color.green);
                     button.setIcon(null);
                 }
             }
@@ -342,6 +341,7 @@ public class GameFrame extends JFrame {
         menuButton.setMargin(new Insets(0, 0, 0, 0));
         menuButton.setBounds(screenSize.width - 240, screenSize.height - 850, 242, 95);
         menuButton.addActionListener(e -> {
+            gameManager.stopTimer();
             WelcomingFrame mainMenuFrame = new WelcomingFrame();
             mainMenuFrame.setVisible(true);
             dispose();
