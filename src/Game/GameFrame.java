@@ -5,6 +5,7 @@ import Plant.*;
 import java.util.List;
 import java.util.ArrayList;
 
+import UI.CustomButtonUI;
 import Zombie.*;
 import javax.swing.*;
 
@@ -81,8 +82,7 @@ public class GameFrame extends JFrame {
 
         initializeMapPanel();
 
-        //new
-
+        // new
 
         // Menu Button
         JButton menuButton = new JButton();
@@ -171,10 +171,11 @@ public class GameFrame extends JFrame {
         renderGameMap();
     }
 
-    public void initializeMapPanel(){
+    public void initializeMapPanel() {
         mapPanel = new JPanel(new GridLayout(6, 9, 2, 2));
-        mapPanel.setBackground(new Color(0, 0, 0, 0));
-//        mapPanel.setBackground(Color.BLACK);
+        // mapPanel.setBackground(new Color(0, 0, 0, 0
+        // mapPanel.setBackground(Color.BLACK);  
+        mapPanel.setOpaque(false);
         mapPanel.setBounds(350, 350, 960, 810);
         mapPanel.setBounds((screenWidth - 800) / 2, 120, 1044, 810);
         layeredPane.add(mapPanel, Integer.valueOf(1));
@@ -182,6 +183,7 @@ public class GameFrame extends JFrame {
         for (int row = 0; row < 6; row++) {
             for (int col = 0; col < 9; col++) {
                 JButton button = new JButton();
+                button.setUI(new CustomButtonUI());
                 button.setPreferredSize(new Dimension(103, 140));
                 button.setFocusPainted(false);
                 button.setContentAreaFilled(false);
@@ -191,11 +193,13 @@ public class GameFrame extends JFrame {
                 button.setOpaque(false);
                 mapPanel.add(button, BorderLayout.WEST);
                 mapButtons[row][col] = button;
-
             }
         }
 
-//            mapPanel.getComponent(18).setBackground(Color.red);
+         
+
+         
+        // mapPanel.getComponent(18).setBackground(Color.red);
 //            mapPanel.getComponent(35).setBackground(Color.red);
     }
 
@@ -212,7 +216,7 @@ public class GameFrame extends JFrame {
                 imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(POLEVAULTINGZOMBIECARD).getImage());
                 break;
             case "Buckethead Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(BUCKETHEADZOMBIE).getImage());
+                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(BUCKETHEADZOMBIECARD).getImage());
                 break;
             case "Ducky Tube Zombie":
                 imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(DUCKYTUBEZOMBIECARD).getImage());
@@ -239,7 +243,9 @@ public class GameFrame extends JFrame {
 
         }
         return imageiconreturn;
+
     }
+
     public void renderGameMap() {
         GameMap<Object> gameMap = gameManager.getGameMap();
         for (int row = 0; row < gameMap.getRow(); row++) {
@@ -251,15 +257,18 @@ public class GameFrame extends JFrame {
                     Object entity = entities.get(0);
                     if (entity instanceof Zombie zombie) {
                         ImageIcon imageIcon = getZombieImage(zombie);
-                        Image image = imageIcon.getImage().getScaledInstance(button.getWidth(), button.getHeight(), Image.SCALE_SMOOTH);
+
+                        Image image = imageIcon.getImage().getScaledInstance(button.getWidth(), button.getHeight(),
+                                Image.SCALE_SMOOTH);
                         imageIcon = new ImageIcon(image);
                         button.setIcon(imageIcon);
                     } else if (entity instanceof Plant plant) {
                         button.setBackground(Color.green);
-                    } // Bisa menambahkan yang lain
-                } else {
-//                    button.setBackground(Color.green);
-                    button.setIcon(null);
+                    } //
+                    {
+                        // button.setBackground(Color.green);
+                        button.setIcon(null);
+                    }
                 }
             }
         }
