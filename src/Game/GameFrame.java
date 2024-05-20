@@ -168,15 +168,22 @@ public class GameFrame extends JFrame {
 
                 button.addActionListener(e -> {
                     if (selectedDeckButton != null) {
+                        Container parent = (Container) e.getSource();
                         JButton newButton = new JButton(selectedDeckButton.getIcon());
                         newButton.setOpaque(false);
                         newButton.setContentAreaFilled(false);
                         newButton.setBorder(null);
                         newButton.setMargin(new Insets(0, 0, 0, 0));
-                        // newButton.setBounds(button.getX(), button.getY(), 103, 140);
-                        ((Container) e.getSource()).add(newButton);
-                        ((Container) e.getSource()).revalidate();
-                        ((Container) e.getSource()).repaint();
+                        newButton.setBounds(button.getX(), button.getY(), 103, 140);
+
+                        newButton.addActionListener(e2 -> {
+                            parent.remove(newButton);
+                            parent.revalidate();
+                            parent.repaint();
+                        });
+                        parent.add(newButton);
+                        parent.revalidate();
+                        parent.repaint();
                     }
                     System.out.println("Clicked Button GETX: " + button.getX());
                     System.out.println("Clicked Button GETY: " + button.getY());
