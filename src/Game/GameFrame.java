@@ -87,6 +87,7 @@ public class GameFrame extends JFrame {
         menuButton.setMargin(new Insets(0, 0, 0, 0));
         menuButton.setBounds(screenSize.width - 240, screenSize.height - 850, 242, 95);
         menuButton.addActionListener(e -> {
+            gameManager.sun.resetSun();
             WelcomingFrame mainMenuFrame = new WelcomingFrame();
             mainMenuFrame.setVisible(true);
             dispose();

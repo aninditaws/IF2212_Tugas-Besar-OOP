@@ -11,7 +11,7 @@ public final class Sun implements Subscriber {
     private int doUpdate = 0;
 
     private Sun() {
-        totalSun = 25;
+        totalSun = 50;
         EventChannel.getInstance().subscribe(this);
         generateRandomInterval();
     }
@@ -43,6 +43,10 @@ public final class Sun implements Subscriber {
         int max = 10;
         int min = 5;
         randomGeneratedInterval = (int) ((Math.random() * (max - min)) + min);
+    }
+
+    public void resetSun(){
+        totalSun = 0;
     }
 
     @Override
