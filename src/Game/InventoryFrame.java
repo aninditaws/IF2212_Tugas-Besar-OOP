@@ -74,7 +74,7 @@ public class InventoryFrame extends JFrame {
         deckPanel.setBounds(34, 148, 150, 600);
         deckPanel.setLayout(new GridLayout(6, 1));
         deckPanel.setOpaque(false);
-        layeredPane.add(deckPanel, BorderLayout.WEST, Integer.valueOf(0));
+        layeredPane.add(deckPanel, BorderLayout.WEST, Integer.valueOf(1));
         // add(deckPanel);
     }
 
