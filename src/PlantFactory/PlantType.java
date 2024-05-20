@@ -1,0 +1,14 @@
+package PlantFactory;
+
+public enum PlantType {
+    SUNFLOWERTYPE,
+    CHERRYBOMBTYPE,
+    JALAPENOTYPE,
+    LILYPADTYPE,
+    PEASHOOTERTYPE,
+    REPEATERTYPE,
+    SNOWPEATYPE,
+    SQUASHTYPE,
+    TALLNUTTYPE,
+    WALLNUTTYPE
+}

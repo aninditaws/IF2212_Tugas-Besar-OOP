@@ -21,7 +21,7 @@ public class ZombieFactory {
             case FOOTBALL:
                 return new FootballZombie(position);
             case GARGANTUAR:
-                return new NewspaperZombie(position);
+                return new GargantuarZombie(position);
             case IMP:
                 return new ImpZombie(position);
             case SCREENDOOR:

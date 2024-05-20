@@ -3,11 +3,17 @@ package Plant;
 import Subscriber.EventChannel;
 import Sun.Sun;
 
+import java.awt.*;
+
 public class Sunflower extends Plant {
 
     private int doUpdate = 0;
+
     public Sunflower() {
-        super("Sunflower", 100, 0, 0, 50, 0, 10, "ImagePvZ/Plant/PlantzImg/Sunflower.png");
+        super("Sunflower", 100, 0, 0, 50, 0, 10, null);
+    }
+    public Sunflower(Point position) {
+        super("Sunflower", 100, 0, 0, 50, 0, 10, position);
     }
     public void bePlanted() {
         EventChannel.getInstance().subscribe(this);

@@ -11,7 +11,6 @@ public class Zombie extends Character {
 
     private static int id = 0;
     public int zombieId = 0;
-    public Point position;
     public boolean is_aquatic;
     private int doUpdate = 0;
     private boolean walk = true;
@@ -27,14 +26,14 @@ public class Zombie extends Character {
     public void move(int x, int y) throws IllegalMoveException {
         int finalX = (position.x + x);
         int finalY = (position.y + y);
-        if (finalX > 11 || finalX < 0 || finalY > 6 || finalY < 0) {
-            throw new IllegalMoveException("Illegal move!");
+        if (finalX > 10 || finalX < 0 || finalY > 6 || finalY < 0) {
+            throw new IllegalMoveException(String.format("Illegal move! want to move to %d, %d", finalX, finalY));
         }
         if (is_aquatic && (finalY < 2 || finalY > 4) ) {
-            throw new IllegalMoveException("Illegal move!");
+            throw new IllegalMoveException(String.format("Illegal move! want to move to %d, %d", finalX, finalY));
         }
         if (!is_aquatic && (finalY > 1 && finalY < 4)) {
-            throw new IllegalMoveException("Illegal move!");
+            throw new IllegalMoveException(String.format("Illegal move! want to move to %d, %d", finalX, finalY));
         }
         System.out.println(String.format("Zombie %d moved from %d, %d to %d, %d", zombieId, position.x, position.y, finalX, finalY));
         position.x = finalX;
