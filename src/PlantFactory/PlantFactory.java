@@ -37,6 +37,24 @@ public class PlantFactory {
     public PlantType getPlantType(Plant plant) {
         if (plant instanceof Sunflower) {
             return PlantType.SUNFLOWERTYPE;
+        } else if (plant instanceof CherryBomb) {
+            return PlantType.CHERRYBOMBTYPE;
+        } else if (plant instanceof Jalapeno) {
+            return PlantType.JALAPENOTYPE;
+        } else if (plant instanceof Lilypad) {
+            return PlantType.LILYPADTYPE;
+        } else if (plant instanceof Peashooter) {
+            return PlantType.PEASHOOTERTYPE;
+        } else if (plant instanceof Repeater) {
+            return PlantType.REPEATERTYPE;
+        } else if (plant instanceof SnowPea) {
+            return PlantType.SNOWPEATYPE;
+        } else if (plant instanceof Squash) {
+            return PlantType.SQUASHTYPE;
+        } else if (plant instanceof Tallnut) {
+            return PlantType.TALLNUTTYPE;
+        } else if (plant instanceof Wallnut) {
+            return PlantType.WALLNUTTYPE;
         } else {
             return PlantType.SUNFLOWERTYPE;
         }
