@@ -64,7 +64,7 @@ public class PictureFactory {
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/DolphineZombie.png");
                 break;
             case GARGANTUARZOMBIECARD:
-                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/GargantuarZombieCard.png");
+                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/GargantuarZombieCard.png");
                 break;
             case IMPZOMBIECARD:
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/ImpZombie.png");

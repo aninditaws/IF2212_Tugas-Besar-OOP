@@ -5,7 +5,7 @@ import Character.CharCoordinat;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -24,12 +24,13 @@ public class Plant extends Character {
       // cooldown = satuannya pake
       /* KONSTRUKTOR */
 
-      public Plant(String name, int health, int attack_damage, int attack_speed, int cost, int range, int cooldown, String file) {
+      public Plant(String name, int health, int attack_damage, int attack_speed, int cost, int range, int cooldown, Point position) {
 
             super(name, health, attack_damage, attack_speed);
             this.cost = cost;
             this.range = range;
             this.cooldown = cooldown;
+            this.position = position;
 
       }
 

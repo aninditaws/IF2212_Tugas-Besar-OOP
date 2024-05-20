@@ -11,7 +11,6 @@ public class Zombie extends Character {
 
     private static int id = 0;
     public int zombieId = 0;
-    public Point position;
     public boolean is_aquatic;
     private int doUpdate = 0;
     private boolean walk = true;
