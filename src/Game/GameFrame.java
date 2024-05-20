@@ -18,6 +18,7 @@ import Character.Character;
 import Plant.*;
 import static Picture.Picture.*;
 
+import PlantFactory.PlantFactory;
 import PlantFactory.PlantType;
 import Zombie.*;
 
@@ -40,7 +41,8 @@ public class GameFrame extends JFrame {
 
     private final JButton[][] mapButtons = new JButton[6][11];
 
-    private PlantType selectedPlant;
+    private PlantType selectedPlant = null;
+    private int indexSelectedPlant;
 
     // private static ArrayList<Bullet> bullets = new ArrayList<Bullet>(); //buat
     // array bullet sama tanaman
@@ -132,13 +134,18 @@ public class GameFrame extends JFrame {
     }
 
     public void initializeDeckButtons() {
+        int index = 0;
         for (Component component : deckPanel.getComponents()) {
             if (component instanceof JButton) {
                 JButton button = (JButton) component;
+                int finalIndex = index;
                 button.addActionListener(e -> {
-                    selectedDeckButton = button;
+                    indexSelectedPlant = finalIndex;
+                    selectedPlant = new PlantFactory().getPlantType(deckPanel.getDeckTanaman().getArrayDeck().get(indexSelectedPlant));
+                    System.out.println(String.format("Selected deck index %d plant type %s", indexSelectedPlant, selectedPlant.toString()));
                 });
             }
+            index += 1;
         }
     }
 
@@ -231,38 +238,43 @@ public class GameFrame extends JFrame {
                 button.setRolloverEnabled(false);
                 button.setFocusable(false);
                 button.setPreferredSize(new Dimension(103, 140));
-
+                int row = i;
+                int col = z;
+                PlantFactory plantFactory = new PlantFactory();
                 button.addActionListener(e -> {
-                    if (selectedDeckButton != null) {
+                    if (selectedPlant != null) {
+                        System.out.println(String.format("Planting at row %d col %d", row, col));
+                        gameManager.getGameMap().addEntity(plantFactory.CreatePlant(selectedPlant, new Point(col, row)), row, col);
+                        selectedPlant = null;
                         Container parent = (Container) e.getSource();
-                        System.out.println(parent);
-                        JButton newButton = new JButton(selectedDeckButton.getIcon());
-                        newButton.setOpaque(false);
-                        newButton.setContentAreaFilled(false);
-                        newButton.setBorder(null);
-                        newButton.setMargin(new Insets(0, 0, 0, 0));
+                        System.out.println(parent.getComponents());
+//                        JButton newButton = new JButton(selectedDeckButton.getIcon());
+//                        newButton.setOpaque(false);
+//                        newButton.setContentAreaFilled(false);
+//                        newButton.setBorder(null);
+//                        newButton.setMargin(new Insets(0, 0, 0, 0));
 
-                        // Iterate through the grid to find the clicked button's position
-                        int row = -1;
-                        int column = -1;
-                        Component[] components = mapPanel.getComponents();
-                        for (int k = 0; k < components.length; k++) {
-                            if (components[k] == button) {
-                                row = k / 11; // Assuming 11 columns in the grid
-                                column = k % 11;
-                                break;
-                            }
-                        }
+//                        // Iterate through the grid to find the clicked button's position
+//                        int row = -1;
+//                        int column = -1;
+//                        Component[] components = mapPanel.getComponents();
+//                        for (int k = 0; k < components.length; k++) {
+//                            if (components[k] == button) {
+//                                row = k / 11; // Assuming 11 columns in the grid
+//                                column = k % 11;
+//                                break;
+//                            }
+//                        }
 
                         // Calculate the position based on the row and column indices
-                        int x = column * button.getWidth();
-                        int y = row * button.getHeight();
-
-                        // Set the bounds of the new button
-                        newButton.setBounds(x, y, button.getWidth(), button.getHeight());
-
-                        parent.add(newButton);
-                        parent.repaint();
+//                        int x = col * button.getWidth();
+//                        int y = row * button.getHeight();
+//
+//                        // Set the bounds of the new button
+//                        newButton.setBounds(x, y, button.getWidth(), button.getHeight());
+//
+//                        parent.add(newButton);
+//                        parent.repaint();
                     }
                 });
                 mapPanel.add(button);
@@ -313,6 +325,20 @@ public class GameFrame extends JFrame {
         return imageiconreturn;
     }
 
+    private ImageIcon getPlantImage(Plant plant) {
+        ImageIcon imageiconreturn;
+        PlantFactory plantFactory = new PlantFactory();
+        switch (plantFactory.getPlantType(plant)) {
+            case SUNFLOWERTYPE:
+                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(SUNFLOWER).getImage());
+                break;
+            default:
+                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(SUNFLOWER).getImage());
+                break;
+        }
+        return imageiconreturn;
+    }
+
     public void renderGameMap() {
         GameMap<Object> gameMap = gameManager.getGameMap();
         for (int row = 0; row < gameMap.getRow(); row++) {
@@ -329,7 +355,11 @@ public class GameFrame extends JFrame {
                         imageIcon = new ImageIcon(image);
                         button.setIcon(imageIcon);
                     } else if (entity instanceof Plant plant) {
-                        button.setBackground(Color.green);
+                        ImageIcon imageIcon = getPlantImage(plant);
+                        Image image = imageIcon.getImage().getScaledInstance(button.getWidth(), button.getHeight(),
+                                Image.SCALE_SMOOTH);
+                        imageIcon = new ImageIcon(image);
+                        button.setIcon(imageIcon);
                     } // Bisa menambahkan yang lain
                 } else {
                     // button.setBackground(Color.green);
