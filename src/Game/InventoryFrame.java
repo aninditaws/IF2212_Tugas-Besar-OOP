@@ -49,10 +49,10 @@ public class InventoryFrame extends JFrame {
         addBackgroundImage();
         // addDeckPanel();
         deckPanel = new DeckPanel(deckTanaman);
-        setDeckPanel(deckPanel);
 
         addinventoryPanel();
         addControlButtons();
+        setDeckPanel(deckPanel);
         addMenuButton();
 
         add(layeredPane, BorderLayout.CENTER);
