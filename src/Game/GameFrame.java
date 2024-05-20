@@ -332,6 +332,33 @@ public class GameFrame extends JFrame {
             case SUNFLOWERTYPE:
                 imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(SUNFLOWER).getImage());
                 break;
+            case CHERRYBOMBTYPE:
+                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(CHERRYBOMB).getImage());
+                break;
+            case JALAPENOTYPE:
+                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(JALAPENO).getImage());
+                break;
+            case LILYPADTYPE:
+                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(LILY_PAD).getImage());
+                break;
+            case PEASHOOTERTYPE:
+                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(PEASHOOTER).getImage());
+                break;
+            case REPEATERTYPE:
+                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(REPEATER).getImage());
+                break;
+            case SNOWPEATYPE:
+                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(SNOWPEA).getImage());
+                break;
+            case SQUASHTYPE:
+                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(SQUASH).getImage());
+                break;
+            case TALLNUTTYPE:
+                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(TALLNUT).getImage());
+                break;
+            case WALLNUTTYPE:
+                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(WALLNUT).getImage());
+                break;
             default:
                 imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(SUNFLOWER).getImage());
                 break;
