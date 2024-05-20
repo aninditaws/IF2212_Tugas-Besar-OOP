@@ -33,6 +33,8 @@ public class Inventory {
     // method initializeInventory
 
     public void initializeInventory() {
+        this.plantInventory.clear();
+
         this.addPlant(new Sunflower());
         this.addPlant(new Peashooter());
         this.addPlant(new Wallnut());
@@ -109,6 +111,7 @@ public class Inventory {
                 plantDeck.getArrayDeck().set(idx2, plant1);
                 System.out.println(
                         String.format("Berhasil menukar tanaman %s dengan tanaman %s.", plant1.name, plant2.name));
+                plantDeck.printDeck();
             } else {
                 System.out.println("Tanaman yang dipilih sama");
             }
@@ -124,6 +127,9 @@ public class Inventory {
             if (idx1 != idx2) {
                 this.plantInventory.set(idx1, plant2);
                 this.plantInventory.set(idx2, plant1);
+                System.out.println(
+                        String.format("Berhasil menukar tanaman %s dengan tanaman %s.", plant1.name, plant2.name));
+                printInventory();
             } else {
                 System.out.println("Tanaman yang dipilih sama");
             }

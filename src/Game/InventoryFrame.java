@@ -216,6 +216,7 @@ public class InventoryFrame extends JFrame {
 
     private void clearDeck() {
         deckTanaman.clearDeck();
+        inventory.initializeInventory();
         reenableAllButtons();
         for (JButton button : plantButtons) {
             button.setBorder(null);
@@ -245,7 +246,6 @@ public class InventoryFrame extends JFrame {
 
     private void swapPlants() {
         removeActionListeners(deckPanel.getComponents());
-        removeActionListeners(inventoryPanel.getComponents());
 
         for (Component component : deckPanel.getComponents()) {
             if (component instanceof JButton) {
@@ -268,6 +268,7 @@ public class InventoryFrame extends JFrame {
                 });
             }
         }
+        removeActionListeners(inventoryPanel.getComponents());
 
         for (Component component : inventoryPanel.getComponents()) {
             if (component instanceof JButton) {
