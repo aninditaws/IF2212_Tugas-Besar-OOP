@@ -11,21 +11,19 @@ public class Zombie extends Character {
 
     private static int id = 0;
     public int zombieId = 0;
-    public static int x, y;
     public Point position;
     public boolean is_aquatic;
     private int doUpdate = 0;
     private boolean walk = true;
     public static ArrayList<Zombie> zombies = new ArrayList<Zombie>();
-    public Zombie(String name, int health, int attack_damage, int attack_speed, boolean is_aquatic, Point position, int x , int y) {
+    public Zombie(String name, int health, int attack_damage, int attack_speed, boolean is_aquatic, Point position) {
         super(name, health, attack_damage, attack_speed);
         this.is_aquatic = is_aquatic;
         this.position = new Point(position);
         EventChannel.getInstance().subscribe(this);
         this.zombieId = id;
         id += 1;
-        this.x = x;
-        this.y = y;
+
 
     }
 
@@ -72,11 +70,11 @@ public class Zombie extends Character {
         }
     }
 
-public static int getX() {
-    return x;
+public int getX() {
+    return this.position.x;
 }
 
-public static int getY(){
-    return y;
+public int getY(){
+    return this.position.y;
 }
 }

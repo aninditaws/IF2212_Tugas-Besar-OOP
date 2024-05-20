@@ -61,7 +61,7 @@ public class Plant extends Character {
       // public void rangeZombie() {};
 
       public void shoot(int power) {
-            spawnBullet();
+//            spawnBullet();
       }
 
       public void draw(Graphics2D g2) {
@@ -70,7 +70,7 @@ public class Plant extends Character {
             } catch (Exception e) {
 
             }
-            g2.drawImage(image, CharCoordinat.getAbsis(), CharCoordinat.getOrdinat(), null);
+//            g2.drawImage(image, CharCoordinat.getAbsis(), CharCoordinat.getOrdinat(), null);
       } // buat ngedraw
 
       public void die() {
