@@ -1,5 +1,7 @@
+import Game.DeckPanel;
 import Game.GameFrame;
 import Game.GameManager;
+import Inventory.DeckTanaman;
 import Plant.Sunflower;
 import Subscriber.EventChannel;
 import Sun.Sun;
@@ -19,10 +21,10 @@ public class Main {
         // eventchannel
         GameManager gameManager = new GameManager();
         gameManager.startTimer();
-        EventQueue.invokeLater(() -> {
-            GameFrame frame = new GameFrame(gameManager);
-            frame.setVisible(true);
-        });
+//        EventQueue.invokeLater(() -> {
+//            GameFrame frame = new GameFrame(gameManager, new DeckPanel(new DeckTanaman(1)));
+//            frame.setVisible(true);
+//        });
     }
 
 }

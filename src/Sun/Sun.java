@@ -43,6 +43,8 @@ public final class Sun implements Subscriber {
         int max = 10;
         int min = 5;
         randomGeneratedInterval = (int) ((Math.random() * (max - min)) + min);
+        System.out.println("generated interval");
+        System.out.println(randomGeneratedInterval);
     }
 
     public void resetSun(){

@@ -6,10 +6,12 @@ import Sun.Sun;
 public class Sunflower extends Plant {
 
     private int doUpdate = 0;
-      public Sunflower() {
-            super("Sunflower", 100, 0, 0, 50, 0, 10, "ImagePvZ/Plant/PlantzImg/Sunflower.png");
-          EventChannel.getInstance().subscribe(this);
-        }
+    public Sunflower() {
+        super("Sunflower", 100, 0, 0, 50, 0, 10, "ImagePvZ/Plant/PlantzImg/Sunflower.png");
+    }
+    public void bePlanted() {
+        EventChannel.getInstance().subscribe(this);
+    }
 
     @Override
     public void update(int gameTick) {

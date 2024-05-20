@@ -88,4 +88,6 @@ public class Plant extends Character {
       public void attack() {
 
       }
+
+      public void bePlanted() {}
 }

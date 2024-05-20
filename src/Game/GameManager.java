@@ -51,15 +51,17 @@ public class GameManager {
     public synchronized void updateGameTick(int gameTick) {
 //        System.out.println(new Date());
         // Publish update
-        channel.publishUpdate(gameTick);
         System.out.println(gameTick);
+        channel.publishUpdate(gameTick);
         // Mekanisme flag
         if (gameTick == 50) {
             flag += 1;
             System.out.println("flag increased");
         }
         // Mekanisme spawning zombie
-        spawnZombie(gameTick);
+        if (gameTick > 20 && gameTick < 160 && gameTick % 3 == 0) {
+            spawnZombie(gameTick);
+        }
         updateGameMap();
     }
 
@@ -84,7 +86,7 @@ public class GameManager {
         for (int i = 0; i <= flag; i += 1) {
             boolean val = new Random().nextInt(3)==0;
             int zombieCount = countZombies();
-            System.out.print("Zombie Count: ");
+            System.out.print("Attempt spawning zombie, Zombie Count: ");
             System.out.println(zombieCount);
             if (val && zombieCount < 10 + (zombieIncrease * flag)) {
                 Point randomPosition = generateRandomZombiePosition(zombieTypes[randomIndex]);

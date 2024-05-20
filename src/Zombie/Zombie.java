@@ -15,7 +15,6 @@ public class Zombie extends Character {
     public boolean is_aquatic;
     private int doUpdate = 0;
     private boolean walk = true;
-    public static ArrayList<Zombie> zombies = new ArrayList<Zombie>();
     public Zombie(String name, int health, int attack_damage, int attack_speed, boolean is_aquatic, Point position) {
         super(name, health, attack_damage, attack_speed);
         this.is_aquatic = is_aquatic;
@@ -23,8 +22,6 @@ public class Zombie extends Character {
         EventChannel.getInstance().subscribe(this);
         this.zombieId = id;
         id += 1;
-
-
     }
 
     public void move(int x, int y) throws IllegalMoveException {
@@ -58,7 +55,7 @@ public class Zombie extends Character {
     public void update(int gameTick) {
         super.update(gameTick);
         doUpdate += 1;
-        if (doUpdate == 5) {
+        if (doUpdate == 10) {
             doUpdate = 0;
             if (walk) {
                 try {
