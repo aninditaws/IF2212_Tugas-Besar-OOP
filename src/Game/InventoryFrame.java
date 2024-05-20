@@ -87,9 +87,9 @@ public class InventoryFrame extends JFrame {
         inventoryPanel.setOpaque(false);
         inventoryPanel.setLayout(new GridLayout(3, 4, 15, 15));
 
-        int index = 0;
-        for (PlantImage plantImage : PlantImage.values()) {
-            final int currentIndex = index;
+        for (int i = 0; i < 10 && i < PlantImage.values().length; i++) {
+            PlantImage plantImage = PlantImage.values()[i];
+            final int currentIndex = i;
             ImageIcon imageIcon = new ImageIcon(plantImage.getImagePath());
             int imageWidth = 155;
             int imageHeight = 93;
@@ -101,8 +101,6 @@ public class InventoryFrame extends JFrame {
             plantButtons.add(button);
 
             inventory.addPlantButton(button);
-
-            index++;
         }
 
         int inventoryWidth = inventoryPanel.getPreferredSize().width;
@@ -163,12 +161,22 @@ public class InventoryFrame extends JFrame {
         }
     }
 
+    private Map<JButton, Boolean> controlBtnStates;
+
     private void addControlButtons() {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setOpaque(false);
         // buttonPanel.setBackground(Color.red);
         buttonPanel.setLayout(new GridLayout(1, 3, 0, 0));
         buttonPanel.setBounds((screenSize.width - 810) / 2, screenSize.height - 195, 600, 100);
+        controlBtnStates = new HashMap<>();
+
+        // addButton(buttonPanel, Picture.CLEARBUTTON, e ->
+        // toggleButtonFunctionality((JButton) e.getSource()));
+        // addButton(buttonPanel, Picture.SWAPBUTTON, e ->
+        // toggleButtonFunctionality((JButton) e.getSource()));
+        // addButton(buttonPanel, Picture.DELETEBUTTON, e ->
+        // toggleButtonFunctionality((JButton) e.getSource()));
 
         addButton(buttonPanel, Picture.CLEARBUTTON, e -> clearDeck());
         addButton(buttonPanel, Picture.SWAPBUTTON, e -> swapPlants());
@@ -191,6 +199,20 @@ public class InventoryFrame extends JFrame {
         button.addActionListener(actionListener);
 
         panel.add(button);
+        controlBtnStates.put(button, false);
+    }
+
+    private void toggleButtonFunctionality(JButton Button) {
+        boolean currentState = controlBtnStates.get(Button);
+        controlBtnStates.put(Button, !currentState);
+        if (currentState) {
+            Button.setEnabled(false);
+            // Button.removeActionListener(Button.getActionListeners()[0]);
+        } else {
+            Button.setEnabled(true);
+            Button.addActionListener(e -> toggleButtonFunctionality((JButton) e.getSource()));
+
+        }
 
     }
 
@@ -231,6 +253,7 @@ public class InventoryFrame extends JFrame {
         inventoryPanel.repaint();
 
         addinventoryPanel();
+
     }
 
     private void removeActionListeners(Component[] components) {

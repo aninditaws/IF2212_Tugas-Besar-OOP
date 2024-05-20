@@ -8,10 +8,13 @@ import Inventory.DeckTanaman;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.net.CookieHandler;
 import java.awt.image.BufferedImage;
 import Picture.*;
+import Character.Character;
+import Plant.*;
 
 public class GameFrame extends JFrame {
     private GameManager gameManager;
@@ -29,6 +32,8 @@ public class GameFrame extends JFrame {
     private DeckPanel deckPanel;
     private JButton selectedDeckButton;
     private DeckTanaman deckTanaman;
+
+    private GameMap<Character> gameMap = new GameMap<>(11, 6);
 
     // private static ArrayList<Bullet> bullets = new ArrayList<Bullet>(); //buat
     // array bullet sama tanaman
@@ -61,6 +66,7 @@ public class GameFrame extends JFrame {
 
         // Deck Panel
         this.deckPanel = deckPanel;
+
         initializeDeckButtons();
 
         layeredPane.add(deckPanel, Integer.valueOf(1));
@@ -182,7 +188,6 @@ public class GameFrame extends JFrame {
                             parent.repaint();
                         });
                         parent.add(newButton);
-                        parent.revalidate();
                         parent.repaint();
                     }
                     System.out.println("Clicked Button GETX: " + button.getX());
