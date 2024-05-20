@@ -63,12 +63,13 @@ public class PictureFactory {
             case DOLPHINERIDERZOMBIECARD:
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/DolphineZombie.png");
                 break;
-            case NEWSPAPERZOMBIECARD:
-                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/newspaper.png");
+            case GARGANTUARZOMBIECARD:
+                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/GargantuarZombieCard.png");
                 break;
             case IMPZOMBIECARD:
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/ImpZombie.png");
                 break;
+            
 
             // Plants
             case SUNFLOWER:
@@ -193,8 +194,8 @@ public class PictureFactory {
             case DOLPHINERIDERZOMBIELIST:
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/DolphineRiderZombieCard.png");
                 break;        
-            case NEWSPAPERZOMBIELIST:
-                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/NewspaperZombieCard.png");
+            case GARGANTUARZOMBIELIST:
+                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/GargantuarZombieCard.png");
                 break;      
             case IMPZOMBIELIST:
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/ImpZombieCard.png");
@@ -281,8 +282,8 @@ public class PictureFactory {
             case DOLPHINERIDERZOMBIEBUTTON:
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/DolphineRiderZombie.png");
                 break;
-            case NEWSPAPERZOMBIEBUTTON:
-                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/NewspaperZombie.png");
+            case GARGANTUARZOMBIEBUTTON:
+                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/GargantuarZombie.png");
                 break;
             case IMPZOMBIEBUTTON:
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/ImpZombie.png");
