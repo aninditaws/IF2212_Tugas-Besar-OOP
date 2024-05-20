@@ -2,6 +2,7 @@ package Game;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.util.List;
 
 import Inventory.DeckTanaman;
 
@@ -15,6 +16,10 @@ import java.awt.image.BufferedImage;
 import Picture.*;
 import Character.Character;
 import Plant.*;
+import static Picture.Picture.*;
+
+import UI.CustomButtonUI;
+import Zombie.*;
 
 public class GameFrame extends JFrame {
     private GameManager gameManager;
@@ -33,7 +38,7 @@ public class GameFrame extends JFrame {
     private JButton selectedDeckButton;
     private DeckTanaman deckTanaman;
 
-    private GameMap<Character> gameMap = new GameMap<>(9, 6);
+    private final JButton[][] mapButtons = new JButton[6][11];
 
     // private static ArrayList<Bullet> bullets = new ArrayList<Bullet>(); //buat
     // array bullet sama tanaman
@@ -184,20 +189,26 @@ public class GameFrame extends JFrame {
         System.out.println(gameManager.sun.getTotalSun());
         setTotalSun(gameManager.sun.getTotalSun());
         setMap();
+        renderGameMap();
     }
 
     public void initializeMapPanel() {
-        mapPanel = new JPanel(new GridLayout(6, 9, 2, 2));
+        mapPanel = new JPanel(new GridLayout(6, 11, 2, 2));
         mapPanel.setOpaque(false);
         mapPanel.setBounds(350, 120, 960, 810);
         layeredPane.add(mapPanel, Integer.valueOf(1));
 
         for (int i = 0; i < 6; i++) {
-            for (int z = 0; z < 9; z++) {
+            for (int z = 0; z < 11; z++) {
                 JButton button = new JButton();
+                button.setUI(new CustomButtonUI());
                 button.setOpaque(false);
                 button.setContentAreaFilled(false);
-                button.setBorder(null);
+                button.setFocusPainted(false);
+                // Bisa diganti jadi false untuk menghilangkan border
+                button.setBorderPainted(true);
+                button.setRolloverEnabled(false);
+                button.setFocusable(false);
                 button.setPreferredSize(new Dimension(103, 140));
 
                 button.addActionListener(e -> {
@@ -235,6 +246,73 @@ public class GameFrame extends JFrame {
                 });
 
                 mapPanel.add(button);
+                mapButtons[i][z] = button;
+            }
+        }
+    }
+
+    private ImageIcon getZombieImage(Zombie zombie) {
+        ImageIcon imageiconreturn;
+        switch (zombie.name) {
+            case "Normal Zombie":
+                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(NORMALZOMBIECARD).getImage());
+                break;
+            case "Conehead Zombie":
+                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(CONEHEADZOMBIECARD).getImage());
+                break;
+            case "Pole Vaulting Zombie":
+                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(POLEVAULTINGZOMBIECARD).getImage());
+                break;
+            case "Buckethead Zombie":
+                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(BUCKETHEADZOMBIECARD).getImage());
+                break;
+            case "Ducky Tube Zombie":
+                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(DUCKYTUBEZOMBIECARD).getImage());
+                break;
+            case "Dolphin Rider Zombie":
+                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(DOLPHINERIDERZOMBIECARD).getImage());
+                break;
+            case "Football Zombie":
+                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(FOOTBALLZOMBIECARD).getImage());
+                break;
+            case "Gargantuar":
+                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(GARGANTUARZOMBIECARD).getImage());
+                break;
+            case "Imp Zombie":
+                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(IMPZOMBIECARD).getImage());
+                break;
+            case "Screen Door Zombie":
+                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(SCREENDOORZOMBIECARD).getImage());
+                break;
+            default:
+                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(NORMALZOMBIECARD).getImage());
+                break;
+
+        }
+        return imageiconreturn;
+    }
+
+    public void renderGameMap() {
+        GameMap<Object> gameMap = gameManager.getGameMap();
+        for (int row = 0; row < gameMap.getRow(); row++) {
+            for (int col = 0; col < gameMap.getColumn(); col++) {
+                List<Object> entities = gameMap.getEntities(row, col);
+                JButton button = mapButtons[row][col];
+                button.setIcon(null);
+                if (!entities.isEmpty()) {
+                    Object entity = entities.get(0);
+                    if (entity instanceof Zombie zombie) {
+                        ImageIcon imageIcon = getZombieImage(zombie);
+                        Image image = imageIcon.getImage().getScaledInstance(button.getWidth(), button.getHeight(), Image.SCALE_SMOOTH);
+                        imageIcon = new ImageIcon(image);
+                        button.setIcon(imageIcon);
+                    } else if (entity instanceof Plant plant) {
+                        button.setBackground(Color.green);
+                    } // Bisa menambahkan yang lain
+                } else {
+//                    button.setBackground(Color.green);
+                    button.setIcon(null);
+                }
             }
         }
     }

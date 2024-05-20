@@ -67,7 +67,7 @@ public class GameManager {
 
     // Map Manager
 
-    private final GameMap<Object> gameMap = new GameMap<>(9, 6);
+    private final GameMap<Object> gameMap = new GameMap<>(11, 6);
 
 
     public GameMap<Object> getGameMap() {
@@ -100,7 +100,7 @@ public class GameManager {
     }
 
     private Point generateRandomZombiePosition(ZombieType zombieType) {
-        int x = 8;
+        int x = 10;
         int y, max, min;
         if (zombieType == ZombieType.DOLPHINRIDER || zombieType == ZombieType.DUCKYTUBE) {
             max = 3;
