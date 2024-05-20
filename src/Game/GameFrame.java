@@ -5,6 +5,7 @@ import Plant.*;
 import java.util.List;
 import java.util.ArrayList;
 
+import UI.CustomButtonUI;
 import Zombie.*;
 import javax.swing.*;
 
@@ -182,6 +183,7 @@ public class GameFrame extends JFrame {
         for (int row = 0; row < 6; row++) {
             for (int col = 0; col < 9; col++) {
                 JButton button = new JButton();
+                button.setUI(new CustomButtonUI());
                 button.setPreferredSize(new Dimension(103, 140));
                 button.setFocusPainted(false);
                 button.setContentAreaFilled(false);
@@ -212,7 +214,7 @@ public class GameFrame extends JFrame {
                 imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(POLEVAULTINGZOMBIECARD).getImage());
                 break;
             case "Buckethead Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(BUCKETHEADZOMBIE).getImage());
+                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(BUCKETHEADZOMBIECARD).getImage());
                 break;
             case "Ducky Tube Zombie":
                 imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(DUCKYTUBEZOMBIECARD).getImage());
