@@ -64,7 +64,7 @@ public class PictureFactory {
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/DolphineZombie.png");
                 break;
             case GARGANTUARZOMBIECARD:
-                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/GargantuGarZombieCard.png");
+                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/GargantuarZombieCard.png");
                 break;
             case IMPZOMBIECARD:
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/ImpZombie.png");
@@ -72,34 +72,34 @@ public class PictureFactory {
 
             // Plants
             case SUNFLOWER:
-                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsImg2/Sunflower.webp");
+                imageIcon = new ImageIcon("ImagePvZ/Plant/PlantsImg/Sunflower.png");
                 break;
             case PEASHOOTER:
-                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsImg2/Peashooter.webp");
+                imageIcon = new ImageIcon("ImagePvZ/Plant/PlantsImg/Peashooter.png");
                 break;
             case WALLNUT:
-                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsImg2/Wall-nut.webp");
+                imageIcon = new ImageIcon("ImagePvZ/Plant/PlantsImg/Wallnut.png");
                 break;
             case SNOWPEA:
-                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsImg2/Snow_Pea.webp");
+                imageIcon = new ImageIcon("ImagePvZ/Plant/PlantsImg/Snowpea.png");
                 break;
             case SQUASH:
-                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsImg2/Squash.webp");
+                imageIcon = new ImageIcon("ImagePvZ/Plant/PlantsImg/Squash.png");
                 break;
             case LILY_PAD:
-                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsImg2/Lily_Pad.webp");
+                imageIcon = new ImageIcon("ImagePvZ/Plant/PlantsImg/Lilypad.png");
                 break;
             case CHERRYBOMB:
-                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsImg2/Cherbomb2.webp");
+                imageIcon = new ImageIcon("ImagePvZ/Plant/PlantsImg/CherryBomb.png");
                 break;
             case JALAPENO:
-                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsImg2/Jalapeno.webp");
+                imageIcon = new ImageIcon("ImagePvZ/Plant/PlantsImg/Jalapeno.png");
                 break;
             case REPEATER:
-                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsImg2/Repeater.webp");
+                imageIcon = new ImageIcon("ImagePvZ/Plant/PlantsImg/Repeater.png");
                 break;
             case TALLNUT:
-                imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsImg2/Tall-nut.webp");
+                imageIcon = new ImageIcon("ImagePvZ/Plant/PlantsImg/Tallnut.png");
                 break;
 
             // Background
