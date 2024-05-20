@@ -1,12 +1,6 @@
 package Game;
 
 import javax.imageio.ImageIO;
-import Plant.*;
-import java.util.List;
-import java.util.ArrayList;
-
-import UI.CustomButtonUI;
-import Zombie.*;
 import javax.swing.*;
 
 import Inventory.DeckTanaman;
@@ -15,12 +9,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.net.CookieHandler;
 import java.awt.image.BufferedImage;
-import java.util.Objects;
-
 import Picture.*;
-
-import static Picture.Picture.*;
 
 public class GameFrame extends JFrame {
     private GameManager gameManager;
@@ -28,15 +19,16 @@ public class GameFrame extends JFrame {
     private JLabel totalSunLabel;
     private JLayeredPane layeredPane;
 
+    private Dimension screenSize;
+
     private JLabel backgroundLabel;
     private ImageIcon imageIcon;
     private int screenWidth;
     private int screenHeight;
 
     private DeckPanel deckPanel;
+    private JButton selectedDeckButton;
     private DeckTanaman deckTanaman;
-
-    private final JButton[][] mapButtons = new JButton[6][9];
 
     // private static ArrayList<Bullet> bullets = new ArrayList<Bullet>(); //buat
     // array bullet sama tanaman
@@ -56,7 +48,7 @@ public class GameFrame extends JFrame {
         this.gameManager = gameManager;
 
         // Screen Size
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.screenWidth = (int) screenSize.getWidth();
         this.screenHeight = (int) screenSize.getHeight();
 
@@ -65,46 +57,18 @@ public class GameFrame extends JFrame {
         layeredPane.setPreferredSize(screenSize);
 
         // Background Map
-        imageIcon = PictureFactory.getImageIcon(Picture.GAMEDAY);
-        Image image = imageIcon.getImage().getScaledInstance(this.screenWidth, this.screenHeight, Image.SCALE_SMOOTH);
-        imageIcon = new ImageIcon(image);
-        backgroundLabel = new JLabel(imageIcon);
-        backgroundLabel.setBounds(0, 0, screenWidth, screenHeight);
-        layeredPane.add(backgroundLabel, Integer.valueOf(0));
+        initializeBackgroundImage();
 
         // Deck Panel
         this.deckPanel = deckPanel;
-        System.out.println(deckPanel.getDeckTanaman().getArrayDeck());
+        initializeDeckButtons();
 
         layeredPane.add(deckPanel, Integer.valueOf(1));
 
         // Map Panel
-
         initializeMapPanel();
 
-        // new
-
-        // Menu Button
-        JButton menuButton = new JButton();
-        menuButton.setIcon(PictureFactory.getImageIcon(Picture.MENUBUTTON));
-        menuButton.setOpaque(false);
-        menuButton.setContentAreaFilled(false);
-        menuButton.setBorder(null);
-        menuButton.setMargin(new Insets(0, 0, 0, 0));
-        menuButton.setBounds(screenSize.width - 240, screenSize.height - 850, 242, 95);
-        menuButton.addActionListener(e -> {
-            gameManager.sun.resetSun();
-            gameManager.stopTimer();
-            // logic buat save atau kalau tidak, reset
-            WelcomingFrame mainMenuFrame = new WelcomingFrame();
-            mainMenuFrame.setVisible(true);
-            dispose();
-        });
-
-        layeredPane.add(menuButton, Integer.valueOf(3));
-        layeredPane.revalidate();
-        layeredPane.repaint();
-
+        initializeMenuButton();
         // Sun Label
         totalSunLabel = new JLabel(String.valueOf(gameManager.sun.getTotalSun()));
         totalSunLabel.setFont(new Font("Yanone Kaffeesatz", Font.BOLD, 30));
@@ -124,13 +88,33 @@ public class GameFrame extends JFrame {
         timer.start();
     }
 
+    public void initializeBackgroundImage() {
+        imageIcon = PictureFactory.getImageIcon(Picture.GAMEDAY);
+        Image image = imageIcon.getImage().getScaledInstance(this.screenWidth, this.screenHeight, Image.SCALE_SMOOTH);
+        imageIcon = new ImageIcon(image);
+        backgroundLabel = new JLabel(imageIcon);
+        backgroundLabel.setBounds(0, 0, screenWidth, screenHeight);
+        layeredPane.add(backgroundLabel, Integer.valueOf(0));
+    }
+
+    public void initializeDeckButtons() {
+        for (Component component : deckPanel.getComponents()) {
+            if (component instanceof JButton) {
+                JButton button = (JButton) component;
+                button.addActionListener(e -> {
+                    selectedDeckButton = button;
+                });
+            }
+        }
+    }
+
     // Put Plant to Map
     public void digButtonPLant(JButton plantBtn, JButton digBtn) {
         Point location = digBtn.getLocation();
         plantBtn.setLocation(location);
     }
 
-    // Setter for totalSunLabel
+    // Setter for totalSunLabel3
     public void setTotalSun(int totalSun) {
         SwingUtilities.invokeLater(() -> totalSunLabel.setText(String.valueOf(totalSun)));
     }
@@ -151,7 +135,7 @@ public class GameFrame extends JFrame {
 
     // Setter for Map
     public void setMap() {
-        SwingUtilities.invokeLater(this::updateBackgroundImage);
+        SwingUtilities.invokeLater(() -> updateBackgroundImage());
     }
 
     // Method naro plant card di area
@@ -160,117 +144,85 @@ public class GameFrame extends JFrame {
         plantCard.setLocation(location);
     }
 
-    // Method buat samain plant Card sama plantnya
-
     // Update game map every second
     public void updateRender() {
         gameManager.updateGameMap();
         System.out.println(gameManager.sun.getTotalSun());
         setTotalSun(gameManager.sun.getTotalSun());
         setMap();
-        renderGameMap();
     }
 
     public void initializeMapPanel() {
         mapPanel = new JPanel(new GridLayout(6, 9, 2, 2));
-        // mapPanel.setBackground(new Color(0, 0, 0, 0
-        // mapPanel.setBackground(Color.BLACK);  
         mapPanel.setOpaque(false);
-        mapPanel.setBounds(350, 350, 960, 810);
-        mapPanel.setBounds((screenWidth - 800) / 2, 120, 1044, 810);
+        mapPanel.setBounds(350, 120, 960, 810);
         layeredPane.add(mapPanel, Integer.valueOf(1));
 
-        for (int row = 0; row < 6; row++) {
-            for (int col = 0; col < 9; col++) {
+        for (int i = 0; i < 6; i++) {
+            for (int z = 0; z < 9; z++) {
                 JButton button = new JButton();
-                button.setUI(new CustomButtonUI());
-                button.setPreferredSize(new Dimension(103, 140));
-                button.setFocusPainted(false);
-                button.setContentAreaFilled(false);
-                button.setBorderPainted(true);
-                button.setRolloverEnabled(false);
-                button.setFocusable(false);
                 button.setOpaque(false);
-                mapPanel.add(button, BorderLayout.WEST);
-                mapButtons[row][col] = button;
-            }
-        }
+                button.setContentAreaFilled(false);
+                button.setBorder(null);
+                button.setPreferredSize(new Dimension(103, 140));
 
-         
-
-         
-        // mapPanel.getComponent(18).setBackground(Color.red);
-//            mapPanel.getComponent(35).setBackground(Color.red);
-    }
-
-    private ImageIcon getZombieImage(Zombie zombie) {
-        ImageIcon imageiconreturn;
-        switch (zombie.name) {
-            case "Normal Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(NORMALZOMBIECARD).getImage());
-                break;
-            case "Conehead Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(CONEHEADZOMBIECARD).getImage());
-                break;
-            case "Pole Vaulting Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(POLEVAULTINGZOMBIECARD).getImage());
-                break;
-            case "Buckethead Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(BUCKETHEADZOMBIECARD).getImage());
-                break;
-            case "Ducky Tube Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(DUCKYTUBEZOMBIECARD).getImage());
-                break;
-            case "Dolphin Rider Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(DOLPHINERIDERZOMBIECARD).getImage());
-                break;
-            case "Football Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(FOOTBALLZOMBIECARD).getImage());
-                break;
-            case "Gargantuar":
-                // TODO: CHANGE TO GARGANTUAR
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(NEWSPAPERZOMBIECARD).getImage());
-                break;
-            case "Imp Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(IMPZOMBIECARD).getImage());
-                break;
-            case "Screen Door Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(SCREENDOORZOMBIECARD).getImage());
-                break;
-            default:
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(NORMALZOMBIECARD).getImage());
-                break;
-
-        }
-        return imageiconreturn;
-
-    }
-
-    public void renderGameMap() {
-        GameMap<Object> gameMap = gameManager.getGameMap();
-        for (int row = 0; row < gameMap.getRow(); row++) {
-            for (int col = 0; col < gameMap.getColumn(); col++) {
-                List<Object> entities = gameMap.getEntities(row, col);
-                JButton button = mapButtons[row][col];
-                button.setIcon(null);
-                if (!entities.isEmpty()) {
-                    Object entity = entities.get(0);
-                    if (entity instanceof Zombie zombie) {
-                        ImageIcon imageIcon = getZombieImage(zombie);
-
-                        Image image = imageIcon.getImage().getScaledInstance(button.getWidth(), button.getHeight(),
-                                Image.SCALE_SMOOTH);
-                        imageIcon = new ImageIcon(image);
-                        button.setIcon(imageIcon);
-                    } else if (entity instanceof Plant plant) {
-                        button.setBackground(Color.green);
-                    } //
-                    {
-                        // button.setBackground(Color.green);
-                        button.setIcon(null);
+                button.addActionListener(e -> {
+                    if (selectedDeckButton != null) {
+                        JButton newButton = new JButton(selectedDeckButton.getIcon());
+                        newButton.setOpaque(false);
+                        newButton.setContentAreaFilled(false);
+                        newButton.setBorder(null);
+                        newButton.setMargin(new Insets(0, 0, 0, 0));
+                        // newButton.setBounds(button.getX(), button.getY(), 103, 140);
+                        ((Container) e.getSource()).add(newButton);
+                        ((Container) e.getSource()).revalidate();
+                        ((Container) e.getSource()).repaint();
                     }
-                }
+                    System.out.println("Clicked Button GETX: " + button.getX());
+                    System.out.println("Clicked Button GETY: " + button.getY());
+                });
+
+                mapPanel.add(button);
             }
         }
+    }
+
+    // public JButton getAreaButton(int row, int column) {
+    // // Calculate the index of the button based on the row and column
+    // int index = row * 9 + column;
+
+    // // Get the component at the calculated index
+    // Component component = mapPanel.getComponent(index);
+
+    // // Check if the component is a JButton
+    // if (component instanceof JButton) {
+    // return (JButton) component;
+    // } else {
+    // // If the component is not a JButton, return null
+    // return null;
+    // }
+    // }
+
+    public void initializeMenuButton() {
+        JButton menuButton = new JButton();
+        menuButton.setIcon(PictureFactory.getImageIcon(Picture.MENUBUTTON));
+        menuButton.setOpaque(false);
+        menuButton.setContentAreaFilled(false);
+        menuButton.setBorder(null);
+        menuButton.setMargin(new Insets(0, 0, 0, 0));
+        menuButton.setBounds(screenSize.width - 240, screenSize.height - 850, 242, 95);
+        menuButton.addActionListener(e -> {
+            WelcomingFrame mainMenuFrame = new WelcomingFrame();
+            mainMenuFrame.setVisible(true);
+            dispose();
+        });
+
+        layeredPane.add(menuButton, Integer.valueOf(3));
+        layeredPane.revalidate();
+        layeredPane.repaint();
+    }
+
+    public void WaterConstraint() {
+
     }
 }
