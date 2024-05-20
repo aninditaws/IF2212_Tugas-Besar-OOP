@@ -18,6 +18,7 @@ import Character.Character;
 import Plant.*;
 import static Picture.Picture.*;
 
+import PlantFactory.PlantType;
 import Zombie.*;
 
 public class GameFrame extends JFrame {
@@ -38,6 +39,8 @@ public class GameFrame extends JFrame {
     private DeckTanaman deckTanaman;
 
     private final JButton[][] mapButtons = new JButton[6][11];
+
+    private PlantType selectedPlant;
 
     // private static ArrayList<Bullet> bullets = new ArrayList<Bullet>(); //buat
     // array bullet sama tanaman
