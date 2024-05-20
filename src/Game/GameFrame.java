@@ -79,7 +79,27 @@ public class GameFrame extends JFrame {
         // Map Panel
         initializeMapPanel();
 
-        initializeMenuButton();
+        // Menu Button
+        JButton menuButton = new JButton();
+        menuButton.setIcon(PictureFactory.getImageIcon(Picture.MENUBUTTON));
+        menuButton.setOpaque(false);
+        menuButton.setContentAreaFilled(false);
+        menuButton.setBorder(null);
+        menuButton.setMargin(new Insets(0, 0, 0, 0));
+        menuButton.setBounds(screenSize.width - 240, screenSize.height - 850, 242, 95);
+        menuButton.addActionListener(e -> {
+            gameManager.sun.resetSun();
+            gameManager.stopTimer();
+            // logic buat save atau kalau tidak, reset
+            WelcomingFrame mainMenuFrame = new WelcomingFrame();
+            mainMenuFrame.setVisible(true);
+            dispose();
+        });
+
+        layeredPane.add(menuButton, Integer.valueOf(3));
+        layeredPane.revalidate();
+        layeredPane.repaint();
+
         // Sun Label
         totalSunLabel = new JLabel(String.valueOf(gameManager.sun.getTotalSun()));
         totalSunLabel.setFont(new Font("Yanone Kaffeesatz", Font.BOLD, 30));
@@ -331,26 +351,6 @@ public class GameFrame extends JFrame {
     // return null;
     // }
     // }
-
-    public void initializeMenuButton() {
-        JButton menuButton = new JButton();
-        menuButton.setIcon(PictureFactory.getImageIcon(Picture.MENUBUTTON));
-        menuButton.setOpaque(false);
-        menuButton.setContentAreaFilled(false);
-        menuButton.setBorder(null);
-        menuButton.setMargin(new Insets(0, 0, 0, 0));
-        menuButton.setBounds(screenSize.width - 240, screenSize.height - 850, 242, 95);
-        menuButton.addActionListener(e -> {
-            gameManager.stopTimer();
-            WelcomingFrame mainMenuFrame = new WelcomingFrame();
-            mainMenuFrame.setVisible(true);
-            dispose();
-        });
-
-        layeredPane.add(menuButton, Integer.valueOf(3));
-        layeredPane.revalidate();
-        layeredPane.repaint();
-    }
 
     public void WaterConstraint() {
 
