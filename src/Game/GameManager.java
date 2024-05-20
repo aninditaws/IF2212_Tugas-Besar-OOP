@@ -51,7 +51,7 @@ public class GameManager {
     public synchronized void updateGameTick(int gameTick) {
 //        System.out.println(new Date());
         // Publish update
-        System.out.println(gameTick);
+        System.out.printf("- TIME : %d%n", gameTick);
         channel.publishUpdate(gameTick);
         // Mekanisme flag
         if (gameTick == 50) {
