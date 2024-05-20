@@ -137,11 +137,20 @@ public class InventoryFrame extends JFrame {
                     inventory.chooseTanaman(clickedPlant, deckTanaman, inventory);
                     button.setBorder(BorderFactory.createLineBorder(Color.RED, 5));
                     addButtonToDeck(clonedButton);
+                    // Retrieve the name of the clicked button
+                    clonedButton.setName(PlantImage.values()[index].name());
+                    System.out.println("Button name: " + clonedButton.getName());
+
                 }
             }
             deckTanaman.printDeck();
             disableButtonsIfMaxReached();
         }
+    }
+
+    public String getImagePathForPlantCard(String plantCardName) {
+        PlantImage plantImage = PlantImage.valueOf(plantCardName);
+        return plantImage.getImagePath();
     }
 
     private void addButtonToDeck(JButton button) {
@@ -171,13 +180,6 @@ public class InventoryFrame extends JFrame {
         buttonPanel.setBounds((screenSize.width - 810) / 2, screenSize.height - 195, 600, 100);
         controlBtnStates = new HashMap<>();
 
-        // addButton(buttonPanel, Picture.CLEARBUTTON, e ->
-        // toggleButtonFunctionality((JButton) e.getSource()));
-        // addButton(buttonPanel, Picture.SWAPBUTTON, e ->
-        // toggleButtonFunctionality((JButton) e.getSource()));
-        // addButton(buttonPanel, Picture.DELETEBUTTON, e ->
-        // toggleButtonFunctionality((JButton) e.getSource()));
-
         addButton(buttonPanel, Picture.CLEARBUTTON, e -> clearDeck());
         addButton(buttonPanel, Picture.SWAPBUTTON, e -> swapPlants());
         addButton(buttonPanel, Picture.DELETEBUTTON, e -> deleteSelectedPlants());
@@ -200,20 +202,6 @@ public class InventoryFrame extends JFrame {
 
         panel.add(button);
         controlBtnStates.put(button, false);
-    }
-
-    private void toggleButtonFunctionality(JButton Button) {
-        boolean currentState = controlBtnStates.get(Button);
-        controlBtnStates.put(Button, !currentState);
-        if (currentState) {
-            Button.setEnabled(false);
-            // Button.removeActionListener(Button.getActionListeners()[0]);
-        } else {
-            Button.setEnabled(true);
-            Button.addActionListener(e -> toggleButtonFunctionality((JButton) e.getSource()));
-
-        }
-
     }
 
     private void addMenuButton() {
