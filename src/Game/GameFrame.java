@@ -203,6 +203,7 @@ public class GameFrame extends JFrame {
                 button.addActionListener(e -> {
                     if (selectedDeckButton != null) {
                         Container parent = (Container) e.getSource();
+                        System.out.println(parent);
                         JButton newButton = new JButton(selectedDeckButton.getIcon());
                         newButton.setOpaque(false);
                         newButton.setContentAreaFilled(false);
