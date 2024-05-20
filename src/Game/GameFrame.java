@@ -33,7 +33,7 @@ public class GameFrame extends JFrame {
     private JButton selectedDeckButton;
     private DeckTanaman deckTanaman;
 
-    private GameMap<Character> gameMap = new GameMap<>(11, 6);
+    private GameMap<Character> gameMap = new GameMap<>(9, 6);
 
     // private static ArrayList<Bullet> bullets = new ArrayList<Bullet>(); //buat
     // array bullet sama tanaman
@@ -68,6 +68,7 @@ public class GameFrame extends JFrame {
         this.deckPanel = deckPanel;
 
         initializeDeckButtons();
+        initializeDigButton();
 
         layeredPane.add(deckPanel, Integer.valueOf(1));
 
@@ -112,6 +113,33 @@ public class GameFrame extends JFrame {
                 });
             }
         }
+    }
+
+    public void initializeDigButton() {
+        ImageIcon imageIcon = PictureFactory.getImageIcon(Picture.DIGBUTTON);
+        Image image = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        imageIcon = new ImageIcon(image);
+        JButton shovel = new JButton(imageIcon);
+        layeredPane.add(shovel, Integer.valueOf(1));
+        shovel.setOpaque(false);
+        shovel.setContentAreaFilled(false);
+        shovel.setBorder(null);
+        shovel.setBounds(50, 760, 100, 100);
+        shovel.addActionListener(e -> {
+            for (Component component : mapPanel.getComponents()) {
+                if (component instanceof JButton) {
+                    JButton button = (JButton) component;
+                    button.addActionListener(e2 -> {
+                        JButton clickedButton = (JButton) e2.getSource();
+                        Container parent = clickedButton.getParent();
+                        parent.remove(clickedButton);
+                        parent.revalidate();
+                        parent.repaint();
+                    });
+                }
+            }
+        });
+
     }
 
     // Put Plant to Map
@@ -180,18 +208,29 @@ public class GameFrame extends JFrame {
                         newButton.setContentAreaFilled(false);
                         newButton.setBorder(null);
                         newButton.setMargin(new Insets(0, 0, 0, 0));
-                        newButton.setBounds(button.getX(), button.getY(), 103, 140);
 
-                        newButton.addActionListener(e2 -> {
-                            parent.remove(newButton);
-                            parent.revalidate();
-                            parent.repaint();
-                        });
+                        // Iterate through the grid to find the clicked button's position
+                        int row = -1;
+                        int column = -1;
+                        Component[] components = mapPanel.getComponents();
+                        for (int k = 0; k < components.length; k++) {
+                            if (components[k] == button) {
+                                row = k / 9; // Assuming 9 columns in the grid
+                                column = k % 9;
+                                break;
+                            }
+                        }
+
+                        // Calculate the position based on the row and column indices
+                        int x = column * button.getWidth();
+                        int y = row * button.getHeight();
+
+                        // Set the bounds of the new button
+                        newButton.setBounds(x, y, button.getWidth(), button.getHeight());
+
                         parent.add(newButton);
                         parent.repaint();
                     }
-                    System.out.println("Clicked Button GETX: " + button.getX());
-                    System.out.println("Clicked Button GETY: " + button.getY());
                 });
 
                 mapPanel.add(button);

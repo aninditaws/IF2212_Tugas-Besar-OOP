@@ -69,7 +69,6 @@ public class PictureFactory {
             case IMPZOMBIECARD:
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/ImpZombie.png");
                 break;
-            
 
             // Plants
             case SUNFLOWER:
@@ -158,49 +157,47 @@ public class PictureFactory {
                 imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsList/Squash.png");
                 break;
 
-
-//             // Bullet List
+            // // Bullet List
             case BULLET:
                 imageIcon = new ImageIcon("ImagePvZ/Plants/Bullet/Pea.png");
                 break;
-            
+
             case SLOWBULLET:
                 imageIcon = new ImageIcon("ImagePvZ/Plants/Bullet/SlowPea.png");
                 break;
 
-
             // Zombies List
             case NORMALZOMBIELIST:
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/NormalZombieCard.png");
-                break;            
+                break;
             case CONEHEADZOMBIELIST:
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/ConeHeadZombieCard.png");
-                break;      
+                break;
             case BUCKETHEADZOMBIELIST:
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/BucketheadZombieCard.png");
-                break;    
+                break;
             case SCREENDOORZOMBIELIST:
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/ScreenDoorZombieCard.png");
-                break;   
+                break;
             case FOOTBALLZOMBIELIST:
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/FootballZombieCard.png");
-                break;    
+                break;
             case POLEVAULTINGZOMBIELIST:
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/PoleVaultingZombieCard.png");
-                break;             
+                break;
             case DUCKYTUBEZOMBIELIST:
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/DuckyTubeZombieCard.png");
-                break;    
+                break;
             case DOLPHINERIDERZOMBIELIST:
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/DolphineRiderZombieCard.png");
-                break;        
-            case GARGANTUARZOMBIELIST:
-                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/GargantuarZombieCard.png");
-                break;      
+                break;
+            // case GARGANTUARZOMBIELIST:
+            // imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies
+            // Card/GargantuarZombieCard.png");
+            // bre
             case IMPZOMBIELIST:
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/Zombies Card/ImpZombieCard.png");
-                break;      
-
+                break;
 
             // Welcoming Button
             case STARTBUTTON:
@@ -217,6 +214,9 @@ public class PictureFactory {
                 break;
             case EXITBUTTON:
                 imageIcon = new ImageIcon("ImagePvZ/Welcome/Button/exitButton.png");
+                break;
+            case DIGBUTTON:
+                imageIcon = new ImageIcon("ImagePvZ/GameFrame/shovel.png");
                 break;
 
             // Plants List Button
@@ -262,29 +262,39 @@ public class PictureFactory {
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/NormalZombie.png");
                 break;
             case CONEHEADZOMBIEBUTTON:
-                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/ConeheadZombie.png");
+                imageIcon = new ImageIcon(
+                        "ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/ConeheadZombie.png");
                 break;
             case BUCKETHEADZOMBIEBUTTON:
-                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/BucketheadZombie.png");
+                imageIcon = new ImageIcon(
+                        "ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/BucketheadZombie.png");
                 break;
             case SCREENDOORZOMBIEBUTTON:
-                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/ScreenDoorZombie.png");
+                imageIcon = new ImageIcon(
+                        "ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/ScreenDoorZombie.png");
                 break;
             case FOOTBALLZOMBIEBUTTON:
-                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/FootballZombie.png");
+                imageIcon = new ImageIcon(
+                        "ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/FootballZombie.png");
                 break;
             case POLEVAULTINGZOMBIEBUTTON:
-                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/PoleVaultingZombie.png");
+                imageIcon = new ImageIcon(
+                        "ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/PoleVaultingZombie.png");
                 break;
             case DUCKYTUBEZOMBIEBUTTON:
-                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/DuckyTubeZombie.png");
+                imageIcon = new ImageIcon(
+                        "ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/DuckyTubeZombie.png");
                 break;
             case DOLPHINERIDERZOMBIEBUTTON:
-                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/DolphineRiderZombie.png");
-                break;
-            case GARGANTUARZOMBIEBUTTON:
-                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/GargantuarZombie.png");
-                break;
+                imageIcon = new ImageIcon(
+                        "ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/DolphineRiderZombie.png");
+
+                //
+                // GARGANTUARZOMBIEBUTTON:
+                // imageIcon = new ImageIcon(
+                // "ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon
+                // Zombies/GargantuarZombie.png");
+                // break;
             case IMPZOMBIEBUTTON:
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/ImpZombie.png");
                 break;

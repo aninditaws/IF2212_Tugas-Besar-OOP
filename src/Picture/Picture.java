@@ -72,8 +72,7 @@ public enum Picture {
     JALAPENOLIST,
     SQUASHLIST,
 
-
-    //Bullet List
+    // Bullet List
     BULLET,
     SLOWBULLET,
     // Zombies List
@@ -88,7 +87,6 @@ public enum Picture {
     NEWSPAPERZOMBIELIST,
     IMPZOMBIELIST,
 
-
     // Welcoming Button
     STARTBUTTON,
     PLANTSBUTTON,
@@ -96,6 +94,7 @@ public enum Picture {
     HELPBUTTON,
     EXITBUTTON,
     MENUBUTTON,
+    DIGBUTTON,
 
     // Plants List Button
     ZOMBIELISTSBUTTON,
