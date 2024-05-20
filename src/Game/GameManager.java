@@ -162,22 +162,32 @@ public class GameManager {
                 .filter(entity -> entity instanceof Plant)
                 .count();
     }
+
+    public boolean checkSpending(int cost) {
+        try {
+            Sun.getInstance().spendSun(cost);
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
     public boolean addPlant(Plant plant, int row, int col) {
         // DO CHECKING
         boolean success = false;
         if (gameMap.determineAreaType(row, col) == AreaType.PLANTABLE_AREA) {
             if (!(plant instanceof Lilypad) && countPlantsInCell(row, col) == 0) {
-                success = true;
-                gameMap.addEntity(plant, row, col);
+                success = checkSpending(plant.cost);
             }
         } else if (gameMap.determineAreaType(row, col) == AreaType.WATER_AREA) {
             if ((plant instanceof Lilypad) && countPlantsInCell(row, col) == 0) {
-                success = true;
-                gameMap.addEntity(plant, row, col);
+                success = checkSpending(plant.cost);
             } else if (!(plant instanceof Lilypad) && countPlantsInCell(row, col) == 1) {
-                success = true;
-                gameMap.addEntity(plant, row, col);
+                success = checkSpending(plant.cost);
             }
+        }
+        if (success) {
+            gameMap.addEntity(plant, row, col);
         }
         System.out.println(String.format("planting %s", success));
         return success;

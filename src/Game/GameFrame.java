@@ -386,6 +386,7 @@ public class GameFrame extends JFrame {
                         imageIcon = new ImageIcon(image);
                         button.setIcon(imageIcon);
                     } else if (entity instanceof Plant plant) {
+                        // TODO: Render plant yang di atas lilypad, karena sekarang cuma bisa render 1 gambar
                         ImageIcon imageIcon = getPlantImage(plant);
                         Image image = imageIcon.getImage().getScaledInstance(button.getWidth(), button.getHeight(),
                                 Image.SCALE_SMOOTH);
