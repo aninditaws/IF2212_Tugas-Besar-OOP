@@ -88,7 +88,7 @@ public class GameManager {
             int zombieCount = countZombies();
             System.out.print("Attempt spawning zombie, Zombie Count: ");
             System.out.println(zombieCount);
-            if (val && zombieCount < 10 + (zombieIncrease * flag)) {
+            if (val && zombieCount < 10 + ((flag > 0)? 15: 0)) {
                 Point randomPosition = generateRandomZombiePosition(zombieTypes[randomIndex]);
                 gameMap.map[randomPosition.y][randomPosition.x].addEntity(zombieFactory.CreateZombie(zombieTypes[randomIndex], randomPosition));
                 System.out.print("Created Zombie ");
