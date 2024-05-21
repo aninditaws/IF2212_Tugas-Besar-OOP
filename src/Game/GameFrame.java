@@ -170,8 +170,16 @@ public class GameFrame extends JFrame {
                 int finalIndex = index;
                 button.addActionListener(e -> {
                     if (selectedPlant != null) {
-                        selectedPlant = null;
-                        indexSelectedPlant = null;
+                        if (indexSelectedPlant == finalIndex) {
+                            // Deselect
+                            selectedPlant = null;
+                            indexSelectedPlant = null;
+                        } else {
+                            // Switch plant
+                            indexSelectedPlant = finalIndex;
+                            selectedPlant = new PlantFactory().getPlantType(deckPanel.getDeckTanaman().getArrayDeck().get(indexSelectedPlant));
+                            System.out.println(String.format("Selected deck index %d plant type %s", indexSelectedPlant, selectedPlant.toString()));
+                        }
                     } else if (!isDigging) {
                         indexSelectedPlant = finalIndex;
                         selectedPlant = new PlantFactory().getPlantType(deckPanel.getDeckTanaman().getArrayDeck().get(indexSelectedPlant));
