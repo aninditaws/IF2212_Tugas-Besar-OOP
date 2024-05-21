@@ -156,6 +156,9 @@ public class GameFrame extends JFrame {
 
         // Center the image on the screen
         backgroundLabel.setBounds((screenWidth - newWidth) / 2, (screenHeight - newHeight) / 2, newWidth, newHeight);
+        backgroundLabel.setHorizontalAlignment(JLabel.CENTER);
+        backgroundLabel.setVerticalAlignment(JLabel.CENTER);
+
         layeredPane.add(backgroundLabel, Integer.valueOf(0));
     }
 
