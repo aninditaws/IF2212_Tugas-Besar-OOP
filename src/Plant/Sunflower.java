@@ -24,7 +24,7 @@ public class Sunflower extends Plant {
 //        System.out.println("mencoba update sunflower");
 //        System.out.println(doUpdate);
         doUpdate += 1;
-        if (doUpdate == 2) {
+        if (doUpdate == 3) {
             doUpdate = 0;
             System.out.println("berhasil update");
             generateSun();

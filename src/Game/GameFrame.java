@@ -44,7 +44,7 @@ public class GameFrame extends JFrame {
     private final JButton[][] mapButtons = new JButton[6][11];
 
     private PlantType selectedPlant = null;
-    private int indexSelectedPlant;
+    private Integer indexSelectedPlant = null;
 
     private boolean isDigging = false;
 
@@ -253,48 +253,25 @@ public class GameFrame extends JFrame {
                 PlantFactory plantFactory = new PlantFactory();
                 button.addActionListener(e -> {
                     if (isDigging) {
-                        if (gameManager.getGameMap().getEntities(row, col).size() > 0) {
+                        if (!gameManager.getGameMap().getEntities(row, col).isEmpty()) {
                             gameManager.getGameMap().removeEntity(row, col, 0);
                             isDigging = !isDigging;
                         }
                     }
                     if (selectedPlant != null) {
-                        System.out.println(String.format("Planting at row %d col %d", row, col));
-                        boolean success = gameManager.addPlant(plantFactory.CreatePlant(selectedPlant, new Point(col, row)), row, col);
-                        if (success) {
-                            // Berhasil menanam, set selected plant nya null dan mulai cooldown, logic mengurangi sun ada di gameManager
-                            // TODO: cooldown refresh
-                            selectedPlant = null;
+                        boolean isOnCooldown = deckPanel.getDeckTanaman().isOnCooldown(indexSelectedPlant);
+                        if (!isOnCooldown) {
+                            System.out.println(String.format("Planting at row %d col %d", row, col));
+                            Plant plant = plantFactory.CreatePlant(selectedPlant, new Point(col, row));
+                            boolean success = gameManager.addPlant(plant, row, col);
+                            if (success) {
+                                // Berhasil menanam, set selected plant nya null dan mulai cooldown, logic mengurangi sun ada di gameManager
+                                plant.bePlanted();
+                                deckPanel.getDeckTanaman().usePlant(indexSelectedPlant);
+                                selectedPlant = null;
+                                indexSelectedPlant = null;
+                            }
                         }
-                        Container parent = (Container) e.getSource();
-                        System.out.println(parent.getComponents());
-//                        JButton newButton = new JButton(selectedDeckButton.getIcon());
-//                        newButton.setOpaque(false);
-//                        newButton.setContentAreaFilled(false);
-//                        newButton.setBorder(null);
-//                        newButton.setMargin(new Insets(0, 0, 0, 0));
-
-//                        // Iterate through the grid to find the clicked button's position
-//                        int row = -1;
-//                        int column = -1;
-//                        Component[] components = mapPanel.getComponents();
-//                        for (int k = 0; k < components.length; k++) {
-//                            if (components[k] == button) {
-//                                row = k / 11; // Assuming 11 columns in the grid
-//                                column = k % 11;
-//                                break;
-//                            }
-//                        }
-
-                        // Calculate the position based on the row and column indices
-//                        int x = col * button.getWidth();
-//                        int y = row * button.getHeight();
-//
-//                        // Set the bounds of the new button
-//                        newButton.setBounds(x, y, button.getWidth(), button.getHeight());
-//
-//                        parent.add(newButton);
-//                        parent.repaint();
                     }
                 });
                 mapPanel.add(button);
