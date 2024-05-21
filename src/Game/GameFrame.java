@@ -169,7 +169,10 @@ public class GameFrame extends JFrame {
                 JButton button = (JButton) component;
                 int finalIndex = index;
                 button.addActionListener(e -> {
-                    if (!isDigging) {
+                    if (selectedPlant != null) {
+                        selectedPlant = null;
+                        indexSelectedPlant = null;
+                    } else if (!isDigging) {
                         indexSelectedPlant = finalIndex;
                         selectedPlant = new PlantFactory().getPlantType(deckPanel.getDeckTanaman().getArrayDeck().get(indexSelectedPlant));
                         System.out.println(String.format("Selected deck index %d plant type %s", indexSelectedPlant, selectedPlant.toString()));
