@@ -44,12 +44,19 @@ public class Zombie extends Character {
     @Override
     public void attack(Character character) {
         character.reduceHealth(attack_damage);
+        System.out.println(String.format("Character %s is being attack by %s", character.name, this.name));
     }
 
     public void getAttacked(int attack_damage){
         reduceHealth(attack_damage);
     }
 
+    public void startWalk() {
+        walk = true;
+    }
+    public void stopWalk() {
+        walk = false;
+    }
     @Override
     public void update(int gameTick) {
         super.update(gameTick);

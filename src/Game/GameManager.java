@@ -11,6 +11,7 @@ import Plant.*;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
+import Character.Character;
 
 public class GameManager {
 
@@ -136,19 +137,48 @@ public class GameManager {
 
     public void updateGameMap() {
         // Iterasi setiap area entity, kalau dia zombie dan sudah berubah positionnya, pindahin
+        // Kalau dead, remove dari gameMap
         for (int i = 0; i < gameMap.map.length; i += 1) {
             for (int j = 0; j < gameMap.map[i].length; j += 1) {
                 List<Object> entities = gameMap.getEntities(i, j);
+                handleAttackZombie(entities, i, j);
                 for (int k = 0; k < entities.size(); k += 1) {
                     Object entity = entities.get(k);
-                    if (entity instanceof Zombie){
-//                        System.out.println(String.format("%d = %d? %d = %d?", ((Zombie) entity).position.x, j, ((Zombie) entity).position.y, i));
-                        if (((Zombie) entity).position.x != j || ((Zombie) entity).position.y != i) {
-                            gameMap.moveEntity(i, j, k, ((Zombie) entity).position.y, ((Zombie) entity).position.x);
-                            System.out.println(String.format("Moved zombie %s from %d, %d to %d, %d", ((Zombie) entity).name, j, i, ((Zombie) entity).position.x, ((Zombie) entity).position.y));
-
-                        }
+                    if (entity instanceof Character character) {
+                        removeIfDead(character,i, j, k);
                     }
+                    if (entity instanceof Zombie zombie){
+//                        System.out.println(String.format("%d = %d? %d = %d?", ((Zombie) entity).position.x, j, ((Zombie) entity).position.y, i));
+                        moveIfChange(zombie, i, j, k);
+                    }
+                }
+            }
+        }
+    }
+
+    private void removeIfDead(Character character, int i , int j, int k) {
+        if (character.dead) {
+            gameMap.removeEntity(i, j, k);
+        }
+    }
+
+    private void moveIfChange(Character character, int i, int j, int k) {
+        if (character.position.x != j || character.position.y != i) {
+            gameMap.moveEntity(i, j, k, character.position.y, character.position.x);
+            System.out.println(String.format("Moved zombie %s from %d, %d to %d, %d", character.name, j, i, character.position.x, character.position.y));
+        }
+    }
+
+    private void handleAttackZombie(List<Object> entities, int i, int j) {
+        List<Object> nextColPlantEntities = gameMap.getEntities(i, (Math.max(j - 1, 0))).stream().filter(entity -> entity instanceof Plant).toList();
+        for (Object entity : entities) {
+            if (entity instanceof Zombie zombie) {
+                // Cek di nextColEntities apakah ada plant, jika iya, walk si zombie di set menjadi false dan mulai attack plant paling "atas"
+                if (!nextColPlantEntities.isEmpty()) {
+                    zombie.stopWalk();
+                    zombie.attack((Character) nextColPlantEntities.get(0));
+                } else {
+                    zombie.startWalk();
                 }
             }
         }
@@ -192,4 +222,6 @@ public class GameManager {
         System.out.println(String.format("planting %s", success));
         return success;
     }
+
+
 }
