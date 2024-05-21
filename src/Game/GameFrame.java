@@ -46,6 +46,8 @@ public class GameFrame extends JFrame {
     private PlantType selectedPlant = null;
     private int indexSelectedPlant;
 
+    private boolean isDigging = false;
+
     // private static ArrayList<Bullet> bullets = new ArrayList<Bullet>(); //buat
     // array bullet sama tanaman
     // private static ArrayList<Plant> plants = new ArrayList<Plant>();
@@ -129,10 +131,31 @@ public class GameFrame extends JFrame {
 
     public void initializeBackgroundImage() {
         imageIcon = PictureFactory.getImageIcon(Picture.GAMEDAY);
-        Image image = imageIcon.getImage().getScaledInstance(this.screenWidth, this.screenHeight, Image.SCALE_SMOOTH);
-        imageIcon = new ImageIcon(image);
+        Image image = imageIcon.getImage();
+
+        // Calculate aspect ratio
+        double imageAspectRatio = (double) image.getWidth(null) / image.getHeight(null);
+        double screenAspectRatio = (double) screenWidth / screenHeight;
+
+        int newWidth;
+        int newHeight;
+
+        // Scale image according to aspect ratio
+        if (imageAspectRatio > screenAspectRatio) {
+            newWidth = screenWidth;
+            newHeight = (int) (screenWidth / imageAspectRatio);
+        } else {
+            newWidth = (int) (screenHeight * imageAspectRatio);
+            newHeight = screenHeight;
+        }
+
+        // Scale the image to fit the screen size while maintaining aspect ratio
+        Image scaledImage = image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+        imageIcon = new ImageIcon(scaledImage);
         backgroundLabel = new JLabel(imageIcon);
-        backgroundLabel.setBounds(0, 0, screenWidth, screenHeight);
+
+        // Center the image on the screen
+        backgroundLabel.setBounds((screenWidth - newWidth) / 2, (screenHeight - newHeight) / 2, newWidth, newHeight);
         layeredPane.add(backgroundLabel, Integer.valueOf(0));
     }
 
@@ -143,9 +166,11 @@ public class GameFrame extends JFrame {
                 JButton button = (JButton) component;
                 int finalIndex = index;
                 button.addActionListener(e -> {
-                    indexSelectedPlant = finalIndex;
-                    selectedPlant = new PlantFactory().getPlantType(deckPanel.getDeckTanaman().getArrayDeck().get(indexSelectedPlant));
-                    System.out.println(String.format("Selected deck index %d plant type %s", indexSelectedPlant, selectedPlant.toString()));
+                    if (!isDigging) {
+                        indexSelectedPlant = finalIndex;
+                        selectedPlant = new PlantFactory().getPlantType(deckPanel.getDeckTanaman().getArrayDeck().get(indexSelectedPlant));
+                        System.out.println(String.format("Selected deck index %d plant type %s", indexSelectedPlant, selectedPlant.toString()));
+                    }
                 });
             }
             index += 1;
@@ -161,28 +186,16 @@ public class GameFrame extends JFrame {
         shovel.setOpaque(false);
         shovel.setContentAreaFilled(false);
         shovel.setBorder(null);
-        shovel.setBounds(50, 760, 100, 100);
+        shovel.setBounds((int)(screenWidth * 0.15), (int)(screenHeight * 0.03), (int)(screenWidth * 0.1), (int)(screenHeight * 0.1));
         shovel.addActionListener(e -> {
-            for (Component component : mapPanel.getComponents()) {
-                if (component instanceof JButton) {
-                    JButton button = (JButton) component;
-                    button.addActionListener(e2 -> {
-                        JButton clickedButton = (JButton) e2.getSource();
-                        Container parent = clickedButton.getParent();
-                        parent.revalidate();
-                        parent.repaint();
-                    });
-                }
+            if (selectedPlant == null) {
+                isDigging = !isDigging;
             }
         });
 
     }
 
     // Put Plant to Map
-    public void digButtonPLant(JButton plantBtn, JButton digBtn) {
-        Point location = digBtn.getLocation();
-        plantBtn.setLocation(location);
-    }
 
     // Setter for totalSunLabel3
     public void setTotalSun(int totalSun) {
@@ -206,12 +219,6 @@ public class GameFrame extends JFrame {
     // Setter for Map
     public void setMap() {
         SwingUtilities.invokeLater(() -> updateBackgroundImage());
-    }
-
-    // Method naro plant card di area
-    public void setPlant(JButton plantCard, JButton plant) {
-        Point location = plant.getLocation();
-        plantCard.setLocation(location);
     }
 
     // Update game map every second
@@ -245,6 +252,12 @@ public class GameFrame extends JFrame {
                 int col = z;
                 PlantFactory plantFactory = new PlantFactory();
                 button.addActionListener(e -> {
+                    if (isDigging) {
+                        if (gameManager.getGameMap().getEntities(row, col).size() > 0) {
+                            gameManager.getGameMap().removeEntity(row, col, 0);
+                            isDigging = !isDigging;
+                        }
+                    }
                     if (selectedPlant != null) {
                         System.out.println(String.format("Planting at row %d col %d", row, col));
                         boolean success = gameManager.addPlant(plantFactory.CreatePlant(selectedPlant, new Point(col, row)), row, col);
