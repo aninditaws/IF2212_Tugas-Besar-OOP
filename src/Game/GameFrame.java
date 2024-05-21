@@ -166,7 +166,6 @@ public class GameFrame extends JFrame {
                     button.addActionListener(e2 -> {
                         JButton clickedButton = (JButton) e2.getSource();
                         Container parent = clickedButton.getParent();
-                        parent.remove(clickedButton);
                         parent.revalidate();
                         parent.repaint();
                     });
@@ -224,7 +223,7 @@ public class GameFrame extends JFrame {
     public void initializeMapPanel() {
         mapPanel = new JPanel(new GridLayout(6, 11, 2, 2));
         mapPanel.setOpaque(false);
-        mapPanel.setBounds(350, 120, 960, 810);
+        mapPanel.setBounds(200, 120, 1500, 810);
         layeredPane.add(mapPanel, Integer.valueOf(1));
 
         for (int i = 0; i < 6; i++) {
