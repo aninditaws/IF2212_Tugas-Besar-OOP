@@ -3,18 +3,28 @@ package Inventory;
 import java.util.*;
 
 import Game.AreaType;
+import Game.GameManager;
 import Game.GameMap;
 import Plant.Plant;
+import Subscriber.*;
 
-public class DeckTanaman {
+public class DeckTanaman implements Subscriber {
     private List<Plant> arrayDeck;
     private int maxDeckSize;
     public static final int MAX_DECK_SIZE = 6;
 
+    public int[] cooldownList;
+
     // Initialization DeckTanaman
     public DeckTanaman(int maxDeckSize) {
-        this.arrayDeck = new ArrayList<Plant>();
         this.maxDeckSize = maxDeckSize;
+        this.arrayDeck = new ArrayList<>(maxDeckSize);
+        this.cooldownList = new int[maxDeckSize];
+        for (int i = 0; i < maxDeckSize; i++) {
+            // Korelasi index sama dengan arrayDeck
+            this.cooldownList[i] = 0;
+        }
+        EventChannel.getInstance().subscribe(this);
     }
 
     // getter arrayDeck
@@ -39,31 +49,32 @@ public class DeckTanaman {
         this.arrayDeck.clear();
     }
 
-    // fungsi menambahkan tanaman ke dalam area
-    public void plantTanaman(Plant plant, GameMap<Plant> area) {
-        int areaRow = area.getRow();
-        int areaColumn = area.getColumn();
-
-        if (area.determineAreaType(areaRow, areaColumn) == AreaType.PLANTABLE_AREA) {
-            // if (plant.getCooldownTime()) if untuk cek cooldown tanaman
-
-            area.getArea(areaRow, areaColumn).addEntity(plant);
+    public boolean isOnCooldown(int index) {
+        if (cooldownList[index] > 0) {
+            return true;
         } else {
-            System.out.println(String.format("Tidak bisa menanam tanaman di area %s",
-                    area.getArea(areaRow, areaColumn).getType()));
+            return false;
         }
     }
 
-    // fungsi menggali/remove tanaman dari dalam area
-    public void digTanaman(GameMap<Plant> area) {
-        int areaRow = area.getRow();
-        int areaColumn = area.getColumn();
-
-        if (area.getArea(areaRow, areaColumn).getEntities() != null) {
-            area.getArea(areaRow, areaColumn).clearEntities();
-        } else {
-            System.out.println(String.format("Tidak bisa menggali tanaman dari area %s",
-                    area.getArea(areaRow, areaColumn).getType()));
+    public void usePlant(int index) {
+        if (!isOnCooldown(index)) {
+            this.cooldownList[index] = this.arrayDeck.get(index).cooldown;
         }
+
+    }
+
+    public void updateCooldown() {
+        for (int i = 0; i < maxDeckSize; i++) {
+            if (cooldownList[i] > 0) {
+                System.out.println(String.format("UPDATE COOLDOWN %s", getArrayDeck().get(i).name));
+                cooldownList[i] -= 1;
+            }
+        }
+    }
+
+    @Override
+    public void update(int gameTick) {
+        updateCooldown();
     }
 }

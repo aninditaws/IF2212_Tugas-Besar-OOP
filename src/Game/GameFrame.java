@@ -39,10 +39,14 @@ public class GameFrame extends JFrame {
     private JButton selectedDeckButton;
     private DeckTanaman deckTanaman;
 
+    private GameDrawingPanel drawingPanel;
+
     private final JButton[][] mapButtons = new JButton[6][11];
 
     private PlantType selectedPlant = null;
-    private int indexSelectedPlant;
+    private Integer indexSelectedPlant = null;
+
+    private boolean isDigging = false;
 
     // private static ArrayList<Bullet> bullets = new ArrayList<Bullet>(); //buat
     // array bullet sama tanaman
@@ -83,6 +87,7 @@ public class GameFrame extends JFrame {
 
         // Map Panel
         initializeMapPanel();
+        initializeDrawingPanel();
 
         // Menu Button
         JButton menuButton = new JButton();
@@ -116,7 +121,7 @@ public class GameFrame extends JFrame {
         add(layeredPane, BorderLayout.CENTER);
 
         // Update periodically
-        Timer timer = new Timer(1000, new ActionListener() {
+        Timer timer = new Timer(200, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 updateRender();
             }
@@ -126,10 +131,34 @@ public class GameFrame extends JFrame {
 
     public void initializeBackgroundImage() {
         imageIcon = PictureFactory.getImageIcon(Picture.GAMEDAY);
-        Image image = imageIcon.getImage().getScaledInstance(this.screenWidth, this.screenHeight, Image.SCALE_SMOOTH);
-        imageIcon = new ImageIcon(image);
+        Image image = imageIcon.getImage();
+
+        // Calculate aspect ratio
+        double imageAspectRatio = (double) image.getWidth(null) / image.getHeight(null);
+        double screenAspectRatio = (double) screenWidth / screenHeight;
+
+        int newWidth;
+        int newHeight;
+
+        // Scale image according to aspect ratio
+        if (imageAspectRatio > screenAspectRatio) {
+            newWidth = screenWidth;
+            newHeight = (int) (screenWidth / imageAspectRatio);
+        } else {
+            newWidth = (int) (screenHeight * imageAspectRatio);
+            newHeight = screenHeight;
+        }
+
+        // Scale the image to fit the screen size while maintaining aspect ratio
+        Image scaledImage = image.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+        imageIcon = new ImageIcon(scaledImage);
         backgroundLabel = new JLabel(imageIcon);
-        backgroundLabel.setBounds(0, 0, screenWidth, screenHeight);
+
+        // Center the image on the screen
+        backgroundLabel.setBounds((screenWidth - newWidth) / 2, (screenHeight - newHeight) / 2, newWidth, newHeight);
+        backgroundLabel.setHorizontalAlignment(JLabel.CENTER);
+        backgroundLabel.setVerticalAlignment(JLabel.CENTER);
+
         layeredPane.add(backgroundLabel, Integer.valueOf(0));
     }
 
@@ -140,9 +169,22 @@ public class GameFrame extends JFrame {
                 JButton button = (JButton) component;
                 int finalIndex = index;
                 button.addActionListener(e -> {
-                    indexSelectedPlant = finalIndex;
-                    selectedPlant = new PlantFactory().getPlantType(deckPanel.getDeckTanaman().getArrayDeck().get(indexSelectedPlant));
-                    System.out.println(String.format("Selected deck index %d plant type %s", indexSelectedPlant, selectedPlant.toString()));
+                    if (selectedPlant != null) {
+                        if (indexSelectedPlant == finalIndex) {
+                            // Deselect
+                            selectedPlant = null;
+                            indexSelectedPlant = null;
+                        } else {
+                            // Switch plant
+                            indexSelectedPlant = finalIndex;
+                            selectedPlant = new PlantFactory().getPlantType(deckPanel.getDeckTanaman().getArrayDeck().get(indexSelectedPlant));
+                            System.out.println(String.format("Selected deck index %d plant type %s", indexSelectedPlant, selectedPlant.toString()));
+                        }
+                    } else if (!isDigging) {
+                        indexSelectedPlant = finalIndex;
+                        selectedPlant = new PlantFactory().getPlantType(deckPanel.getDeckTanaman().getArrayDeck().get(indexSelectedPlant));
+                        System.out.println(String.format("Selected deck index %d plant type %s", indexSelectedPlant, selectedPlant.toString()));
+                    }
                 });
             }
             index += 1;
@@ -158,29 +200,16 @@ public class GameFrame extends JFrame {
         shovel.setOpaque(false);
         shovel.setContentAreaFilled(false);
         shovel.setBorder(null);
-        shovel.setBounds(50, 760, 100, 100);
+        shovel.setBounds((int)(screenWidth * 0.15), (int)(screenHeight * 0.03), (int)(screenWidth * 0.1), (int)(screenHeight * 0.1));
         shovel.addActionListener(e -> {
-            for (Component component : mapPanel.getComponents()) {
-                if (component instanceof JButton) {
-                    JButton button = (JButton) component;
-                    button.addActionListener(e2 -> {
-                        JButton clickedButton = (JButton) e2.getSource();
-                        Container parent = clickedButton.getParent();
-                        parent.remove(clickedButton);
-                        parent.revalidate();
-                        parent.repaint();
-                    });
-                }
+            if (selectedPlant == null) {
+                isDigging = !isDigging;
             }
         });
 
     }
 
     // Put Plant to Map
-    public void digButtonPLant(JButton plantBtn, JButton digBtn) {
-        Point location = digBtn.getLocation();
-        plantBtn.setLocation(location);
-    }
 
     // Setter for totalSunLabel3
     public void setTotalSun(int totalSun) {
@@ -206,25 +235,19 @@ public class GameFrame extends JFrame {
         SwingUtilities.invokeLater(() -> updateBackgroundImage());
     }
 
-    // Method naro plant card di area
-    public void setPlant(JButton plantCard, JButton plant) {
-        Point location = plant.getLocation();
-        plantCard.setLocation(location);
-    }
-
     // Update game map every second
     public void updateRender() {
-        gameManager.updateGameMap();
-        System.out.println(gameManager.sun.getTotalSun());
+//        System.out.println(gameManager.sun.getTotalSun());
         setTotalSun(gameManager.sun.getTotalSun());
         setMap();
         renderGameMap();
+        repaint();
     }
 
     public void initializeMapPanel() {
         mapPanel = new JPanel(new GridLayout(6, 11, 2, 2));
         mapPanel.setOpaque(false);
-        mapPanel.setBounds(350, 120, 960, 810);
+        mapPanel.setBounds((int)(screenWidth * 0.2), (int)(screenHeight * 0.15), (int)(screenWidth * 0.75), (int)(screenHeight * 0.75));
         layeredPane.add(mapPanel, Integer.valueOf(1));
 
         for (int i = 0; i < 6; i++) {
@@ -237,48 +260,31 @@ public class GameFrame extends JFrame {
                 button.setBorderPainted(true);
                 button.setRolloverEnabled(false);
                 button.setFocusable(false);
-                button.setPreferredSize(new Dimension(103, 140));
+                button.setPreferredSize(new Dimension((int)(screenWidth * 0.075), (int)(screenHeight * 0.075)));
                 int row = i;
                 int col = z;
                 PlantFactory plantFactory = new PlantFactory();
                 button.addActionListener(e -> {
-                    if (selectedPlant != null) {
-                        System.out.println(String.format("Planting at row %d col %d", row, col));
-                        boolean success = gameManager.addPlant(plantFactory.CreatePlant(selectedPlant, new Point(col, row)), row, col);
-                        if (success) {
-                            // Berhasil menanam, set selected plant nya null dan mulai cooldown, logic mengurangi sun ada di gameManager
-                            // TODO: cooldown refresh
-                            selectedPlant = null;
+                    if (isDigging) {
+                        if (!gameManager.getGameMap().getEntities(row, col).isEmpty()) {
+                            gameManager.getGameMap().removeEntity(row, col, 0);
+                            isDigging = !isDigging;
                         }
-                        Container parent = (Container) e.getSource();
-                        System.out.println(parent.getComponents());
-//                        JButton newButton = new JButton(selectedDeckButton.getIcon());
-//                        newButton.setOpaque(false);
-//                        newButton.setContentAreaFilled(false);
-//                        newButton.setBorder(null);
-//                        newButton.setMargin(new Insets(0, 0, 0, 0));
-
-//                        // Iterate through the grid to find the clicked button's position
-//                        int row = -1;
-//                        int column = -1;
-//                        Component[] components = mapPanel.getComponents();
-//                        for (int k = 0; k < components.length; k++) {
-//                            if (components[k] == button) {
-//                                row = k / 11; // Assuming 11 columns in the grid
-//                                column = k % 11;
-//                                break;
-//                            }
-//                        }
-
-                        // Calculate the position based on the row and column indices
-//                        int x = col * button.getWidth();
-//                        int y = row * button.getHeight();
-//
-//                        // Set the bounds of the new button
-//                        newButton.setBounds(x, y, button.getWidth(), button.getHeight());
-//
-//                        parent.add(newButton);
-//                        parent.repaint();
+                    }
+                    if (selectedPlant != null) {
+                        boolean isOnCooldown = deckPanel.getDeckTanaman().isOnCooldown(indexSelectedPlant);
+                        if (!isOnCooldown) {
+                            System.out.println(String.format("Planting at row %d col %d", row, col));
+                            Plant plant = plantFactory.CreatePlant(selectedPlant, new Point(col, row));
+                            boolean success = gameManager.addPlant(plant, row, col);
+                            if (success) {
+                                // Berhasil menanam, set selected plant nya null dan mulai cooldown, logic mengurangi sun ada di gameManager
+                                plant.bePlanted();
+                                deckPanel.getDeckTanaman().usePlant(indexSelectedPlant);
+                                selectedPlant = null;
+                                indexSelectedPlant = null;
+                            }
+                        }
                     }
                 });
                 mapPanel.add(button);
@@ -287,137 +293,13 @@ public class GameFrame extends JFrame {
         }
     }
 
-    private ImageIcon getZombieImage(Zombie zombie) {
-        ImageIcon imageiconreturn;
-        switch (zombie.name) {
-            case "Normal Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(NORMALZOMBIECARD).getImage());
-                break;
-            case "Conehead Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(CONEHEADZOMBIECARD).getImage());
-                break;
-            case "Pole Vaulting Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(POLEVAULTINGZOMBIECARD).getImage());
-                break;
-            case "Buckethead Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(BUCKETHEADZOMBIECARD).getImage());
-                break;
-            case "Ducky Tube Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(DUCKYTUBEZOMBIECARD).getImage());
-                break;
-            case "Dolphin Rider Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(DOLPHINERIDERZOMBIECARD).getImage());
-                break;
-            case "Football Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(FOOTBALLZOMBIECARD).getImage());
-                break;
-            case "Gargantuar":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(GARGANTUARZOMBIECARD).getImage());
-                break;
-            case "Imp Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(IMPZOMBIECARD).getImage());
-                break;
-            case "Screen Door Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(SCREENDOORZOMBIECARD).getImage());
-                break;
-            default:
-                System.out.println(String.format("Default case! %s", zombie.name));
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(NORMALZOMBIECARD).getImage());
-                break;
-
-        }
-        return imageiconreturn;
-    }
-
-    private ImageIcon getPlantImage(Plant plant) {
-        ImageIcon imageiconreturn;
-        PlantFactory plantFactory = new PlantFactory();
-        switch (plantFactory.getPlantType(plant)) {
-            case SUNFLOWERTYPE:
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(SUNFLOWER).getImage());
-                break;
-            case CHERRYBOMBTYPE:
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(CHERRYBOMB).getImage());
-                break;
-            case JALAPENOTYPE:
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(JALAPENO).getImage());
-                break;
-            case LILYPADTYPE:
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(LILY_PAD).getImage());
-                break;
-            case PEASHOOTERTYPE:
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(PEASHOOTER).getImage());
-                break;
-            case REPEATERTYPE:
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(REPEATER).getImage());
-                break;
-            case SNOWPEATYPE:
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(SNOWPEA).getImage());
-                break;
-            case SQUASHTYPE:
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(SQUASH).getImage());
-                break;
-            case TALLNUTTYPE:
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(TALLNUT).getImage());
-                break;
-            case WALLNUTTYPE:
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(WALLNUT).getImage());
-                break;
-            default:
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(SUNFLOWER).getImage());
-                break;
-        }
-        return imageiconreturn;
+    public void initializeDrawingPanel() {
+        drawingPanel = new GameDrawingPanel(gameManager);
+        drawingPanel.setBounds((int)(screenWidth * 0.2), (int)(screenHeight * 0.15), (int)(screenWidth * 0.75), (int)(screenHeight * 0.75));
+        layeredPane.add(drawingPanel, Integer.valueOf(1)); // Add the drawing panel below the buttons
     }
 
     public void renderGameMap() {
-        GameMap<Object> gameMap = gameManager.getGameMap();
-        for (int row = 0; row < gameMap.getRow(); row++) {
-            for (int col = 0; col < gameMap.getColumn(); col++) {
-                List<Object> entities = gameMap.getEntities(row, col);
-                JButton button = mapButtons[row][col];
-                button.setIcon(null);
-                if (!entities.isEmpty()) {
-                    Object entity = entities.get(0);
-                    if (entity instanceof Zombie zombie) {
-                        ImageIcon imageIcon = getZombieImage(zombie);
-                        Image image = imageIcon.getImage().getScaledInstance(button.getWidth(), button.getHeight(),
-                                Image.SCALE_SMOOTH);
-                        imageIcon = new ImageIcon(image);
-                        button.setIcon(imageIcon);
-                    } else if (entity instanceof Plant plant) {
-                        // TODO: Render plant yang di atas lilypad, karena sekarang cuma bisa render 1 gambar
-                        ImageIcon imageIcon = getPlantImage(plant);
-                        Image image = imageIcon.getImage().getScaledInstance(button.getWidth(), button.getHeight(),
-                                Image.SCALE_SMOOTH);
-                        imageIcon = new ImageIcon(image);
-                        button.setIcon(imageIcon);
-                    } // Bisa menambahkan yang lain
-                } else {
-                    // button.setBackground(Color.green);
-                    button.setIcon(null);
-                }
-            }
-        }
-    }
-
-    // public JButton getAreaButton(int row, int column) {
-    // // Calculate the index of the button based on the row and column
-    // int index = row * 11 + column;
-
-    // // Get the component at the calculated index
-    // Component component = mapPanel.getComponent(index);
-
-    // // Check if the component is a JButton
-    // if (component instanceof JButton) {
-    // return (JButton) component;
-    // } else {
-    // // If the component is not a JButton, return null
-    // return null;
-    // }
-    // }
-
-    public void WaterConstraint() {
-
+        drawingPanel.repaint();
     }
 }

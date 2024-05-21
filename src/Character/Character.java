@@ -62,7 +62,7 @@ abstract public class Character implements Subscriber {
       }
 
       public void attack(Character character) {
-
+            character.reduceHealth(this.attack_damage);
       }
 
 

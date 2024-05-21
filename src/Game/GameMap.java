@@ -62,13 +62,13 @@ public class GameMap<T> {
     public AreaType determineAreaType(int row, int col) {
         if (col == 0) {
             return AreaType.PROTECTED_AREA;
-        } else if (col >= 1 && col <= 7) {
+        } else if (col >= 1 && col <= 9) {
             if (row >= 2 && row <= 3) {
                 return AreaType.WATER_AREA;
             } else {
                 return AreaType.PLANTABLE_AREA;
             }
-        } else if (col == 8) {
+        } else if (col == 10) {
             if (row >= 2 && row <= 3) {
                 return AreaType.ZOMBIE_SPAWN_WATER;
             } else {
