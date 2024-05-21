@@ -17,7 +17,7 @@ public class Inventory {
         this.plantInventory = new ArrayList<Plant>();
         initializeInventory();
         clickedPlants = new HashMap<>();
-        for (int i = 0; i < plantInventory.size(); i++) {
+        for (int i = 0; i < 10; i++) {
             clickedPlants.put(i, false);
         }
         plantButtons = new ArrayList<>();
@@ -33,7 +33,6 @@ public class Inventory {
     // method initializeInventory
 
     public void initializeInventory() {
-        this.plantInventory.clear();
 
         this.addPlant(new Sunflower());
         this.addPlant(new Peashooter());
@@ -52,9 +51,21 @@ public class Inventory {
         return this.plantInventory.get(index);
     }
 
+    public void clearPlants() {
+        this.plantInventory.clear();
+    }
+
+    public List<JButton> getPlantButtons() {
+        return plantButtons;
+    }
+
+    public void clearPlantButtons() {
+        this.plantButtons.clear();
+    }
+
     // method addPlant
     public void addPlant(Plant plant) {
-        plantInventory.add(plant);
+        this.plantInventory.add(plant);
     }
 
     // method addPlantButton
@@ -70,6 +81,7 @@ public class Inventory {
 
     // Method print tanaman yang ada di inventory
     public void printInventory() {
+        System.out.println("Inventory :");
         for (Plant plant : plantInventory) {
             System.out.println(String.format("%s", plant.name));
         }
@@ -145,5 +157,15 @@ public class Inventory {
     // plant lagi dipencet
     public void setClicked(int index, boolean clicked) {
         clickedPlants.put(index, clicked);
+    }
+
+    public static void main(String[] args) {
+        Inventory inventory = new Inventory();
+
+        inventory.printInventory();
+        inventory.clearPlants();
+        inventory.printInventory();
+        inventory.initializeInventory();
+        inventory.printInventory();
     }
 }
