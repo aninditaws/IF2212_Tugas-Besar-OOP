@@ -39,6 +39,8 @@ public class GameFrame extends JFrame {
     private JButton selectedDeckButton;
     private DeckTanaman deckTanaman;
 
+    private GameDrawingPanel drawingPanel;
+
     private final JButton[][] mapButtons = new JButton[6][11];
 
     private PlantType selectedPlant = null;
@@ -83,6 +85,7 @@ public class GameFrame extends JFrame {
 
         // Map Panel
         initializeMapPanel();
+        initializeDrawingPanel();
 
         // Menu Button
         JButton menuButton = new JButton();
@@ -218,6 +221,7 @@ public class GameFrame extends JFrame {
         setTotalSun(gameManager.sun.getTotalSun());
         setMap();
         renderGameMap();
+        repaint();
     }
 
     public void initializeMapPanel() {
@@ -284,6 +288,12 @@ public class GameFrame extends JFrame {
                 mapButtons[i][z] = button;
             }
         }
+    }
+
+    public void initializeDrawingPanel() {
+        drawingPanel = new GameDrawingPanel(gameManager);
+        drawingPanel.setBounds(200, 120, 1500, 810);
+        layeredPane.add(drawingPanel, Integer.valueOf(1)); // Add the drawing panel below the buttons
     }
 
     private ImageIcon getZombieImage(Zombie zombie) {
@@ -370,6 +380,7 @@ public class GameFrame extends JFrame {
     }
 
     public void renderGameMap() {
+        drawingPanel.repaint();
         GameMap<Object> gameMap = gameManager.getGameMap();
         for (int row = 0; row < gameMap.getRow(); row++) {
             for (int col = 0; col < gameMap.getColumn(); col++) {
@@ -383,14 +394,15 @@ public class GameFrame extends JFrame {
                         Image image = imageIcon.getImage().getScaledInstance(button.getWidth(), button.getHeight(),
                                 Image.SCALE_SMOOTH);
                         imageIcon = new ImageIcon(image);
-                        button.setIcon(imageIcon);
+//                        button.setIcon(imageIcon);
                     } else if (entity instanceof Plant plant) {
                         // TODO: Render plant yang di atas lilypad, karena sekarang cuma bisa render 1 gambar
+                        // Untuk ini harus agak refactor deh, bikin component buat draw
                         ImageIcon imageIcon = getPlantImage(plant);
-                        Image image = imageIcon.getImage().getScaledInstance(button.getWidth(), button.getHeight(),
+                        Image image = imageIcon.getImage().getScaledInstance((int) (button.getWidth() * 0.6), (int) (button.getHeight() * 0.6),
                                 Image.SCALE_SMOOTH);
                         imageIcon = new ImageIcon(image);
-                        button.setIcon(imageIcon);
+//                        button.setIcon(imageIcon);
                     } // Bisa menambahkan yang lain
                 } else {
                     // button.setBackground(Color.green);
