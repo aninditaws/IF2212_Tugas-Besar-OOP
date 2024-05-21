@@ -119,16 +119,22 @@ public class InventoryFrame extends JFrame {
 
     }
 
+    private Map<JButton, ActionListener> originalPlantButtonListeners = new HashMap<>();
+
     private JButton createPlantButton(ImageIcon imageIcon, int index) {
         JButton button = new JButton(imageIcon);
         button.setOpaque(false);
         button.setContentAreaFilled(false);
         button.setBorder(null);
         button.setSize(new Dimension(155, 93));
-        button.addActionListener(e -> handlePlantButtonClick(index, button));
+        ActionListener listener = e -> handlePlantButtonClick(index, button);
+        button.addActionListener(listener);
+        originalPlantButtonListeners.put(button, listener);
 
         return button;
     }
+
+    private Map<JButton, ActionListener> originalDeckButtonListeners = new HashMap<>();
 
     private void handlePlantButtonClick(int index, JButton button) {
         Plant clickedPlant = inventory.getPlant(index);
@@ -144,14 +150,38 @@ public class InventoryFrame extends JFrame {
                     inventory.chooseTanaman(clickedPlant, deckTanaman, inventory);
                     button.setBorder(BorderFactory.createLineBorder(Color.RED, 5));
                     addButtonToDeck(clonedButton);
+
+                    // Store the original action listener
+                    ActionListener originalListener = e -> handleDeckButtonClick(clonedButton);
+                    clonedButton.addActionListener(originalListener);
+                    originalDeckButtonListeners.put(clonedButton, originalListener);
+
                     // Retrieve the name of the clicked button
                     clonedButton.setName(PlantImage.values()[index].name());
                     System.out.println("Button name: " + clonedButton.getName());
-
                 }
             }
             deckTanaman.printDeck();
             disableButtonsIfMaxReached();
+        }
+    }
+
+    private void handleDeckButtonClick(JButton button) {
+        int buttonIndex = deckPanel.getComponentZOrder(button);
+        if (buttonIndex != -1 && buttonIndex < deckTanaman.getArrayDeck().size()) {
+            deckPanel.remove(button);
+            deckPanel.revalidate();
+            deckPanel.repaint();
+            Plant removedPlant = deckTanaman.getArrayDeck().remove(buttonIndex);
+
+            for (int i = 0; i < inventory.getPlantInventory().size(); i++) {
+                Plant plant = inventory.getPlant(i);
+                if (plant.equals(removedPlant)) {
+                    inventory.removePlantBorder(i);
+                    reenableAllButtons();
+                    break;
+                }
+            }
         }
     }
 
@@ -209,26 +239,33 @@ public class InventoryFrame extends JFrame {
         button.setSize(400, 100);
         button.setMargin(new Insets(0, 0, 0, 0));
 
-        // Use an ActionListener to toggle functionality on click
-
-        ItemListener itemListener = new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                int state = e.getStateChange();
-
-                if (state == ItemEvent.SELECTED) {
-                    button.setSelected(true);
-                    if (actionListener != null) {
-                        actionListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
+        button.addItemListener(e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                if (actionListener != null) {
+                    actionListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
+                }
+            } else {
+                // Reattach the original action listeners to plant buttons
+                for (Map.Entry<JButton, ActionListener> entry : originalPlantButtonListeners.entrySet()) {
+                    JButton plantButton = entry.getKey();
+                    ActionListener originalListener = entry.getValue();
+                    for (ActionListener listener : plantButton.getActionListeners()) {
+                        plantButton.removeActionListener(listener);
                     }
-                } else if (state == ItemEvent.DESELECTED) {
-                    button.setSelected(false);
-                    button.removeActionListener(actionListener);
+                    plantButton.addActionListener(originalListener);
+                }
+                // Reattach the original action listeners to deck buttons
+                for (Map.Entry<JButton, ActionListener> entry : originalDeckButtonListeners.entrySet()) {
+                    JButton deckButton = entry.getKey();
+                    ActionListener originalListener = entry.getValue();
+                    for (ActionListener listener : deckButton.getActionListeners()) {
+                        deckButton.removeActionListener(listener);
+                    }
+                    deckButton.addActionListener(originalListener);
                 }
             }
+        });
 
-        };
-        button.addItemListener(itemListener);
         panel.add(button);
         controlBtnStates.put(button, false);
     }
@@ -254,34 +291,20 @@ public class InventoryFrame extends JFrame {
     }
 
     private void clearDeck() {
-        if (!clearDeckActive) {
-            deckTanaman.clearDeck();
-            // inventory.printInventory();
-            inventory.clearPlants();
-            inventory.clearPlantButtons();
-            // System.out.println("plant buttons size: " +
-            // inventory.getPlantButtons().size());
-
-            inventory.initializeInventory();
-            // inventory.printInventory();
-            addButtontoInventory();
-
-            reenableAllButtons();
-            for (JButton button : plantButtons) {
-                button.setBorder(null);
-            }
-            JPanel deckPanel = (JPanel) layeredPane.getComponentAt(34, 148);
-            deckPanel.removeAll();
-            deckPanel.revalidate();
-            deckPanel.repaint();
-
-            layeredPane.remove(inventoryPanel);
-
-            addinventoryPanel();
-
+        deckTanaman.clearDeck();
+        inventory.clearPlants();
+        inventory.clearPlantButtons();
+        inventory.initializeInventory();
+        addButtontoInventory();
+        reenableAllButtons();
+        for (JButton button : plantButtons) {
+            button.setBorder(null);
         }
-        clearDeckActive = !clearDeckActive;
-
+        deckPanel.removeAll();
+        deckPanel.revalidate();
+        deckPanel.repaint();
+        layeredPane.remove(inventoryPanel);
+        addinventoryPanel();
     }
 
     private void removeActionListeners(Component[] components) {
@@ -296,74 +319,48 @@ public class InventoryFrame extends JFrame {
     }
 
     private void swapPlants() {
-        if (!swapPlantsActive) {
-            removeActionListeners(deckPanel.getComponents());
+        removeActionListeners(deckPanel.getComponents());
+        removeActionListeners(inventoryPanel.getComponents());
 
-            for (Component component : deckPanel.getComponents()) {
-                if (component instanceof JButton) {
-                    JButton button = (JButton) component;
-                    button.addActionListener(e -> {
-                        if (selectedButtons.contains(button)) {
-                            selectedButtons.remove(button);
-                            button.setBorder(null);
-                        } else {
-                            if (selectedButtons.size() < 2) {
-                                selectedButtons.add(button);
-                                button.setBorder(BorderFactory.createLineBorder(Color.BLUE, 5));
-                                if (selectedButtons.size() == 2 && isButtonSamePanel(selectedButtons, deckPanel)) {
-                                    swapButton(selectedButtons.get(0), selectedButtons.get(1), deckPanel);
-                                }
+        for (Component component : deckPanel.getComponents()) {
+            if (component instanceof JButton) {
+                JButton button = (JButton) component;
+                button.addActionListener(e -> {
+                    if (selectedButtons.contains(button)) {
+                        selectedButtons.remove(button);
+                        button.setBorder(null);
+                    } else {
+                        if (selectedButtons.size() < 2) {
+                            selectedButtons.add(button);
+                            button.setBorder(BorderFactory.createLineBorder(Color.BLUE, 5));
+                            if (selectedButtons.size() == 2 && isButtonSamePanel(selectedButtons, deckPanel)) {
+                                swapButtonInDeckPanel(selectedButtons.get(0), selectedButtons.get(1));
                             }
                         }
-                    });
-                }
-            }
-            removeActionListeners(inventoryPanel.getComponents());
-
-            for (Component component : inventoryPanel.getComponents()) {
-                if (component instanceof JButton) {
-                    JButton button = (JButton) component;
-                    button.addActionListener(e -> {
-                        if (selectedButtons.contains(button)) {
-                            selectedButtons.remove(button);
-                            button.setBorder(null);
-                        } else {
-                            if (selectedButtons.size() < 2) {
-                                selectedButtons.add(button);
-                                button.setBorder(BorderFactory.createLineBorder(Color.BLUE, 5));
-                                if (selectedButtons.size() == 2 && isButtonSamePanel(selectedButtons, inventoryPanel)) {
-                                    swapButton(selectedButtons.get(0), selectedButtons.get(1), inventoryPanel);
-                                }
-                            }
-                        }
-                    });
-                }
-            }
-        } else {
-            // Remove all action listeners from deckPanel buttons
-            for (Component component : deckPanel.getComponents()) {
-                if (component instanceof JButton) {
-                    JButton button = (JButton) component;
-                    for (ActionListener listener : button.getActionListeners()) {
-                        button.removeActionListener(listener);
                     }
-                    button.setBorder(null); // Remove any selection borders
-                }
+                });
             }
-            selectedButtons.clear(); // Clear any selected buttons
-            // Remove all action listeners from inventoryPanel buttons
-            for (Component component : inventoryPanel.getComponents()) {
-                if (component instanceof JButton) {
-                    JButton button = (JButton) component;
-                    for (ActionListener listener : button.getActionListeners()) {
-                        button.removeActionListener(listener);
-                    }
-                    button.setBorder(null); // Remove any selection borders
-                }
-            }
-            selectedButtons.clear(); // Clear any selected buttons
         }
-        swapPlantsActive = !swapPlantsActive; // Toggle the state
+
+        for (Component component : inventoryPanel.getComponents()) {
+            if (component instanceof JButton) {
+                JButton button = (JButton) component;
+                button.addActionListener(e -> {
+                    if (selectedButtons.contains(button)) {
+                        selectedButtons.remove(button);
+                        button.setBorder(null);
+                    } else {
+                        if (selectedButtons.size() < 2) {
+                            selectedButtons.add(button);
+                            button.setBorder(BorderFactory.createLineBorder(Color.BLUE, 5));
+                            if (selectedButtons.size() == 2 && isButtonSamePanel(selectedButtons, inventoryPanel)) {
+                                swapButtonInInventoryPanel(selectedButtons.get(0), selectedButtons.get(1));
+                            }
+                        }
+                    }
+                });
+            }
+        }
     }
 
     private boolean isButtonSamePanel(List<JButton> buttons, JPanel panel) {
@@ -375,32 +372,42 @@ public class InventoryFrame extends JFrame {
         return true;
     }
 
-    private void swapButton(JButton btn1, JButton btn2, JPanel panel) {
-        if (selectedButtons.size() == 2) {
+    private void swapButtonInDeckPanel(JButton btn1, JButton btn2) {
+        int idx1 = deckPanel.getComponentZOrder(btn1);
+        int idx2 = deckPanel.getComponentZOrder(btn2);
 
-            int idx1 = panel.getComponentZOrder(btn1);
-            int idx2 = panel.getComponentZOrder(btn2);
+        deckPanel.add(btn2, idx1);
+        deckPanel.add(btn1, idx2);
 
-            if (panel == deckPanel) {
-                panel.add(btn2, idx1);
-                panel.add(btn1, idx2);
-                Plant plant1 = deckTanaman.getArrayDeck().get(idx1);
-                Plant plant2 = deckTanaman.getArrayDeck().get(idx2);
-                inventory.Switch(deckTanaman, plant1, plant2);
-            } else if (panel == inventoryPanel) {
-                panel.add(btn2, idx1);
-                panel.add(btn1, idx2);
-                Plant plant1 = inventory.getPlant(idx1);
-                Plant plant2 = inventory.getPlant(idx2);
-                inventory.Switch(plant1, plant2);
-            }
-            panel.revalidate();
-            panel.repaint();
+        Plant plant1 = deckTanaman.getArrayDeck().get(idx1);
+        Plant plant2 = deckTanaman.getArrayDeck().get(idx2);
+        inventory.Switch(deckTanaman, plant1, plant2);
 
-            selectedButtons.clear();
-            btn1.setBorder(null);
-            btn2.setBorder(null);
-        }
+        deckPanel.revalidate();
+        deckPanel.repaint();
+
+        selectedButtons.clear();
+        btn1.setBorder(null);
+        btn2.setBorder(null);
+    }
+
+    private void swapButtonInInventoryPanel(JButton btn1, JButton btn2) {
+        int idx1 = inventoryPanel.getComponentZOrder(btn1);
+        int idx2 = inventoryPanel.getComponentZOrder(btn2);
+
+        inventoryPanel.add(btn2, idx1);
+        inventoryPanel.add(btn1, idx2);
+
+        Plant plant1 = inventory.getPlant(idx1);
+        Plant plant2 = inventory.getPlant(idx2);
+        inventory.Switch(plant1, plant2);
+
+        inventoryPanel.revalidate();
+        inventoryPanel.repaint();
+
+        selectedButtons.clear();
+        btn1.setBorder(null);
+        btn2.setBorder(null);
     }
 
     private void deleteSelectedPlants() {
