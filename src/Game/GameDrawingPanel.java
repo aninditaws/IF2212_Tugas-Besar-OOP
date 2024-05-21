@@ -31,15 +31,14 @@ public class GameDrawingPanel extends JPanel {
                     if (entity instanceof Zombie zombie) {
                         ImageIcon imageIcon = getZombieImage(zombie);
                         Image image = imageIcon.getImage();
-                        int x = (int) (col * cellWidth + 0.2 * cellWidth);
-                        int y = (int) (row * cellHeight + 0.2 * cellWidth);
+                        int x = (int) (col * cellWidth);
+                        int y = (int) (row * cellHeight);
                         g.drawImage(image, x, y, cellWidth, cellHeight, null);
                     } else if (entity instanceof Plant plant) {
                         ImageIcon imageIcon = getPlantImage(plant);
                         Image image = imageIcon.getImage();
                         int x = (int) (col * cellWidth + 0.2 * cellWidth);
                         int y = (int) (row * cellHeight + 0.2 * cellWidth);
-                        System.out.println("Draw plant");
                         g.drawImage(image, x, y, (int) (cellWidth * 0.6), (int) (cellHeight * 0.6), null);
                     }
                 }

@@ -217,7 +217,7 @@ public class GameFrame extends JFrame {
     // Update game map every second
     public void updateRender() {
         gameManager.updateGameMap();
-        System.out.println(gameManager.sun.getTotalSun());
+//        System.out.println(gameManager.sun.getTotalSun());
         setTotalSun(gameManager.sun.getTotalSun());
         setMap();
         renderGameMap();
