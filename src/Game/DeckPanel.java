@@ -1,7 +1,10 @@
 package Game;
 
-import javax.swing.JPanel;
+import javax.swing.*;
+
 import java.awt.*;
+import java.awt.event.*;
+
 import Inventory.DeckTanaman;
 
 public class DeckPanel extends JPanel {
@@ -23,6 +26,19 @@ public class DeckPanel extends JPanel {
         setOpaque(false);
         setBounds(34, 148, 150, 600);
 
+    }
+
+    public void disableAllButtonFunctionality() {
+        for (Component component : getComponents()) {
+            if (component instanceof JButton) {
+                JButton button = (JButton) component;
+                // Remove action listener
+                ActionListener[] listeners = button.getActionListeners();
+                for (ActionListener listener : listeners) {
+                    button.removeActionListener(listener);
+                }
+            }
+        }
     }
 
 }

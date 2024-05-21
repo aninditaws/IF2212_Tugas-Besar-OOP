@@ -79,7 +79,7 @@ public class GameFrame extends JFrame {
 
         // Deck Panel
         this.deckPanel = deckPanel;
-
+        deckPanel.disableAllButtonFunctionality();
         initializeDeckButtons();
         initializeDigButton();
 
@@ -171,19 +171,21 @@ public class GameFrame extends JFrame {
                 button.addActionListener(e -> {
                     if (selectedPlant != null) {
                         if (indexSelectedPlant == finalIndex) {
-                            // Deselect
                             selectedPlant = null;
                             indexSelectedPlant = null;
                         } else {
-                            // Switch plant
                             indexSelectedPlant = finalIndex;
-                            selectedPlant = new PlantFactory().getPlantType(deckPanel.getDeckTanaman().getArrayDeck().get(indexSelectedPlant));
-                            System.out.println(String.format("Selected deck index %d plant type %s", indexSelectedPlant, selectedPlant.toString()));
+                            selectedPlant = new PlantFactory()
+                                    .getPlantType(deckPanel.getDeckTanaman().getArrayDeck().get(indexSelectedPlant));
+                            System.out.println(String.format("Selected deck index %d plant type %s", indexSelectedPlant,
+                                    selectedPlant.toString()));
                         }
                     } else if (!isDigging) {
                         indexSelectedPlant = finalIndex;
-                        selectedPlant = new PlantFactory().getPlantType(deckPanel.getDeckTanaman().getArrayDeck().get(indexSelectedPlant));
-                        System.out.println(String.format("Selected deck index %d plant type %s", indexSelectedPlant, selectedPlant.toString()));
+                        selectedPlant = new PlantFactory()
+                                .getPlantType(deckPanel.getDeckTanaman().getArrayDeck().get(indexSelectedPlant));
+                        System.out.println(String.format("Selected deck index %d plant type %s", indexSelectedPlant,
+                                selectedPlant.toString()));
                     }
                 });
             }
@@ -200,7 +202,8 @@ public class GameFrame extends JFrame {
         shovel.setOpaque(false);
         shovel.setContentAreaFilled(false);
         shovel.setBorder(null);
-        shovel.setBounds((int)(screenWidth * 0.15), (int)(screenHeight * 0.03), (int)(screenWidth * 0.1), (int)(screenHeight * 0.1));
+        shovel.setBounds((int) (screenWidth * 0.15), (int) (screenHeight * 0.03), (int) (screenWidth * 0.1),
+                (int) (screenHeight * 0.1));
         shovel.addActionListener(e -> {
             if (selectedPlant == null) {
                 isDigging = !isDigging;
@@ -237,7 +240,7 @@ public class GameFrame extends JFrame {
 
     // Update game map every second
     public void updateRender() {
-//        System.out.println(gameManager.sun.getTotalSun());
+        // System.out.println(gameManager.sun.getTotalSun());
         setTotalSun(gameManager.sun.getTotalSun());
         setMap();
         renderGameMap();
@@ -247,7 +250,8 @@ public class GameFrame extends JFrame {
     public void initializeMapPanel() {
         mapPanel = new JPanel(new GridLayout(6, 11, 2, 2));
         mapPanel.setOpaque(false);
-        mapPanel.setBounds((int)(screenWidth * 0.2), (int)(screenHeight * 0.15), (int)(screenWidth * 0.75), (int)(screenHeight * 0.75));
+        mapPanel.setBounds((int) (screenWidth * 0.2), (int) (screenHeight * 0.15), (int) (screenWidth * 0.75),
+                (int) (screenHeight * 0.75));
         layeredPane.add(mapPanel, Integer.valueOf(1));
 
         for (int i = 0; i < 6; i++) {
@@ -260,7 +264,7 @@ public class GameFrame extends JFrame {
                 button.setBorderPainted(true);
                 button.setRolloverEnabled(false);
                 button.setFocusable(false);
-                button.setPreferredSize(new Dimension((int)(screenWidth * 0.075), (int)(screenHeight * 0.075)));
+                button.setPreferredSize(new Dimension((int) (screenWidth * 0.075), (int) (screenHeight * 0.075)));
                 int row = i;
                 int col = z;
                 PlantFactory plantFactory = new PlantFactory();
@@ -278,7 +282,8 @@ public class GameFrame extends JFrame {
                             Plant plant = plantFactory.CreatePlant(selectedPlant, new Point(col, row));
                             boolean success = gameManager.addPlant(plant, row, col);
                             if (success) {
-                                // Berhasil menanam, set selected plant nya null dan mulai cooldown, logic mengurangi sun ada di gameManager
+                                // Berhasil menanam, set selected plant nya null dan mulai cooldown, logic
+                                // mengurangi sun ada di gameManager
                                 plant.bePlanted();
                                 deckPanel.getDeckTanaman().usePlant(indexSelectedPlant);
                                 selectedPlant = null;
@@ -295,7 +300,8 @@ public class GameFrame extends JFrame {
 
     public void initializeDrawingPanel() {
         drawingPanel = new GameDrawingPanel(gameManager);
-        drawingPanel.setBounds((int)(screenWidth * 0.2), (int)(screenHeight * 0.15), (int)(screenWidth * 0.75), (int)(screenHeight * 0.75));
+        drawingPanel.setBounds((int) (screenWidth * 0.2), (int) (screenHeight * 0.15), (int) (screenWidth * 0.75),
+                (int) (screenHeight * 0.75));
         layeredPane.add(drawingPanel, Integer.valueOf(1)); // Add the drawing panel below the buttons
     }
 
