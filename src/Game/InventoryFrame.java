@@ -86,7 +86,21 @@ public class InventoryFrame extends JFrame {
         inventoryPanel = new JPanel();
         inventoryPanel.setOpaque(false);
         inventoryPanel.setLayout(new GridLayout(3, 4, 15, 15));
+        // inventory.printInventory();
 
+        addButtontoInventory();
+
+        int inventoryWidth = inventoryPanel.getPreferredSize().width;
+        int inventoryHeight = inventoryPanel.getPreferredSize().height;
+        int inventoryX = (screenSize.width - inventoryWidth) / 2 - 100;
+        int inventoryY = (screenSize.height - inventoryHeight) / 2 - 100;
+        inventoryPanel.setBounds(inventoryX, inventoryY, inventoryWidth, inventoryHeight);
+
+        layeredPane.add(inventoryPanel, Integer.valueOf(2));
+    }
+
+    private void addButtontoInventory() {
+        plantButtons.clear();
         for (int i = 0; i < 10 && i < PlantImage.values().length; i++) {
             PlantImage plantImage = PlantImage.values()[i];
             final int currentIndex = i;
@@ -103,13 +117,6 @@ public class InventoryFrame extends JFrame {
             inventory.addPlantButton(button);
         }
 
-        int inventoryWidth = inventoryPanel.getPreferredSize().width;
-        int inventoryHeight = inventoryPanel.getPreferredSize().height;
-        int inventoryX = (screenSize.width - inventoryWidth) / 2 - 100;
-        int inventoryY = (screenSize.height - inventoryHeight) / 2 - 100;
-        inventoryPanel.setBounds(inventoryX, inventoryY, inventoryWidth, inventoryHeight);
-
-        layeredPane.add(inventoryPanel, Integer.valueOf(2));
     }
 
     private JButton createPlantButton(ImageIcon imageIcon, int index) {
@@ -226,7 +233,16 @@ public class InventoryFrame extends JFrame {
 
     private void clearDeck() {
         deckTanaman.clearDeck();
+        // inventory.printInventory();
+        inventory.clearPlants();
+        inventory.clearPlantButtons();
+        // System.out.println("plant buttons size: " +
+        // inventory.getPlantButtons().size());
+
         inventory.initializeInventory();
+        // inventory.printInventory();
+        addButtontoInventory();
+
         reenableAllButtons();
         for (JButton button : plantButtons) {
             button.setBorder(null);
@@ -236,9 +252,7 @@ public class InventoryFrame extends JFrame {
         deckPanel.revalidate();
         deckPanel.repaint();
 
-        inventoryPanel.removeAll();
-        inventoryPanel.revalidate();
-        inventoryPanel.repaint();
+        layeredPane.remove(inventoryPanel);
 
         addinventoryPanel();
 
@@ -299,6 +313,7 @@ public class InventoryFrame extends JFrame {
 
                         }
                     }
+
                 });
             }
         }
@@ -410,11 +425,20 @@ public class InventoryFrame extends JFrame {
     }
 
     private void disableButtonsIfMaxReached() {
-        if (deckTanaman.getArrayDeck().size() >= deckTanaman.getMaxDeckSize()) {
-            for (JButton button : plantButtons) {
-                if (!deckTanaman.getArrayDeck().contains(inventory.getPlant(plantButtons.indexOf(button)))) {
+        if (deckTanaman.getArrayDeck().size() >= 6) {
+            System.out.println("size plantButtons: " + plantButtons.size());
+
+            for (int i = 0; i < plantButtons.size(); i++) {
+                JButton button = plantButtons.get(i);
+                Plant plant = inventory.getPlant(i);
+
+                // Uncomment this line if you need to debug the plant names
+                // System.out.println("Plant name: " + plant.name);
+
+                if (!deckTanaman.getArrayDeck().contains(plant)) {
                     button.setEnabled(false);
                 }
+
             }
         }
     }
