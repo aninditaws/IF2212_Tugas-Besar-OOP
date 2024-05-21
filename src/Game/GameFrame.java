@@ -119,7 +119,7 @@ public class GameFrame extends JFrame {
         add(layeredPane, BorderLayout.CENTER);
 
         // Update periodically
-        Timer timer = new Timer(1000, new ActionListener() {
+        Timer timer = new Timer(200, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 updateRender();
             }
