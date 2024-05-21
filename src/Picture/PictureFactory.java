@@ -46,10 +46,10 @@ public class PictureFactory {
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/ConeheadZombie.png");
                 break;
             case BUCKETHEADZOMBIECARD:
-                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/buckethead.png");
+                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/BucketheadZombie.png");
                 break;
             case SCREENDOORZOMBIECARD:
-                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/doorzoombie.png");
+                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/DoorZoombie.png");
                 break;
             case FOOTBALLZOMBIECARD:
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/FootballZombie.png");
@@ -64,7 +64,7 @@ public class PictureFactory {
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/DolphineZombie.png");
                 break;
             case GARGANTUARZOMBIECARD:
-                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/GargantuarZombieCard.png");
+                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/GargantuarZombie.png");
                 break;
             case IMPZOMBIECARD:
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie IMG/ImpZombie.png");

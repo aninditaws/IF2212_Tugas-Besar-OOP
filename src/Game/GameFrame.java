@@ -227,7 +227,7 @@ public class GameFrame extends JFrame {
     public void initializeMapPanel() {
         mapPanel = new JPanel(new GridLayout(6, 11, 2, 2));
         mapPanel.setOpaque(false);
-        mapPanel.setBounds(200, 120, 1500, 810);
+        mapPanel.setBounds((int)(screenWidth * 0.2), (int)(screenHeight * 0.15), (int)(screenWidth * 0.75), (int)(screenHeight * 0.75));
         layeredPane.add(mapPanel, Integer.valueOf(1));
 
         for (int i = 0; i < 6; i++) {
@@ -240,7 +240,7 @@ public class GameFrame extends JFrame {
                 button.setBorderPainted(true);
                 button.setRolloverEnabled(false);
                 button.setFocusable(false);
-                button.setPreferredSize(new Dimension(103, 140));
+                button.setPreferredSize(new Dimension((int)(screenWidth * 0.075), (int)(screenHeight * 0.075)));
                 int row = i;
                 int col = z;
                 PlantFactory plantFactory = new PlantFactory();
@@ -292,143 +292,11 @@ public class GameFrame extends JFrame {
 
     public void initializeDrawingPanel() {
         drawingPanel = new GameDrawingPanel(gameManager);
-        drawingPanel.setBounds(200, 120, 1500, 810);
+        drawingPanel.setBounds((int)(screenWidth * 0.2), (int)(screenHeight * 0.15), (int)(screenWidth * 0.75), (int)(screenHeight * 0.75));
         layeredPane.add(drawingPanel, Integer.valueOf(1)); // Add the drawing panel below the buttons
-    }
-
-    private ImageIcon getZombieImage(Zombie zombie) {
-        ImageIcon imageiconreturn;
-        switch (zombie.name) {
-            case "Normal Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(NORMALZOMBIECARD).getImage());
-                break;
-            case "Conehead Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(CONEHEADZOMBIECARD).getImage());
-                break;
-            case "Pole Vaulting Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(POLEVAULTINGZOMBIECARD).getImage());
-                break;
-            case "Buckethead Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(BUCKETHEADZOMBIECARD).getImage());
-                break;
-            case "Ducky Tube Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(DUCKYTUBEZOMBIECARD).getImage());
-                break;
-            case "Dolphin Rider Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(DOLPHINERIDERZOMBIECARD).getImage());
-                break;
-            case "Football Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(FOOTBALLZOMBIECARD).getImage());
-                break;
-            case "Gargantuar":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(GARGANTUARZOMBIECARD).getImage());
-                break;
-            case "Imp Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(IMPZOMBIECARD).getImage());
-                break;
-            case "Screen Door Zombie":
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(SCREENDOORZOMBIECARD).getImage());
-                break;
-            default:
-                System.out.println(String.format("Default case! %s", zombie.name));
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(NORMALZOMBIECARD).getImage());
-                break;
-
-        }
-        return imageiconreturn;
-    }
-
-    private ImageIcon getPlantImage(Plant plant) {
-        ImageIcon imageiconreturn;
-        PlantFactory plantFactory = new PlantFactory();
-        switch (plantFactory.getPlantType(plant)) {
-            case SUNFLOWERTYPE:
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(SUNFLOWER).getImage());
-                break;
-            case CHERRYBOMBTYPE:
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(CHERRYBOMB).getImage());
-                break;
-            case JALAPENOTYPE:
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(JALAPENO).getImage());
-                break;
-            case LILYPADTYPE:
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(LILY_PAD).getImage());
-                break;
-            case PEASHOOTERTYPE:
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(PEASHOOTER).getImage());
-                break;
-            case REPEATERTYPE:
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(REPEATER).getImage());
-                break;
-            case SNOWPEATYPE:
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(SNOWPEA).getImage());
-                break;
-            case SQUASHTYPE:
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(SQUASH).getImage());
-                break;
-            case TALLNUTTYPE:
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(TALLNUT).getImage());
-                break;
-            case WALLNUTTYPE:
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(WALLNUT).getImage());
-                break;
-            default:
-                imageiconreturn = new ImageIcon(PictureFactory.getImageIcon(SUNFLOWER).getImage());
-                break;
-        }
-        return imageiconreturn;
     }
 
     public void renderGameMap() {
         drawingPanel.repaint();
-        GameMap<Object> gameMap = gameManager.getGameMap();
-        for (int row = 0; row < gameMap.getRow(); row++) {
-            for (int col = 0; col < gameMap.getColumn(); col++) {
-                List<Object> entities = gameMap.getEntities(row, col);
-                JButton button = mapButtons[row][col];
-                button.setIcon(null);
-                if (!entities.isEmpty()) {
-                    Object entity = entities.get(0);
-                    if (entity instanceof Zombie zombie) {
-                        ImageIcon imageIcon = getZombieImage(zombie);
-                        Image image = imageIcon.getImage().getScaledInstance(button.getWidth(), button.getHeight(),
-                                Image.SCALE_SMOOTH);
-                        imageIcon = new ImageIcon(image);
-//                        button.setIcon(imageIcon);
-                    } else if (entity instanceof Plant plant) {
-                        // TODO: Render plant yang di atas lilypad, karena sekarang cuma bisa render 1 gambar
-                        // Untuk ini harus agak refactor deh, bikin component buat draw
-                        ImageIcon imageIcon = getPlantImage(plant);
-                        Image image = imageIcon.getImage().getScaledInstance((int) (button.getWidth() * 0.6), (int) (button.getHeight() * 0.6),
-                                Image.SCALE_SMOOTH);
-                        imageIcon = new ImageIcon(image);
-//                        button.setIcon(imageIcon);
-                    } // Bisa menambahkan yang lain
-                } else {
-                    // button.setBackground(Color.green);
-                    button.setIcon(null);
-                }
-            }
-        }
-    }
-
-    // public JButton getAreaButton(int row, int column) {
-    // // Calculate the index of the button based on the row and column
-    // int index = row * 11 + column;
-
-    // // Get the component at the calculated index
-    // Component component = mapPanel.getComponent(index);
-
-    // // Check if the component is a JButton
-    // if (component instanceof JButton) {
-    // return (JButton) component;
-    // } else {
-    // // If the component is not a JButton, return null
-    // return null;
-    // }
-    // }
-
-    public void WaterConstraint() {
-
     }
 }
