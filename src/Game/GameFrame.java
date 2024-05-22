@@ -55,9 +55,9 @@ public class GameFrame extends JFrame {
     public GameFrame(GameManager gameManager, DeckPanel deckPanel) {
         // Game Title & State
         setTitle("Michael vs. Lalapan");
-        setSize(800, 600);
+        setSize(1240, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        // setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         // Layout
         setLayout(new BorderLayout());
@@ -66,7 +66,8 @@ public class GameFrame extends JFrame {
         this.gameManager = gameManager;
 
         // Screen Size
-        screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        // screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        screenSize = new Dimension(1240, 700);
         this.screenWidth = (int) screenSize.getWidth();
         this.screenHeight = (int) screenSize.getHeight();
 
@@ -77,56 +78,57 @@ public class GameFrame extends JFrame {
         // Background Map
         initializeBackgroundImage();
 
-        // Deck Panel
-        this.deckPanel = deckPanel;
-        deckPanel.disableAllButtonFunctionality();
-        initializeDeckButtons();
-        initializeDigButton();
+        // // Deck Panel
+        // this.deckPanel = deckPanel;
+        // deckPanel.disableAllButtonFunctionality();
+        // initializeDeckButtons();
+        // initializeDigButton();
 
-        layeredPane.add(deckPanel, Integer.valueOf(1));
+        // layeredPane.add(deckPanel, Integer.valueOf(1));
 
-        // Map Panel
-        initializeMapPanel();
-        initializeDrawingPanel();
+        // // Map Panel
+        // initializeMapPanel();
+        // initializeDrawingPanel();
 
-        // Menu Button
-        JButton menuButton = new JButton();
-        menuButton.setIcon(PictureFactory.getImageIcon(Picture.MENUBUTTON));
-        menuButton.setOpaque(false);
-        menuButton.setContentAreaFilled(false);
-        menuButton.setBorder(null);
-        menuButton.setMargin(new Insets(0, 0, 0, 0));
-        menuButton.setBounds(screenSize.width - 240, screenSize.height - 850, 242, 95);
-        menuButton.addActionListener(e -> {
-            gameManager.sun.resetSun();
-            gameManager.stopTimer();
-            // logic buat save atau kalau tidak, reset
-            WelcomingFrame mainMenuFrame = new WelcomingFrame();
-            mainMenuFrame.setVisible(true);
-            dispose();
-        });
+        // // Menu Button
+        // JButton menuButton = new JButton();
+        // menuButton.setIcon(PictureFactory.getImageIcon(Picture.MENUBUTTON));
+        // menuButton.setOpaque(false);
+        // menuButton.setContentAreaFilled(false);
+        // menuButton.setBorder(null);
+        // menuButton.setMargin(new Insets(0, 0, 0, 0));
+        // menuButton.setBounds(screenSize.width - 240, screenSize.height - 850, 242,
+        // 95);
+        // menuButton.addActionListener(e -> {
+        // gameManager.sun.resetSun();
+        // gameManager.stopTimer();
+        // // logic buat save atau kalau tidak, reset
+        // WelcomingFrame mainMenuFrame = new WelcomingFrame();
+        // mainMenuFrame.setVisible(true);
+        // dispose();
+        // });
 
-        layeredPane.add(menuButton, Integer.valueOf(3));
-        layeredPane.revalidate();
-        layeredPane.repaint();
+        // layeredPane.add(menuButton, Integer.valueOf(3));
+        // layeredPane.revalidate();
+        // layeredPane.repaint();
 
-        // Sun Label
-        totalSunLabel = new JLabel(String.valueOf(gameManager.sun.getTotalSun()));
-        totalSunLabel.setFont(new Font("Yanone Kaffeesatz", Font.BOLD, 30));
-        totalSunLabel.setForeground(Color.WHITE);
-        totalSunLabel.setBounds(135, 52, 100, 50);
-        layeredPane.add(totalSunLabel, Integer.valueOf(2));
+        // // Sun Label
+        // totalSunLabel = new JLabel(String.valueOf(gameManager.sun.getTotalSun()));
+        // totalSunLabel.setFont(new Font("Yanone Kaffeesatz", Font.BOLD, 30));
+        // totalSunLabel.setForeground(Color.WHITE);
+        // totalSunLabel.setBounds(135, 52, 100, 50);
+        // layeredPane.add(totalSunLabel, Integer.valueOf(2));
 
-        // Show Sun Label & Map
+        // // Show Sun Label & Map
         add(layeredPane, BorderLayout.CENTER);
 
-        // Update periodically
-        Timer timer = new Timer(200, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                updateRender();
-            }
-        });
-        timer.start();
+        // // Update periodically
+        // Timer timer = new Timer(200, new ActionListener() {
+        // public void actionPerformed(ActionEvent e) {
+        // updateRender();
+        // }
+        // });
+        // timer.start();
     }
 
     public void initializeBackgroundImage() {
@@ -307,5 +309,15 @@ public class GameFrame extends JFrame {
 
     public void renderGameMap() {
         drawingPanel.repaint();
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            GameManager gameManager = new GameManager();
+            DeckTanaman deckTanaman = new DeckTanaman(6);
+            DeckPanel deckPanel = new DeckPanel(deckTanaman);
+            GameFrame gameFrame = new GameFrame(gameManager, deckPanel);
+            gameFrame.setVisible(true);
+        });
     }
 }
