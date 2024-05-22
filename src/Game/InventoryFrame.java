@@ -44,8 +44,8 @@ public class InventoryFrame extends JFrame {
     private JLayeredPane layeredPane;
     /*
      * Panel tiap layer:
-     * layer 0: Background image
-     * layer 1: deckPanel,inventoryPanel
+     * layer 0: Background image, deckPanel
+     * layer 1: inventoryPanel
      * layer 2: buttonPanel,menuButton,playButton
      */
 
@@ -109,7 +109,7 @@ public class InventoryFrame extends JFrame {
         deckPanel.setBounds(34, 148, 150, 600);
         deckPanel.setLayout(new GridLayout(6, 1));
         deckPanel.setOpaque(false);
-        layeredPane.add(deckPanel, BorderLayout.WEST, Integer.valueOf(1));
+        layeredPane.add(deckPanel, BorderLayout.WEST, Integer.valueOf(0));
         // add(deckPanel);
     }
 
