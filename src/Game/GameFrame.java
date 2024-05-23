@@ -271,7 +271,7 @@ public class GameFrame extends JFrame {
                 button.addActionListener(e -> {
                     if (isDigging) {
                         if (!gameManager.getGameMap().getEntities(row, col).isEmpty()) {
-                            gameManager.getGameMap().removeEntity(row, col, 0);
+                            gameManager.getGameMap().removeEntity(row, col, gameManager.getGameMap().getEntities(row, col).size()-1);
                             isDigging = !isDigging;
                         }
                     }

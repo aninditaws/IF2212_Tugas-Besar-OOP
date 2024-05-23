@@ -37,12 +37,12 @@ public class GameDrawingPanel extends JPanel {
                     } else if (entity instanceof Plant plant) {
                         ImageIcon imageIcon = getPlantImage(plant);
                         Image image = imageIcon.getImage();
-                        int x = (int) (col * cellWidth + 0.25 * cellWidth);
-                        int y = (int) (row * cellHeight + 0.15 * cellHeight);
+                        int x = (int) (col * cellWidth + 0.2 * cellWidth);
+                        int y = (int) (row * cellHeight + 0.07 * cellHeight);
                         if (entity instanceof Lilypad) {
                             y += (int) (0.2 * cellHeight);
                         }
-                        g.drawImage(image, x, y, (int) (cellWidth * 0.6), (int) (cellHeight * 0.6), null);
+                        g.drawImage(image, x, y, (int) (cellWidth * 0.7), (int) (cellHeight * 0.7), null);
                     }
                 }
             }

@@ -280,7 +280,7 @@ public class GameFrem extends JFrame {
                 button.setContentAreaFilled(false);
                 button.setFocusPainted(false);
                 // Bisa diganti jadi false untuk menghilangkan border
-                button.setBorderPainted(false);
+                button.setBorderPainted(true);
                 // button.setRolloverEnabled(false);
                 // button.setFocusable(false);
                 button.setPreferredSize(new Dimension(70, 70));
@@ -290,7 +290,7 @@ public class GameFrem extends JFrame {
                 button.addActionListener(e -> {
                     if (isDigging) {
                         if (!gameManager.getGameMap().getEntities(row, col).isEmpty()) {
-                            gameManager.getGameMap().removeEntity(row, col, 0);
+                            gameManager.getGameMap().removeEntity(row, col, gameManager.getGameMap().getEntities(row, col).size()-1);
                             isDigging = !isDigging;
                         }
                     }
@@ -319,8 +319,9 @@ public class GameFrem extends JFrame {
 
     public void initializeDrawingPanel() {
         drawingPanel = new GameDrawingPanel(gameManager);
-        drawingPanel.setBounds((int) (screenWidth * 0.2), (int) (screenHeight * 0.15), (int) (screenWidth * 0.75),
-                (int) (screenHeight * 0.75));
+//        drawingPanel.setBounds((int) (screenWidth * 0.2), (int) (screenHeight * 0.15), (int) (screenWidth * 0.75),
+//                (int) (screenHeight * 0.75));
+        drawingPanel.setBounds((int) (screenWidth * 0.174), (int) (screenHeight * 0.15), 1000, 612);
         layeredPane.add(drawingPanel, Integer.valueOf(1)); // Add the drawing panel below the buttons
     }
 
