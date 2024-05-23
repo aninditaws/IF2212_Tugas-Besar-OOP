@@ -1,7 +1,6 @@
 package Plant;
 
 import Character.Character;
-import Character.CharCoordinat;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

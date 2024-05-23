@@ -9,6 +9,7 @@ import java.util.List;
 import Inventory.*;
 import Picture.*;
 import Plant.*;
+import UI.*;
 
 public class InventoryFrame extends JFrame {
     // Attributes
@@ -196,7 +197,7 @@ public class InventoryFrame extends JFrame {
 
     private void handlePlantButtonClick(int index, JButton button) {
         Plant clickedPlant = inventory.getPlant(index);
-        JButton clonedButton = new JButton(button.getIcon());
+        DeckButton clonedButton = new DeckButton(button.getIcon());
         if (button.isEnabled()) {
             if (deckTanaman.getArrayDeck().contains(clickedPlant)) {
                 deckTanaman.getArrayDeck().remove(clickedPlant);

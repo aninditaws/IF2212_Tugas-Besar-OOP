@@ -20,6 +20,7 @@ import static Picture.Picture.*;
 
 import PlantFactory.PlantFactory;
 import PlantFactory.PlantType;
+import UI.DeckButton;
 import Zombie.*;
 
 public class GameFrame extends JFrame {
@@ -38,7 +39,7 @@ public class GameFrame extends JFrame {
     private DeckPanel deckPanel;
     private JButton selectedDeckButton;
     private DeckTanaman deckTanaman;
-    private JButton[] deckButtons;
+    private DeckButton[] deckButtons;
 
     private GameDrawingPanel drawingPanel;
 
@@ -80,7 +81,7 @@ public class GameFrame extends JFrame {
 
         // Deck Panel
         this.deckPanel = deckPanel;
-        deckButtons = new JButton[deckPanel.getDeckTanaman().getMaxDeckSize()];
+        deckButtons = new DeckButton[deckPanel.getDeckTanaman().getMaxDeckSize()];
         deckPanel.disableAllButtonFunctionality();
         initializeDeckButtons();
         initializeDigButton();
@@ -168,7 +169,7 @@ public class GameFrame extends JFrame {
         int index = 0;
         for (Component component : deckPanel.getComponents()) {
             if (component instanceof JButton) {
-                JButton button = (JButton) component;
+                DeckButton button = (DeckButton) component;
                 deckButtons[index] = button;
                 int finalIndex = index;
                 button.addActionListener(e -> {
@@ -249,6 +250,7 @@ public class GameFrame extends JFrame {
     public void updateRender() {
         // System.out.println(gameManager.sun.getTotalSun());
         setTotalSun(gameManager.sun.getTotalSun());
+        updateGameDeckCooldown();
         setMap();
         renderGameMap();
         repaint();
@@ -315,5 +317,26 @@ public class GameFrame extends JFrame {
 
     public void renderGameMap() {
         drawingPanel.repaint();
+    }
+
+    public void renderFlag() {
+        if (gameManager.isFlag()) {
+            ImageIcon imageIcon = PictureFactory.getImageIcon(Picture.FLAG);
+            Image image = imageIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
+            JLabel flag = new JLabel(new ImageIcon(image));
+            flag.setBounds(0, 0, image.getWidth(flag), image.getHeight(flag));
+            layeredPane.add(flag,Integer.valueOf(2));
+        }
+    }
+
+    public void updateGameDeckCooldown() {
+        for (int i = 0; i < deckButtons.length; i++) {
+            if (deckPanel.getDeckTanaman().cooldownList[i] > 0) {
+                deckButtons[i].isCooldown = true;
+            } else {
+                deckButtons[i].isCooldown = false;
+            }
+            deckButtons[i].repaint();
+        }
     }
 }

@@ -20,6 +20,7 @@ import static Picture.Picture.*;
 
 import PlantFactory.PlantFactory;
 import PlantFactory.PlantType;
+import UI.DeckButton;
 import Zombie.*;
 
 public class GameFrem extends JFrame {
@@ -39,7 +40,7 @@ public class GameFrem extends JFrame {
     private JButton selectedDeckButton;
     private DeckTanaman deckTanaman;
 
-    private JButton[] deckButtons;
+    private DeckButton[] deckButtons;
 
     private GameDrawingPanel drawingPanel;
 
@@ -97,7 +98,7 @@ public class GameFrem extends JFrame {
         }
 
         deckPanel.disableAllButtonFunctionality();
-        deckButtons = new JButton[deckPanel.getDeckTanaman().getMaxDeckSize()];
+        deckButtons = new DeckButton[deckPanel.getDeckTanaman().getMaxDeckSize()];
         initializeDeckButtons();
         initializeDigButton();
 
@@ -187,7 +188,7 @@ public class GameFrem extends JFrame {
         int index = 0;
         for (Component component : deckPanel.getComponents()) {
             if (component instanceof JButton) {
-                JButton button = (JButton) component;
+                DeckButton button = (DeckButton) component;
                 deckButtons[index] = button;
                 int finalIndex = index;
                 button.addActionListener(e -> {
@@ -268,6 +269,7 @@ public class GameFrem extends JFrame {
     public void updateRender() {
         // System.out.println(gameManager.sun.getTotalSun());
         setTotalSun(gameManager.sun.getTotalSun());
+        updateGameDeckCooldown();
         setMap();
         renderGameMap();
         renderFlag();
@@ -346,6 +348,17 @@ public class GameFrem extends JFrame {
             JLabel flag = new JLabel(new ImageIcon(image));
             flag.setBounds(0, 0, image.getWidth(flag), image.getHeight(flag));
             layeredPane.add(flag,Integer.valueOf(2));
+        }
+    }
+
+    public void updateGameDeckCooldown() {
+        for (int i = 0; i < deckButtons.length; i++) {
+            if (deckPanel.getDeckTanaman().cooldownList[i] > 0) {
+                deckButtons[i].isCooldown = true;
+            } else {
+                deckButtons[i].isCooldown = false;
+            }
+            deckButtons[i].repaint();
         }
     }
 }
