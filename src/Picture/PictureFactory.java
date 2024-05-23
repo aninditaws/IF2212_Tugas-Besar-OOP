@@ -254,16 +254,16 @@ public class PictureFactory {
                 imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsIcon/Squash_icon.png");
                 break;
 
-            // Zombies List Button
             case PLANTLISTSBUTTON:
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie List + Icon Zombies/plantListsButton.png");
                 break;
+
+            // Zombies List Button
             case NORMALZOMBIEBUTTON:
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/NormalZombie.png");
                 break;
             case CONEHEADZOMBIEBUTTON:
-                imageIcon = new ImageIcon(
-                        "ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/ConeheadZombie.png");
+                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/ConeheadZombie.png");
                 break;
             case BUCKETHEADZOMBIEBUTTON:
                 imageIcon = new ImageIcon(
@@ -286,15 +286,13 @@ public class PictureFactory {
                         "ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/DuckyTubeZombie.png");
                 break;
             case DOLPHINERIDERZOMBIEBUTTON:
-                imageIcon = new ImageIcon(
-                        "ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/DolphineRiderZombie.png");
+                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/DolphineRiderZombie.png");
+                break;
 
-                //
-                // GARGANTUARZOMBIEBUTTON:
-                // imageIcon = new ImageIcon(
-                // "ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon
-                // Zombies/GargantuarZombie.png");
-                // break;
+            case GARGANTUARZOMBIEBUTTON:
+                imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/GargantuarZombie.png");
+                break;
+
             case IMPZOMBIEBUTTON:
                 imageIcon = new ImageIcon("ImagePvZ/Zombies/Zombie List + Icon Zombies/Icon Zombies/ImpZombie.png");
                 break;

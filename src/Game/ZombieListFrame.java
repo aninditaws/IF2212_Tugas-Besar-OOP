@@ -187,22 +187,22 @@ public class ZombieListFrame extends JFrame{
             }
         }); buttonPanel.add(dolphineriderZombieButton);
 
-        // Newspaper Zombie Button -- Show Newspaper Zombie Page
-        JButton newspaperZombieButton = new JButton();
-        newspaperZombieButton.setIcon(PictureFactory.getImageIcon(Picture.NEWSPAPERZOMBIEBUTTON));
-        newspaperZombieButton.setOpaque(false);
-        newspaperZombieButton.setContentAreaFilled(false);
-        newspaperZombieButton.setBorder(null);
-        newspaperZombieButton.setSize(775, 775);
-        newspaperZombieButton.setMargin(new Insets(0, 0, 0, 0));    
+        // Gargantuar Zombie Button -- Show Gargantuar Zombie Page
+        JButton gargantuarZombieButton = new JButton();
+        gargantuarZombieButton.setIcon(PictureFactory.getImageIcon(Picture.GARGANTUARZOMBIELIST));
+        gargantuarZombieButton.setOpaque(false);
+        gargantuarZombieButton.setContentAreaFilled(false);
+        gargantuarZombieButton.setBorder(null);
+        gargantuarZombieButton.setSize(775, 775);
+        gargantuarZombieButton.setMargin(new Insets(0, 0, 0, 0));    
         
-        newspaperZombieButton.addActionListener(new ActionListener() {
+        gargantuarZombieButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JButton newspaperZombieCard = new JButton();
-                newspaperZombieCard.setIcon(PictureFactory.getImageIcon(Picture.NEWSPAPERZOMBIELIST));
-                showCard(newspaperZombieCard, 950, 75, 500, 700);
+                JButton gargantuarZombieCard = new JButton();
+                gargantuarZombieCard.setIcon(PictureFactory.getImageIcon(Picture.GARGANTUARZOMBIELIST));
+                showCard(gargantuarZombieCard, 950, 75, 500, 700);
             }
-        }); buttonPanel.add(newspaperZombieButton);
+        }); buttonPanel.add(gargantuarZombieButton);
 
         // Imp Zombie Button -- Show Imp Zombie Page
         JButton impZombieButton = new JButton();
