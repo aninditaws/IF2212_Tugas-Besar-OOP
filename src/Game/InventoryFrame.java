@@ -70,8 +70,10 @@ public class InventoryFrame extends JFrame {
     // Method buat inisialisasi frame
     private void initializeFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        // setExtendedState(JFrame.MAXIMIZED_BOTH);
+        // screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        screenSize = new Dimension(1240, 700);
+        setSize(screenSize);
     }
 
     // Method buat inisialisasi komponen-komponen di frame
@@ -105,8 +107,8 @@ public class InventoryFrame extends JFrame {
     // Method buat nambahin deckPanel
     public void setDeckPanel(DeckPanel deckPanel) {
         this.deckPanel = deckPanel;
-        deckPanel.setPreferredSize(new Dimension(150, 150));
-        deckPanel.setBounds(34, 148, 150, 600);
+        deckPanel.setPreferredSize(new Dimension(128, 464));
+        deckPanel.setBounds(30, 118, 128, 466);
         deckPanel.setLayout(new GridLayout(6, 1));
         deckPanel.setOpaque(false);
         layeredPane.add(deckPanel, BorderLayout.WEST, Integer.valueOf(0));
@@ -124,8 +126,8 @@ public class InventoryFrame extends JFrame {
 
         int inventoryWidth = inventoryPanel.getPreferredSize().width;
         int inventoryHeight = inventoryPanel.getPreferredSize().height;
-        int inventoryX = (screenSize.width - inventoryWidth) / 2 - 100;
-        int inventoryY = (screenSize.height - inventoryHeight) / 2 - 100;
+        int inventoryX = (screenSize.width - inventoryWidth) / 2 - 85;
+        int inventoryY = (screenSize.height - inventoryHeight) / 2 - 85;
         inventoryPanel.setBounds(inventoryX, inventoryY, inventoryWidth, inventoryHeight);
 
         layeredPane.add(inventoryPanel, Integer.valueOf(1));
@@ -138,8 +140,8 @@ public class InventoryFrame extends JFrame {
             PlantImage plantImage = PlantImage.values()[i];
             final int currentIndex = i;
             ImageIcon imageIcon = new ImageIcon(plantImage.getImagePath());
-            int imageWidth = 155;
-            int imageHeight = 93;
+            int imageWidth = 130;
+            int imageHeight = 73;
             Image image = imageIcon.getImage().getScaledInstance(imageWidth, imageHeight, Image.SCALE_SMOOTH);
             imageIcon = new ImageIcon(image);
             JButton button = createPlantButton(imageIcon, currentIndex);
@@ -171,7 +173,7 @@ public class InventoryFrame extends JFrame {
         button.setOpaque(false);
         button.setContentAreaFilled(false);
         button.setBorder(null);
-        button.setSize(new Dimension(155, 93));
+        button.setSize(new Dimension(155, 95));
         ActionListener listener = e -> handlePlantButtonClick(index, button);
         button.addActionListener(listener);
         originalPlantButtonListeners.put(button, listener);
@@ -286,8 +288,8 @@ public class InventoryFrame extends JFrame {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setOpaque(false);
         // buttonPanel.setBackground(Color.red);
-        buttonPanel.setLayout(new GridLayout(1, 3, 0, 0));
-        buttonPanel.setBounds((screenSize.width - 810) / 2, screenSize.height - 195, 600, 100);
+        buttonPanel.setLayout(new GridLayout(1, 3, 10, 0));
+        buttonPanel.setBounds((screenSize.width - 680) / 2, screenSize.height - 147, 500, 60);
         controlBtnStates = new HashMap<>();
 
         addButton(buttonPanel, Picture.CLEARBUTTON, e -> clearDeck());
@@ -313,7 +315,7 @@ public class InventoryFrame extends JFrame {
         button.setOpaque(false);
         button.setContentAreaFilled(false);
         button.setBorder(null);
-        button.setSize(400, 100);
+        button.setSize(140, 44);
         button.setMargin(new Insets(0, 0, 0, 0));
 
         button.addItemListener(e -> {
@@ -355,7 +357,8 @@ public class InventoryFrame extends JFrame {
         menuButton.setContentAreaFilled(false);
         menuButton.setBorder(null);
         menuButton.setMargin(new Insets(0, 0, 0, 0));
-        menuButton.setBounds(screenSize.width - 300, screenSize.height - 850, 242, 95);
+        menuButton.setBounds(screenSize.width - 225, screenSize.height - 670, 140, 60);
+
         // kalau diklik dia bakal ke WelcomingFrame
         menuButton.addActionListener(e -> {
             WelcomingFrame mainMenuFrame = new WelcomingFrame();
@@ -575,7 +578,7 @@ public class InventoryFrame extends JFrame {
         // playButton.setContentAreaFilled(false);
         // playButton.setBorder(null);
         playButton.setMargin(new Insets(0, 0, 0, 0));
-        playButton.setBounds(screenSize.width - 350, screenSize.height - 145, 242, 61);
+        playButton.setBounds(screenSize.width - 267, screenSize.height - 120, 183, 57);
         playButton.addActionListener(e -> startGame());
 
         layeredPane.add(playButton, Integer.valueOf(2));

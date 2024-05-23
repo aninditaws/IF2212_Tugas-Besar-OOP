@@ -56,12 +56,12 @@ public class GameFrem extends JFrame {
         // Game Title & State
         // Screen Size
         // screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        screenSize = new Dimension(1240, 700);
+        screenSize = new Dimension(1240, 750);
         this.screenWidth = (int) screenSize.getWidth();
         this.screenHeight = (int) screenSize.getHeight();
 
         setTitle("Michael vs. Lalapan");
-        setSize(1240, 700);
+        setSize(1240, 750);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // setExtendedState(JFrame.MAXIMIZED_BOTH);
 
@@ -69,6 +69,7 @@ public class GameFrem extends JFrame {
         setLayout(new BorderLayout());
 
         // Manager Game
+        this.gameManager = gameManager;
 
         // LayeredPane
         layeredPane = new JLayeredPane();
@@ -77,57 +78,71 @@ public class GameFrem extends JFrame {
         // Background Map
         initializeBackgroundImage();
 
-        // // Deck Panel
-        // this.deckPanel = deckPanel;
-        // deckPanel.disableAllButtonFunctionality();
-        // initializeDeckButtons();
-        // initializeDigButton();
+        // Deck Panel
+        this.deckPanel = deckPanel;
+        deckPanel.setPreferredSize(new Dimension(128, 500));
+        deckPanel.setOpaque(false);
+        deckPanel.setBackground(new Color(23, 122, 22, 0));
+        deckPanel.setLayout(new GridLayout(6, 1, 15, 0));
+        deckPanel.setBounds(30, 118, 128, 509); // Then set the bounds
+        deckPanel.revalidate();
+        deckPanel.repaint();
 
-        // layeredPane.add(deckPanel, Integer.valueOf(1));
+        // Set the background color for each component in the deckPanel
+        Component[] components = deckPanel.getComponents();
+        for (Component component : components) {
+            component.setBackground(new Color(23, 122, 22, 0));
+        }
+
+        deckPanel.disableAllButtonFunctionality();
+        initializeDeckButtons();
+        initializeDigButton();
+
+        layeredPane.add(deckPanel, Integer.valueOf(1));
 
         // // Map Panel
-        // initializeMapPanel();
-        // initializeDrawingPanel();
+        initializeMapPanel();
+        initializeDrawingPanel();
 
-        // // Menu Button
-        // JButton menuButton = new JButton();
-        // menuButton.setIcon(PictureFactory.getImageIcon(Picture.MENUBUTTON));
-        // menuButton.setOpaque(false);
-        // menuButton.setContentAreaFilled(false);
-        // menuButton.setBorder(null);
-        // menuButton.setMargin(new Insets(0, 0, 0, 0));
-        // menuButton.setBounds(screenSize.width - 240, screenSize.height - 850, 242,
-        // 95);
-        // menuButton.addActionListener(e -> {
-        // gameManager.sun.resetSun();
-        // gameManager.stopTimer();
-        // // logic buat save atau kalau tidak, reset
-        // WelcomingFrame mainMenuFrame = new WelcomingFrame();
-        // mainMenuFrame.setVisible(true);
-        // dispose();
-        // });
+        // Menu Button
+        JButton menuButton = new JButton();
+        menuButton.setIcon(PictureFactory.getImageIcon(Picture.MENUBUTTON));
+        menuButton.setOpaque(false);
+        menuButton.setContentAreaFilled(false);
+        menuButton.setBorder(null);
+        menuButton.setMargin(new Insets(0, 0, 0, 0));
+        menuButton.setBounds(screenSize.width - 200, screenSize.height - 745, 140, 60);
+        menuButton.addActionListener(e -> {
+            gameManager.sun.resetSun();
+            gameManager.stopTimer();
+            // logic buat save atau kalau tidak, reset
+            WelcomingFrame mainMenuFrame = new WelcomingFrame();
+            mainMenuFrame.setVisible(true);
+            dispose();
+        });
 
-        // layeredPane.add(menuButton, Integer.valueOf(3));
-        // layeredPane.revalidate();
-        // layeredPane.repaint();
+        layeredPane.add(menuButton, Integer.valueOf(3));
+        layeredPane.revalidate();
+        layeredPane.repaint();
 
-        // // Sun Label
-        // totalSunLabel = new JLabel(String.valueOf(gameManager.sun.getTotalSun()));
-        // totalSunLabel.setFont(new Font("Yanone Kaffeesatz", Font.BOLD, 30));
-        // totalSunLabel.setForeground(Color.WHITE);
-        // totalSunLabel.setBounds(135, 52, 100, 50);
-        // layeredPane.add(totalSunLabel, Integer.valueOf(2));
+        // Sun Label
+        totalSunLabel = new JLabel(String.valueOf(gameManager.sun.getTotalSun()));
+        totalSunLabel.setFont(new Font("Yanone Kaffeesatz", Font.BOLD, 30));
+        totalSunLabel.setForeground(Color.WHITE);
+        totalSunLabel.setBounds(100, 43, 100, 50);
+        layeredPane.add(totalSunLabel, Integer.valueOf(2));
 
         // // Show Sun Label & Map
         add(layeredPane, BorderLayout.CENTER);
 
-        // // Update periodically
-        // Timer timer = new Timer(200, new ActionListener() {
-        // public void actionPerformed(ActionEvent e) {
-        // updateRender();
-        // }
-        // });
-        // timer.start();
+        // Update periodically
+        Timer timer = new Timer(200, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                updateRender();
+
+            }
+        });
+        timer.start();
     }
 
     public void initializeBackgroundImage() {
@@ -156,7 +171,9 @@ public class GameFrem extends JFrame {
         backgroundLabel = new JLabel(imageIcon);
 
         // Center the image on the screen
-        backgroundLabel.setBounds((screenWidth - newWidth) / 2, (screenHeight - newHeight) / 2, newWidth, newHeight);
+        // backgroundLabel.setBounds((screenWidth - newWidth) / 2, (screenHeight -
+        // newHeight) / 2, newWidth, newHeight);
+        backgroundLabel.setBounds(0, 0, (int) screenSize.getWidth(), (int) screenSize.getHeight());
         backgroundLabel.setHorizontalAlignment(JLabel.CENTER);
         backgroundLabel.setVerticalAlignment(JLabel.CENTER);
 
@@ -196,15 +213,15 @@ public class GameFrem extends JFrame {
 
     public void initializeDigButton() {
         ImageIcon imageIcon = PictureFactory.getImageIcon(Picture.DIGBUTTON);
-        Image image = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        Image image = imageIcon.getImage().getScaledInstance(82, 82, Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(image);
         JButton shovel = new JButton(imageIcon);
         layeredPane.add(shovel, Integer.valueOf(1));
         shovel.setOpaque(false);
         shovel.setContentAreaFilled(false);
         shovel.setBorder(null);
-        shovel.setBounds((int) (screenWidth * 0.15), (int) (screenHeight * 0.03), (int) (screenWidth * 0.1),
-                (int) (screenHeight * 0.1));
+        shovel.setBounds((int) (screenWidth * 0.15), (int) (screenHeight * 0.03), 82,
+                82);
         shovel.addActionListener(e -> {
             if (selectedPlant == null) {
                 isDigging = !isDigging;
@@ -249,23 +266,24 @@ public class GameFrem extends JFrame {
     }
 
     public void initializeMapPanel() {
-        mapPanel = new JPanel(new GridLayout(6, 11, 2, 2));
+        mapPanel = new JPanel(new GridLayout(6, 11, 0, 0));
         mapPanel.setOpaque(false);
-        mapPanel.setBounds((int) (screenWidth * 0.2), (int) (screenHeight * 0.15), (int) (screenWidth * 0.75),
-                (int) (screenHeight * 0.75));
+        mapPanel.setBackground(new Color(255, 255, 255, 255));
+        mapPanel.setBounds((int) (screenWidth * 0.174), (int) (screenHeight * 0.15), 1000, 612);
+
         layeredPane.add(mapPanel, Integer.valueOf(1));
 
         for (int i = 0; i < 6; i++) {
             for (int z = 0; z < 11; z++) {
                 JButton button = new JButton();
-                button.setOpaque(false);
+                // button.setOpaque(false);
                 button.setContentAreaFilled(false);
                 button.setFocusPainted(false);
                 // Bisa diganti jadi false untuk menghilangkan border
-                button.setBorderPainted(true);
-                button.setRolloverEnabled(false);
-                button.setFocusable(false);
-                button.setPreferredSize(new Dimension((int) (screenWidth * 0.075), (int) (screenHeight * 0.075)));
+                button.setBorderPainted(false);
+                // button.setRolloverEnabled(false);
+                // button.setFocusable(false);
+                button.setPreferredSize(new Dimension(70, 70));
                 int row = i;
                 int col = z;
                 PlantFactory plantFactory = new PlantFactory();
@@ -308,13 +326,5 @@ public class GameFrem extends JFrame {
 
     public void renderGameMap() {
         drawingPanel.repaint();
-    }
-
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            InventoryFrame inventoryFrame = new InventoryFrame();
-
-            inventoryFrame.setVisible(true);
-        });
     }
 }

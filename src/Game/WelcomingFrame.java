@@ -19,11 +19,12 @@ public class WelcomingFrame extends JFrame {
         // Game Title & State
         setTitle("Michael vs. Lalapan");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        // setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLayout(new BorderLayout());
 
         // Screen Size
-        screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        // screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        screenSize = new Dimension(1240, 700);
         int screenWidth = (int) screenSize.getWidth();
         int screenHeight = (int) screenSize.getHeight();
 

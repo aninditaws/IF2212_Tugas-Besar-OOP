@@ -21,10 +21,10 @@ public class DeckPanel extends JPanel {
 
     public void initializeComponents() {
 
-        setPreferredSize(new Dimension(150, 150));
+        setPreferredSize(new Dimension(128, 466));
         setLayout(new GridLayout(6, 1));
-        setOpaque(false);
-        setBounds(34, 148, 150, 600);
+        // setOpaque(false);
+        // setBounds(34, 148, 128, 466);
 
     }
 
