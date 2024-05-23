@@ -11,6 +11,11 @@ for /r "src/Character" %%f in (*.java) do (
     echo %%f >> filelist.txt
 )
 
+:: Compile Character package
+for /r "src/Exception" %%f in (*.java) do (
+    echo %%f >> filelist.txt
+)
+
 :: Compile Zombie package
 for /r "src/Zombie" %%f in (*.java) do (
     echo %%f >> filelist.txt
@@ -46,6 +51,11 @@ for /r "src/ZombieFactory" %%f in (*.java) do (
     echo %%f >> filelist.txt
 )
 
+:: Compile Character package
+for /r "src/Inventory" %%f in (*.java) do (
+    echo %%f >> filelist.txt
+)
+
 :: Compile Game package last
 for /r "src/Game" %%f in (*.java) do (
     echo %%f >> filelist.txt
@@ -60,7 +70,7 @@ if %errorlevel% neq 0 (
 )
 
 echo Creating JAR file...
-jar cfm "my_project.jar" MANIFEST.MF -C "bin" .
+jar cfm "MichaelvsLalapan.jar" MANIFEST.MF -C "bin" .
 
 if %errorlevel% neq 0 (
     echo JAR creation failed.
