@@ -1,6 +1,7 @@
 package Plant;
 
 import Character.Character;
+import Game.GameMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -85,8 +86,8 @@ public class Plant extends Character {
             return file;
       }
 
-      public void attack() {
-
+      public void attack(GameMap<Object> gameMap) {
+            // Diturunkan ke setiap plant class, nanti jadi logicnya
       }
 
       public void bePlanted() {}

@@ -50,6 +50,7 @@ public class GameFrem extends JFrame {
     private Integer indexSelectedPlant = null;
 
     private boolean isDigging = false;
+    private JLabel flag;
 
     // private static ArrayList<Bullet> bullets = new ArrayList<Bullet>(); //buat
     // array bullet sama tanaman
@@ -107,6 +108,12 @@ public class GameFrem extends JFrame {
         // // Map Panel
         initializeMapPanel();
         initializeDrawingPanel();
+
+        // Flag
+        ImageIcon imageIcon = PictureFactory.getImageIcon(Picture.FLAG);
+        Image image = imageIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
+        flag = new JLabel(new ImageIcon(image));
+        flag.setBounds(0, 0, image.getWidth(flag), image.getHeight(flag));
 
         // Menu Button
         JButton menuButton = new JButton();

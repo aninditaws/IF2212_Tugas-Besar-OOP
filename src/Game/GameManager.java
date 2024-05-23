@@ -154,6 +154,7 @@ public class GameManager {
             for (int j = 0; j < gameMap.map[i].length; j += 1) {
                 List<Object> entities = gameMap.getEntities(i, j);
                 handleAttackZombie(entities, i, j);
+                handleAttackPlant(entities, i, j);
                 for (int k = 0; k < entities.size(); k += 1) {
                     Object entity = entities.get(k);
                     if (entity instanceof Character) {
@@ -238,5 +239,13 @@ public class GameManager {
         return success;
     }
 
+    private void handleAttackPlant(List<Object> entities, int i, int j) {
+        for (Object entity : entities) {
+            if (entity instanceof Plant) {
+                Plant plant = (Plant) entity;
+                plant.attack(gameMap);
+            }
+        }
+    }
 
 }
