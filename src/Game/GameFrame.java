@@ -255,7 +255,7 @@ public class GameFrame extends JFrame {
     }
 
     public void initializeMapPanel() {
-        mapPanel = new JPanel(new GridLayout(6, 11, 2, 2));
+        mapPanel = new JPanel(new GridLayout(6, 11, 2, 2));;
         mapPanel.setOpaque(false);
         mapPanel.setBounds((int) (screenWidth * 0.2), (int) (screenHeight * 0.15), (int) (screenWidth * 0.75),
                 (int) (screenHeight * 0.75));

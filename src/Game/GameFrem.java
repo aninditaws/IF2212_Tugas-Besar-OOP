@@ -340,9 +340,12 @@ public class GameFrem extends JFrame {
     }
 
     public void renderFlag() {
-        // Masukkan label, diset di layeredPane.add di offset yang masih kosong
         if (gameManager.isFlag()) {
-            // hanya dimunculkan saat dia isFlag nya true
+            ImageIcon imageIcon = PictureFactory.getImageIcon(Picture.FLAG);
+            Image image = imageIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
+            JLabel flag = new JLabel(new ImageIcon(image));
+            flag.setBounds(0, 0, image.getWidth(flag), image.getHeight(flag));
+            layeredPane.add(flag,Integer.valueOf(2));
         }
     }
 }
