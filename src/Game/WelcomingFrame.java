@@ -24,7 +24,7 @@ public class WelcomingFrame extends JFrame {
 
         // Screen Size
         // screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        screenSize = new Dimension(1240, 700);
+        screenSize = new Dimension(1240, 750);
         int screenWidth = (int) screenSize.getWidth();
         int screenHeight = (int) screenSize.getHeight();
 

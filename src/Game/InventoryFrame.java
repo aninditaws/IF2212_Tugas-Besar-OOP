@@ -73,7 +73,7 @@ public class InventoryFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // setExtendedState(JFrame.MAXIMIZED_BOTH);
         // screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        screenSize = new Dimension(1240, 700);
+        screenSize = new Dimension(1240, 750);
         setSize(screenSize);
     }
 
