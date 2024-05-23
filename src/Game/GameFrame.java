@@ -38,6 +38,7 @@ public class GameFrame extends JFrame {
     private DeckPanel deckPanel;
     private JButton selectedDeckButton;
     private DeckTanaman deckTanaman;
+    private JButton[] deckButtons;
 
     private GameDrawingPanel drawingPanel;
 
@@ -79,6 +80,7 @@ public class GameFrame extends JFrame {
 
         // Deck Panel
         this.deckPanel = deckPanel;
+        deckButtons = new JButton[deckPanel.getDeckTanaman().getMaxDeckSize()];
         deckPanel.disableAllButtonFunctionality();
         initializeDeckButtons();
         initializeDigButton();
@@ -167,18 +169,22 @@ public class GameFrame extends JFrame {
         for (Component component : deckPanel.getComponents()) {
             if (component instanceof JButton) {
                 JButton button = (JButton) component;
+                deckButtons[index] = button;
                 int finalIndex = index;
                 button.addActionListener(e -> {
                     if (selectedPlant != null) {
                         if (indexSelectedPlant == finalIndex) {
                             selectedPlant = null;
                             indexSelectedPlant = null;
+                            button.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
                         } else {
+                            deckButtons[indexSelectedPlant].setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
                             indexSelectedPlant = finalIndex;
                             selectedPlant = new PlantFactory()
                                     .getPlantType(deckPanel.getDeckTanaman().getArrayDeck().get(indexSelectedPlant));
                             System.out.println(String.format("Selected deck index %d plant type %s", indexSelectedPlant,
                                     selectedPlant.toString()));
+                            button.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
                         }
                     } else if (!isDigging) {
                         indexSelectedPlant = finalIndex;
@@ -186,6 +192,7 @@ public class GameFrame extends JFrame {
                                 .getPlantType(deckPanel.getDeckTanaman().getArrayDeck().get(indexSelectedPlant));
                         System.out.println(String.format("Selected deck index %d plant type %s", indexSelectedPlant,
                                 selectedPlant.toString()));
+                        button.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
                     }
                 });
             }
@@ -286,6 +293,7 @@ public class GameFrame extends JFrame {
                                 // mengurangi sun ada di gameManager
                                 plant.bePlanted();
                                 deckPanel.getDeckTanaman().usePlant(indexSelectedPlant);
+                                deckButtons[indexSelectedPlant].setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
                                 selectedPlant = null;
                                 indexSelectedPlant = null;
                             }
