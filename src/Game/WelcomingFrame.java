@@ -132,7 +132,7 @@ public class WelcomingFrame extends JFrame {
         exitButton.setBorder(null);
         exitButton.setSize(250, 80);
         exitButton.setMargin(new Insets(0, 0, 0, 0));
-        exitButton.setBounds(screenWidth - 300, screenHeight - 200, 250, 80);
+        exitButton.setBounds(screenWidth - 300, screenHeight - 95, 250, 80);
         exitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
