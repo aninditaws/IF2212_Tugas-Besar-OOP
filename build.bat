@@ -60,7 +60,7 @@ if %errorlevel% neq 0 (
 )
 
 echo Creating JAR file...
-jar cfm my_project.jar MANIFEST.MF -C bin .
+jar cfm MichaelvsLalapan.jar MANIFEST.MF -C bin .
 
 echo Running the application...
 java -cp bin Game.WelcomingFrame
