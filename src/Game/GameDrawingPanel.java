@@ -28,13 +28,15 @@ public class GameDrawingPanel extends JPanel {
             for (int col = 0; col < gameMap.getColumn(); col++) {
                 List<Object> entities = gameMap.getEntities(row, col);
                 for (Object entity : entities) {
-                    if (entity instanceof Zombie zombie) {
+                    if (entity instanceof Zombie) {
+                        Zombie zombie = (Zombie) entity;
                         ImageIcon imageIcon = getZombieImage(zombie);
                         Image image = imageIcon.getImage();
                         int x = (int) (col * cellWidth);
                         int y = (int) (row * cellHeight);
                         g.drawImage(image, x, y, cellWidth, cellHeight, null);
-                    } else if (entity instanceof Plant plant) {
+                    } else if (entity instanceof Plant) {
+                        Plant plant = (Plant) entity;
                         ImageIcon imageIcon = getPlantImage(plant);
                         Image image = imageIcon.getImage();
                         int x = (int) (col * cellWidth + 0.2 * cellWidth);

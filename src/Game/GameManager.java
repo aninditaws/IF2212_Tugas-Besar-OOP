@@ -11,7 +11,10 @@ import Plant.*;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
+
 import Character.Character;
+
 
 public class GameManager {
 
@@ -153,11 +156,13 @@ public class GameManager {
                 handleAttackZombie(entities, i, j);
                 for (int k = 0; k < entities.size(); k += 1) {
                     Object entity = entities.get(k);
-                    if (entity instanceof Character character) {
+                    if (entity instanceof Character) {
+                        Character character = (Character) entity;
                         removeIfDead(character,i, j, k);
                     }
-                    if (entity instanceof Zombie zombie){
+                    if (entity instanceof Zombie){
 //                        System.out.println(String.format("%d = %d? %d = %d?", ((Zombie) entity).position.x, j, ((Zombie) entity).position.y, i));
+                        Zombie zombie = (Zombie) entity;
                         moveIfChange(zombie, i, j, k);
                     }
                 }
@@ -179,9 +184,10 @@ public class GameManager {
     }
 
     private void handleAttackZombie(List<Object> entities, int i, int j) {
-        List<Object> nextColPlantEntities = gameMap.getEntities(i, (Math.max(j - 1, 0))).stream().filter(entity -> entity instanceof Plant).toList();
+        List<Object> nextColPlantEntities = gameMap.getEntities(i, (Math.max(j - 1, 0))).stream().filter(entity -> entity instanceof Plant).collect(Collectors.toList());;
         for (Object entity : entities) {
-            if (entity instanceof Zombie zombie) {
+            if (entity instanceof Zombie) {
+                Zombie zombie = (Zombie) entity;
                 // Cek di nextColEntities apakah ada plant, jika iya, walk si zombie di set menjadi false dan mulai attack plant paling "atas"
                 if (!nextColPlantEntities.isEmpty()) {
                     zombie.stopWalk();
