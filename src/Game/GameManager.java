@@ -93,7 +93,7 @@ public class GameManager {
         ZombieType[] zombieTypes = ZombieType.values();
         ZombieFactory zombieFactory = new ZombieFactory();
 
-        for (int i = 0; i <= (flag? 5 : 1); i += 1) {
+        for (int i = 0; i <= (flag? 5 : 0); i += 1) {
             boolean val = new Random().nextInt(3)==0;
             int zombieCount = countZombies();
             System.out.print("Attempt spawning zombie, Zombie Count: ");
