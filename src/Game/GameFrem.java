@@ -262,6 +262,7 @@ public class GameFrem extends JFrame {
         setTotalSun(gameManager.sun.getTotalSun());
         setMap();
         renderGameMap();
+        renderFlag();
         repaint();
     }
 
@@ -327,5 +328,12 @@ public class GameFrem extends JFrame {
 
     public void renderGameMap() {
         drawingPanel.repaint();
+    }
+
+    public void renderFlag() {
+        // Masukkan label, diset di layeredPane.add di offset yang masih kosong
+        if (gameManager.isFlag()) {
+            // hanya dimunculkan saat dia isFlag nya true
+        }
     }
 }

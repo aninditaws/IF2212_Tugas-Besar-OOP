@@ -15,7 +15,7 @@ import Character.Character;
 
 public class GameManager {
 
-    public int flag = 0;
+    public boolean flag = false;
     public int gameTick = 0;
     private final int zombieIncrease = 2;
 
@@ -55,15 +55,24 @@ public class GameManager {
         System.out.printf("- TIME : %d%n", gameTick);
         channel.publishUpdate(gameTick);
         // Mekanisme flag
-        if (gameTick == 50) {
-            flag += 1;
-            System.out.println("flag increased");
+        if (gameTick == 50 || gameTick == 100) {
+            flag = true;
+            System.out.println("flag on");
+        }
+
+        if (gameTick == 60 || gameTick == 110) {
+            flag = false;
+            System.out.println("flag off");
         }
         // Mekanisme spawning zombie
         if (gameTick > 20 && gameTick < 160 && gameTick % 3 == 0) {
             spawnZombie(gameTick);
         }
         updateGameMap();
+    }
+
+    public boolean isFlag() {
+        return flag;
     }
 
     // Map Manager
@@ -84,12 +93,12 @@ public class GameManager {
         ZombieType[] zombieTypes = ZombieType.values();
         ZombieFactory zombieFactory = new ZombieFactory();
 
-        for (int i = 0; i <= flag; i += 1) {
+        for (int i = 0; i <= (flag? 5 : 1); i += 1) {
             boolean val = new Random().nextInt(3)==0;
             int zombieCount = countZombies();
             System.out.print("Attempt spawning zombie, Zombie Count: ");
             System.out.println(zombieCount);
-            if (val && zombieCount < 10 + ((flag > 0)? 15: 0)) {
+            if (val && zombieCount < 10 + ((flag)? 15 : 0)) {
                 Point randomPosition = generateRandomZombiePosition(zombieTypes[randomIndex]);
                 gameMap.map[randomPosition.y][randomPosition.x].addEntity(zombieFactory.CreateZombie(zombieTypes[randomIndex], randomPosition));
                 System.out.print("Created Zombie ");
