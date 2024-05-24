@@ -75,62 +75,55 @@ public class GameManager {
             spawnZombie(gameTick);
         }
         updateGameMap();
-        handleShooting();
-        updateBullets();
     }
 
     // Bullet Manager
 
-    private void handleShooting() {
-        for (int i = 0; i < gameMap.getRow(); i++) {
-            for (int j = 0; j < gameMap.getColumn(); j++) {
-                List<Object> entities = gameMap.getEntities(i, j);
-                for (Object entity : entities) {
-                    if (entity instanceof Plant) {
-                        Plant plant = (Plant) entity;
-                        if (plant.getRange() == -1) {
-                            plant.shoot();
-                        }
-                        // System.out.println("Plant shoot--------");
-                    }
-                }
-            }
-        }
-    }
+//    private void handleShooting() {
+//        for (int i = 0; i < gameMap.getRow(); i++) {
+//            for (int j = 0; j < gameMap.getColumn(); j++) {
+//                List<Object> entities = gameMap.getEntities(i, j);
+//                for (Object entity : entities) {
+//                    if (entity instanceof Plant) {
+//                        Plant plant = (Plant) entity;
+//                        if (plant.getRange() == -1) {
+//                            plant.shoot();
+//                        }
+//                        // System.out.println("Plant shoot--------");
+//                    }
+//                }
+//            }
+//        }
+//    }
 
-    public void updateBullets() {
-        for (int i = 0; i < gameMap.getRow(); i++) {
-            for (int j = 0; j < gameMap.getColumn(); j++) {
-                List<Object> entities = gameMap.getEntities(i, j);
-                for (Object entity : entities) {
-                    if (entity instanceof Plant plant) {
-                        plant.updateBullets();
-                        List<Bullet> bulletRemove = checkBulletCollisions(plant.getBullets());
-                        plant.getBullets().removeAll(bulletRemove);
-                    }
-                }
-            }
-        }
-    }
+//    public void updateBullets() {
+//        for (int i = 0; i < gameMap.getRow(); i++) {
+//            for (int j = 0; j < gameMap.getColumn(); j++) {
+//                List<Object> entities = gameMap.getEntities(i, j);
+//                for (Object entity : entities) {
+//                    if (entity instanceof Plant plant) {
+////                        plant.updateBullets();
+//                        List<Bullet> bulletRemove = checkBulletCollisions(plant.getBullets());
+////                        plant.getBullets().removeAll(bulletRemove);
+//                    }
+//                }
+//            }
+//        }
+//    }
 
-    public List<Bullet> checkBulletCollisions(List<Bullet> bullets) {
-        List<Bullet> bulletsToRemove = new ArrayList<>();
-        for (Bullet bullet : bullets) {
-            int bulletX = bullet.getPosition().x;
-            int bulletY = bullet.getPosition().y;
-            if (bulletX < gameMap.getColumn() && bulletY < gameMap.getRow()) {
-                List<Object> entities = gameMap.getEntities(bulletY, bulletX);
-                for (Object entity : entities) {
-                    if (entity instanceof Zombie zombie) {
-                        zombie.getAttacked(bullet.getDamage());
-                        System.out.println("Zombie Health: " + zombie.getHealth());
-                        bulletsToRemove.add(bullet);
-                        break;
-                    }
+    public void handleBulletCollision(List<Object> entities, int i, int j) {
+        List<Object> zombieCollided = gameMap.getEntities(i, j).stream()
+                .filter(entity -> entity instanceof Zombie).collect(Collectors.toList());
+        for (Object entity : entities) {
+            if (entity instanceof Bullet) {
+                Bullet bullet = (Bullet) entity;
+                if (!zombieCollided.isEmpty()) {
+                    ((Zombie) zombieCollided.get(0)).getAttacked(bullet.attack_damage);
+                    System.out.println("ZOMBIE SHOT!");
+                    bullet.dead = true;
                 }
             }
         }
-        return bulletsToRemove;
     }
 
     public boolean isFlag() {
@@ -227,6 +220,13 @@ public class GameManager {
                         Zombie zombie = (Zombie) entity;
                         moveIfChange(zombie, i, j, k);
                     }
+                    if (entity instanceof Bullet) {
+                        Bullet bullet = (Bullet) entity;
+                        if (!bullet.dead) {
+                            moveIfChange(bullet, i, j, k);
+                            bullet.attack(gameMap);
+                        }
+                    }
                 }
             }
         }
@@ -234,6 +234,7 @@ public class GameManager {
 
     private void removeIfDead(Character character, int i, int j, int k) {
         if (character.dead) {
+            System.out.println(String.format("DEAD, remove from %d, %d", j, i));
             gameMap.removeEntity(i, j, k);
         }
     }
@@ -244,7 +245,7 @@ public class GameManager {
         }
         if (character.position.x != j || character.position.y != i) {
             gameMap.moveEntity(i, j, k, character.position.y, character.position.x);
-            System.out.println(String.format("Moved zombie %s from %d, %d to %d, %d", character.name, j, i,
+            System.out.println(String.format("Moved %s from %d, %d to %d, %d", character.name, j, i,
                     character.position.x, character.position.y));
         }
     }
@@ -252,7 +253,7 @@ public class GameManager {
     private void handleAttackZombie(List<Object> entities, int i, int j) {
         List<Object> nextColPlantEntities = gameMap.getEntities(i, (Math.max(j - 1, 0))).stream()
                 .filter(entity -> entity instanceof Plant).collect(Collectors.toList());
-        ;
+
         for (Object entity : entities) {
             if (entity instanceof Zombie) {
                 Zombie zombie = (Zombie) entity;
