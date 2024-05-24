@@ -27,6 +27,7 @@ import Zombie.*;
 public class GameFrem extends JFrame {
     private GameManager gameManager;
     private JPanel mapPanel;
+    private boolean stopgame = false;
     private JLabel totalSunLabel;
     private JLayeredPane layeredPane;
 
@@ -128,8 +129,9 @@ public class GameFrem extends JFrame {
         menuButton.setBounds(screenSize.width - 200, screenSize.height - 745, 140, 60);
         menuButton.addActionListener(e -> {
             gameManager.sun.resetSun();
-            gameManager.stopGame();
             gameManager.stopTimer();
+            gameManager.stopGame();
+            stopgame = true;
             // logic buat save atau kalau tidak, reset
             WelcomingFrame mainMenuFrame = new WelcomingFrame();
             mainMenuFrame.setVisible(true);
@@ -157,6 +159,7 @@ public class GameFrem extends JFrame {
             }
         });
         timer.start();
+        stopgame = false;
     }
 
     public void initializeBackgroundImage() {
@@ -289,6 +292,7 @@ public class GameFrem extends JFrame {
         renderGameMap();
         renderFlag();
         // Check win/lose
+        if (stopgame) return;
         int condition = gameManager.checkEndCondition();
         if (condition == 0) {
             // lose

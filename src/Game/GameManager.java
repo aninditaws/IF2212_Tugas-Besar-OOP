@@ -53,6 +53,7 @@ public class GameManager {
     public void stopGame() {
         EventChannel.getInstance().unsubscribeAll();
         EventChannel.getInstance().subscribe(Sun.getInstance());
+        gameMap.clearMap();
     }
 
     public void stopTimer() {

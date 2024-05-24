@@ -26,6 +26,10 @@ public class GameMap<T> {
         }
     }
 
+    public void clearMap() {
+        map = new Area[height][width];
+    }
+
     public void addEntity(T entity, int row, int col) {
         if (row < 0 || row >= height || col < 0 || col >= width) {
             throw new IllegalArgumentException("Error! Tidak dapat meletakkan di luar map");
