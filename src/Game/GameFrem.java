@@ -297,8 +297,26 @@ public class GameFrem extends JFrame {
             Image image = imageIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
             JLabel loseimage = new JLabel(new ImageIcon(image));
             loseimage.setBounds(0, 0, image.getWidth(loseimage), image.getHeight(loseimage));
-            layeredPane.add(loseimage, Integer.valueOf(2));
+            layeredPane.add(loseimage, Integer.valueOf(3));
             gameManager.stopTimer();
+
+            JButton loseButton = new JButton();
+            loseButton.setIcon(PictureFactory.getImageIcon(Picture.LOSE));
+            loseButton.setOpaque(false);
+            loseButton.setContentAreaFilled(false);
+            loseButton.setBorder(null);
+            loseButton.setSize(530, 75);
+            loseButton.setLocation((1240 - 650) / 2,635);
+            loseButton.setMargin(new Insets(0, 0, 0, 0));
+
+            loseButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    WelcomingFrame frame = new WelcomingFrame();
+                    frame.setVisible(true);
+                    dispose();
+                }
+            });
+
         } else if (condition == 2) {
             // win
             System.out.println("CONGRATULATIONS! YOU WIN");
@@ -306,8 +324,26 @@ public class GameFrem extends JFrame {
             Image image = imageIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
             JLabel winimage = new JLabel(new ImageIcon(image));
             winimage.setBounds(0, 0, image.getWidth(winimage), image.getHeight(winimage));
-            layeredPane.add(winimage, Integer.valueOf(2));
+            layeredPane.add(winimage, Integer.valueOf(3));
             gameManager.stopTimer();
+
+            JButton winButton = new JButton();
+            winButton.setIcon(PictureFactory.getImageIcon(Picture.WIN));
+            winButton.setOpaque(false);
+            winButton.setContentAreaFilled(false);
+            winButton.setBorder(null);
+            winButton.setSize(530, 75);
+            winButton.setLocation((1240 - 650) / 2,635);
+            winButton.setMargin(new Insets(0, 0, 0, 0));
+
+            winButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    WelcomingFrame frame = new WelcomingFrame();
+                    frame.setVisible(true);
+                    dispose();
+                }
+            });
+
         }
         repaint();
     }
