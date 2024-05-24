@@ -15,14 +15,15 @@ public class PolevaultingZombie extends Zombie {
         super("Pole Vaulting Zombie", 175, 100, 1, false, position);
     }
 
-    public void jump(){
-        if (canJump==true && Plant.name == "Tallnut" ) {
-            // Dapat melakukan lompatan, zombie nembus tanaman di depannya
-            // gameMap.moveEntity(position.getX(),position.getY(), (position.getX() + 1), (position.getY() + 1));
-            System.out.println(String.format("Pole Vault zombie jumped to %d from %d, %d to %d.", position.getX(), (position.getX() + 1), position.getY(), (position.getY() + 1)));
-
-        }
-    }
+//    public void jump(){
+//        if (canJump==true && Plant.name == "Tallnut" ) {
+//            // Dapat melakukan lompatan, zombie nembus tanaman di depannya
+//            // gameMap.moveEntity(position.getX(),position.getY(), (position.getX() + 1), (position.getY() + 1));
+//            System.out.println(String.format("Pole Vault zombie jumped to %d from %d, %d to %d.", position.getX(), (position.getX() + 1), position.getY(), (position.getY() + 1)));
+//
+//        }
+//    }
+    // minimal code nya dipikirin dulu deh, jangan asal! ini apaan Plant.name?? itu static class
 
     public void setCanJump(boolean canJump){
         this.canJump = canJump;
