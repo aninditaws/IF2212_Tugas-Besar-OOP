@@ -25,19 +25,20 @@ public class PlantsListFrame extends JFrame{
 
         // Screen Size and scaling factor
         // screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        screenSize = new Dimension(1240, 750);
-        int screenWidth = (int) screenSize.getWidth();
-        int screenHeight = (int) screenSize.getHeight();
+        setSize(1240, 750);
+        setLocationRelativeTo(null);
+        // int 1240 = (int) screenSize.getWidth();
+        // int 750 = (int) screenSize.getHeight();
 
         // Layered Pane
         layeredPane = new JLayeredPane();
-        layeredPane.setPreferredSize(screenSize);
+        layeredPane.setPreferredSize(new Dimension(1240, 750));
 
         // Picture of Background
         ImageIcon imageIcon = PictureFactory.getImageIcon(Picture.PLANTSLISTBG);
-        Image image = imageIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
+        Image image = imageIcon.getImage().getScaledInstance(1240, 750, Image.SCALE_SMOOTH);
         label = new JLabel(new ImageIcon(image));
-        label.setBounds(0, 0, screenWidth, screenHeight);
+        label.setBounds(0, 0, 1240, 750);
         layeredPane.add(label, Integer.valueOf(0));
 
         // 10 buttons: PLANTS LIST
@@ -220,7 +221,7 @@ public class PlantsListFrame extends JFrame{
         menuPanel = new JPanel();
         menuPanel.setOpaque(false);
         menuPanel.setLayout(new GridLayout(1, 2, 0, 0));
-        menuPanel.setBounds((screenWidth - 650) / 2, 635, 650, 70);
+        menuPanel.setBounds((1240 - 650) / 2, 635, 650, 70);
         layeredPane.add(menuPanel, Integer.valueOf(1));
 
         // Menu Button -- To Welcome

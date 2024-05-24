@@ -75,6 +75,7 @@ public class InventoryFrame extends JFrame {
         // screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         screenSize = new Dimension(1240, 750);
         setSize(screenSize);
+        setLocationRelativeTo(null);
     }
 
     // Method buat inisialisasi komponen-komponen di frame

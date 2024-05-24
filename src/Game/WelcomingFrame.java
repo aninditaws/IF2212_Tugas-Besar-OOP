@@ -24,20 +24,21 @@ public class WelcomingFrame extends JFrame {
 
         // Screen Size
         // screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        screenSize = new Dimension(1240, 750);
-        int screenWidth = (int) screenSize.getWidth();
-        int screenHeight = (int) screenSize.getHeight();
+        setSize(1240, 750);
+        setLocationRelativeTo(null);
+        // int 1240 = (int) screenSize.getWidth();
+        // int 750 = (int) screenSize.getHeight();
 
         // Layered Pane
         layeredPane = new JLayeredPane();
-        layeredPane.setPreferredSize(screenSize);
+        layeredPane.setPreferredSize(new Dimension(1240, 750));
 
         // Picture of Background
         ImageIcon imageIcon = PictureFactory.getImageIcon(Picture.WELCOME);
-        Image image = imageIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
+        Image image = imageIcon.getImage().getScaledInstance(1240, 750, Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(image);
         label = new JLabel(imageIcon);
-        label.setBounds(0, 0, screenWidth, screenHeight);
+        label.setBounds(0, 0, 1240, 750);
         add(label);
         layeredPane.add(label, Integer.valueOf(0));
 
@@ -45,7 +46,7 @@ public class WelcomingFrame extends JFrame {
         buttonPanel = new JPanel();
         buttonPanel.setOpaque(false);
         buttonPanel.setLayout(new GridLayout(3, 1, 10, 10));
-        buttonPanel.setBounds((screenWidth - 400) / 2, (screenHeight - 100) / 2, 450, 300);
+        buttonPanel.setBounds((1240 - 400) / 2, (750 - 100) / 2, 450, 300);
         layeredPane.add(buttonPanel, Integer.valueOf(1));
 
         // Start Button -- To Inventory
@@ -132,7 +133,7 @@ public class WelcomingFrame extends JFrame {
         exitButton.setBorder(null);
         exitButton.setSize(250, 80);
         exitButton.setMargin(new Insets(0, 0, 0, 0));
-        exitButton.setBounds(screenWidth - 300, screenHeight - 95, 250, 80);
+        exitButton.setBounds(1240 - 300, 750 - 95, 250, 80);
         exitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);

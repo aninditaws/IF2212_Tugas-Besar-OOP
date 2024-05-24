@@ -121,9 +121,6 @@ public class PictureFactory {
             case GAMENIGHT:
                 imageIcon = new ImageIcon("ImagePvZ/GameFrame/gameFrameNight.png");
                 break;
-            case HELP:
-                imageIcon = new ImageIcon("ImagePvZ/GameFrame/HelpNobutton.png");
-                break;
             case FLAG:
                 imageIcon = new ImageIcon("ImagePvZ/GameFrame/flag.png");
                 break;
@@ -160,7 +157,7 @@ public class PictureFactory {
                 imageIcon = new ImageIcon("ImagePvZ/Plants/PlantsList/Squash.png");
                 break;
 
-            // // Bullet List
+            // Bullet List
             case BULLET:
                 imageIcon = new ImageIcon("ImagePvZ/Plants/Bullet/Pea.png");
                 break;
@@ -303,6 +300,15 @@ public class PictureFactory {
             // Help Button
             case MENUBACKBUTTON:
                 imageIcon = new ImageIcon("ImagePvZ/GameFrame/MenuButton.png");
+                break;
+            case MENUHELPBUTTON:
+                imageIcon = new ImageIcon("ImagePvZ/GameFrame/menu.png");
+                break;
+            case NEXTHELPBUTTON:                
+                imageIcon = new ImageIcon("ImagePvZ/GameFrame/next.png");
+                break;
+            case BACKHELPBUTTON:
+                imageIcon = new ImageIcon("ImagePvZ/GameFrame/back.png");
                 break;
 
             // Inventory Button
