@@ -1,15 +1,12 @@
-//package Plant.Bullets;
-//
-//import Plant.Bullet;
-//import Character.CharCoordinat;
-//
-//
-//public class SlowBullet extends Bullet {
-//
-//      public SlowBullet(int power, CharCoordinat i) {
-//            super(power, i);
-//            img = "ImagePvZ/Plants/Bullet/SlowPea.png";
-//            //TODO Auto-generated constructor stub
-//      }
-//
-//}
+package Plant.Bullets;
+
+import java.awt.Point;
+
+
+public class SlowBullet extends Bullet {
+
+      public SlowBullet(Point position, int speed, int damage) {
+            super(position, speed, damage);
+        }
+
+}
