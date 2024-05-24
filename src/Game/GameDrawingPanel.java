@@ -55,34 +55,34 @@ public class GameDrawingPanel extends JPanel {
                         }
                         g.drawImage(image, x, y, (int) (cellWidth * 0.7), (int) (cellHeight * 0.7), null);
 
-//                        if (plant.getRange() == -1) {
-//                            Iterator<Bullet> bulletIterator = plant.getBullets().iterator();
-//                            while (bulletIterator.hasNext()) {
-//                                Bullet bullet = bulletIterator.next();
-//                                if (gameManager.checkBulletCollisions(Collections.singletonList(bullet))
-//                                        .contains(bullet)) {
-//                                    bulletIterator.remove();
-//                                } else {
-//                                    ImageIcon bulletImageIcon;
-//                                    if (plant instanceof Peashooter) {
-//                                        bulletImageIcon = new ImageIcon(bullet.getPeaPath());
-//                                    } else if (plant instanceof SnowPea) {
-//                                        bulletImageIcon = new ImageIcon(bullet.getsnowPath());
-//                                    } else {
-//                                        continue;
-//                                    }
-//                                    Image bulletImage = bulletImageIcon.getImage();
-//                                    int bulletX = x + (int) (0.01 * cellWidth);
-//                                    int bulletMov = bullet.getPosition().x * (int) (0.7 * cellWidth);
-//                                    bulletX += bulletMov;
-//                                    int bulletY = y;
-//                                    g.drawImage(bulletImage, bulletX, bulletY, null);
-//                                }
-//                            }
-//                        }
+                        // if (plant.getRange() == -1) {
+                        // Iterator<Bullet> bulletIterator = plant.getBullets().iterator();
+                        // while (bulletIterator.hasNext()) {
+                        // Bullet bullet = bulletIterator.next();
+                        // if (gameManager.checkBulletCollisions(Collections.singletonList(bullet))
+                        // .contains(bullet)) {
+                        // bulletIterator.remove();
+                        // } else {
+                        // ImageIcon bulletImageIcon;
+                        // if (plant instanceof Peashooter) {
+                        // bulletImageIcon = new ImageIcon(bullet.getPeaPath());
+                        // } else if (plant instanceof SnowPea) {
+                        // bulletImageIcon = new ImageIcon(bullet.getsnowPath());
+                        // } else {
+                        // continue;
+                        // }
+                        // Image bulletImage = bulletImageIcon.getImage();
+                        // int bulletX = x + (int) (0.01 * cellWidth);
+                        // int bulletMov = bullet.getPosition().x * (int) (0.7 * cellWidth);
+                        // bulletX += bulletMov;
+                        // int bulletY = y;
+                        // g.drawImage(bulletImage, bulletX, bulletY, null);
+                        // }
+                        // }
+                        // }
                     } else if (entity instanceof Bullet) {
                         Bullet bullet = (Bullet) entity;
-                        Image image = bullet.slow? bullet.getsnowPath():bullet.getPeaPath();
+                        Image image = bullet.slow ? bullet.getsnowPath() : bullet.getPeaPath();
                         int x = (int) (col * cellWidth + 0.5 * cellWidth);
                         int y = (int) (row * cellHeight + 0.5 * cellHeight);
                         g.drawImage(image, x, y, (int) (cellWidth * 0.3), (int) (cellHeight * 0.3), null);
