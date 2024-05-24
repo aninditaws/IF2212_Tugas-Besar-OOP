@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Repeater extends Plant {
       private long lastShotTime;
-      private int doShoot = 1;
+      private int doShoot = 2;
 
       public Repeater() {
             super("Repeater", 100, 25, 8, 200, -1, 10, null);

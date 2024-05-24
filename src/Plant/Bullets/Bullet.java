@@ -50,6 +50,9 @@ public class Bullet extends Character {
         List<Object> zombies = gameMap.getEntities(position.y, position.x).stream().filter(entity -> entity instanceof Zombie).collect(Collectors.toList());
         if (!zombies.isEmpty()) {
             ((Zombie) zombies.get(0)).getAttacked(attack_damage);
+            if (slow) {
+                ((Zombie) zombies.get(0)).getSlowed();
+            }
             dead = true;
         }
     }

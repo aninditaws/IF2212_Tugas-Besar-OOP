@@ -14,6 +14,9 @@ public class Zombie extends Character {
     public boolean is_aquatic;
     private int doUpdate = 0;
     private boolean walk = true;
+
+    private boolean slow = false;
+    private int slowUpdate = 0;
     public Zombie(String name, int health, int attack_damage, int attack_speed, boolean is_aquatic, Point position) {
         super(name, health, attack_damage, attack_speed);
         this.is_aquatic = is_aquatic;
@@ -61,7 +64,10 @@ public class Zombie extends Character {
     public void update(int gameTick) {
         super.update(gameTick);
         doUpdate += 1;
-        if (doUpdate == 10) {
+        if (slowUpdate <= 0) {
+            slow = false;
+        }
+        if (doUpdate >= 10 + (slow? 5 : 0)) {
             doUpdate = 0;
             if (walk) {
                 try {
@@ -71,6 +77,12 @@ public class Zombie extends Character {
                 }
             }
         }
+        slowUpdate -= 1;
+    }
+
+    public void getSlowed() {
+        this.slow = true;
+        this.slowUpdate = 3;
     }
 
 public int getX() {
