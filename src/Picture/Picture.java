@@ -58,7 +58,6 @@ public enum Picture {
     INVENTORY,
     GAMEDAY,
     GAMENIGHT,
-    HELP,
     FLAG,
 
     // Plants List
@@ -76,6 +75,7 @@ public enum Picture {
     // Bullet List
     BULLET,
     SLOWBULLET,
+    
     // Zombies List
     NORMALZOMBIELIST,
     CONEHEADZOMBIELIST,
@@ -125,6 +125,9 @@ public enum Picture {
 
     // Help Button
     MENUBACKBUTTON,
+    MENUHELPBUTTON,
+    BACKHELPBUTTON,
+    NEXTHELPBUTTON,
 
     // Inventory Button
     SWAPBUTTON,
