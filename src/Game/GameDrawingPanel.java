@@ -8,6 +8,8 @@ import Plant.Bullets.Bullet;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import static Picture.Picture.*;
@@ -38,6 +40,9 @@ public class GameDrawingPanel extends JPanel {
                         int x = (int) (col * cellWidth);
                         int y = (int) (row * cellHeight);
                         g.drawImage(image, x, y, cellWidth, cellHeight, null);
+                        if (zombie.isDead()) {
+
+                        }
                     } else if (entity instanceof Plant) {
                         Plant plant = (Plant) entity;
                         ImageIcon imageIcon = getPlantImage(plant);
@@ -51,37 +56,35 @@ public class GameDrawingPanel extends JPanel {
                         g.drawImage(image, x, y, (int) (cellWidth * 0.7), (int) (cellHeight * 0.7), null);
 
                         if (plant.getRange() == -1) {
-                            if (plant instanceof Peashooter) {
-
-                                for (Bullet bullet : plant.getBullets()) {
-                                    ImageIcon bulletImageIcon = new ImageIcon(bullet.getPeaPath());
+                            Iterator<Bullet> bulletIterator = plant.getBullets().iterator();
+                            while (bulletIterator.hasNext()) {
+                                Bullet bullet = bulletIterator.next();
+                                if (gameManager.checkBulletCollisions(Collections.singletonList(bullet))
+                                        .contains(bullet)) {
+                                    bulletIterator.remove();
+                                } else {
+                                    ImageIcon bulletImageIcon;
+                                    if (plant instanceof Peashooter) {
+                                        bulletImageIcon = new ImageIcon(bullet.getPeaPath());
+                                    } else if (plant instanceof SnowPea) {
+                                        bulletImageIcon = new ImageIcon(bullet.getsnowPath());
+                                    } else {
+                                        continue;
+                                    }
                                     Image bulletImage = bulletImageIcon.getImage();
-
-                                    int bulletX = (int) (x + 0.01 * cellWidth);
-                                    int bulletMov = (int) (bullet.getPosition().x * 0.7 * cellWidth);
-                                    bulletX += bulletMov;
-                                    int bulletY = y;
-                                    g.drawImage(bulletImage, bulletX, bulletY, null);
-
-                                }
-                            } else if (plant instanceof SnowPea) {
-                                for (Bullet bullet : plant.getBullets()) {
-                                    ImageIcon bulletImageIcon = new ImageIcon(bullet.getsnowPath());
-                                    Image bulletImage = bulletImageIcon.getImage();
-
-                                    int bulletX = (int) (x + 0.01 * cellWidth);
-                                    int bulletMov = (int) (bullet.getPosition().x * 0.7 * cellWidth);
+                                    int bulletX = x + (int) (0.01 * cellWidth);
+                                    int bulletMov = bullet.getPosition().x * (int) (0.7 * cellWidth);
                                     bulletX += bulletMov;
                                     int bulletY = y;
                                     g.drawImage(bulletImage, bulletX, bulletY, null);
                                 }
                             }
-
                         }
                     }
                 }
             }
         }
+
     }
 
     private ImageIcon getZombieImage(Zombie zombie) {

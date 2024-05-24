@@ -10,6 +10,7 @@ import java.awt.*;
 import Plant.*;
 import Plant.Bullets.Bullet;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -104,14 +105,16 @@ public class GameManager {
                 for (Object entity : entities) {
                     if (entity instanceof Plant plant) {
                         plant.updateBullets();
-                        checkBulletCollisions(plant.getBullets(), i, j);
+                        List<Bullet> bulletRemove = checkBulletCollisions(plant.getBullets());
+                        plant.getBullets().removeAll(bulletRemove);
                     }
                 }
             }
         }
     }
 
-    private void checkBulletCollisions(List<Bullet> bullets, int plantRow, int plantCol) {
+    public List<Bullet> checkBulletCollisions(List<Bullet> bullets) {
+        List<Bullet> bulletsToRemove = new ArrayList<>();
         for (Bullet bullet : bullets) {
             int bulletX = bullet.getPosition().x;
             int bulletY = bullet.getPosition().y;
@@ -120,13 +123,14 @@ public class GameManager {
                 for (Object entity : entities) {
                     if (entity instanceof Zombie zombie) {
                         zombie.getAttacked(bullet.getDamage());
-                        // System.out.println("Zombie attacked--------");
-                        bulletX = gameMap.getColumn();
+                        System.out.println("Zombie Health: " + zombie.getHealth());
+                        bulletsToRemove.add(bullet);
                         break;
                     }
                 }
             }
         }
+        return bulletsToRemove;
     }
 
     public boolean isFlag() {
