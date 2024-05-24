@@ -64,7 +64,7 @@ public class GameDrawingPanel extends JPanel {
                                     bulletIterator.remove();
                                 } else {
                                     ImageIcon bulletImageIcon;
-                                    if (plant instanceof Peashooter) {
+                                    if ((plant instanceof Peashooter) || (plant instanceof Repeater)) {
                                         bulletImageIcon = new ImageIcon(bullet.getPeaPath());
                                     } else if (plant instanceof SnowPea) {
                                         bulletImageIcon = new ImageIcon(bullet.getsnowPath());
@@ -72,10 +72,12 @@ public class GameDrawingPanel extends JPanel {
                                         continue;
                                     }
                                     Image bulletImage = bulletImageIcon.getImage();
-                                    int bulletX = x + (int) (0.01 * cellWidth);
+                                    int bulletX = bullet.getPosition().x * (int) (0.7 * cellWidth);
                                     int bulletMov = bullet.getPosition().x * (int) (0.7 * cellWidth);
+                                    System.out.println("Bullet sebelum: " + bulletX);
                                     bulletX += bulletMov;
                                     int bulletY = y;
+                                    System.out.println("Bullet setelah: " + bulletX);
                                     g.drawImage(bulletImage, bulletX, bulletY, null);
                                 }
                             }

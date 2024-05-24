@@ -24,7 +24,7 @@ public class SnowPea extends Plant {
             long currentTime = System.currentTimeMillis();
             if (currentTime - lastShotTime >= cooldown * 1000) {
                   System.out.println("Shooting a bullet from position: " + position);
-                  bullets.add(new Bullet(new Point(position.x + 1, position.y), 1, attack_damage));
+                  bullets.add(new Bullet(new Point(position.x + 1, position.y), this.attack_speed, this.attack_damage));
                   lastShotTime = currentTime;
             }
 

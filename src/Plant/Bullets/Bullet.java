@@ -34,6 +34,10 @@ public class Bullet {
         position.x += speed;
     }
 
+    public void move() {
+        position.x += 1;
+    }
+
     public boolean isOutOfBounds(int width) {
         return position.x > width;
     }

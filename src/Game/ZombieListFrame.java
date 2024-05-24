@@ -6,7 +6,7 @@ import java.awt.event.*;
 
 import Picture.*;
 
-public class ZombieListFrame extends JFrame{
+public class ZombieListFrame extends JFrame {
     private JLayeredPane layeredPane;
     private JPanel buttonPanel;
     private JLabel label;
@@ -16,7 +16,7 @@ public class ZombieListFrame extends JFrame{
     private JButton plantsListButton;
     private JButton currentVisibleCard;
 
-    public ZombieListFrame(){
+    public ZombieListFrame() {
         // Game Title & State
         setTitle("Michael vs. Lalapan");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,15 +54,16 @@ public class ZombieListFrame extends JFrame{
         normalZombieButton.setContentAreaFilled(false);
         normalZombieButton.setBorder(null);
         normalZombieButton.setSize(550, 550);
-        normalZombieButton.setMargin(new Insets(0, 0, 0, 0));    
-        
+        normalZombieButton.setMargin(new Insets(0, 0, 0, 0));
+
         normalZombieButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JButton normalZombieCard = new JButton();
                 normalZombieCard.setIcon(PictureFactory.getImageIcon(Picture.NORMALZOMBIELIST));
                 showCard(normalZombieCard, 710, 50, 500, 600);
             }
-        }); buttonPanel.add(normalZombieButton);
+        });
+        buttonPanel.add(normalZombieButton);
 
         // Conehead Zombie Button -- Show Conehead Zombie Page
         JButton coneheadZombieButton = new JButton();
@@ -71,15 +72,16 @@ public class ZombieListFrame extends JFrame{
         coneheadZombieButton.setContentAreaFilled(false);
         coneheadZombieButton.setBorder(null);
         coneheadZombieButton.setSize(550, 550);
-        coneheadZombieButton.setMargin(new Insets(0, 0, 0, 0));    
-        
+        coneheadZombieButton.setMargin(new Insets(0, 0, 0, 0));
+
         coneheadZombieButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JButton coneheadZombieCard = new JButton();
                 coneheadZombieCard.setIcon(PictureFactory.getImageIcon(Picture.CONEHEADZOMBIELIST));
                 showCard(coneheadZombieCard, 710, 50, 500, 600);
             }
-        }); buttonPanel.add(coneheadZombieButton);
+        });
+        buttonPanel.add(coneheadZombieButton);
 
         // Buckethead Zombie Button -- Show Buckethead Zombie Page
         JButton bucketheadZombieButton = new JButton();
@@ -88,15 +90,16 @@ public class ZombieListFrame extends JFrame{
         bucketheadZombieButton.setContentAreaFilled(false);
         bucketheadZombieButton.setBorder(null);
         bucketheadZombieButton.setSize(550, 550);
-        bucketheadZombieButton.setMargin(new Insets(0, 0, 0, 0));    
-        
+        bucketheadZombieButton.setMargin(new Insets(0, 0, 0, 0));
+
         bucketheadZombieButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JButton bucketheadZombieCard = new JButton();
                 bucketheadZombieCard.setIcon(PictureFactory.getImageIcon(Picture.BUCKETHEADZOMBIELIST));
                 showCard(bucketheadZombieCard, 710, 50, 500, 600);
             }
-        }); buttonPanel.add(bucketheadZombieButton);
+        });
+        buttonPanel.add(bucketheadZombieButton);
 
         // Screendoor Zombie Button -- Show Screendoor Zombie Page
         JButton screendoorZombieButton = new JButton();
@@ -105,15 +108,16 @@ public class ZombieListFrame extends JFrame{
         screendoorZombieButton.setContentAreaFilled(false);
         screendoorZombieButton.setBorder(null);
         screendoorZombieButton.setSize(550, 550);
-        screendoorZombieButton.setMargin(new Insets(0, 0, 0, 0));    
-        
+        screendoorZombieButton.setMargin(new Insets(0, 0, 0, 0));
+
         screendoorZombieButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JButton screendoorZombieCard = new JButton();
                 screendoorZombieCard.setIcon(PictureFactory.getImageIcon(Picture.SCREENDOORZOMBIELIST));
                 showCard(screendoorZombieCard, 710, 50, 500, 600);
             }
-        }); buttonPanel.add(screendoorZombieButton);
+        });
+        buttonPanel.add(screendoorZombieButton);
 
         // Football Zombie Button -- Show Football Zombie Page
         JButton footballZombieButton = new JButton();
@@ -122,15 +126,16 @@ public class ZombieListFrame extends JFrame{
         footballZombieButton.setContentAreaFilled(false);
         footballZombieButton.setBorder(null);
         footballZombieButton.setSize(550, 550);
-        footballZombieButton.setMargin(new Insets(0, 0, 0, 0));    
-        
+        footballZombieButton.setMargin(new Insets(0, 0, 0, 0));
+
         footballZombieButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JButton footballZombieCard = new JButton();
                 footballZombieCard.setIcon(PictureFactory.getImageIcon(Picture.FOOTBALLZOMBIELIST));
                 showCard(footballZombieCard, 710, 50, 500, 600);
             }
-        }); buttonPanel.add(footballZombieButton);
+        });
+        buttonPanel.add(footballZombieButton);
 
         // Polevaulting Zombie Button -- Show Polevaulting Zombie Page
         JButton polevaultingZombieButton = new JButton();
@@ -139,15 +144,16 @@ public class ZombieListFrame extends JFrame{
         polevaultingZombieButton.setContentAreaFilled(false);
         polevaultingZombieButton.setBorder(null);
         polevaultingZombieButton.setSize(550, 550);
-        polevaultingZombieButton.setMargin(new Insets(0, 0, 0, 0));    
-        
+        polevaultingZombieButton.setMargin(new Insets(0, 0, 0, 0));
+
         polevaultingZombieButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JButton polevaultingZombieCard = new JButton();
                 polevaultingZombieCard.setIcon(PictureFactory.getImageIcon(Picture.POLEVAULTINGZOMBIELIST));
                 showCard(polevaultingZombieCard, 710, 50, 500, 600);
             }
-        }); buttonPanel.add(polevaultingZombieButton);
+        });
+        buttonPanel.add(polevaultingZombieButton);
 
         // Duckytube Zombie Button -- Show Duckytube Zombie Page
         JButton duckytubeZombieButton = new JButton();
@@ -156,15 +162,16 @@ public class ZombieListFrame extends JFrame{
         duckytubeZombieButton.setContentAreaFilled(false);
         duckytubeZombieButton.setBorder(null);
         duckytubeZombieButton.setSize(550, 550);
-        duckytubeZombieButton.setMargin(new Insets(0, 0, 0, 0));    
-        
+        duckytubeZombieButton.setMargin(new Insets(0, 0, 0, 0));
+
         duckytubeZombieButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JButton duckytubeZombieCard = new JButton();
                 duckytubeZombieCard.setIcon(PictureFactory.getImageIcon(Picture.DUCKYTUBEZOMBIELIST));
                 showCard(duckytubeZombieCard, 710, 50, 500, 600);
             }
-        }); buttonPanel.add(duckytubeZombieButton);
+        });
+        buttonPanel.add(duckytubeZombieButton);
 
         // Dolphinerider Zombie Button -- Show Dolphinerider Zombie Page
         JButton dolphineriderZombieButton = new JButton();
@@ -173,32 +180,34 @@ public class ZombieListFrame extends JFrame{
         dolphineriderZombieButton.setContentAreaFilled(false);
         dolphineriderZombieButton.setBorder(null);
         dolphineriderZombieButton.setSize(550, 550);
-        dolphineriderZombieButton.setMargin(new Insets(0, 0, 0, 0));    
-        
+        dolphineriderZombieButton.setMargin(new Insets(0, 0, 0, 0));
+
         dolphineriderZombieButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JButton dolphineriderZombieCard = new JButton();
                 dolphineriderZombieCard.setIcon(PictureFactory.getImageIcon(Picture.DOLPHINERIDERZOMBIELIST));
                 showCard(dolphineriderZombieCard, 710, 50, 500, 600);
             }
-        }); buttonPanel.add(dolphineriderZombieButton);
+        });
+        buttonPanel.add(dolphineriderZombieButton);
 
         // Gargantuar Zombie Button -- Show Gargantuar Zombie Page
         JButton gargantuarZombieButton = new JButton();
-        gargantuarZombieButton.setIcon(PictureFactory.getImageIcon(Picture.GARGANTUARZOMBIELIST));
+        gargantuarZombieButton.setIcon(PictureFactory.getImageIcon(Picture.GARGANTUARZOMBIEBUTTON));
         gargantuarZombieButton.setOpaque(false);
         gargantuarZombieButton.setContentAreaFilled(false);
         gargantuarZombieButton.setBorder(null);
         gargantuarZombieButton.setSize(550, 550);
-        gargantuarZombieButton.setMargin(new Insets(0, 0, 0, 0));    
-        
+        gargantuarZombieButton.setMargin(new Insets(0, 0, 0, 0));
+
         gargantuarZombieButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JButton gargantuarZombieCard = new JButton();
                 gargantuarZombieCard.setIcon(PictureFactory.getImageIcon(Picture.GARGANTUARZOMBIELIST));
                 showCard(gargantuarZombieCard, 710, 50, 500, 600);
             }
-        }); buttonPanel.add(gargantuarZombieButton);
+        });
+        buttonPanel.add(gargantuarZombieButton);
 
         // Imp Zombie Button -- Show Imp Zombie Page
         JButton impZombieButton = new JButton();
@@ -207,15 +216,16 @@ public class ZombieListFrame extends JFrame{
         impZombieButton.setContentAreaFilled(false);
         impZombieButton.setBorder(null);
         impZombieButton.setSize(550, 550);
-        impZombieButton.setMargin(new Insets(0, 0, 0, 0));    
-        
+        impZombieButton.setMargin(new Insets(0, 0, 0, 0));
+
         impZombieButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JButton impZombieCard = new JButton();
                 impZombieCard.setIcon(PictureFactory.getImageIcon(Picture.IMPZOMBIELIST));
                 showCard(impZombieCard, 710, 50, 500, 600);
             }
-        }); buttonPanel.add(impZombieButton);
+        });
+        buttonPanel.add(impZombieButton);
 
         // 2 buttons: Menu, Plants List
         menuPanel = new JPanel();
@@ -238,8 +248,9 @@ public class ZombieListFrame extends JFrame{
                 frame.setVisible(true);
                 dispose();
             }
-        }); menuPanel.add(menuButton);        
-       
+        });
+        menuPanel.add(menuButton);
+
         // Plants List Button -- To Plants List
         plantsListButton = new JButton();
         plantsListButton.setIcon(PictureFactory.getImageIcon(Picture.PLANTLISTSBUTTON));
@@ -247,14 +258,15 @@ public class ZombieListFrame extends JFrame{
         plantsListButton.setContentAreaFilled(false);
         plantsListButton.setBorder(null);
         plantsListButton.setMargin(new Insets(0, 0, 0, 0));
-        
+
         plantsListButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 PlantsListFrame frame = new PlantsListFrame();
                 frame.setVisible(true);
                 dispose();
             }
-        }); menuPanel.add(plantsListButton);   
+        });
+        menuPanel.add(plantsListButton);
 
         // LayeredPane
         add(layeredPane, BorderLayout.CENTER);
