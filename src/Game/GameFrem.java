@@ -287,6 +287,15 @@ public class GameFrem extends JFrame {
         setMap();
         renderGameMap();
         renderFlag();
+        // Check win/lose
+        int condition = gameManager.checkEndCondition();
+        if (condition == 0) {
+            // lose
+            System.out.println("GAME END! YOU LOSE");
+        } else if (condition == 2) {
+            // win
+            System.out.println("CONGRATULATIONS! YOU WIN");
+        }
         repaint();
     }
 

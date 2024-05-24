@@ -251,4 +251,33 @@ public class GameManager {
         }
     }
 
+    // Win and Lose Manager
+    public int checkEndCondition() {
+        // 0 lose, 1 masih bermain, 2 win
+        if (checkLosingCondition()) {
+            return 0;
+        } else if (checkWinningCondition()) {
+            return 2;
+        } else {
+            return 1;
+        }
+    }
+
+    private boolean checkLosingCondition() {
+        for (int j = 0; j < gameMap.map[0].length; j += 1) {
+            List<Object> entities = gameMap.getEntities(0, j);
+            for (int k = 0; k < entities.size(); k += 1) {
+                Object entity = entities.get(k);
+                if (entity instanceof Zombie){
+//                        System.out.println(String.format("%d = %d? %d = %d?", ((Zombie) entity).position.x, j, ((Zombie) entity).position.y, i));
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean checkWinningCondition() {
+        return countZombies() == 0 && gameTick > 160;
+    }
 }
