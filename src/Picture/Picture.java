@@ -59,6 +59,8 @@ public enum Picture {
     GAMEDAY,
     GAMENIGHT,
     FLAG,
+    LOSE,
+    WIN,
 
     // Plants List
     SUNFLOWERLIST,

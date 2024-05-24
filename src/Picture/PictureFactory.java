@@ -124,6 +124,12 @@ public class PictureFactory {
             case FLAG:
                 imageIcon = new ImageIcon("ImagePvZ/GameFrame/flag.png");
                 break;
+            case WIN:
+                imageIcon = new ImageIcon("ImagePvZ/GameFrame/BackToMenuWin.png");
+                break;
+            case LOSE:
+                imageIcon = new ImageIcon("ImagePvZ/GameFrame/BackToMenuLose.png");
+                break;
 
             // Plants List
             case SUNFLOWERLIST:
