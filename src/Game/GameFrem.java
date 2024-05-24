@@ -152,7 +152,6 @@ public class GameFrem extends JFrame {
         Timer timer = new Timer(200, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 updateRender();
-
             }
         });
         timer.start();
@@ -297,6 +296,7 @@ public class GameFrem extends JFrame {
             JLabel loseimage = new JLabel(new ImageIcon(image));
             loseimage.setBounds(0, 0, image.getWidth(loseimage), image.getHeight(loseimage));
             layeredPane.add(loseimage,Integer.valueOf(2));
+            gameManager.stopTimer();
         } else if (condition == 2) {
             // win
             System.out.println("CONGRATULATIONS! YOU WIN");
@@ -305,6 +305,7 @@ public class GameFrem extends JFrame {
             JLabel winimage = new JLabel(new ImageIcon(image));
             winimage.setBounds(0, 0, image.getWidth(winimage), image.getHeight(winimage));
             layeredPane.add(winimage,Integer.valueOf(2));
+            gameManager.stopTimer();
         }
         repaint();
     }
