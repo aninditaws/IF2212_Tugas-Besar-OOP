@@ -45,8 +45,15 @@ public class Bullet {
         // System.out.println("Drawing bullet at: " + position.x + " " + position.y);
     }
 
-    public Image getImagePath() {
+    public Image getPeaPath() {
+
         return PictureFactory.getImageIcon(Picture.BULLET).getImage();
+
+    }
+
+    public Image getsnowPath() {
+
+        return PictureFactory.getImageIcon(Picture.SLOWBULLET).getImage();
 
     }
 }

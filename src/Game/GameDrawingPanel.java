@@ -50,15 +50,32 @@ public class GameDrawingPanel extends JPanel {
                         }
                         g.drawImage(image, x, y, (int) (cellWidth * 0.7), (int) (cellHeight * 0.7), null);
 
-                        for (Bullet bullet : plant.getBullets()) {
-                            ImageIcon bulletImageIcon = new ImageIcon(bullet.getImagePath());
-                            Image bulletImage = bulletImageIcon.getImage();
+                        if (plant.getRange() == -1) {
+                            if (plant instanceof Peashooter) {
 
-                            int bulletX = (int) (x + 0.01 * cellWidth);
-                            int bulletMov = (int) (bullet.getPosition().x * 0.7 * cellWidth);
-                            bulletX += bulletMov;
-                            int bulletY = y;
-                            g.drawImage(bulletImage, bulletX, bulletY, null);
+                                for (Bullet bullet : plant.getBullets()) {
+                                    ImageIcon bulletImageIcon = new ImageIcon(bullet.getPeaPath());
+                                    Image bulletImage = bulletImageIcon.getImage();
+
+                                    int bulletX = (int) (x + 0.01 * cellWidth);
+                                    int bulletMov = (int) (bullet.getPosition().x * 0.7 * cellWidth);
+                                    bulletX += bulletMov;
+                                    int bulletY = y;
+                                    g.drawImage(bulletImage, bulletX, bulletY, null);
+
+                                }
+                            } else if (plant instanceof SnowPea) {
+                                for (Bullet bullet : plant.getBullets()) {
+                                    ImageIcon bulletImageIcon = new ImageIcon(bullet.getsnowPath());
+                                    Image bulletImage = bulletImageIcon.getImage();
+
+                                    int bulletX = (int) (x + 0.01 * cellWidth);
+                                    int bulletMov = (int) (bullet.getPosition().x * 0.7 * cellWidth);
+                                    bulletX += bulletMov;
+                                    int bulletY = y;
+                                    g.drawImage(bulletImage, bulletX, bulletY, null);
+                                }
+                            }
 
                         }
                     }
