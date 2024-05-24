@@ -1,5 +1,7 @@
 package Game;
 
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 import Zombie.*;
 
@@ -57,6 +59,16 @@ public class GameMap<T> {
             throw new IllegalArgumentException("Error! Tidak dapat melihat yang di luar map");
         }
         return map[row][col].getEntities();
+    }
+
+    public List<List<T>> getEntitiesRange(List<Point> points) {
+        List<List<T>> ret = new ArrayList<>();
+
+        points.forEach(point -> {
+            ret.add(getEntities(point.y, point.x));
+        });
+
+        return ret;
     }
 
     public AreaType determineAreaType(int row, int col) {
