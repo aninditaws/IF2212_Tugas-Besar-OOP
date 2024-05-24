@@ -334,7 +334,7 @@ public class GameFrem extends JFrame {
                 PlantFactory plantFactory = new PlantFactory();
                 button.addActionListener(e -> {
                     if (isDigging) {
-                        if (!gameManager.getGameMap().getEntities(row, col).isEmpty()) {
+                        if (!gameManager.getGameMap().getEntities(row, col).isEmpty() && gameManager.getGameMap().getEntities(row, col).get(gameManager.getGameMap().getEntities(row, col).size() - 1) instanceof Plant) {
                             gameManager.getGameMap().removeEntity(row, col,
                                     gameManager.getGameMap().getEntities(row, col).size() - 1);
                             isDigging = !isDigging;
