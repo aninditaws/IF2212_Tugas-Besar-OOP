@@ -49,6 +49,7 @@ public final class Sun implements Subscriber {
 
     public void resetSun(){
         totalSun = 50;
+        doUpdate = 0;
     }
 
     @Override

@@ -50,6 +50,11 @@ public class GameManager {
         timerThread.start();
     }
 
+    public void stopGame() {
+        EventChannel.getInstance().unsubscribeAll();
+        EventChannel.getInstance().subscribe(Sun.getInstance());
+    }
+
     public void stopTimer() {
         // Membuat thread berhenti
         timerThread.interrupt();

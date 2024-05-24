@@ -20,6 +20,7 @@ import static Picture.Picture.*;
 
 import PlantFactory.PlantFactory;
 import PlantFactory.PlantType;
+import Subscriber.EventChannel;
 import UI.DeckButton;
 import Zombie.*;
 
@@ -127,6 +128,7 @@ public class GameFrem extends JFrame {
         menuButton.setBounds(screenSize.width - 200, screenSize.height - 745, 140, 60);
         menuButton.addActionListener(e -> {
             gameManager.sun.resetSun();
+            gameManager.stopGame();
             gameManager.stopTimer();
             // logic buat save atau kalau tidak, reset
             WelcomingFrame mainMenuFrame = new WelcomingFrame();

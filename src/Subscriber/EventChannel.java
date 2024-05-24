@@ -6,7 +6,7 @@ import java.util.List;
 public class EventChannel {
 
     private static EventChannel instance = null;
-    private final List<Subscriber> subscribers = new ArrayList<>();
+    private List<Subscriber> subscribers = new ArrayList<>();
 
     public static EventChannel getInstance() {
         if (instance == null) {
@@ -20,7 +20,13 @@ public class EventChannel {
     }
 
     public void unsubscribe(Subscriber subscriber) {
-        subscribers.remove(subscriber);
+        if (subscribers.contains(subscriber)) {
+            subscribers.remove(subscriber);
+        }
+    }
+
+    public void unsubscribeAll() {
+        subscribers = new ArrayList<>();
     }
 
     public synchronized void publishUpdate(int gameTick) {
