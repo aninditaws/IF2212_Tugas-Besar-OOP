@@ -31,9 +31,11 @@ public class CherryBomb extends Plant{
             points.add(new Point((Math.min(position.x + 1, 10)), Math.min(position.y + 1, 5)));
             List<List<Object>> entitiesAttacked = gameMap.getEntitiesRange(points);
             entitiesAttacked.forEach(list -> {
-                  list.forEach(zombie -> {
-                        ((Zombie) zombie).reduceHealth(attack_damage);
-                        System.out.println(String.format("Cherrybomb attacks %s", ((Zombie) zombie).name));
+                  list.forEach(entity -> {
+                        if (entity instanceof Zombie) {
+                              ((Zombie) entity).reduceHealth(attack_damage);
+                              System.out.println(String.format("Cherrybomb attacks %s", ((Zombie) entity).name));
+                        }
                   });
             });
             dead = true;

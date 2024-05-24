@@ -178,6 +178,9 @@ public class GameManager {
     }
 
     private void moveIfChange(Character character, int i, int j, int k) {
+        if (character.isDead()) {
+            return;
+        }
         if (character.position.x != j || character.position.y != i) {
             gameMap.moveEntity(i, j, k, character.position.y, character.position.x);
             System.out.println(String.format("Moved zombie %s from %d, %d to %d, %d", character.name, j, i, character.position.x, character.position.y));
