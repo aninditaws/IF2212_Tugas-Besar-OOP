@@ -58,12 +58,12 @@ public class GameManager {
         System.out.printf("- TIME : %d%n", gameTick);
         channel.publishUpdate(gameTick);
         // Mekanisme flag
-        if (gameTick == 50 || gameTick == 100) {
+        if (gameTick == 140) {
             flag = true;
             System.out.println("flag on");
         }
 
-        if (gameTick == 60 || gameTick == 110) {
+        if (gameTick == 145) {
             flag = false;
             System.out.println("flag off");
         }
