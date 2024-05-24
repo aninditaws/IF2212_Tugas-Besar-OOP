@@ -195,7 +195,7 @@ public class GameManager {
                 // Cek di nextColEntities apakah ada plant, jika iya, walk si zombie di set menjadi false dan mulai attack plant paling "atas"
                 if (!nextColPlantEntities.isEmpty()) {
                     zombie.stopWalk();
-                    zombie.attack((Character) nextColPlantEntities.get(0));
+                    zombie.attack((Character) nextColPlantEntities.get(nextColPlantEntities.size() - 1));
                 } else {
                     zombie.startWalk();
                 }
@@ -264,8 +264,8 @@ public class GameManager {
     }
 
     private boolean checkLosingCondition() {
-        for (int j = 0; j < gameMap.map[0].length; j += 1) {
-            List<Object> entities = gameMap.getEntities(0, j);
+        for (int j = 0; j < gameMap.map.length; j += 1) {
+            List<Object> entities = gameMap.getEntities(j, 0);
             for (int k = 0; k < entities.size(); k += 1) {
                 Object entity = entities.get(k);
                 if (entity instanceof Zombie){

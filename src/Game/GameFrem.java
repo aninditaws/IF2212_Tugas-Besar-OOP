@@ -292,9 +292,19 @@ public class GameFrem extends JFrame {
         if (condition == 0) {
             // lose
             System.out.println("GAME END! YOU LOSE");
+            ImageIcon imageIcon = PictureFactory.getImageIcon(Picture.LOSEGAME);
+            Image image = imageIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
+            JLabel loseimage = new JLabel(new ImageIcon(image));
+            loseimage.setBounds(0, 0, image.getWidth(loseimage), image.getHeight(loseimage));
+            layeredPane.add(loseimage,Integer.valueOf(2));
         } else if (condition == 2) {
             // win
             System.out.println("CONGRATULATIONS! YOU WIN");
+            ImageIcon imageIcon = PictureFactory.getImageIcon(Picture.WINGAME);
+            Image image = imageIcon.getImage().getScaledInstance(screenWidth,screenHeight, Image.SCALE_SMOOTH);
+            JLabel winimage = new JLabel(new ImageIcon(image));
+            winimage.setBounds(0, 0, image.getWidth(winimage), image.getHeight(winimage));
+            layeredPane.add(winimage,Integer.valueOf(2));
         }
         repaint();
     }
@@ -375,7 +385,17 @@ public class GameFrem extends JFrame {
             Image image = imageIcon.getImage().getScaledInstance((int) (screenWidth * 0.5),(int) (screenHeight * 0.3), Image.SCALE_SMOOTH);
             JLabel flag = new JLabel(new ImageIcon(image));
             flag.setBounds((int) (screenWidth * 0.3), (int) (screenHeight * 0.33), image.getWidth(flag), image.getHeight(flag));
-            layeredPane.add(flag,Integer.valueOf(2));
+            layeredPane.add(flag,Integer.valueOf(5));
+        } else {
+            if (layeredPane.getComponentCountInLayer(5) != 0) {
+                Component[] components = layeredPane.getComponentsInLayer(5);
+                for (Component component : components) {
+                    layeredPane.remove(component);
+                }
+                // Revalidate and repaint the layeredPane to reflect changes
+                layeredPane.revalidate();
+                layeredPane.repaint();
+            }
         }
     }
 
