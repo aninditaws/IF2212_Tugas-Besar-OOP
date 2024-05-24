@@ -353,7 +353,7 @@ public class GameFrem extends JFrame {
             ImageIcon imageIcon = PictureFactory.getImageIcon(Picture.FLAG);
             Image image = imageIcon.getImage().getScaledInstance((int) (screenWidth * 0.5),(int) (screenHeight * 0.3), Image.SCALE_SMOOTH);
             JLabel flag = new JLabel(new ImageIcon(image));
-            flag.setBounds((int) (screenWidth * 0.3), 0, image.getWidth(flag), image.getHeight(flag));
+            flag.setBounds((int) (screenWidth * 0.3), (int) (screenHeight * 0.33), image.getWidth(flag), image.getHeight(flag));
             layeredPane.add(flag,Integer.valueOf(2));
         }
     }
