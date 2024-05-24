@@ -321,6 +321,12 @@ public class PictureFactory {
             case MENUBUTTON:
                 imageIcon = new ImageIcon("ImagePvZ/Inventory/Button/menuButton.png");
                 break;
+            case LOSEGAME:
+                imageIcon = new ImageIcon("ImagePvZ/GameFrame/LosePage.png");
+                break;
+            case WINGAME:
+                imageIcon = new ImageIcon("ImagePvZ/GameFrame/WinPage.png");
+                break;
             default:
                 break;
         }

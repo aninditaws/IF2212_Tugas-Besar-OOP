@@ -131,4 +131,7 @@ public enum Picture {
     DELETEBUTTON,
     CLEARBUTTON,
     NEXTBUTTON,
+
+    LOSEGAME,
+    WINGAME
 }
