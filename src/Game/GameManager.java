@@ -85,9 +85,11 @@ public class GameManager {
             for (int j = 0; j < gameMap.getColumn(); j++) {
                 List<Object> entities = gameMap.getEntities(i, j);
                 for (Object entity : entities) {
-                    if (entity instanceof Plant plant) {
-                        plant.shoot();
-
+                    if (entity instanceof Plant) {
+                        Plant plant = (Plant) entity;
+                        if (plant.getRange() == -1) {
+                            plant.shoot();
+                        }
                         // System.out.println("Plant shoot--------");
                     }
                 }
