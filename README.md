@@ -2,9 +2,6 @@
 <p align="justify"> Roro Jonggrang diserang oleh pasukan jin yang menjadi zombie. Bandung Bondowoso ingin menyelamatkan istri tercintanya. Ia memiliki beberapa benih tanaman yang memiliki kemampuan khusus. Akan tetapi, dia kebingungan untuk mencari strategi yang tepat. Bantulah Bandung Bondowoso untuk mensimulasikan serangan zombie dan strategi pertahanan yang akan digunakan.
 <p align="justify"> Michael vs Lalapan adalah sebuah simulasi permainan bertahan yang mengharuskan player menanam berbagai macam tanaman di halaman depan untuk melindungi rumah dari serangan zombie. Setiap tanaman memiliki kemampuan unik, seperti menembak, menahan, atau meledak. Player memerlukan sejumlah sun sebagai mata uang untuk dapat menanam tanaman. Pada akhir permainan, pemain akan dinyatakan menang jika semua zombie berhasil dikalahkan dan kalah jika ada zombie yang berhasil mencapai rumah.
 
-## Daftar Isi <!-- omit in toc -->
-
-
 ## Cara Kompilasi Program
 1.  Buka terminal pada folder download
 ```sh
