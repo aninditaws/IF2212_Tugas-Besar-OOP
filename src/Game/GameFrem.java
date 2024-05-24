@@ -295,16 +295,16 @@ public class GameFrem extends JFrame {
             Image image = imageIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
             JLabel loseimage = new JLabel(new ImageIcon(image));
             loseimage.setBounds(0, 0, image.getWidth(loseimage), image.getHeight(loseimage));
-            layeredPane.add(loseimage,Integer.valueOf(2));
+            layeredPane.add(loseimage, Integer.valueOf(2));
             gameManager.stopTimer();
         } else if (condition == 2) {
             // win
             System.out.println("CONGRATULATIONS! YOU WIN");
             ImageIcon imageIcon = PictureFactory.getImageIcon(Picture.WINGAME);
-            Image image = imageIcon.getImage().getScaledInstance(screenWidth,screenHeight, Image.SCALE_SMOOTH);
+            Image image = imageIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
             JLabel winimage = new JLabel(new ImageIcon(image));
             winimage.setBounds(0, 0, image.getWidth(winimage), image.getHeight(winimage));
-            layeredPane.add(winimage,Integer.valueOf(2));
+            layeredPane.add(winimage, Integer.valueOf(2));
             gameManager.stopTimer();
         }
         repaint();
@@ -325,7 +325,7 @@ public class GameFrem extends JFrame {
                 button.setContentAreaFilled(false);
                 button.setFocusPainted(false);
                 // Bisa diganti jadi false untuk menghilangkan border
-                button.setBorderPainted(true);
+                button.setBorderPainted(false);
                 // button.setRolloverEnabled(false);
                 // button.setFocusable(false);
                 button.setPreferredSize(new Dimension(70, 70));
@@ -335,7 +335,8 @@ public class GameFrem extends JFrame {
                 button.addActionListener(e -> {
                     if (isDigging) {
                         if (!gameManager.getGameMap().getEntities(row, col).isEmpty()) {
-                            gameManager.getGameMap().removeEntity(row, col, gameManager.getGameMap().getEntities(row, col).size()-1);
+                            gameManager.getGameMap().removeEntity(row, col,
+                                    gameManager.getGameMap().getEntities(row, col).size() - 1);
                             isDigging = !isDigging;
                             if (isDigging) {
                                 shovel.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
@@ -355,7 +356,8 @@ public class GameFrem extends JFrame {
                                 // mengurangi sun ada di gameManager
                                 plant.bePlanted();
                                 deckPanel.getDeckTanaman().usePlant(indexSelectedPlant);
-                                deckButtons[indexSelectedPlant].setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
+                                deckButtons[indexSelectedPlant]
+                                        .setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
                                 selectedPlant = null;
                                 indexSelectedPlant = null;
                             }
@@ -370,8 +372,9 @@ public class GameFrem extends JFrame {
 
     public void initializeDrawingPanel() {
         drawingPanel = new GameDrawingPanel(gameManager);
-//        drawingPanel.setBounds((int) (screenWidth * 0.2), (int) (screenHeight * 0.15), (int) (screenWidth * 0.75),
-//                (int) (screenHeight * 0.75));
+        // drawingPanel.setBounds((int) (screenWidth * 0.2), (int) (screenHeight *
+        // 0.15), (int) (screenWidth * 0.75),
+        // (int) (screenHeight * 0.75));
         drawingPanel.setBounds((int) (screenWidth * 0.174), (int) (screenHeight * 0.15), 1000, 612);
         layeredPane.add(drawingPanel, Integer.valueOf(1)); // Add the drawing panel below the buttons
     }
@@ -383,10 +386,12 @@ public class GameFrem extends JFrame {
     public void renderFlag() {
         if (gameManager.isFlag()) {
             ImageIcon imageIcon = PictureFactory.getImageIcon(Picture.FLAG);
-            Image image = imageIcon.getImage().getScaledInstance((int) (screenWidth * 0.5),(int) (screenHeight * 0.3), Image.SCALE_SMOOTH);
+            Image image = imageIcon.getImage().getScaledInstance((int) (screenWidth * 0.5), (int) (screenHeight * 0.3),
+                    Image.SCALE_SMOOTH);
             JLabel flag = new JLabel(new ImageIcon(image));
-            flag.setBounds((int) (screenWidth * 0.3), (int) (screenHeight * 0.33), image.getWidth(flag), image.getHeight(flag));
-            layeredPane.add(flag,Integer.valueOf(5));
+            flag.setBounds((int) (screenWidth * 0.3), (int) (screenHeight * 0.33), image.getWidth(flag),
+                    image.getHeight(flag));
+            layeredPane.add(flag, Integer.valueOf(5));
         } else {
             if (layeredPane.getComponentCountInLayer(5) != 0) {
                 Component[] components = layeredPane.getComponentsInLayer(5);

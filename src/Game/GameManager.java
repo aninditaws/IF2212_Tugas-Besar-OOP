@@ -8,13 +8,14 @@ import ZombieFactory.ZombieType;
 
 import java.awt.*;
 import Plant.*;
+import Plant.Bullets.Bullet;
+
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import Character.Character;
-
 
 public class GameManager {
 
@@ -29,7 +30,8 @@ public class GameManager {
     private final EventChannel channel = EventChannel.getInstance();
 
     public void startTimer() {
-        // Membuat sebuah thread yang akan menjalankan updateGameTick setiap 1 detik (1000 milliseconds)
+        // Membuat sebuah thread yang akan menjalankan updateGameTick setiap 1 detik
+        // (1000 milliseconds)
         timerThread = new Thread(() -> {
             try {
                 while (true) {
@@ -53,7 +55,7 @@ public class GameManager {
     }
 
     public synchronized void updateGameTick(int gameTick) {
-//        System.out.println(new Date());
+        // System.out.println(new Date());
         // Publish update
         System.out.printf("- TIME : %d%n", gameTick);
         channel.publishUpdate(gameTick);
@@ -72,6 +74,57 @@ public class GameManager {
             spawnZombie(gameTick);
         }
         updateGameMap();
+        handleShooting();
+        updateBullets();
+    }
+
+    // Bullet Manager
+
+    private void handleShooting() {
+        for (int i = 0; i < gameMap.getRow(); i++) {
+            for (int j = 0; j < gameMap.getColumn(); j++) {
+                List<Object> entities = gameMap.getEntities(i, j);
+                for (Object entity : entities) {
+                    if (entity instanceof Plant plant) {
+                        plant.shoot();
+
+                        // System.out.println("Plant shoot--------");
+                    }
+                }
+            }
+        }
+    }
+
+    public void updateBullets() {
+        for (int i = 0; i < gameMap.getRow(); i++) {
+            for (int j = 0; j < gameMap.getColumn(); j++) {
+                List<Object> entities = gameMap.getEntities(i, j);
+                for (Object entity : entities) {
+                    if (entity instanceof Plant plant) {
+                        plant.updateBullets();
+                        checkBulletCollisions(plant.getBullets(), i, j);
+                    }
+                }
+            }
+        }
+    }
+
+    private void checkBulletCollisions(List<Bullet> bullets, int plantRow, int plantCol) {
+        for (Bullet bullet : bullets) {
+            int bulletX = bullet.getPosition().x;
+            int bulletY = bullet.getPosition().y;
+            if (bulletX < gameMap.getColumn() && bulletY < gameMap.getRow()) {
+                List<Object> entities = gameMap.getEntities(bulletY, bulletX);
+                for (Object entity : entities) {
+                    if (entity instanceof Zombie zombie) {
+                        zombie.getAttacked(bullet.getDamage());
+                        // System.out.println("Zombie attacked--------");
+                        bulletX = gameMap.getColumn();
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     public boolean isFlag() {
@@ -81,7 +134,6 @@ public class GameManager {
     // Map Manager
 
     private final GameMap<Object> gameMap = new GameMap<>(11, 6);
-
 
     public GameMap<Object> getGameMap() {
         return gameMap;
@@ -96,14 +148,15 @@ public class GameManager {
         ZombieType[] zombieTypes = ZombieType.values();
         ZombieFactory zombieFactory = new ZombieFactory();
 
-        for (int i = 0; i <= (flag? 5 : 0); i += 1) {
-            boolean val = new Random().nextInt(3)==0;
+        for (int i = 0; i <= (flag ? 5 : 0); i += 1) {
+            boolean val = new Random().nextInt(3) == 0;
             int zombieCount = countZombies();
             System.out.print("Attempt spawning zombie, Zombie Count: ");
             System.out.println(zombieCount);
-            if (val && zombieCount < 10 + ((flag)? 15 : 0)) {
+            if (val && zombieCount < 10 + ((flag) ? 15 : 0)) {
                 Point randomPosition = generateRandomZombiePosition(zombieTypes[randomIndex]);
-                gameMap.map[randomPosition.y][randomPosition.x].addEntity(zombieFactory.CreateZombie(zombieTypes[randomIndex], randomPosition));
+                gameMap.map[randomPosition.y][randomPosition.x]
+                        .addEntity(zombieFactory.CreateZombie(zombieTypes[randomIndex], randomPosition));
                 System.out.print("Created Zombie ");
                 System.out.print(zombieTypes[randomIndex].toString());
                 System.out.print(" at ");
@@ -119,7 +172,7 @@ public class GameManager {
             max = 3;
             min = 2;
         } else {
-            boolean spawnTop = new Random().nextInt(2)==0;
+            boolean spawnTop = new Random().nextInt(2) == 0;
             if (spawnTop) {
                 max = 1;
                 min = 0;
@@ -148,7 +201,8 @@ public class GameManager {
     }
 
     public void updateGameMap() {
-        // Iterasi setiap area entity, kalau dia zombie dan sudah berubah positionnya, pindahin
+        // Iterasi setiap area entity, kalau dia zombie dan sudah berubah positionnya,
+        // pindahin
         // Kalau dead, remove dari gameMap
         for (int i = 0; i < gameMap.map.length; i += 1) {
             for (int j = 0; j < gameMap.map[i].length; j += 1) {
@@ -159,10 +213,11 @@ public class GameManager {
                     Object entity = entities.get(k);
                     if (entity instanceof Character) {
                         Character character = (Character) entity;
-                        removeIfDead(character,i, j, k);
+                        removeIfDead(character, i, j, k);
                     }
-                    if (entity instanceof Zombie){
-//                        System.out.println(String.format("%d = %d? %d = %d?", ((Zombie) entity).position.x, j, ((Zombie) entity).position.y, i));
+                    if (entity instanceof Zombie) {
+                        // System.out.println(String.format("%d = %d? %d = %d?", ((Zombie)
+                        // entity).position.x, j, ((Zombie) entity).position.y, i));
                         Zombie zombie = (Zombie) entity;
                         moveIfChange(zombie, i, j, k);
                     }
@@ -171,7 +226,7 @@ public class GameManager {
         }
     }
 
-    private void removeIfDead(Character character, int i , int j, int k) {
+    private void removeIfDead(Character character, int i, int j, int k) {
         if (character.dead) {
             gameMap.removeEntity(i, j, k);
         }
@@ -183,16 +238,20 @@ public class GameManager {
         }
         if (character.position.x != j || character.position.y != i) {
             gameMap.moveEntity(i, j, k, character.position.y, character.position.x);
-            System.out.println(String.format("Moved zombie %s from %d, %d to %d, %d", character.name, j, i, character.position.x, character.position.y));
+            System.out.println(String.format("Moved zombie %s from %d, %d to %d, %d", character.name, j, i,
+                    character.position.x, character.position.y));
         }
     }
 
     private void handleAttackZombie(List<Object> entities, int i, int j) {
-        List<Object> nextColPlantEntities = gameMap.getEntities(i, (Math.max(j - 1, 0))).stream().filter(entity -> entity instanceof Plant).collect(Collectors.toList());;
+        List<Object> nextColPlantEntities = gameMap.getEntities(i, (Math.max(j - 1, 0))).stream()
+                .filter(entity -> entity instanceof Plant).collect(Collectors.toList());
+        ;
         for (Object entity : entities) {
             if (entity instanceof Zombie) {
                 Zombie zombie = (Zombie) entity;
-                // Cek di nextColEntities apakah ada plant, jika iya, walk si zombie di set menjadi false dan mulai attack plant paling "atas"
+                // Cek di nextColEntities apakah ada plant, jika iya, walk si zombie di set
+                // menjadi false dan mulai attack plant paling "atas"
                 if (!nextColPlantEntities.isEmpty()) {
                     zombie.stopWalk();
                     zombie.attack((Character) nextColPlantEntities.get(nextColPlantEntities.size() - 1));
@@ -221,6 +280,7 @@ public class GameManager {
             return false;
         }
     }
+
     public boolean addPlant(Plant plant, int row, int col) {
         // DO CHECKING
         boolean success = false;
@@ -268,8 +328,9 @@ public class GameManager {
             List<Object> entities = gameMap.getEntities(j, 0);
             for (int k = 0; k < entities.size(); k += 1) {
                 Object entity = entities.get(k);
-                if (entity instanceof Zombie){
-//                        System.out.println(String.format("%d = %d? %d = %d?", ((Zombie) entity).position.x, j, ((Zombie) entity).position.y, i));
+                if (entity instanceof Zombie) {
+                    // System.out.println(String.format("%d = %d? %d = %d?", ((Zombie)
+                    // entity).position.x, j, ((Zombie) entity).position.y, i));
                     return true;
                 }
             }

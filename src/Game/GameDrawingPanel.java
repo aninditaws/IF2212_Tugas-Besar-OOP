@@ -1,8 +1,11 @@
 package Game;
+
 import Picture.PictureFactory;
 import PlantFactory.PlantFactory;
 import Zombie.*;
 import Plant.*;
+import Plant.Bullets.Bullet;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
@@ -43,8 +46,21 @@ public class GameDrawingPanel extends JPanel {
                         int y = (int) (row * cellHeight + 0.07 * cellHeight);
                         if (entity instanceof Lilypad) {
                             y += (int) (0.2 * cellHeight);
+
                         }
                         g.drawImage(image, x, y, (int) (cellWidth * 0.7), (int) (cellHeight * 0.7), null);
+
+                        for (Bullet bullet : plant.getBullets()) {
+                            ImageIcon bulletImageIcon = new ImageIcon(bullet.getImagePath());
+                            Image bulletImage = bulletImageIcon.getImage();
+
+                            int bulletX = (int) (x + 0.01 * cellWidth);
+                            int bulletMov = (int) (bullet.getPosition().x * 0.7 * cellWidth);
+                            bulletX += bulletMov;
+                            int bulletY = y;
+                            g.drawImage(bulletImage, bulletX, bulletY, null);
+
+                        }
                     }
                 }
             }
