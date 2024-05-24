@@ -52,6 +52,8 @@ public class GameFrem extends JFrame {
     private boolean isDigging = false;
     private JLabel flag;
 
+    private JButton shovel;
+
     // private static ArrayList<Bullet> bullets = new ArrayList<Bullet>(); //buat
     // array bullet sama tanaman
     // private static ArrayList<Plant> plants = new ArrayList<Plant>();
@@ -231,7 +233,7 @@ public class GameFrem extends JFrame {
         ImageIcon imageIcon = PictureFactory.getImageIcon(Picture.DIGBUTTON);
         Image image = imageIcon.getImage().getScaledInstance(82, 82, Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(image);
-        JButton shovel = new JButton(imageIcon);
+        shovel = new JButton(imageIcon);
         layeredPane.add(shovel, Integer.valueOf(1));
         shovel.setOpaque(false);
         shovel.setContentAreaFilled(false);
@@ -241,6 +243,11 @@ public class GameFrem extends JFrame {
         shovel.addActionListener(e -> {
             if (selectedPlant == null) {
                 isDigging = !isDigging;
+                if (isDigging) {
+                    shovel.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
+                } else {
+                    shovel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
+                }
             }
         });
 
@@ -310,6 +317,11 @@ public class GameFrem extends JFrame {
                         if (!gameManager.getGameMap().getEntities(row, col).isEmpty()) {
                             gameManager.getGameMap().removeEntity(row, col, gameManager.getGameMap().getEntities(row, col).size()-1);
                             isDigging = !isDigging;
+                            if (isDigging) {
+                                shovel.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
+                            } else {
+                                shovel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
+                            }
                         }
                     }
                     if (selectedPlant != null) {
